@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: rgb(211, 216, 232);
+  --font-orbitron: 'Orbitron';
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background-color: #0d1224;
+  font-family: var(--font-orbitron), sans-serif;
+}
+
+.font-orbitron {
+  font-family: var(--font-orbitron), sans-serif;
+}
+
+/* Sticky Cards */
+#sticky-card-1 {
+  --index: 1;
+}
+
+#sticky-card-2 {
+  --index: 2;
+}
+
+#sticky-card-3 {
+  --index: 3;
+}
+
+#sticky-card-4 {
+  --index: 4;
+}
+
+.sticky-card {
+  top: calc(var(--index) * 4rem);
+}
+
+/* === GlowCard Styles === */
+
+.glow-container {
+  display: flex;
+  flex-direction: var(--direction, row);
+  gap: var(--gap, 32px);
+  position: relative;
+}
+
+.glow-card {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Elemento que crea el efecto visual */
+.glows::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(from calc(var(--start, 0deg) * 1deg),
+      rgba(22, 242, 179, var(--active, 0)) 0deg,
+      transparent 90deg,
+      rgba(22, 242, 179, var(--active, 0)) 180deg,
+      transparent 270deg,
+      rgba(22, 242, 179, var(--active, 0)) 360deg);
+  filter: blur(var(--blur, 12px));
+  opacity: var(--active, 0);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.glows {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.glitch:hover {
+  animation: glitch 0.3s linear infinite;
+}
+/* app/globals.css */
+
+@keyframes flicker {
+  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+    opacity: 1;
+  }
+  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, -2px); }
+  40% { transform: translate(2px, 2px); }
+  60% { transform: translate(-2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cyberpunk-bg::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 221, 0.03),
+    rgba(0, 255, 221, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  z-index: 10;
+  animation: scanline 8s linear infinite;
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .cyberpunk-bg::before {
+    display: block;
+  }
+}
+
+.glitch-container {
+  position: relative;
+}
+
+.glitch {
+  position: relative;
+}
+
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: -1px;
+  text-shadow: -1px 0 red;
+  animation: glitch 2s infinite linear;
+  clip: rect(44px, 450px, 56px, 0);
+  opacity: 0.8;
+}
+
+.glitch::before {
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  top: 1px;
+  text-shadow: 1px 0 blue;
+  animation: glitch 3s infinite linear;
+  clip: rect(44px, 450px, 56px, 0);
+  opacity: 0.8;
+}
+
+.animate-fade-in {
+  animation: fade-in 1.2s ease-out forwards;
+}
