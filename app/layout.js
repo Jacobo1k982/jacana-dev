@@ -7,6 +7,8 @@ import ScrollToTop from "./components/helper/scroll-to-top";
 import Navbar from "./components/navbar";
 import "./css/card.scss";
 import "./css/globals.scss";
+import { ToastProvider } from './components/ToastProvider';
+import ParticleBackground from './components/ParticleBackground';
 
 // Fonts con variables
 const orbitron = Orbitron({
@@ -37,6 +39,9 @@ export default function RootLayout({ children }) {
         <meta charSet="utf-8" />
       </head>
       <body className="font-orbitron bg-[#0d1224] text-white">
+        <ParticleBackground />
+        <ToastProvider />
+        <div className="fixed top-0 left-0 w-full z-50"></div>
         <ToastContainer />
         {/* Navbar con posición fija y alto z-index */}
         <div className="fixed top-0 left-0 w-full z-50">
