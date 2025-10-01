@@ -1,0 +1,25 @@
+[0;1;32m●[0m nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (]8;;file://srv1029083/usr/lib/systemd/system/nginx.service/usr/lib/systemd/system/nginx.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: [0;1;32mactive (running)[0m since Tue 2025-09-30 17:27:43 UTC; 2h 43min ago
+       Docs: ]8;;man:nginx(8)man:nginx(8)]8;;
+    Process: 26384 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 26389 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 27004 ExecReload=/usr/sbin/nginx -g daemon on; master_process on; -s reload (code=exited, status=0/SUCCESS)
+   Main PID: 26390 (nginx)
+      Tasks: 2 (limit: 4654)
+     Memory: 2.9M (peak: 5.6M)
+        CPU: 136ms
+     CGroup: /system.slice/nginx.service
+             ├─[0;38;5;245m26390 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"[0m
+             └─[0;38;5;245m30880 "nginx: worker process"[0m
+
+Sep 30 17:27:43 srv1029083 nginx[26384]: 2025/09/30 17:27:43 [warn] 26384#26384: conflicting server name "jacana-dev.com" on 0.0.0.0:80, ignored
+Sep 30 17:27:43 srv1029083 nginx[26384]: 2025/09/30 17:27:43 [warn] 26384#26384: conflicting server name "www.jacana-dev.com" on 0.0.0.0:80, ignored
+Sep 30 17:27:43 srv1029083 nginx[26389]: 2025/09/30 17:27:43 [warn] 26389#26389: conflicting server name "jacana-dev.com" on 0.0.0.0:80, ignored
+Sep 30 17:27:43 srv1029083 nginx[26389]: 2025/09/30 17:27:43 [warn] 26389#26389: conflicting server name "www.jacana-dev.com" on 0.0.0.0:80, ignored
+Sep 30 17:27:43 srv1029083 systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+Sep 30 18:25:51 srv1029083 systemd[1]: Reloading nginx.service - A high performance web server and a reverse proxy server...
+Sep 30 18:25:51 srv1029083 nginx[27004]: 2025/09/30 18:25:51 [warn] 27004#27004: conflicting server name "jacana-dev.com" on 0.0.0.0:80, ignored
+Sep 30 18:25:51 srv1029083 nginx[27004]: 2025/09/30 18:25:51 [warn] 27004#27004: conflicting server name "www.jacana-dev.com" on 0.0.0.0:80, ignored
+Sep 30 18:25:51 srv1029083 nginx[27004]: 2025/09/30 18:25:51 [notice] 27004#27004: signal process started
+Sep 30 18:25:51 srv1029083 systemd[1]: Reloaded nginx.service - A high performance web server and a reverse proxy server.

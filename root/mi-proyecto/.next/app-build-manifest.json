@@ -1,0 +1,100 @@
+{
+  "pages": {
+    "/_not-found/page": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/chunks/app/_not-found/page-c5ea91ddb311c2c8.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/css/4fb036f9cfdb35d1.css",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/376-4e006453e676e24c.js",
+      "static/chunks/app/layout-deff3f50772ec73f.js"
+    ],
+    "/contact/page": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/chunks/544-882dda0fe74acbd9.js",
+      "static/chunks/app/contact/page-50b663ea76451aae.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/chunks/app/page-1015993b872ec396.js"
+    ],
+    "/product/AnalyticsTrackingDescription/page": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/chunks/app/product/AnalyticsTrackingDescription/page-5955f1ff6e21ea79.js"
+    ],
+    "/product/ArchitectureRefactorsDescription/page": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/chunks/app/product/ArchitectureRefactorsDescription/page-98fc07b3edd3dda9.js"
+    ],
+    "/product/DevOpsCICDDescription/page": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/chunks/app/product/DevOpsCICDDescription/page-d0b3fb86b3305898.js"
+    ],
+    "/product/FullStackDescription/page": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/chunks/app/product/FullStackDescription/page-ee0a99c771f97873.js"
+    ],
+    "/product/MentorshipCodeReviewDescription/page": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/chunks/app/product/MentorshipCodeReviewDescription/page-02c00124ee9402a2.js"
+    ],
+    "/product/ModernAPIDescription/page": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/chunks/app/product/ModernAPIDescription/page-55572b80a48e4a33.js"
+    ],
+    "/product/PricingSection/page": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/app/product/PricingSection/page-04336761fabad6bf.js"
+    ],
+    "/product/SecurityHardeningDescription/page": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/chunks/app/product/SecurityHardeningDescription/page-11466b1132b22b2c.js"
+    ],
+    "/product/UXUIDescription/page": [
+      "static/chunks/webpack-caa21fb8525f2992.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-40634877ae3e8e9d.js",
+      "static/chunks/main-app-9d26054e596d0e50.js",
+      "static/chunks/app/product/UXUIDescription/page-151411626f8bc8e4.js"
+    ]
+  }
+}

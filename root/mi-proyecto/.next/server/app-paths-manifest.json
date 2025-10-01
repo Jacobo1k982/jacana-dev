@@ -1,0 +1,15 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/contact/page": "app/contact/page.js",
+  "/page": "app/page.js",
+  "/product/AnalyticsTrackingDescription/page": "app/product/AnalyticsTrackingDescription/page.js",
+  "/product/ArchitectureRefactorsDescription/page": "app/product/ArchitectureRefactorsDescription/page.js",
+  "/product/DevOpsCICDDescription/page": "app/product/DevOpsCICDDescription/page.js",
+  "/product/FullStackDescription/page": "app/product/FullStackDescription/page.js",
+  "/product/MentorshipCodeReviewDescription/page": "app/product/MentorshipCodeReviewDescription/page.js",
+  "/product/ModernAPIDescription/page": "app/product/ModernAPIDescription/page.js",
+  "/product/PricingSection/page": "app/product/PricingSection/page.js",
+  "/product/SecurityHardeningDescription/page": "app/product/SecurityHardeningDescription/page.js",
+  "/product/UXUIDescription/page": "app/product/UXUIDescription/page.js"
+}
