@@ -49,7 +49,12 @@ const infraSecurityData: SecurityCardData = {
     },
 };
 
-const SecurityCard = ({ data }: { SecurityCardData }) => {
+// ✅ Corregido: definimos correctamente las props
+interface SecurityCardProps {
+    data: SecurityCardData;
+}
+
+const SecurityCard = ({ data }: SecurityCardProps) => {
     return (
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100 dark:border-gray-700">
             <div className="flex items-center mb-4">

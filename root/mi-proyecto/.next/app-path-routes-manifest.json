@@ -1,0 +1,15 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/contact/page": "/contact",
+  "/page": "/",
+  "/product/AnalyticsTrackingDescription/page": "/product/AnalyticsTrackingDescription",
+  "/product/ArchitectureRefactorsDescription/page": "/product/ArchitectureRefactorsDescription",
+  "/product/DevOpsCICDDescription/page": "/product/DevOpsCICDDescription",
+  "/product/FullStackDescription/page": "/product/FullStackDescription",
+  "/product/MentorshipCodeReviewDescription/page": "/product/MentorshipCodeReviewDescription",
+  "/product/ModernAPIDescription/page": "/product/ModernAPIDescription",
+  "/product/PricingSection/page": "/product/PricingSection",
+  "/product/SecurityHardeningDescription/page": "/product/SecurityHardeningDescription",
+  "/product/UXUIDescription/page": "/product/UXUIDescription"
+}

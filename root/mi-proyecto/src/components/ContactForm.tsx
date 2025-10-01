@@ -45,7 +45,7 @@ export default function ContactForm() {
             } else {
                 setSubmitStatus("error");
             }
-        } catch (err) {
+        } catch {
             setSubmitStatus("error");
         } finally {
             setIsSubmitting(false);
@@ -81,8 +81,8 @@ export default function ContactForm() {
                             {...register("name", { required: "El nombre es obligatorio" })}
                             aria-invalid={errors.name ? "true" : "false"}
                             className={`w-full px-4 py-3 rounded-xl border ${errors.name
-                                    ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                                    : "border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+                                ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                                : "border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
                                 } bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 transition-colors`}
                             placeholder="Tu nombre"
                         />
@@ -112,10 +112,10 @@ export default function ContactForm() {
                             })}
                             aria-invalid={errors.email ? "true" : "false"}
                             className={`w-full px-4 py-3 rounded-xl border ${errors.email
-                                    ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                                    : "border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+                                ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                                : "border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
                                 } bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 transition-colors`}
-                            placeholder="tu@ejemplo.com"
+                            placeholder="jacana-dev@ejemplo.com"
                         />
                         {errors.email && (
                             <p className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
@@ -143,8 +143,8 @@ export default function ContactForm() {
                             })}
                             aria-invalid={errors.message ? "true" : "false"}
                             className={`w-full px-4 py-3 rounded-xl border ${errors.message
-                                    ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                                    : "border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
+                                ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                                : "border-gray-300 dark:border-gray-600 focus:ring-indigo-500 focus:border-indigo-500"
                                 } bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 transition-colors`}
                             placeholder="Cuéntame sobre tu proyecto..."
                         />
@@ -159,8 +159,8 @@ export default function ContactForm() {
                         type="submit"
                         disabled={isSubmitting || !isDirty || !isValid}
                         className={`w-full py-3 px-4 rounded-xl font-medium text-white shadow-md transition-all duration-200 ${isSubmitting || !isDirty || !isValid
-                                ? "bg-gray-400 dark:bg-gray-600 cursor-not-allowed"
-                                : "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
+                            ? "bg-gray-400 dark:bg-gray-600 cursor-not-allowed"
+                            : "bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
                             }`}
                     >
                         {isSubmitting ? (

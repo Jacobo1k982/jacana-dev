@@ -1,16 +1,18 @@
-// components/MenuItemsUltra.tsx
+// components/Navbar/MenuItemsUltra.tsx
 "use client";
+
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { menuItems } from "./menuData";
+import { menuItems, MenuItem, SubItem } from "./menuData";
 
 export default function MenuItemsUltra() {
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
     return (
         <div className="hidden lg:flex items-center space-x-6">
-            {menuItems.map((item) => (
+            {menuItems.map((item: MenuItem) => (
                 <div
                     key={item.label}
                     className="relative"
@@ -39,7 +41,7 @@ export default function MenuItemsUltra() {
                         </Link>
                     )}
 
-                    {/* Submenú mejorado */}
+                    {/* Submenú */}
                     {item.subItems && (
                         <AnimatePresence>
                             {activeMenu === item.label && (
@@ -55,7 +57,7 @@ export default function MenuItemsUltra() {
 
                                         <div className="relative bg-gray-900/80 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl w-[480px] overflow-hidden p-6 z-10">
                                             <div className="grid grid-cols-2 gap-4">
-                                                {item.subItems.map((sub) => (
+                                                {item.subItems.map((sub: SubItem) => (
                                                     <Link
                                                         key={sub.label}
                                                         href={sub.href}
@@ -68,23 +70,26 @@ export default function MenuItemsUltra() {
                                                                 transition={{ type: "spring", stiffness: 300 }}
                                                             >
                                                                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400/30 to-blue-500/30 rounded-lg blur opacity-60 group-hover:opacity-100 transition-opacity"></div>
-                                                                {/* ✅ Imagen envuelta en motion.div en lugar de motion.img */}
                                                                 <motion.div
                                                                     whileHover={{ scale: 1.1 }}
                                                                     transition={{ duration: 0.3 }}
                                                                     className="relative z-10 h-16 w-16 rounded-lg shadow-md overflow-hidden"
                                                                 >
-                                                                    <img
+                                                                    <Image
                                                                         src={sub.image}
                                                                         alt={sub.label}
+                                                                        width={64}
+                                                                        height={64}
                                                                         className="h-full w-full object-cover"
                                                                     />
                                                                 </motion.div>
                                                             </motion.div>
                                                         )}
+
                                                         <span className="text-sm font-semibold text-white group-hover:text-cyan-300 transition-colors">
                                                             {sub.label}
                                                         </span>
+
                                                         {sub.description && (
                                                             <span className="text-xs text-gray-400 mt-1 leading-tight">
                                                                 {sub.description}

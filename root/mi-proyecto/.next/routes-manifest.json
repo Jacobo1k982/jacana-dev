@@ -1,0 +1,119 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/contact",
+      "regex": "^/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contact(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/product/AnalyticsTrackingDescription",
+      "regex": "^/product/AnalyticsTrackingDescription(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/product/AnalyticsTrackingDescription(?:/)?$"
+    },
+    {
+      "page": "/product/ArchitectureRefactorsDescription",
+      "regex": "^/product/ArchitectureRefactorsDescription(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/product/ArchitectureRefactorsDescription(?:/)?$"
+    },
+    {
+      "page": "/product/DevOpsCICDDescription",
+      "regex": "^/product/DevOpsCICDDescription(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/product/DevOpsCICDDescription(?:/)?$"
+    },
+    {
+      "page": "/product/FullStackDescription",
+      "regex": "^/product/FullStackDescription(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/product/FullStackDescription(?:/)?$"
+    },
+    {
+      "page": "/product/MentorshipCodeReviewDescription",
+      "regex": "^/product/MentorshipCodeReviewDescription(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/product/MentorshipCodeReviewDescription(?:/)?$"
+    },
+    {
+      "page": "/product/ModernAPIDescription",
+      "regex": "^/product/ModernAPIDescription(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/product/ModernAPIDescription(?:/)?$"
+    },
+    {
+      "page": "/product/PricingSection",
+      "regex": "^/product/PricingSection(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/product/PricingSection(?:/)?$"
+    },
+    {
+      "page": "/product/SecurityHardeningDescription",
+      "regex": "^/product/SecurityHardeningDescription(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/product/SecurityHardeningDescription(?:/)?$"
+    },
+    {
+      "page": "/product/UXUIDescription",
+      "regex": "^/product/UXUIDescription(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/product/UXUIDescription(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}
