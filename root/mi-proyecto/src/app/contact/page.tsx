@@ -23,10 +23,10 @@ export default function ContactPage() {
                     <p className="text-sm">
                         ¿Prefieres por correo? Escríbeme directamente a{" "}
                         <a
-                            href="mailto:tucorreo@ejemplo.com"
+                            href="mailto:ventas@ejacana-dev.com"
                             className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
                         >
-                            tucorreo@ejemplo.com
+                            ventas@jacana-dev.com
                         </a>
                     </p>
                 </div>
