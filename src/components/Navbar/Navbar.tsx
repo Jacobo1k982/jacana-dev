@@ -2,12 +2,14 @@
 
 import { useState, useEffect, useRef, useCallback, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, ExternalLink, Sparkles } from "lucide-react";
+import { Menu, X, ChevronDown, ExternalLink, Sparkles, LogOut, User } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { menuItems } from "./menuData";
 import Logo from "./Logo";
 import LogoTwo from "./LogoTwo";
 import type { MenuDataItem } from "./menuData.types";
+import { useAuth } from "@/hooks/use-auth";
 
 // Helper function to check if link is internal
 const isInternalLink = (href: string) =>
@@ -479,6 +481,9 @@ function Navbar() {
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const scrolled = useScrollPosition(12);
     const containerRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
+    const { user, loading: authLoading, logout } = useAuth();
+
 
     // Use body scroll lock when mobile menu is open
     useBodyLock(isMobileMenuOpen);
@@ -508,6 +513,14 @@ function Navbar() {
     const handleDropdownToggle = useCallback((label: string) => {
         setActiveDropdown((prev) => (prev === label ? null : label));
     }, []);
+
+    // Handle logout
+    const handleLogout = async () => {
+        await logout();
+        router.push("/");
+        router.refresh();
+        setIsMobileMenuOpen(false);
+    };
 
     return (
         <div ref={containerRef} className="relative z-50">
@@ -579,6 +592,55 @@ function Navbar() {
                                 <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 transition-transform duration-300 group-hover:scale-105" />
                                 <span className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-white/20 to-emerald-400/0 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             </Link>
+                            {authLoading ? (
+                                // Loading state
+                                <div className="w-24 h-9 bg-white/5 rounded-lg animate-pulse" />
+                            ) : user ? (
+                                // Logged in state
+                                <>
+                                    <div className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/5 border border-white/10">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center">
+                                                <User size={16} className="text-white" />
+                                            </div>
+                                            <div className="hidden sm:block">
+                                                <p className="text-sm font-medium text-white">{user.name || 'User'}</p>
+                                                <p className="text-xs text-slate-400 truncate max-w-[120px]">{user.email}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="relative px-4 py-2.5 rounded-xl font-medium text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-all duration-200 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
+                                    >
+                                        <LogOut size={16} />
+                                        <span className="hidden sm:inline">Logout</span>
+                                    </button>
+                                </>
+                            ) : (
+                                // Logged out state
+                                <>
+                                    <Link
+                                        href="/login"
+                                        className="relative text-sm text-slate-400 hover:text-white transition-colors duration-200 group"
+                                    >
+                                        <span className="relative z-10">Iniciar sesión</span>
+                                        <span className="absolute bottom-0 left-0 h-[1px] w-0 bg-gradient-to-r from-cyan-400 to-emerald-400 group-hover:w-full transition-all duration-200" />
+                                    </Link>
+
+                                    <Link
+                                        href="/register"
+                                        className="relative px-5 py-2.5 rounded-xl font-semibold text-sm text-white overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                                    >
+                                        <span className="relative z-10 flex items-center gap-2">
+                                            Registrarse
+                                            <Sparkles size={14} className="opacity-70" />
+                                        </span>
+                                        <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 transition-transform duration-300 group-hover:scale-105" />
+                                        <span className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-white/20 to-emerald-400/0 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                    </Link>
+                                </>
+                            )}
                         </div>
 
                         {/* Mobile Menu Toggle */}
@@ -667,6 +729,52 @@ function Navbar() {
                                     </span>
                                     <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500" />
                                 </Link>
+                                {authLoading ? (
+                                    // Loading state
+                                    <div className="w-full h-12 bg-white/5 rounded-lg animate-pulse" />
+                                ) : user ? (
+                                    // Logged in state
+                                    <>
+                                        <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10">
+                                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center flex-shrink-0">
+                                                <User size={18} className="text-white" />
+                                            </div>
+                                            <div className="min-w-0 flex-1">
+                                                <p className="text-sm font-medium text-white truncate">{user.name || 'User'}</p>
+                                                <p className="text-xs text-slate-400 truncate">{user.email}</p>
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={handleLogout}
+                                            className="w-full px-4 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 border border-transparent hover:border-red-400/10 transition-all duration-200 flex items-center justify-center gap-2"
+                                        >
+                                            <LogOut size={16} />
+                                            Cerrar sesión
+                                        </button>
+                                    </>
+                                ) : (
+                                    // Logged out state
+                                    <>
+                                        <Link
+                                            href="/login"
+                                            onClick={handleMobileMenuItemClick}
+                                            className="block w-full px-4 py-3 rounded-xl text-center text-slate-300 hover:text-white hover:bg-white/5 border border-transparent hover:border-cyan-400/10 transition-all duration-200"
+                                        >
+                                            Iniciar sesión
+                                        </Link>
+                                        <Link
+                                            href="/register"
+                                            onClick={handleMobileMenuItemClick}
+                                            className="relative block w-full px-5 py-3.5 rounded-xl font-semibold text-sm text-center text-white overflow-hidden group"
+                                        >
+                                            <span className="relative z-10 flex items-center justify-center gap-2">
+                                                Registrarse
+                                                <Sparkles size={14} className="opacity-70" />
+                                            </span>
+                                            <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500" />
+                                        </Link>
+                                    </>
+                                )}
                             </div>
                         </motion.div>
                     </motion.div>

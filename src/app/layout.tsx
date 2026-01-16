@@ -1,9 +1,11 @@
-// src/app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
+
 import Navbar from "@/components/Navbar/Navbar";
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+import ToastProviderClient from "@/components/providers/ToastProviderClient";
+
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 
 export const metadata: Metadata = {
   title: "JACANA DEV || Soluciones Digitales Full Stack",
@@ -20,10 +22,12 @@ export default function RootLayout({
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}
       >
-        <Navbar />
-        <main className="min-h-screen">
-          {children} {/* 👈 Solo se renderiza AQUÍ */}
-        </main>
+        <ToastProviderClient>
+          <Navbar />
+          <main className="min-h-screen">
+            {children}
+          </main>
+        </ToastProviderClient>
       </body>
     </html>
   );
