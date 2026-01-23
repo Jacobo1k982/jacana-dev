@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Tailwind layers (ya las tienes, pero las mantenemos explícitas)
+   ============================================================================ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   Theme: colores semánticos, spacing, animaciones, etc.
+   Usamos OKLCH para mejor manejo de luz/oscuridad y consistencia perceptual
+   ============================================================================ */
+@theme {
+  /* Colores base semánticos (puedes usar estos en clases como bg-primary, text-accent, etc.) */
+  --color-background: oklch(99% 0.01 260);
+  /* casi blanco puro, muy limpio */
+  --color-foreground: oklch(20% 0.04 260);
+  /* gris muy oscuro */
+
+  --color-primary: oklch(65% 0.22 250);
+  /* indigo-azul moderno */
+  --color-primary-hover: oklch(72% 0.22 250);
+  --color-primary-active: oklch(58% 0.22 250);
+
+  --color-accent: oklch(68% 0.18 190);
+  /* teal/cyan elegante */
+  --color-accent-hover: oklch(75% 0.18 190);
+
+  --color-surface: oklch(98% 0.015 260);
+  /* fondo de cards / glass light */
+  --color-surface-dark: oklch(18% 0.04 260);
+  /* fondo glass dark */
+
+  --color-border: oklch(90% 0.02 260 / 0.12);
+  /* bordes sutiles light */
+  --color-border-dark: oklch(40% 0.03 260 / 0.18);
+  /* bordes dark */
+
+  --color-glass-bg: oklch(100% 0 0 / 0.08);
+  /* base glass light */
+  --color-glass-bg-dark: oklch(0% 0 0 / 0.14);
+  /* base glass dark */
+
+  /* Gradientes útiles para navbar / botones premium */
+  --gradient-primary: linear-gradient(135deg, oklch(65% 0.22 250), oklch(68% 0.18 190));
+  --gradient-glow: linear-gradient(135deg, oklch(70% 0.15 250 / 0.15), oklch(70% 0.15 190 / 0.08));
+
+  /* Tipografía (puedes cambiar a tus fuentes custom) */
+  --font-sans: "Geist Sans", "Inter", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* Efectos de glassmorphism reutilizables */
+  --glass-blur: blur(16px);
+  --glass-border: 1px solid color-mix(in oklch, currentColor 18%, transparent);
+  --glass-shadow: 0 10px 30px -10px oklch(0% 0 0 / 0.15);
+
+  /* Animaciones rápidas y elegantes para navbar */
+  --animate-fade-in: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  --animate-glow-pulse: glowPulse 2.5s ease-in-out infinite;
+  --animate-scale-subtle: scaleSubtle 0.3s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes glowPulse {
+
+    0%,
+    100% {
+      opacity: 0.5;
+      filter: brightness(1);
+    }
+
+    50% {
+      opacity: 1;
+      filter: brightness(1.15);
+    }
+  }
+
+  @keyframes scaleSubtle {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(1.03);
+    }
+  }
+}
+
+/* ============================================================================
+   Base styles + dark mode
+   ============================================================================ */
+@layer base {
+  :root {
+    --background: var(--color-background);
+    --foreground: var(--color-foreground);
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: var(--color-surface-dark);
+      --foreground: oklch(95% 0.02 260);
+      color-scheme: dark;
+    }
+
+    /* Glassmorphism más pronunciado en dark mode */
+    .glass {
+      background: var(--color-glass-bg-dark);
+      backdrop-filter: var(--glass-blur);
+      border: var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+  }
+
+  /* Soporte para glassmorphism light/dark explícito (útil en navbar) */
+  .glass {
+    background: color-mix(in srgb, var(--color-glass-bg), transparent);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Mejora accesibilidad focus */
+  :focus-visible {
+    outline: 2.5px solid oklch(65% 0.22 250 / 0.6);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+/* ============================================================================
+   Utilidades custom (opcional, pero muy útil para navbar)
+   ============================================================================ */
+@layer utilities {
+  .perspective-900 {
+    perspective: 900px;
+  }
+
+  .perspective-1100 {
+    perspective: 1100px;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 12px color-mix(in oklch, currentColor 40%, transparent);
+  }
+
+  .bg-gradient-glow {
+    background: var(--gradient-glow);
+  }
+}

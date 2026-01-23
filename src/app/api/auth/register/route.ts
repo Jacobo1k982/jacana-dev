@@ -1,0 +1,92 @@
+import { NextRequest, NextResponse } from "next/server"
+import { db } from "@/lib/db"
+import { hashPassword } from "@/lib/auth/password"
+import { createToken } from "@/lib/auth/jwt"
+import { z } from "zod"
+
+const registerSchema = z.object({
+    name: z.string().min(2),
+    email: z.string().email(),
+    password: z.string().min(8),
+})
+
+export async function POST(req: NextRequest) {
+    try {
+        const body = await req.json()
+        const parsed = registerSchema.safeParse(body)
+
+        if (!parsed.success) {
+            return NextResponse.json(
+                { error: parsed.error.flatten() },
+                { status: 400 }
+            )
+        }
+
+        const { name, email, password } = parsed.data
+
+        const existingUser = await db.user.findUnique({
+            where: { email },
+        })
+
+        if (existingUser) {
+            return NextResponse.json(
+                { error: "Email already registered" },
+                { status: 409 }
+            )
+        }
+
+        const hashedPassword = await hashPassword(password)
+
+        const user = await db.user.create({
+            data: {
+                name,
+                email,
+                password: hashedPassword,
+            },
+        })
+
+        const token = createToken({
+            userId: user.id,
+            email: user.email,
+        })
+
+        const expires = new Date(
+            Date.now() + 7 * 24 * 60 * 60 * 1000
+        )
+
+        await db.session.create({
+            data: {
+                userId: user.id,
+                sessionToken: token,
+                expires,
+            },
+        })
+
+        const response = NextResponse.json(
+            {
+                user: {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                },
+            },
+            { status: 201 }
+        )
+
+        response.cookies.set("auth-token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            expires,
+            path: "/",
+        })
+
+        return response
+    } catch (error) {
+        console.error("REGISTER ERROR:", error)
+        return NextResponse.json(
+            { error: "Internal server error" },
+            { status: 500 }
+        )
+    }
+}
