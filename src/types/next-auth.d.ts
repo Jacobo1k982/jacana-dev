@@ -1,12 +1,16 @@
 // src/types/next-auth.d.ts
-import "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
 
 declare module "next-auth" {
     interface User {
+        // add any custom user fields you use
         avatar?: string | null;
     }
-    // optionally ensure Session.user includes this User shape
+
     interface Session {
-        user?: User;
+        user: {
+            // keep standard fields and add avatar
+            avatar?: string | null;
+        } & DefaultSession["user"];
     }
 }
