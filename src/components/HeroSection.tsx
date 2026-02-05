@@ -28,16 +28,26 @@ export default function HeroSection() {
     return (
         <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0d1117] text-[#c9d1d9]">
 
-            {/* Fondo Grid de Puntos (Estilo Técnico) */}
-            <div
-                className="absolute inset-0 pointer-events-none opacity-20"
-                style={{
-                    backgroundImage: 'radial-gradient(#30363d 1.5px, transparent 1.5px)',
-                    backgroundSize: '32px 32px'
-                }}
-            />
+            {/* ── VIDEO DE FONDO (HERO VIDEO) ──────────────────────────────────────────────── */}
+            {/* Nota: Asegúrate de que el video sea oscuro para mantener la legibilidad.
+                  muted es obligatorio para que funcione autoplay en la mayoría de navegadores. */}
+            <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover z-0 opacity-40"
+                // CAMBIA ESTA RUTA A TU ARCHIVO DE VIDEO
+                src="/video/medium.mp4"
+            >
+                Tu navegador no soporta video HTML5.
+            </video>
 
-            <div className="relative z-10 max-w-7xl w-full mx-auto pt-10 pb-20">
+            {/* ── OVERLAY CRÍTICO (Para que el texto se lea bien) ──────────────────────────────── */}
+            {/* Gradiente que oscurece el video, especialmente en la izquierda donde está el texto */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#0d1117] via-[#0d1117]/80 to-transparent pointer-events-none" />
+
+            <div className="relative z-20 max-w-7xl w-full mx-auto pt-10 pb-20">
 
                 <div className="flex flex-col items-center text-center space-y-8 md:space-y-12">
 
@@ -51,11 +61,11 @@ export default function HeroSection() {
                                 animate={isVisible ? { opacity: 1, x: 0 } : {}}
                                 transition={{ duration: 0.8, delay: 0.2 }}
                             >
-                                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#f0f6fc] tracking-tight leading-[1.1]">
+                                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#f0f6fc] tracking-tight leading-[1.1] drop-shadow-sm">
                                     Construimos software <br className="hidden lg:block" />
                                     <span className="text-[#58a6ff]">a escala industrial.</span>
                                 </h1>
-                                <p className="mt-6 text-lg text-[#8b949e] max-w-xl leading-relaxed">
+                                <p className="mt-6 text-lg text-[#8b949e] max-w-xl leading-relaxed drop-shadow-md">
                                     Desarrollamos aplicaciones Full-Stack seguras, escalables y mantenibles.
                                     Arquitectura moderna inspirada en los estándares más altos de la industria.
                                 </p>
@@ -67,23 +77,23 @@ export default function HeroSection() {
                                 transition={{ duration: 0.8, delay: 0.4 }}
                                 className="flex flex-col sm:flex-row gap-4"
                             >
-                                <button className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white transition-colors bg-[#238636] hover:bg-[#2ea043] border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-[#238636] focus:ring-offset-2 focus:ring-offset-[#0d1117]">
+                                <button className="flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-colors bg-[#238636] hover:bg-[#2ea043] border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-[#238636] focus:ring-offset-2 focus:ring-offset-[#0d1117] shadow-lg hover:shadow-emerald-900/20">
                                     <Terminal className="w-4 h-4" />
                                     Iniciar Proyecto
                                 </button>
 
-                                <button className="flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-[#c9d1d9] transition-colors bg-[#161b22] hover:text-white border border-[#30363d] hover:border-[#8b949e] rounded-md">
+                                <button className="flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-[#c9d1d9] transition-colors bg-[#161b22] hover:text-white border border-[#30363d] hover:border-[#8b949e] rounded-md backdrop-blur-md">
                                     <ExternalLink className="w-4 h-4" />
                                     Ver Documentación
                                 </button>
                             </motion.div>
 
-                            {/* Stats minimalistas */}
+                            {/* Stats minimalistas con fondo sutil para legibilidad sobre video */}
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={isVisible ? { opacity: 1 } : {}}
                                 transition={{ delay: 0.6 }}
-                                className="flex gap-8 pt-6 border-t border-[#21262d]"
+                                className="flex gap-8 pt-6 border-t border-[#30363d]/50"
                             >
                                 {stats.map((stat, i) => (
                                     <div key={i} className="flex flex-col">
@@ -95,6 +105,7 @@ export default function HeroSection() {
                         </div>
 
                         {/* Columna Derecha: Visual (Terminal + Lottie) */}
+                        {/* Nota: He añadido un fondo más oscuro al Terminal para que destaque sobre el video de fondo */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={isVisible ? { opacity: 1, scale: 1 } : {}}
@@ -102,7 +113,7 @@ export default function HeroSection() {
                             className="relative group"
                         >
                             {/* Contenedor estilo VS Code / GitHub Codespaces */}
-                            <div className="relative rounded-md border border-[#30363d] bg-[#0d1117] shadow-2xl overflow-hidden">
+                            <div className="relative rounded-md border border-[#30363d] bg-[#0d1117] shadow-2xl overflow-hidden backdrop-blur-xl">
                                 {/* Barra de titulo */}
                                 <div className="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-[#30363d]">
                                     <div className="flex items-center gap-2">
@@ -116,7 +127,6 @@ export default function HeroSection() {
                                         </div>
                                     </div>
                                     <div className="flex gap-3 text-[#8b949e]">
-                                        {/* CORRECCIÓN APLICADA AQUÍ: className="w-4 h-4 cursor-pointer" */}
                                         <GitBranch className="w-4 h-4 cursor-pointer" />
                                         <ExternalLink className="w-4 h-4 cursor-pointer" />
                                     </div>
@@ -161,7 +171,7 @@ export default function HeroSection() {
                         </motion.div>
                     </div>
 
-                    {/* Grid de Características (Cards estilo GitHub) */}
+                    {/* Grid de Características (Cards estilo GitHub con fondo semisólido para legibilidad) */}
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         animate={isVisible ? { opacity: 1, y: 0 } : {}}
@@ -173,7 +183,7 @@ export default function HeroSection() {
                             return (
                                 <div
                                     key={i}
-                                    className="group relative rounded-md border border-[#30363d] bg-[#161b22] p-6 hover:border-[#8b949e] transition-colors"
+                                    className="group relative rounded-md border border-[#30363d] bg-[#161b22]/90 p-6 hover:border-[#8b949e] transition-colors backdrop-blur-md"
                                 >
                                     <div className="mb-4 inline-flex p-2 rounded bg-[#0d1117] border border-[#30363d] group-hover:border-[#58a6ff] group-hover:text-[#58a6ff] text-[#8b949e] transition-colors">
                                         <Icon size={24} />
@@ -187,12 +197,12 @@ export default function HeroSection() {
                         })}
                     </motion.div>
 
-                    {/* CTA Final estilo Footer de Repo */}
+                    {/* CTA Final estilo Footer de Repo con fondo legible */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={isVisible ? { opacity: 1 } : {}}
                         transition={{ delay: 1 }}
-                        className="w-full max-w-3xl rounded-lg border border-dashed border-[#30363d] bg-[#0d1117]/50 p-8 text-center"
+                        className="w-full max-w-3xl rounded-lg border border-dashed border-[#30363d] bg-[#0d1117]/80 p-8 text-center backdrop-blur-md"
                     >
                         <h4 className="text-[#f0f6fc] font-semibold mb-2">¿Listo para escalar?</h4>
                         <p className="text-sm text-[#8b949e] mb-4">
