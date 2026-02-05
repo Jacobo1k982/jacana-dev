@@ -30,7 +30,8 @@ function useScrollPosition(threshold = 10) {
     return scrolled;
 }
 
-function useClickOutside(ref: React.RefObject<HTMLElement>, callback: () => void) {
+// Hook actualizado con la firma corregida para aceptar null
+function useClickOutside(ref: React.RefObject<HTMLElement | null>, callback: () => void) {
     useEffect(() => {
         const handle = (e: MouseEvent) => {
             if (ref.current && !ref.current.contains(e.target as Node)) callback();
@@ -60,14 +61,22 @@ const DesktopMenuItem = memo(function DesktopMenuItem({
 
     const handleMouseEnter = () => onToggle(item.label);
 
-    // CORRECCIÓN APLICADA AQUÍ:
+    // CORRECCIÓN ROBUSTA PARA EL ERROR "parameter 1 is not of type 'Node'"
     const handleMouseLeave = (e: React.MouseEvent) => {
         const related = e.relatedTarget;
 
-        // Verificación de seguridad para evitar el error "parameter 1 is not of type 'Node'"
-        if (related && dropdownRef.current && dropdownRef.current.contains(related as Node)) {
+        // 1. Verificamos que relatedTarget exista y sea un nodo DOM real
+        if (!related || !(related instanceof Node)) {
+            onToggle(null);
             return;
         }
+
+        // 2. Verificamos si el ratón se movió hacia el dropdown actual
+        if (dropdownRef.current && dropdownRef.current.contains(related)) {
+            return;
+        }
+
+        // 3. Si salimos del contenedor hacia algo que no es el dropdown, cerramos
         onToggle(null);
     };
 
@@ -306,7 +315,7 @@ function Navbar() {
                     ${scrolled ? "border-b border-[#30363d]" : "border-b border-transparent"}
                 `}
             >
-                <div className="max-w-7xl mx-auto px-4 sm:px-12 h-full flex items-center justify-between">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
                     {/* Logo */}
                     <div
                         onClick={() => router.push("/")}
