@@ -5,9 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Mail, Lock, ArrowRight, Eye, EyeOff, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 
 export default function LoginPage() {
@@ -102,181 +99,173 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-            {/* Background effects */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
-            </div>
+        <div className="relative min-h-screen flex flex-col items-center justify-center px-4 bg-[#0d1117]">
 
+            {/* Patrón de fondo sutil (Técnico) */}
+            <div
+                className="absolute inset-0 pointer-events-none opacity-[0.03]"
+                style={{
+                    backgroundImage: 'radial-gradient(#c9d1d9 1px, transparent 1px)',
+                    backgroundSize: '24px 24px'
+                }}
+            />
+
+            {/* Contenedor Principal */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                className="relative w-full max-w-md"
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="relative z-10 w-full max-w-md"
             >
-                <div className="relative backdrop-blur-xl bg-slate-900/80 border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
-                    {/* Header */}
-                    <div className="p-8 border-b border-white/5">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.1, duration: 0.4 }}
-                        >
-                            <h1 className="text-3xl font-bold text-white mb-2">Bienvenido de nuevo</h1>
-                            <p className="text-slate-400">Inicie sesión en su cuenta para continuar</p>
-                        </motion.div>
-                    </div>
+                {/* Header Logo / Title */}
+                <div className="text-center mb-8">
+                    <h1 className="text-3xl font-bold text-[#f0f6fc] mb-2">Sign in</h1>
+                    <p className="text-[#8b949e]">to continue to JACANA DEV</p>
+                </div>
 
-                    {/* Form */}
-                    <div className="p-8">
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            {/* General error */}
-                            {errors.general && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm"
-                                >
-                                    {errors.general}
-                                </motion.div>
-                            )}
+                {/* Login Card */}
+                <div className="rounded-md border border-[#30363d] bg-[#161b22] shadow-2xl p-8">
+                    <form onSubmit={handleSubmit} className="space-y-6">
 
-                            {/* Email */}
+                        {/* General Error Alert */}
+                        {errors.general && (
                             <motion.div
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.2 }}
-                                className="space-y-2"
-                            >
-                                <Label htmlFor="email" className="text-slate-300">
-                                    Email
-                                </Label>
-                                <div className="relative">
-                                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        placeholder="tú@ejemplo.com"
-                                        value={formData.email}
-                                        onChange={(e) => handleChange("email", e.target.value)}
-                                        className={`pl-10 bg-slate-950/50 border-white/10 text-white placeholder:text-slate-500 focus:border-cyan-400/50 focus:ring-cyan-400/20 ${errors.email ? "border-red-500/50 focus:border-red-500/50" : ""
-                                            }`}
-                                        disabled={isLoading}
-                                    />
-                                </div>
-                                {errors.email && (
-                                    <p className="text-sm text-red-400">{errors.email}</p>
-                                )}
-                            </motion.div>
-
-                            {/* Password */}
-                            <motion.div
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.3 }}
-                                className="space-y-2"
-                            >
-                                <div className="flex items-center justify-between">
-                                    <Label htmlFor="password" className="text-slate-300">
-                                        Contraseña
-                                    </Label>
-                                    <Link
-                                        href="/forgot-password"
-                                        className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
-                                    >
-                                        Has olvidado tu contraseña?
-                                    </Link>
-                                </div>
-                                <div className="relative">
-                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                                    <Input
-                                        id="password"
-                                        type={showPassword ? "text" : "password"}
-                                        placeholder="••••••••"
-                                        value={formData.password}
-                                        onChange={(e) => handleChange("password", e.target.value)}
-                                        className={`pl-10 pr-10 bg-slate-950/50 border-white/10 text-white placeholder:text-slate-500 focus:border-cyan-400/50 focus:ring-cyan-400/20 ${errors.password ? "border-red-500/50 focus:border-red-500/50" : ""
-                                            }`}
-                                        disabled={isLoading}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-300 transition-colors"
-                                        disabled={isLoading}
-                                    >
-                                        {showPassword ? (
-                                            <EyeOff className="h-4 w-4" />
-                                        ) : (
-                                            <Eye className="h-4 w-4" />
-                                        )}
-                                    </button>
-                                </div>
-                                {errors.password && (
-                                    <p className="text-sm text-red-400">{errors.password}</p>
-                                )}
-                            </motion.div>
-
-                            {/* Submit button */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 10 }}
+                                initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.4 }}
+                                className="p-3 rounded-md bg-[#f85149]/10 border border-[#f85149] text-[#f85149] text-sm"
                             >
-                                <Button
-                                    type="submit"
-                                    disabled={isLoading}
-                                    className="w-full bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-white font-semibold py-6 text-base relative overflow-hidden group"
-                                >
-                                    {isLoading ? (
-                                        <>
-                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                            Iniciar sesión...
-                                        </>
-                                    ) : (
-                                        <>
-                                            Iniciar sesión
-                                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                                        </>
-                                    )}
-                                    {!isLoading && (
-                                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-white/20 to-emerald-400/0 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                    )}
-                                </Button>
+                                {errors.general}
                             </motion.div>
-                        </form>
+                        )}
 
-                        {/* Divider */}
-                        <div className="relative my-6">
-                            <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-white/10"></div>
+                        {/* Email Input */}
+                        <div className="space-y-2">
+                            <label htmlFor="email" className="block text-sm font-medium text-[#c9d1d9]">
+                                Email address
+                            </label>
+                            <div className="relative">
+                                <Mail className="absolute left-3 top-2.5 h-4 w-4 text-[#8b949e]" />
+                                <input
+                                    id="email"
+                                    type="email"
+                                    placeholder="name@example.com"
+                                    value={formData.email}
+                                    onChange={(e) => handleChange("email", e.target.value)}
+                                    className={`
+                                        w-full pl-10 pr-3 py-2 bg-[#0d1117] border rounded-md text-[#c9d1d9] placeholder-[#484f58]
+                                        focus:outline-none focus:border-[#58a6ff] focus:ring-1 focus:ring-[#58a6ff] focus:ring-inset
+                                        transition-colors duration-200
+                                        ${errors.email ? "border-[#f85149] focus:border-[#f85149] focus:ring-[#f85149]" : "border-[#30363d]"}
+                                    `}
+                                    disabled={isLoading}
+                                    autoComplete="email"
+                                />
                             </div>
-                            <div className="relative flex justify-center text-xs uppercase">
-                                <span className="bg-slate-900/80 px-2 text-slate-500">
-                                    O continuar con
-                                </span>
-                            </div>
+                            {errors.email && (
+                                <p className="text-sm text-[#f85149]">{errors.email}</p>
+                            )}
                         </div>
 
-                        {/* Sign up link */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5 }}
-                            className="text-center"
-                        >
-                            <p className="text-slate-400">
-                                No tengo una cuenta?{" "}
+                        {/* Password Input */}
+                        <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                                <label htmlFor="password" className="block text-sm font-medium text-[#c9d1d9]">
+                                    Password
+                                </label>
                                 <Link
-                                    href="/register"
-                                    className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+                                    href="/forgot-password"
+                                    className="text-xs text-[#58a6ff] hover:underline"
                                 >
-                                    Regístrate gratis
+                                    Forgot password?
                                 </Link>
-                            </p>
-                        </motion.div>
+                            </div>
+                            <div className="relative">
+                                <Lock className="absolute left-3 top-2.5 h-4 w-4 text-[#8b949e]" />
+                                <input
+                                    id="password"
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="••••••••"
+                                    value={formData.password}
+                                    onChange={(e) => handleChange("password", e.target.value)}
+                                    className={`
+                                        w-full pl-10 pr-10 py-2 bg-[#0d1117] border rounded-md text-[#c9d1d9] placeholder-[#484f58]
+                                        focus:outline-none focus:border-[#58a6ff] focus:ring-1 focus:ring-[#58a6ff] focus:ring-inset
+                                        transition-colors duration-200
+                                        ${errors.password ? "border-[#f85149] focus:border-[#f85149] focus:ring-[#f85149]" : "border-[#30363d]"}
+                                    `}
+                                    disabled={isLoading}
+                                    autoComplete="current-password"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3 top-2.5 text-[#8b949e] hover:text-[#c9d1d9] transition-colors"
+                                    disabled={isLoading}
+                                >
+                                    {showPassword ? (
+                                        <EyeOff className="h-4 w-4" />
+                                    ) : (
+                                        <Eye className="h-4 w-4" />
+                                    )}
+                                </button>
+                            </div>
+                            {errors.password && (
+                                <p className="text-sm text-[#f85149]">{errors.password}</p>
+                            )}
+                        </div>
+
+                        {/* Submit Button (GitHub Green Style) */}
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className={`
+                                relative w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-white
+                                rounded-md border border-transparent transition-all duration-200
+                                ${isLoading
+                                    ? "bg-[#2ea043]/70 cursor-not-allowed opacity-70"
+                                    : "bg-[#238636] hover:bg-[#2ea043] focus:outline-none focus:ring-2 focus:ring-[#238636] focus:ring-offset-2 focus:ring-offset-[#161b22]"
+                                }
+                            `}
+                        >
+                            {isLoading ? (
+                                <>
+                                    <Loader2 className="h-4 w-4 animate-spin" />
+                                    Signing in...
+                                </>
+                            ) : (
+                                <>
+                                    Sign in
+                                    <ArrowRight className="h-4 w-4" />
+                                </>
+                            )}
+                        </button>
+                    </form>
+
+                    {/* Divider */}
+                    <div className="relative my-6">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-[#30363d]"></div>
+                        </div>
+                        <div className="relative flex justify-center text-xs uppercase">
+                            <span className="px-2 bg-[#161b22] text-[#8b949e]">
+                                New to JACANA DEV?
+                            </span>
+                        </div>
                     </div>
+
+                    {/* Sign Up Link */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                    >
+                        <Link
+                            href="/register"
+                            className="w-full block text-center px-4 py-2 text-sm font-semibold text-[#c9d1d9] border border-[#30363d] rounded-md hover:bg-[#21262d] hover:text-white transition-colors"
+                        >
+                            Create an account
+                        </Link>
+                    </motion.div>
                 </div>
             </motion.div>
         </div>

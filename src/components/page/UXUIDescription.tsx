@@ -1,169 +1,199 @@
 'use client'
 
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import Lottie from 'lottie-react';
 import codingAnimation from '../Lottie/UIUX-Designer.json';
+import { Layout, Code2, CheckCircle, ArrowRight, PenTool, Monitor } from 'lucide-react';
 
+// Datos refinados
 const designData = {
     title: "Diseño Centrado en el Usuario",
-    description: "Creo flujos intuitivos basados en investigación, accesibilidad y principios de diseño humano. Cada interacción se valida con usuarios reales y métricas de comportamiento.",
-    technologies: ["Figma", "User Testing", "Wireframing", "Design Systems", "WCAG 2.2", "A11y", "Prototyping", "Heuristics Evaluation"],
-    icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a4 4 0 004-4V5z" />
-        </svg>
-    ),
-    colors: {
-        gradient: "from-purple-500 to-violet-600",
-        bgGlow: "from-purple-400/20 to-violet-600/20",
-        border: "border-purple-500/30",
-    },
-}
+    description: "Creación de flujos intuitivos basados en investigación y accesibilidad. Diseño sistemas escalables y valido cada interacción con usuarios reales.",
+    technologies: [
+        { name: "Figma", color: "bg-purple-500" },
+        { name: "User Testing", color: "bg-pink-500" },
+        { name: "Wireframing", color: "bg-gray-500" },
+        { name: "Design Systems", color: "bg-blue-500" },
+        { name: "WCAG 2.2", color: "bg-green-500" },
+        { name: "Prototyping", color: "bg-indigo-500" },
+    ],
+    icon: <Layout size={28} />,
+    accentColor: "border-[#8957e5]", // GitHub Purple
+    accentText: "text-[#8957e5]",
+    bgAccent: "bg-[#8957e5]/10",
+};
 
 const implementationData = {
     title: "Implementación Técnica de UI",
-    description: "Traduzco diseños en interfaces funcionales, performantes y accesibles usando componentes reutilizables, animaciones significativas y patrones de interacción probados.",
-    technologies: ["React", "Next.js", "Tailwind CSS", "ShadCN/UI", "Framer Motion", "Radix UI", "CSS Container Queries", "View Transitions API"],
-    icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
-        </svg>
-    ),
-    colors: {
-        gradient: "from-pink-500 to-rose-600",
-        bgGlow: "from-pink-400/20 to-rose-600/20",
-        border: "border-pink-500/30",
-    },
-}
+    description: "Traducción de diseños en código funcional y accesible. Uso componentes reutilizables, animaciones performantes y patrones de interacción probados.",
+    technologies: [
+        { name: "React", color: "bg-blue-500" },
+        { name: "Next.js", color: "bg-white" },
+        { name: "Tailwind CSS", color: "bg-cyan-400" },
+        { name: "ShadCN/UI", color: "bg-slate-800" },
+        { name: "Framer Motion", color: "bg-pink-500" },
+        { name: "Radix UI", color: "bg-indigo-600" },
+    ],
+    icon: <Code2 size={28} />,
+    accentColor: "border-[#db61a2]", // Pink for Implementation
+    accentText: "text-[#db61a2]",
+    bgAccent: "bg-[#db61a2]/10",
+};
 
-const UXUICard = ({ data }: { data: typeof designData }) => {
+// Componente Tarjeta Estilo GitHub (Nativo)
+const TechCard = ({ data }: { data: typeof designData }) => {
     return (
-        <Card className={`
-      relative overflow-hidden
-      bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50
-      backdrop-blur-xl border-2 ${data.colors.border}
-      hover:border-purple-400/50 transition-all duration-500
-      group
-    `}>
-            {/* Glow Effect */}
-            <div className={`
-        absolute inset-0 bg-gradient-to-br ${data.colors.bgGlow}
-        opacity-0 group-hover:opacity-100 transition-opacity duration-500
-      `} />
+        <div className={`
+            relative flex flex-col h-full rounded-md border border-[#30363d] bg-[#161b22] 
+            transition-all duration-300 hover:border-[#8b949e] hover:shadow-lg
+        `}>
+            {/* Borde superior de color */}
+            <div className={`h-1 w-full rounded-t-sm ${data.bgAccent.replace('/10', '')} opacity-80`} />
 
-            {/* Animated Border Glow */}
-            <div className={`
-        absolute inset-0 bg-gradient-to-br ${data.colors.gradient}
-        opacity-0 group-hover:opacity-20 transition-opacity duration-500
-        blur-2xl
-      `} />
-
-            {/* Content */}
-            <CardHeader className="relative z-10">
-                <div className="flex items-center gap-4">
+            <div className="p-6 md:p-8 flex flex-col h-full">
+                {/* Header */}
+                <div className="flex items-center gap-4 mb-6">
                     <div className={`
-            relative p-3 rounded-2xl
-            bg-gradient-to-br ${data.colors.gradient}
-            shadow-2xl
-            group-hover:scale-110 group-hover:rotate-3
-            transition-all duration-500
-          `}>
-                        <div className="text-white filter drop-shadow-lg">
+                        p-3 rounded-md border ${data.accentColor} bg-[#0d1117] ${data.bgAccent}
+                        flex items-center justify-center
+                    `}>
+                        <span className={data.accentText}>
                             {data.icon}
-                        </div>
+                        </span>
                     </div>
-                    <CardTitle className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                        {data.title}
-                    </CardTitle>
+                    <h3 className="text-xl font-semibold text-[#f0f6fc]">{data.title}</h3>
                 </div>
-            </CardHeader>
 
-            <CardContent className="relative z-10 space-y-6">
-                <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                {/* Descripción */}
+                <p className="text-[#8b949e] text-sm leading-relaxed mb-8 flex-1">
                     {data.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2">
-                    {data.technologies.map((tech) => (
-                        <Badge
-                            key={tech}
-                            variant="outline"
-                            className={`
-                px-3 py-1.5 text-sm font-medium
-                bg-gradient-to-br ${data.colors.bgGlow}
-                border ${data.colors.border}
-                text-gray-200
-                hover:bg-white/10 transition-all duration-300
-                hover:scale-105 hover:shadow-lg
-              `}
-                        >
-                            {tech}
-                        </Badge>
-                    ))}
+                {/* Tecnologías estilo GitHub */}
+                <div className="space-y-3">
+                    <h4 className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider">Tools</h4>
+                    <div className="flex flex-wrap gap-2">
+                        {data.technologies.map((tech) => (
+                            <span
+                                key={tech.name}
+                                className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#0d1117] border border-[#30363d] text-xs text-[#c9d1d9] hover:border-[#8b949e] transition-colors cursor-default"
+                            >
+                                <span className={`w-2 h-2 rounded-full ${tech.color}`}></span>
+                                {tech.name}
+                            </span>
+                        ))}
+                    </div>
                 </div>
-            </CardContent>
-        </Card>
-    )
-}
+            </div>
+        </div>
+    );
+};
 
 const UXUIDescription = () => {
     return (
-        <section className="relative py-24 px-4 sm:px-6 lg:px-8">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50" />
+        <section className="relative min-h-screen flex flex-col bg-[#0d1117] border-t border-[#30363d]">
 
-            {/* Grid Pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+            {/* Patrón de fondo sutil */}
+            <div
+                className="absolute inset-0 pointer-events-none opacity-[0.03]"
+                style={{
+                    backgroundImage: 'radial-gradient(#c9d1d9 1px, transparent 1px)',
+                    backgroundSize: '24px 24px'
+                }}
+            />
 
-            {/* Content */}
-            <div className="relative z-10 max-w-6xl mx-auto">
-                {/* Header */}
-                <div className="text-center mb-16 space-y-6">
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-                        <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-                            UX/UI Técnico:{" "}
-                        </span>
-                        <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 bg-clip-text text-transparent">
-                            donde el diseño se convierte en código
-                        </span>
-                    </h2>
-                    {/* Lottie Animation */}
-                    <div className="w-full max-w-md mx-auto mb-10 animate-fade-up">
-                        <div className="relative">
-                            {/* Glow effect behind Lottie */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-teal-500/15 to-emerald-500/20 blur-3xl rounded-3xl"></div>
-                            <Lottie
-                                animationData={codingAnimation}
-                                loop={true}
-                                autoplay={true}
-                                className="relative z-10"
-                            />
+            <div className="relative z-10 flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 py-15">
+                <div className="max-w-7xl mx-auto w-full">
+
+                    {/* Header Section */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+
+                        {/* Visual / Lottie Container */}
+                        <div className="relative group">
+                            {/* Container estilo Figma / Design Tool */}
+                            <div className="relative rounded-lg border border-[#30363d] bg-[#0d1117] shadow-2xl overflow-hidden">
+                                {/* Barra superior falsa */}
+                                <div className="flex items-center px-4 py-3 border-b border-[#30363d] bg-[#161b22]">
+                                    <div className="flex gap-1.5">
+                                        <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                                        <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                                        <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                                    </div>
+                                    <div className="ml-4 px-3 py-0.5 rounded bg-[#0d1117] border border-[#30363d] text-xs text-[#8b949e] font-mono">
+                                        ui-design-preview
+                                    </div>
+                                </div>
+
+                                {/* Lottie */}
+                                <div className="p-4 bg-[#0d1117] flex items-center justify-center min-h-[300px]">
+                                    <Lottie
+                                        animationData={codingAnimation}
+                                        loop={true}
+                                        autoplay={true}
+                                        className="w-full max-w-sm h-auto opacity-90"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Efecto de sutil brillo detrás */}
+                            <div className="absolute -inset-1 bg-gradient-to-r from-[#8957e5] to-[#db61a2] rounded-lg blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500 -z-10" />
+                        </div>
+
+                        {/* Texto Principal */}
+                        <div className="space-y-6"> 
+
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#f0f6fc] tracking-tight leading-[1.1]">
+                                Technical <br />
+                                <span className="text-[#8957e5]">UX / UI</span>.
+                            </h2>
+
+                            <p className="text-lg text-[#8b949e] leading-relaxed max-w-lg">
+                                Combino empatía por el usuario con rigor técnico para crear interfaces que no solo se ven bien, sino que funcionan perfectamente y son accesibles para todos.
+                            </p>
+
+                            <div className="flex flex-wrap gap-4 pt-4">
+                                <button className="flex items-center gap-2 px-6 py-3 bg-[#238636] hover:bg-[#2ea043] text-white text-sm font-semibold rounded-md transition-all border border-transparent focus:ring-2 focus:ring-[#238636] focus:ring-offset-2 focus:ring-offset-[#0d1117]">
+                                    Ver Prototipos
+                                    <Monitor size={16} />
+                                </button>
+                                <button className="flex items-center gap-2 px-6 py-3 bg-[#161b22] hover:bg-[#21262d] text-[#c9d1d9] text-sm font-semibold rounded-md transition-all border border-[#30363d] hover:border-[#8b949e]">
+                                    <PenTool size={16} />
+                                    Design System
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                        Combino empatía por el usuario con rigor técnico para crear interfaces que no solo se ven bien, sino que{" "}
-                        <span className="text-purple-400 font-semibold">funcionan</span>, se{" "}
-                        <span className="text-pink-400 font-semibold">sienten naturales</span> y{" "}
-                        <span className="text-rose-400 font-semibold">cumplen objetivos</span> de negocio.
-                    </p>
-                </div>
 
-                {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                    <UXUICard data={designData} />
-                    <UXUICard data={implementationData} />
-                </div>
-
-                {/* Bottom CTA */}
-                <div className="text-center">
-                    <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-rose-600 text-white font-semibold shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 cursor-default backdrop-blur-sm border border-white/20">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                        <span>El mejor diseño es el que nadie nota… porque simplemente funciona</span>
+                    {/* Tech Cards Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+                        <TechCard data={designData} />
+                        <TechCard data={implementationData} />
                     </div>
+
+                    {/* Elegant Bottom CTA (Alert/Note Style) */}
+                    <div className="max-w-4xl mx-auto">
+                        <div className="relative rounded-md border border-[#30363d] bg-[#161b22] p-8 md:p-12 text-center overflow-hidden">
+                            <div className="absolute top-0 right-0 p-4 opacity-10 transform scale-150 -rotate-12">
+                                <PenTool size={200} strokeWidth={1} />
+                            </div>
+
+                            <h3 className="text-2xl md:text-3xl font-bold text-[#f0f6fc] mb-4 relative z-10">
+                                Diseño que se siente natural
+                            </h3>
+                            <p className="text-[#8b949e] mb-8 max-w-2xl mx-auto relative z-10">
+                                El mejor diseño es el que nadie nota porque simplemente funciona. Un equilibrio perfecto entre estética y funcionalidad técnica.
+                            </p>
+
+                            <a
+                                href="/contact"
+                                className="inline-flex items-center gap-2 px-8 py-3 text-sm font-semibold text-[#58a6ff] border border-[#30363d] rounded-md hover:bg-[#161b22] hover:border-[#8b949e] hover:text-[#79c0ff] transition-all relative z-10"
+                            >
+                                Proyecto UI/UX
+                                <ArrowRight size={16} />
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>

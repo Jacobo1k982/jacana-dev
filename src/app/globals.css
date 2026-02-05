@@ -1,3 +1,8 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Tailwind layers (ya las tienes, pero las mantenemos explícitas)
+   ============================================================================ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -174,4 +179,65 @@
   .bg-gradient-glow {
     background: var(--gradient-glow);
   }
+
+  @layer utilities {
+    .animate-pulse-slow {
+      animation: pulse 10s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .animate-fade-in {
+      animation: fadeInUp 0.7s ease-out forwards;
+    }
+  }
+
+  @keyframes pulse {
+
+    0%,
+    100% {
+      opacity: 0.75;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Estilo Scrollbar estilo GitHub */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 5px;
+  border: 2px solid #0d1117;
+  /* Crea el efecto de espacio */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* Estilo Scrollbar Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #30363d #0d1117;
 }

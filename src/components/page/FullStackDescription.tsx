@@ -1,182 +1,213 @@
 'use client'
 
-import React from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import React from 'react';
 import Lottie from 'lottie-react';
 import codingAnimation from '../Lottie/Developer-Front-End.json';
+import { Monitor, Server, CheckCircle, ArrowRight, Terminal } from 'lucide-react';
 
+// Datos refinados
 const frontendData = {
     title: "Frontend Moderno",
-    description: "Desarrollo interfaces rápidas, accesibles y SEO-friendly con enfoque en experiencia de usuario, performance y mantenibilidad. Uso arquitecturas basadas en componentes y patrones reactivos.",
-    technologies: ["React", "Next.js 15", "TypeScript", "Tailwind CSS", "ShadCN/UI", "Zod", "TanStack Query", "Framer Motion"],
-    icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-    ),
-    colors: {
-        gradient: "from-cyan-500 to-blue-600",
-        bgGlow: "from-cyan-400/20 to-blue-600/20",
-        border: "border-cyan-500/30",
-    },
-}
+    description: "Desarrollo interfaces rápidas, accesibles y SEO-friendly. Implemento arquitecturas basadas en componentes (Atomic Design) y patrones reactivos para máxima mantenibilidad.",
+    technologies: [
+        { name: "React", color: "bg-blue-500" },
+        { name: "Next.js 15", color: "bg-white" },
+        { name: "TypeScript", color: "bg-blue-600" },
+        { name: "Tailwind CSS", color: "bg-cyan-400" },
+        { name: "ShadCN/UI", color: "bg-slate-800" },
+        { name: "Zod", color: "bg-indigo-600" },
+        { name: "TanStack Query", color: "bg-orange-500" },
+        { name: "Framer Motion", color: "bg-pink-500" },
+    ],
+    icon: <Monitor size={28} />,
+    accentColor: "border-[#58a6ff]",
+    accentText: "text-[#58a6ff]",
+    bgAccent: "bg-[#58a6ff]/10",
+};
 
 const backendData = {
     title: "Backend Robusto",
-    description: "Construyo APIs seguras, escalables y bien documentadas con enfoque en arquitectura limpia, manejo de errores, validación de datos y observabilidad. Integro autenticación moderna y bases de datos optimizadas.",
-    technologies: ["Node.js", "Python", "PostgreSQL", "Prisma ORM", "Redis", "NextAuth.js", "tRPC", "Docker"],
-    icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-        </svg>
-    ),
-    colors: {
-        gradient: "from-violet-500 to-purple-600",
-        bgGlow: "from-violet-400/20 to-purple-600/20",
-        border: "border-violet-500/30",
-    },
-}
+    description: "Construcción de APIs REST y GraphQL seguras. Arquitectura limpia (Clean Architecture), manejo de errores, validación de datos con Zod y observabilidad total.",
+    technologies: [
+        { name: "Node.js", color: "bg-green-600" },
+        { name: "Python", color: "bg-yellow-500" },
+        { name: "PostgreSQL", color: "bg-blue-700" },
+        { name: "Prisma ORM", color: "bg-black dark:bg-white" },
+        { name: "Redis", color: "bg-red-600" },
+        { name: "NextAuth.js", color: "bg-slate-400" },
+        { name: "tRPC", color: "bg-indigo-500" },
+        { name: "Docker", color: "bg-blue-500" },
+    ],
+    icon: <Server size={28} />,
+    accentColor: "border-[#8957e5]", // Purple
+    accentText: "text-[#a371f7]",
+    bgAccent: "bg-[#8957e5]/10",
+};
 
+// Componente Tarjeta Estilo GitHub Repo
 const TechCard = ({ data }: { data: typeof frontendData }) => {
     return (
-        <Card className={`
-      relative overflow-hidden
-      bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50
-      backdrop-blur-xl border-2 ${data.colors.border}
-      hover:border-cyan-400/50 transition-all duration-500
-      group
-    `}>
-            {/* Glow Effect */}
-            <div className={`
-        absolute inset-0 bg-gradient-to-br ${data.colors.bgGlow}
-        opacity-0 group-hover:opacity-100 transition-opacity duration-500
-      `} />
+        <div className={`
+            relative flex flex-col h-full rounded-md border border-[#30363d] bg-[#161b22] 
+            transition-all duration-300 hover:border-[#8b949e] hover:shadow-lg
+        `}>
+            {/* Borde superior de color para identificar la tarjeta */}
+            <div className={`h-1 w-full rounded-t-sm ${data.bgAccent.replace('/10', '')} opacity-80`} />
 
-            {/* Animated Border Glow */}
-            <div className={`
-        absolute inset-0 bg-gradient-to-br ${data.colors.gradient}
-        opacity-0 group-hover:opacity-20 transition-opacity duration-500
-        blur-2xl
-      `} />
-
-            {/* Content */}
-            <CardHeader className="relative z-10">
-                <div className="flex items-center gap-4">
-                    <div className={`
-            relative p-3 rounded-2xl
-            bg-gradient-to-br ${data.colors.gradient}
-            shadow-2xl shadow-${data.colors.gradient.split('-')[1]}-500/30
-            group-hover:scale-110 group-hover:rotate-3
-            transition-all duration-500
-          `}>
-                        <div className="text-white filter drop-shadow-lg">
-                            {data.icon}
+            <div className="p-6 md:p-8 flex flex-col h-full">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-4">
+                        <div className={`
+                            p-3 rounded-md border ${data.accentColor} bg-[#0d1117] ${data.bgAccent}
+                            flex items-center justify-center
+                        `}>
+                            <span className={data.accentText}>
+                                {data.icon}
+                            </span>
                         </div>
+                        <h3 className="text-xl font-semibold text-[#f0f6fc]">{data.title}</h3>
                     </div>
-                    <CardTitle className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                        {data.title}
-                    </CardTitle>
                 </div>
-            </CardHeader>
 
-            <CardContent className="relative z-10 space-y-6">
-                <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                {/* Descripción */}
+                <p className="text-[#8b949e] text-sm leading-relaxed mb-8 flex-1">
                     {data.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2">
-                    {data.technologies.map((tech) => (
-                        <Badge
-                            key={tech}
-                            variant="outline"
-                            className={`
-                px-3 py-1.5 text-sm font-medium
-                bg-gradient-to-br ${data.colors.bgGlow}
-                border ${data.colors.border}
-                text-gray-200
-                hover:bg-white/10 transition-all duration-300
-                hover:scale-105 hover:shadow-lg
-              `}
-                        >
-                            {tech}
-                        </Badge>
-                    ))}
+                {/* Tecnologías estilo GitHub */}
+                <div className="space-y-3">
+                    <h4 className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider">Tech Stack</h4>
+                    <div className="flex flex-wrap gap-2">
+                        {data.technologies.map((tech) => (
+                            <span
+                                key={tech.name}
+                                className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#0d1117] border border-[#30363d] text-xs text-[#c9d1d9] hover:border-[#8b949e] transition-colors cursor-default"
+                            >
+                                <span className={`w-2 h-2 rounded-full ${tech.color}`}></span>
+                                {tech.name}
+                            </span>
+                        ))}
+                    </div>
                 </div>
-            </CardContent>
-        </Card>
-    )
-}
+            </div>
+        </div>
+    );
+};
 
 const FullStackDescription = () => {
     return (
-        <section className="relative min-h-screen flex flex-col">
-            {/* Animated Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-black">
-                {/* Grid Pattern */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        <section className="relative min-h-screen flex flex-col bg-[#0d1117] border-t border-[#30363d]">
 
-                {/* Animated Gradient Orbs */}
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-2000" />
-            </div>
+            {/* Patrón de fondo sutil (Dot Grid) */}
+            <div
+                className="absolute inset-0 pointer-events-none opacity-[0.03]"
+                style={{
+                    backgroundImage: 'radial-gradient(#c9d1d9 1px, transparent 1px)',
+                    backgroundSize: '24px 24px'
+                }}
+            />
 
-            {/* Main Content */}
-            <div className="relative z-10 flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 py-24">
-                <div className="max-w-6xl mx-auto w-full">
-                    {/* Header */}
-                    <div className="text-center mb-16 space-y-9">
-                        
-                        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold">
-                            <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-                                ¿Qué hace un{" "}
-                            </span>
-                            <span className="bg-gradient-to-r from-cyan-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
-                                Desarrollador Full Stack
-                            </span>
-                            <span className="bg-gradient-to-r from-gray-200 via-gray-300 to-white bg-clip-text text-transparent">
-                                ?
-                            </span>
-                        </h2>
-                        {/* Lottie Animation */}
-                        <div className="w-full max-w-md mx-auto mb-10 animate-fade-up">
-                            <div className="relative">
-                                {/* Glow effect behind Lottie */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-teal-500/15 to-emerald-500/20 blur-3xl rounded-3xl"></div>
-                                <Lottie
-                                    animationData={codingAnimation}
-                                    loop={true}
-                                    autoplay={true}
-                                    className="relative z-10"
-                                />
+            <div className="relative z-10 flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 py-15">
+                <div className="max-w-7xl mx-auto w-full">
+
+                    {/* Header Section */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+
+                        {/* Visual / Lottie Container */}
+                        <div className="relative group">
+                            {/* Container estilo Editor de Código */}
+                            <div className="relative rounded-lg border border-[#30363d] bg-[#0d1117] shadow-2xl overflow-hidden">
+                                {/* Barra superior falsa */}
+                                <div className="flex items-center px-4 py-3 border-b border-[#30363d] bg-[#161b22]">
+                                    <div className="flex gap-1.5">
+                                        <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                                        <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                                        <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                                    </div>
+                                    <div className="ml-4 px-3 py-0.5 rounded bg-[#0d1117] border border-[#30363d] text-xs text-[#8b949e] font-mono">
+                                        dev-environment
+                                    </div>
+                                </div>
+
+                                {/* Lottie */}
+                                <div className="p-4 bg-[#0d1117] flex items-center justify-center min-h-[300px]">
+                                    <Lottie
+                                        animationData={codingAnimation}
+                                        loop={true}
+                                        autoplay={true}
+                                        className="w-full max-w-sm h-auto opacity-90"
+                                    />
+                                </div>
                             </div>
+
+                            {/* Efecto de sutil brillo detrás */}
+                            <div className="absolute -inset-1 bg-gradient-to-r from-[#58a6ff] to-[#8957e5] rounded-lg blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500 -z-10" />
                         </div>
 
-                        <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                            Diseño, construyo y despliego aplicaciones completas con enfoque en{" "}
-                            <span className="text-cyan-400 font-semibold">calidad</span>,{" "}
-                            <span className="text-violet-400 font-semibold">seguridad</span>,{" "}
-                            <span className="text-purple-400 font-semibold">escalabilidad</span> y{" "}
-                            <span className="text-pink-400 font-semibold">experiencia de usuario</span>.
-                        </p>
-                    </div>
+                        {/* Texto Principal */}
+                        <div className="space-y-6">
 
-                    {/* Cards Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#f0f6fc] tracking-tight leading-[1.1]">
+                                Full Stack <br />
+                                <span className="text-[#58a6ff]">Engineering</span>.
+                            </h2>
+
+                            <p className="text-lg text-[#8b949e] leading-relaxed max-w-lg">
+                                Diseño, construyo y despliego aplicaciones completas con un enfoque riguroso en arquitectura limpia, seguridad y experiencia de usuario de alto rendimiento.
+                            </p>
+
+                            <div className="flex flex-wrap gap-4 pt-4">
+                                {/* BOTÓN MODIFICADO: Ahora es un enlace a tu portafolio */}
+                                <a
+                                    href="https://cv-desarrolloweb.netlify.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-6 py-3 bg-[#238636] hover:bg-[#2ea043] text-white text-sm font-semibold rounded-md transition-all border border-transparent focus:ring-2 focus:ring-[#238636] focus:ring-offset-2 focus:ring-offset-[#0d1117]"
+                                >
+                                    Ver Portafolio
+                                    <ArrowRight size={16} />
+                                </a>
+                                <button className="flex items-center gap-2 px-6 py-3 bg-[#161b22] hover:bg-[#21262d] text-[#c9d1d9] text-sm font-semibold rounded-md transition-all border border-[#30363d] hover:border-[#8b949e]">
+                                    <Terminal size={16} />
+                                    Ver Código
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {/* Tech Cards Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
                         <TechCard data={frontendData} />
                         <TechCard data={backendData} />
                     </div>
 
-                    {/* Bottom CTA */}
-                    <div className="text-center">
-                        <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 via-violet-500 to-purple-600 text-white font-semibold shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105 cursor-default backdrop-blur-sm border border-white/20">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
-                            <span>Del concepto al despliegue: código limpio, seguro y listo para producción</span>
+                    {/* Elegant Bottom CTA (Callout Style) */}
+                    <div className="max-w-4xl mx-auto">
+                        <div className="relative rounded-md border border-[#30363d] bg-[#161b22] p-8 md:p-12 text-center overflow-hidden">
+                            {/* Decoración de fondo */}
+                            <div className="absolute top-0 right-0 p-4 opacity-10">
+                                <svg width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-[#c9d1d9]">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                                </svg>
+                            </div>
+
+                            <h3 className="text-2xl md:text-3xl font-bold text-[#f0f6fc] mb-4 relative z-10">
+                                ¿Listo para escalar tu proyecto?
+                            </h3>
+                            <p className="text-[#8b949e] mb-8 max-w-2xl mx-auto relative z-10">
+                                Desde la arquitectura inicial hasta el despliegue final. Entrego código limpio, documentado y optimizado para crecer contigo.
+                            </p>
+
+                            <a
+                                href="/contact"
+                                className="inline-flex items-center gap-2 px-8 py-3 text-sm font-semibold text-[#58a6ff] border border-[#30363d] rounded-md hover:bg-[#161b22] hover:border-[#8b949e] hover:text-[#79c0ff] transition-all relative z-10"
+                            >
+                                Iniciar conversación
+                                <ArrowRight size={16} />
+                            </a>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>

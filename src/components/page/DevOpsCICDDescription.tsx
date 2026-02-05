@@ -1,170 +1,200 @@
 'use client'
 
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import Lottie from 'lottie-react';
 import codingAnimation from '../Lottie/digital-marketing.json';
+import { GitMerge, Server, CheckCircle, ArrowRight, Cpu, Layers } from 'lucide-react';
 
-
+// Datos refinados
 const ciCdData = {
     title: "CI/CD Moderno",
-    description: "Automatizo pipelines de integración y entrega continua con enfoque en calidad, seguridad y velocidad. Cada commit se prueba, construye, escanea y despliega de forma confiable y reproducible.",
-    technologies: ["GitHub Actions", "GitLab CI", "CircleCI", "Argo CD", "Trunk-Based Dev", "SemVer", "Canary Deployments", "Feature Flags"],
-    icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-        </svg>
-    ),
-    colors: {
-        gradient: "from-cyan-500 to-teal-600",
-        bgGlow: "from-cyan-400/20 to-teal-600/20",
-        border: "border-cyan-500/30",
-    },
-}
+    description: "Automatización de pipelines de integración y entrega continua. Cada commit se prueba, construye, escanea y despliega de forma confiable, rápida y segura.",
+    technologies: [
+        { name: "GitHub Actions", color: "bg-blue-500" },
+        { name: "GitLab CI", color: "bg-orange-500" },
+        { name: "CircleCI", color: "bg-white" },
+        { name: "Argo CD", color: "bg-orange-600" },
+        { name: "Docker", color: "bg-blue-400" },
+        { name: "Terraform", color: "bg-purple-600" },
+    ],
+    icon: <GitMerge size={28} />,
+    accentColor: "border-[#58a6ff]", // Blue for CI
+    accentText: "text-[#58a6ff]",
+    bgAccent: "bg-[#58a6ff]/10",
+};
 
 const infraData = {
     title: "Infraestructura como Código",
-    description: "Gestiono entornos escalables y seguros usando IaC, contenedores y orquestación. Todo está versionado, auditable y reproducible desde cero en minutos.",
-    technologies: ["Docker", "Kubernetes", "Terraform", "AWS", "Azure", "Helm", "Prometheus", "Grafana"],
-    icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c.375.375.586.89.586 1.414v3.586a2 2 0 01-2 2H5a2 2 0 01-2-2V13.172a2 2 0 01.586-1.414l5-5A2 2 0 019 6.172V5L8 4z" />
-        </svg>
-    ),
-    colors: {
-        gradient: "from-violet-500 to-fuchsia-600",
-        bgGlow: "from-violet-400/20 to-fuchsia-600/20",
-        border: "border-violet-500/30",
-    },
-}
+    description: "Gestión de entornos escalables y seguros mediante IaC, contenedores y orquestación. Entornos reproducibles versionados desde cero en minutos.",
+    technologies: [
+        { name: "Docker", color: "bg-blue-500" },
+        { name: "Kubernetes", color: "bg-blue-600" },
+        { name: "AWS", color: "bg-yellow-500" },
+        { name: "Azure", color: "bg-blue-400" },
+        { name: "Helm", color: "bg-cyan-500" },
+        { name: "Terraform", color: "bg-purple-600" },
+    ],
+    icon: <Layers size={28} />,
+    accentColor: "border-[#d29922]", // Orange/Amber for Infra
+    accentText: "text-[#d29922]",
+    bgAccent: "bg-[#d29922]/10",
+};
 
-const DevOpsCard = ({ data }: { data: typeof ciCdData }) => {
+// Componente Tarjeta Estilo GitHub
+const TechCard = ({ data }: { data: typeof ciCdData }) => {
     return (
-        <Card className={`
-      relative overflow-hidden
-      bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50
-      backdrop-blur-xl border-2 ${data.colors.border}
-      hover:border-cyan-400/50 transition-all duration-500
-      group
-    `}>
-            {/* Glow Effect */}
-            <div className={`
-        absolute inset-0 bg-gradient-to-br ${data.colors.bgGlow}
-        opacity-0 group-hover:opacity-100 transition-opacity duration-500
-      `} />
+        <div className={`
+            relative flex flex-col h-full rounded-md border border-[#30363d] bg-[#161b22] 
+            transition-all duration-300 hover:border-[#8b949e] hover:shadow-lg
+        `}>
+            {/* Borde superior de color */}
+            <div className={`h-1 w-full rounded-t-sm ${data.bgAccent.replace('/10', '')} opacity-80`} />
 
-            {/* Animated Border Glow */}
-            <div className={`
-        absolute inset-0 bg-gradient-to-br ${data.colors.gradient}
-        opacity-0 group-hover:opacity-20 transition-opacity duration-500
-        blur-2xl
-      `} />
-
-            {/* Content */}
-            <CardHeader className="relative z-10">
-                <div className="flex items-center gap-4">
+            <div className="p-6 md:p-8 flex flex-col h-full">
+                {/* Header */}
+                <div className="flex items-center gap-4 mb-6">
                     <div className={`
-            relative p-3 rounded-2xl
-            bg-gradient-to-br ${data.colors.gradient}
-            shadow-2xl
-            group-hover:scale-110 group-hover:rotate-3
-            transition-all duration-500
-          `}>
-                        <div className="text-white filter drop-shadow-lg">
+                        p-3 rounded-md border ${data.accentColor} bg-[#0d1117] ${data.bgAccent}
+                        flex items-center justify-center
+                    `}>
+                        <span className={data.accentText}>
                             {data.icon}
-                        </div>
+                        </span>
                     </div>
-                    <CardTitle className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                        {data.title}
-                    </CardTitle>
+                    <h3 className="text-xl font-semibold text-[#f0f6fc]">{data.title}</h3>
                 </div>
-            </CardHeader>
 
-            <CardContent className="relative z-10 space-y-6">
-                <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                {/* Descripción */}
+                <p className="text-[#8b949e] text-sm leading-relaxed mb-8 flex-1">
                     {data.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2">
-                    {data.technologies.map((tech) => (
-                        <Badge
-                            key={tech}
-                            variant="outline"
-                            className={`
-                px-3 py-1.5 text-sm font-medium
-                bg-gradient-to-br ${data.colors.bgGlow}
-                border ${data.colors.border}
-                text-gray-200
-                hover:bg-white/10 transition-all duration-300
-                hover:scale-105 hover:shadow-lg
-              `}
-                        >
-                            {tech}
-                        </Badge>
-                    ))}
+                {/* Tecnologías estilo GitHub */}
+                <div className="space-y-3">
+                    <h4 className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider">Stack & Tools</h4>
+                    <div className="flex flex-wrap gap-2">
+                        {data.technologies.map((tech) => (
+                            <span
+                                key={tech.name}
+                                className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#0d1117] border border-[#30363d] text-xs text-[#c9d1d9] hover:border-[#8b949e] transition-colors cursor-default"
+                            >
+                                <span className={`w-2 h-2 rounded-full ${tech.color}`}></span>
+                                {tech.name}
+                            </span>
+                        ))}
+                    </div>
                 </div>
-            </CardContent>
-        </Card>
-    )
-}
+            </div>
+        </div>
+    );
+};
 
 const DevOpsCICDDescription = () => {
     return (
-        <section className="relative py-24 px-4 sm:px-6 lg:px-8">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50" />
+        <section className="relative min-h-screen flex flex-col bg-[#0d1117] border-t border-[#30363d]">
 
-            {/* Grid Pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+            {/* Patrón de fondo sutil */}
+            <div
+                className="absolute inset-0 pointer-events-none opacity-[0.03]"
+                style={{
+                    backgroundImage: 'radial-gradient(#c9d1d9 1px, transparent 1px)',
+                    backgroundSize: '24px 24px'
+                }}
+            />
 
-            {/* Content */}
-            <div className="relative z-10 max-w-6xl mx-auto">
-                {/* Header */}
-                <div className="text-center mb-16 space-y-6">
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-                        <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-                            DevOps & CI/CD:{" "}
-                        </span>
-                        <span className="bg-gradient-to-r from-cyan-400 via-teal-400 to-violet-400 bg-clip-text text-transparent">
-                            velocidad con confianza
-                        </span>
-                    </h2>
-                    {/* Lottie Animation */}
-                    <div className="w-full max-w-md mx-auto mb-10 animate-fade-up">
-                        <div className="relative">
-                            {/* Glow effect behind Lottie */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-teal-500/15 to-emerald-500/20 blur-3xl rounded-3xl"></div>
-                            <Lottie
-                                animationData={codingAnimation}
-                                loop={true}
-                                autoplay={true}
-                                className="relative z-10"
-                            />
+            <div className="relative z-10 flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 py-15">
+                <div className="max-w-7xl mx-auto w-full">
+
+                    {/* Header Section */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center mb-24">
+
+                        {/* Visual / Lottie Container */}
+                        <div className="relative group">
+                            {/* Container estilo Pipeline / Workflow */}
+                            <div className="relative rounded-lg border border-[#30363d] bg-[#0d1117] shadow-2xl overflow-hidden">
+                                {/* Barra superior falsa */}
+                                <div className="flex items-center px-4 py-3 border-b border-[#30363d] bg-[#161b22]">
+                                    <div className="flex gap-1.5">
+                                        <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                                        <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                                        <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                                    </div>
+                                    <div className="ml-4 px-3 py-0.5 rounded bg-[#0d1117] border border-[#30363d] text-xs text-[#8b949e] font-mono">
+                                        workflow-runner
+                                    </div>
+                                </div>
+
+                                {/* Lottie */}
+                                <div className="p-4 bg-[#0d1117] flex items-center justify-center min-h-[300px]">
+                                    <Lottie
+                                        animationData={codingAnimation}
+                                        loop={true}
+                                        autoplay={true}
+                                        className="w-full max-w-sm h-auto opacity-90"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Efecto de sutil brillo detrás */}
+                            <div className="absolute -inset-1 bg-gradient-to-r from-[#58a6ff] to-[#d29922] rounded-lg blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500 -z-10" />
+                        </div>
+
+                        {/* Texto Principal */}
+                        <div className="space-y-6">
+
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#f0f6fc] tracking-tight leading-[1.1]">
+                                DevOps & <br />
+                                <span className="text-[#58a6ff]">CI/CD</span>.
+                            </h2>
+
+                            <p className="text-lg text-[#8b949e] leading-relaxed max-w-lg">
+                                Automatizo el ciclo de vida completo del software. Del commit al despliegue, garantizando calidad, seguridad y velocidad de entrega.
+                            </p>
+
+                            <div className="flex flex-wrap gap-4 pt-4">
+                                <button className="flex items-center gap-2 px-6 py-3 bg-[#238636] hover:bg-[#2ea043] text-white text-sm font-semibold rounded-md transition-all border border-transparent focus:ring-2 focus:ring-[#238636] focus:ring-offset-2 focus:ring-offset-[#0d1117]">
+                                    Ver Pipeline
+                                    <Cpu size={16} />
+                                </button>
+                                <button className="flex items-center gap-2 px-6 py-3 bg-[#161b22] hover:bg-[#21262d] text-[#c9d1d9] text-sm font-semibold rounded-md transition-all border border-[#30363d] hover:border-[#8b949e]">
+                                    Documentación
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    {/* Tech Cards Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+                        <TechCard data={ciCdData} />
+                        <TechCard data={infraData} />
+                    </div>
+
+                    {/* Elegant Bottom CTA (Alert/Note Style) */}
+                    <div className="max-w-4xl mx-auto">
+                        <div className="relative rounded-md border border-[#30363d] bg-[#161b22] p-8 md:p-12 text-center overflow-hidden">
+                            <div className="absolute top-0 right-0 p-4 opacity-10">
+                                <Server size={200} strokeWidth={1} />
+                            </div>
+
+                            <h3 className="text-2xl md:text-3xl font-bold text-[#f0f6fc] mb-4 relative z-10">
+                                Automatización Inteligente
+                            </h3>
+                            <p className="text-[#8b949e] mb-8 max-w-2xl mx-auto relative z-10">
+                                No solo scripts, sino sistemas resilientes. Infraestructura reproducible y despliegues seguros con código.
+                            </p>
+
+                            <a
+                                href="/contact"
+                                className="inline-flex items-center gap-2 px-8 py-3 text-sm font-semibold text-[#58a6ff] border border-[#30363d] rounded-md hover:bg-[#161b22] hover:border-[#8b949e] hover:text-[#79c0ff] transition-all relative z-10"
+                            >
+                                Consultar Arquitectura
+                                <ArrowRight size={16} />
+                            </a>
                         </div>
                     </div>
-                    <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                        Automatizo el ciclo de vida del software para entregar valor de forma{" "}
-                        <span className="text-cyan-400 font-semibold">rápida</span>,{" "}
-                        <span className="text-teal-400 font-semibold">segura</span> y{" "}
-                        <span className="text-violet-400 font-semibold">repetible</span> — desde el primer commit hasta producción.
-                    </p>
-                </div>
 
-                {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                    <DevOpsCard data={ciCdData} />
-                    <DevOpsCard data={infraData} />
-                </div>
-
-                {/* Bottom CTA */}
-                <div className="text-center">
-                    <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 via-teal-500 to-violet-600 text-white font-semibold shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105 cursor-default backdrop-blur-sm border border-white/20">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                        <span>Automatización inteligente, no solo scripts</span>
-                    </div>
                 </div>
             </div>
         </section>

@@ -5,9 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Mail, Lock, User, ArrowRight, Eye, EyeOff, Check, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 
 export default function RegisterPage() {
@@ -107,7 +104,7 @@ export default function RegisterPage() {
 
             toast({
                 title: "Account created!",
-                description: "Welcome to Z.ai! You've been automatically logged in.",
+                description: "Welcome to JACANA DEV! You've been automatically logged in.",
             });
 
             router.push("/");
@@ -128,316 +125,283 @@ export default function RegisterPage() {
     };
 
     const passwordStrength = getPasswordStrength(formData.password);
-    const strengthColors = [
-        "bg-red-500",
-        "bg-orange-500",
-        "bg-yellow-500",
-        "bg-lime-500",
-        "bg-green-500",
-    ];
-    const strengthLabels = ["Very Weak", "Weak", "Fair", "Good", "Strong"];
+
+    // Colores para la barra de fuerza (Estilo GitHub: Gris -> Verde)
+    const getStrengthColor = (index: number) => {
+        if (index < passwordStrength) {
+            if (passwordStrength <= 2) return "bg-red-500"; // Débil
+            if (passwordStrength === 3) return "bg-yellow-500"; // Regular
+            return "bg-[#238636]"; // Fuerte (GitHub Green)
+        }
+        return "bg-[#30363d]"; // Inactivo
+    };
 
     return (
-        <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-            {/* Background effects */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-            </div>
+        <div className="relative min-h-screen flex flex-col items-center justify-center px-4 bg-[#0d1117]">
 
+            {/* Patrón de fondo sutil (Técnico) */}
+            <div
+                className="absolute inset-0 pointer-events-none opacity-[0.03]"
+                style={{
+                    backgroundImage: 'radial-gradient(#c9d1d9 1px, transparent 1px)',
+                    backgroundSize: '24px 24px'
+                }}
+            />
+
+            {/* Contenedor Principal */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                className="relative w-full max-w-md"
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="relative z-10 w-full max-w-md"
             >
-                <div className="relative backdrop-blur-xl bg-slate-900/80 border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
-                    {/* Header */}
-                    <div className="p-8 border-b border-white/5">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.1, duration: 0.4 }}
-                        >
-                            <h1 className="text-3xl font-bold text-white mb-2">Crear una cuenta</h1>
-                            <p className="text-slate-400">Únase a miles de usuarios que construyen el futuro</p>
-                        </motion.div>
-                    </div>
+                {/* Header */}
+                <div className="text-center mb-8">
+                    <h1 className="text-3xl font-bold text-[#f0f6fc] mb-2">Create an account</h1>
+                    <p className="text-[#8b949e]">to continue to JACANA DEV</p>
+                </div>
 
-                    {/* Form */}
-                    <div className="p-8">
-                        <form onSubmit={handleSubmit} className="space-y-5">
-                            {/* General error */}
-                            {errors.general && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm"
-                                >
-                                    {errors.general}
-                                </motion.div>
-                            )}
+                {/* Register Card */}
+                <div className="rounded-md border border-[#30363d] bg-[#161b22] shadow-2xl p-8">
+                    <form onSubmit={handleSubmit} className="space-y-6">
 
-                            {/* Name */}
+                        {/* General Error Alert */}
+                        {errors.general && (
                             <motion.div
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.2 }}
-                                className="space-y-2"
-                            >
-                                <Label htmlFor="name" className="text-slate-300">
-                                    Nombre
-                                </Label>
-                                <div className="relative">
-                                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                                    <Input
-                                        id="name"
-                                        type="text"
-                                        placeholder="John Doe"
-                                        value={formData.name}
-                                        onChange={(e) => handleChange("name", e.target.value)}
-                                        className={`pl-10 bg-slate-950/50 border-white/10 text-white placeholder:text-slate-500 focus:border-cyan-400/50 focus:ring-cyan-400/20 ${errors.name ? "border-red-500/50 focus:border-red-500/50" : ""
-                                            }`}
-                                        disabled={isLoading}
-                                    />
-                                </div>
-                                {errors.name && (
-                                    <p className="text-sm text-red-400">{errors.name}</p>
-                                )}
-                            </motion.div>
-
-                            {/* Email */}
-                            <motion.div
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.3 }}
-                                className="space-y-2"
-                            >
-                                <Label htmlFor="email" className="text-slate-300">
-                                    Email
-                                </Label>
-                                <div className="relative">
-                                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                                    <Input
-                                        id="email"
-                                        type="email"
-                                        placeholder="you@example.com"
-                                        value={formData.email}
-                                        onChange={(e) => handleChange("email", e.target.value)}
-                                        className={`pl-10 bg-slate-950/50 border-white/10 text-white placeholder:text-slate-500 focus:border-cyan-400/50 focus:ring-cyan-400/20 ${errors.email ? "border-red-500/50 focus:border-red-500/50" : ""
-                                            }`}
-                                        disabled={isLoading}
-                                    />
-                                </div>
-                                {errors.email && (
-                                    <p className="text-sm text-red-400">{errors.email}</p>
-                                )}
-                            </motion.div>
-
-                            {/* Password */}
-                            <motion.div
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.4 }}
-                                className="space-y-2"
-                            >
-                                <Label htmlFor="password" className="text-slate-300">
-                                    Contraseña
-                                </Label>
-                                <div className="relative">
-                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                                    <Input
-                                        id="password"
-                                        type={showPassword ? "text" : "password"}
-                                        placeholder="••••••••"
-                                        value={formData.password}
-                                        onChange={(e) => handleChange("password", e.target.value)}
-                                        className={`pl-10 pr-10 bg-slate-950/50 border-white/10 text-white placeholder:text-slate-500 focus:border-cyan-400/50 focus:ring-cyan-400/20 ${errors.password ? "border-red-500/50 focus:border-red-500/50" : ""
-                                            }`}
-                                        disabled={isLoading}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-300 transition-colors"
-                                        disabled={isLoading}
-                                    >
-                                        {showPassword ? (
-                                            <EyeOff className="h-4 w-4" />
-                                        ) : (
-                                            <Eye className="h-4 w-4" />
-                                        )}
-                                    </button>
-                                </div>
-
-                                {/* Password strength indicator */}
-                                {formData.password && (
-                                    <div className="space-y-2">
-                                        <div className="flex gap-1">
-                                            {[0, 1, 2, 3, 4].map((index) => (
-                                                <div
-                                                    key={index}
-                                                    className={`h-1 flex-1 rounded-full transition-colors duration-300 ${index < passwordStrength
-                                                            ? strengthColors[passwordStrength - 1]
-                                                            : "bg-slate-700"
-                                                        }`}
-                                                />
-                                            ))}
-                                        </div>
-                                        <p className="text-xs text-slate-400">
-                                            {passwordStrength > 0 ? strengthLabels[passwordStrength - 1] : "Enter a password"}
-                                        </p>
-                                    </div>
-                                )}
-
-                                {/* Password requirements */}
-                                {formData.password && (
-                                    <div className="space-y-1">
-                                        <p className="text-xs text-slate-500">La contraseña debe contener:</p>
-                                        <div className="grid grid-cols-2 gap-1 text-xs">
-                                            <div className="flex items-center gap-1.5 text-slate-400">
-                                                <Check
-                                                    className={`h-3 w-3 ${formData.password.length >= 8
-                                                            ? "text-green-400"
-                                                            : "text-slate-600"
-                                                        }`}
-                                                />
-                                                8+ caracteres
-                                            </div>
-                                            <div className="flex items-center gap-1.5 text-slate-400">
-                                                <Check
-                                                    className={`h-3 w-3 ${/[A-Z]/.test(formData.password)
-                                                            ? "text-green-400"
-                                                            : "text-slate-600"
-                                                        }`}
-                                                />
-                                                Letra mayúscula
-                                            </div>
-                                            <div className="flex items-center gap-1.5 text-slate-400">
-                                                <Check
-                                                    className={`h-3 w-3 ${/[0-9]/.test(formData.password)
-                                                            ? "text-green-400"
-                                                            : "text-slate-600"
-                                                        }`}
-                                                />
-                                                Número
-                                            </div>
-                                            <div className="flex items-center gap-1.5 text-slate-400">
-                                                <Check
-                                                    className={`h-3 w-3 ${/[^A-Za-z0-9]/.test(formData.password)
-                                                            ? "text-green-400"
-                                                            : "text-slate-600"
-                                                        }`}
-                                                />
-                                                Carácter especial
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {errors.password && (
-                                    <p className="text-sm text-red-400">{errors.password}</p>
-                                )}
-                            </motion.div>
-
-                            {/* Confirm Password */}
-                            <motion.div
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.5 }}
-                                className="space-y-2"
-                            >
-                                <Label htmlFor="confirmPassword" className="text-slate-300">
-                                    Confirmar Contraseña
-                                </Label>
-                                <div className="relative">
-                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                                    <Input
-                                        id="confirmPassword"
-                                        type={showConfirmPassword ? "text" : "password"}
-                                        placeholder="••••••••"
-                                        value={formData.confirmPassword}
-                                        onChange={(e) => handleChange("confirmPassword", e.target.value)}
-                                        className={`pl-10 pr-10 bg-slate-950/50 border-white/10 text-white placeholder:text-slate-500 focus:border-cyan-400/50 focus:ring-cyan-400/20 ${errors.confirmPassword ? "border-red-500/50 focus:border-red-500/50" : ""
-                                            }`}
-                                        disabled={isLoading}
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-300 transition-colors"
-                                        disabled={isLoading}
-                                    >
-                                        {showConfirmPassword ? (
-                                            <EyeOff className="h-4 w-4" />
-                                        ) : (
-                                            <Eye className="h-4 w-4" />
-                                        )}
-                                    </button>
-                                </div>
-                                {errors.confirmPassword && (
-                                    <p className="text-sm text-red-400">{errors.confirmPassword}</p>
-                                )}
-                            </motion.div>
-
-                            {/* Submit button */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 10 }}
+                                initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.6 }}
+                                className="p-3 rounded-md bg-[#f85149]/10 border border-[#f85149] text-[#f85149] text-sm"
                             >
-                                <Button
-                                    type="submit"
-                                    disabled={isLoading}
-                                    className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-white font-semibold py-6 text-base relative overflow-hidden group"
-                                >
-                                    {isLoading ? (
-                                        <>
-                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                            Creando cuenta...
-                                        </>
-                                    ) : (
-                                        <>
-                                            Crear una cuenta
-                                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                                        </>
-                                    )}
-                                    {!isLoading && (
-                                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/0 via-white/20 to-cyan-400/0 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                    )}
-                                </Button>
+                                {errors.general}
                             </motion.div>
-                        </form>
+                        )}
 
-                        {/* Divider */}
-                        <div className="relative my-6">
-                            <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-white/10"></div>
+                        {/* Name Input */}
+                        <div className="space-y-2">
+                            <label htmlFor="name" className="block text-sm font-medium text-[#c9d1d9]">
+                                Username
+                            </label>
+                            <div className="relative">
+                                <User className="absolute left-3 top-2.5 h-4 w-4 text-[#8b949e]" />
+                                <input
+                                    id="name"
+                                    type="text"
+                                    placeholder="johndoe"
+                                    value={formData.name}
+                                    onChange={(e) => handleChange("name", e.target.value)}
+                                    className={`
+                                        w-full pl-10 pr-3 py-2 bg-[#0d1117] border rounded-md text-[#c9d1d9] placeholder-[#484f58]
+                                        focus:outline-none focus:border-[#58a6ff] focus:ring-1 focus:ring-[#58a6ff] focus:ring-inset
+                                        transition-colors duration-200
+                                        ${errors.name ? "border-[#f85149] focus:border-[#f85149] focus:ring-[#f85149]" : "border-[#30363d]"}
+                                    `}
+                                    disabled={isLoading}
+                                    autoComplete="username"
+                                />
                             </div>
-                            <div className="relative flex justify-center text-xs uppercase">
-                                <span className="bg-slate-900/80 px-2 text-slate-500">
-                                    Ya tengo una cuenta?
-                                </span>
-                            </div>
+                            {errors.name && (
+                                <p className="text-sm text-[#f85149]">{errors.name}</p>
+                            )}
                         </div>
 
-                        {/* Sign in link */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.7 }}
-                            className="text-center"
-                        >
-                            <p className="text-slate-400">
-                                <Link
-                                    href="/login"
-                                    className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+                        {/* Email Input */}
+                        <div className="space-y-2">
+                            <label htmlFor="email" className="block text-sm font-medium text-[#c9d1d9]">
+                                Email address
+                            </label>
+                            <div className="relative">
+                                <Mail className="absolute left-3 top-2.5 h-4 w-4 text-[#8b949e]" />
+                                <input
+                                    id="email"
+                                    type="email"
+                                    placeholder="name@example.com"
+                                    value={formData.email}
+                                    onChange={(e) => handleChange("email", e.target.value)}
+                                    className={`
+                                        w-full pl-10 pr-3 py-2 bg-[#0d1117] border rounded-md text-[#c9d1d9] placeholder-[#484f58]
+                                        focus:outline-none focus:border-[#58a6ff] focus:ring-1 focus:ring-[#58a6ff] focus:ring-inset
+                                        transition-colors duration-200
+                                        ${errors.email ? "border-[#f85149] focus:border-[#f85149] focus:ring-[#f85149]" : "border-[#30363d]"}
+                                    `}
+                                    disabled={isLoading}
+                                    autoComplete="email"
+                                />
+                            </div>
+                            {errors.email && (
+                                <p className="text-sm text-[#f85149]">{errors.email}</p>
+                            )}
+                        </div>
+
+                        {/* Password Input */}
+                        <div className="space-y-2">
+                            <label htmlFor="password" className="block text-sm font-medium text-[#c9d1d9]">
+                                Password
+                            </label>
+                            <div className="relative">
+                                <Lock className="absolute left-3 top-2.5 h-4 w-4 text-[#8b949e]" />
+                                <input
+                                    id="password"
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Create a password"
+                                    value={formData.password}
+                                    onChange={(e) => handleChange("password", e.target.value)}
+                                    className={`
+                                        w-full pl-10 pr-10 py-2 bg-[#0d1117] border rounded-md text-[#c9d1d9] placeholder-[#484f58]
+                                        focus:outline-none focus:border-[#58a6ff] focus:ring-1 focus:ring-[#58a6ff] focus:ring-inset
+                                        transition-colors duration-200
+                                        ${errors.password ? "border-[#f85149] focus:border-[#f85149] focus:ring-[#f85149]" : "border-[#30363d]"}
+                                    `}
+                                    disabled={isLoading}
+                                    autoComplete="new-password"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3 top-2.5 text-[#8b949e] hover:text-[#c9d1d9] transition-colors"
+                                    disabled={isLoading}
                                 >
-                                    Inicie sesión en su cuenta existente
-                                </Link>
-                            </p>
-                        </motion.div>
+                                    {showPassword ? (
+                                        <EyeOff className="h-4 w-4" />
+                                    ) : (
+                                        <Eye className="h-4 w-4" />
+                                    )}
+                                </button>
+                            </div>
+
+                            {errors.password && (
+                                <p className="text-sm text-[#f85149]">{errors.password}</p>
+                            )}
+
+                            {/* Password Strength & Requirements (GitHub Style) */}
+                            {formData.password && (
+                                <div className="mt-3 space-y-3">
+                                    {/* Strength Bar */}
+                                    <div className="flex gap-1 h-1">
+                                        {[0, 1, 2, 3, 4].map((index) => (
+                                            <div
+                                                key={index}
+                                                className={`flex-1 rounded-full transition-colors duration-300 ${getStrengthColor(index)}`}
+                                            />
+                                        ))}
+                                    </div>
+
+                                    {/* Check Requirements */}
+                                    <div className="space-y-1">
+                                        <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-[#8b949e]">
+                                            <div className="flex items-center gap-1.5">
+                                                <Check className={`h-3 w-3 ${formData.password.length >= 8 ? "text-[#3fb950]" : "text-[#30363d]"}`} />
+                                                8+ characters
+                                            </div>
+                                            <div className="flex items-center gap-1.5">
+                                                <Check className={`h-3 w-3 ${/[A-Z]/.test(formData.password) ? "text-[#3fb950]" : "text-[#30363d]"}`} />
+                                                Uppercase letter
+                                            </div>
+                                            <div className="flex items-center gap-1.5">
+                                                <Check className={`h-3 w-3 ${/[0-9]/.test(formData.password) ? "text-[#3fb950]" : "text-[#30363d]"}`} />
+                                                Number
+                                            </div>
+                                            <div className="flex items-center gap-1.5">
+                                                <Check className={`h-3 w-3 ${/[^A-Za-z0-9]/.test(formData.password) ? "text-[#3fb950]" : "text-[#30363d]"}`} />
+                                                Special character
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Confirm Password Input */}
+                        <div className="space-y-2">
+                            <label htmlFor="confirmPassword" className="block text-sm font-medium text-[#c9d1d9]">
+                                Confirm password
+                            </label>
+                            <div className="relative">
+                                <Lock className="absolute left-3 top-2.5 h-4 w-4 text-[#8b949e]" />
+                                <input
+                                    id="confirmPassword"
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    placeholder="Confirm your password"
+                                    value={formData.confirmPassword}
+                                    onChange={(e) => handleChange("confirmPassword", e.target.value)}
+                                    className={`
+                                        w-full pl-10 pr-10 py-2 bg-[#0d1117] border rounded-md text-[#c9d1d9] placeholder-[#484f58]
+                                        focus:outline-none focus:border-[#58a6ff] focus:ring-1 focus:ring-[#58a6ff] focus:ring-inset
+                                        transition-colors duration-200
+                                        ${errors.confirmPassword ? "border-[#f85149] focus:border-[#f85149] focus:ring-[#f85149]" : "border-[#30363d]"}
+                                    `}
+                                    disabled={isLoading}
+                                    autoComplete="new-password"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    className="absolute right-3 top-2.5 text-[#8b949e] hover:text-[#c9d1d9] transition-colors"
+                                    disabled={isLoading}
+                                >
+                                    {showConfirmPassword ? (
+                                        <EyeOff className="h-4 w-4" />
+                                    ) : (
+                                        <Eye className="h-4 w-4" />
+                                    )}
+                                </button>
+                            </div>
+                            {errors.confirmPassword && (
+                                <p className="text-sm text-[#f85149]">{errors.confirmPassword}</p>
+                            )}
+                        </div>
+
+                        {/* Submit Button */}
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className={`
+                                relative w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-white
+                                rounded-md border border-transparent transition-all duration-200
+                                ${isLoading
+                                    ? "bg-[#2ea043]/70 cursor-not-allowed opacity-70"
+                                    : "bg-[#238636] hover:bg-[#2ea043] focus:outline-none focus:ring-2 focus:ring-[#238636] focus:ring-offset-2 focus:ring-offset-[#161b22]"
+                                }
+                            `}
+                        >
+                            {isLoading ? (
+                                <>
+                                    <Loader2 className="h-4 w-4 animate-spin" />
+                                    Creating account...
+                                </>
+                            ) : (
+                                <>
+                                    Create account
+                                    <ArrowRight className="h-4 w-4" />
+                                </>
+                            )}
+                        </button>
+                    </form>
+
+                    {/* Divider */}
+                    <div className="relative my-6">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-[#30363d]"></div>
+                        </div>
+                        <div className="relative flex justify-center text-xs uppercase">
+                            <span className="px-2 bg-[#161b22] text-[#8b949e]">
+                                Already have an account?
+                            </span>
+                        </div>
                     </div>
+
+                    {/* Sign In Link */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                    >
+                        <Link
+                            href="/login"
+                            className="w-full block text-center px-4 py-2 text-sm font-semibold text-[#c9d1d9] border border-[#30363d] rounded-md hover:bg-[#21262d] hover:text-white transition-colors"
+                        >
+                            Sign in
+                        </Link>
+                    </motion.div>
                 </div>
             </motion.div>
         </div>

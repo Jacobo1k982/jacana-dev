@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { X, ChevronDown } from "lucide-react";
 import { menuItems } from "./menuData";
 
 export default function MobileMenuUltra({
@@ -19,101 +19,117 @@ export default function MobileMenuUltra({
         <AnimatePresence>
             {isOpen && (
                 <>
-                    {/* Overlay */}
+                    {/* Overlay oscuro estilo GitHub (fondo sólido oscuro) */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsOpen(false)}
-                        className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
+                        className="fixed inset-0 bg-black/60 backdrop-blur-[2px] z-40"
                     />
 
-                    {/* Panel */}
+                    {/* Panel Lateral */}
                     <motion.aside
                         initial={{ x: "100%" }}
                         animate={{ x: 0 }}
                         exit={{ x: "100%" }}
-                        transition={{ type: "spring", stiffness: 260, damping: 28 }}
-                        className="fixed top-0 right-0 h-full w-[90vw] max-w-sm z-50"
+                        transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }} // Transición lineal estilo nativo
+                        className="fixed top-0 right-0 h-full w-full sm:w-[400px] z-50"
                     >
-                        <div className="relative h-full bg-slate-950/80 backdrop-blur-2xl border-l border-white/10 shadow-[0_0_60px_-15px_rgba(0,255,255,0.25)]">
-                            {/* Halo */}
-                            <div className="absolute -left-10 top-1/4 h-1/2 w-24 bg-gradient-to-b from-cyan-500/20 to-indigo-500/20 blur-3xl pointer-events-none" />
+                        {/* Contenedor principal estilo GitHub Dark */}
+                        <div className="relative h-full bg-[#0d1117] border-l border-[#30363d] flex flex-col shadow-2xl">
 
-                            <div className="px-6 py-8 flex flex-col gap-6">
-                                {/* Menu items */}
-                                {menuItems.map((item) => {
-                                    const isActive = activeMenu === item.label;
+                            {/* Header del Panel (Close Button) */}
+                            <div className="flex items-center justify-between px-4 py-4 border-b border-[#30363d]">
+                                <span className="text-sm font-semibold text-[#c9d1d9]">Menu</span>
+                                <button
+                                    onClick={() => setIsOpen(false)}
+                                    className="p-2 rounded-md hover:bg-[#21262d] text-[#8b949e] hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-[#30363d]"
+                                >
+                                    <X size={20} />
+                                </button>
+                            </div>
 
-                                    return (
-                                        <div key={item.label} className="border-b border-white/10 pb-4">
-                                            <button
-                                                onClick={() =>
-                                                    item.subItems
-                                                        ? setActiveMenu(isActive ? null : item.label)
-                                                        : setIsOpen(false)
-                                                }
-                                                className="w-full flex items-center justify-between text-left px-1 py-2 text-sm font-semibold text-white"
-                                            >
-                                                <span className="tracking-wide">{item.label}</span>
+                            {/* Scrollable Content */}
+                            <div className="flex-1 overflow-y-auto">
+                                <div className="px-4 py-4">
+                                    {/* Menu items */}
+                                    {menuItems.map((item) => {
+                                        const isActive = activeMenu === item.label;
 
-                                                {item.subItems && (
-                                                    <motion.span
-                                                        animate={{ rotate: isActive ? 180 : 0 }}
-                                                        transition={{ duration: 0.25 }}
-                                                        className="text-cyan-400"
-                                                    >
-                                                        <ChevronDown size={18} />
-                                                    </motion.span>
-                                                )}
-                                            </button>
+                                        return (
+                                            <div key={item.label} className="mb-1">
+                                                <button
+                                                    onClick={() =>
+                                                        item.subItems
+                                                            ? setActiveMenu(isActive ? null : item.label)
+                                                            : setIsOpen(false)
+                                                    }
+                                                    className={`
+                                                        w-full flex items-center justify-between text-left px-3 py-3 rounded-md text-sm font-medium transition-colors
+                                                        ${isActive ? "bg-[#161b22] text-white" : "text-[#c9d1d9] hover:bg-[#161b22] hover:text-white"}
+                                                    `}
+                                                >
+                                                    <span>{item.label}</span>
 
-                                            <AnimatePresence>
-                                                {item.subItems && isActive && (
-                                                    <motion.div
-                                                        initial={{ height: 0, opacity: 0 }}
-                                                        animate={{ height: "auto", opacity: 1 }}
-                                                        exit={{ height: 0, opacity: 0 }}
-                                                        transition={{ duration: 0.25, ease: "easeOut" }}
-                                                        className="overflow-hidden mt-2 pl-2"
-                                                    >
-                                                        <div className="flex flex-col gap-1">
-                                                            {item.subItems.map((sub) => (
-                                                                <Link
-                                                                    key={sub.label}
-                                                                    href={sub.href}
-                                                                    onClick={() => setIsOpen(false)}
-                                                                    className="rounded-lg px-4 py-2.5 text-sm text-slate-300 hover:text-white hover:bg-white/[0.05] transition"
-                                                                >
-                                                                    {sub.label}
-                                                                </Link>
-                                                            ))}
-                                                        </div>
-                                                    </motion.div>
-                                                )}
-                                            </AnimatePresence>
-                                        </div>
-                                    );
-                                })}
+                                                    {item.subItems && (
+                                                        <motion.span
+                                                            animate={{ rotate: isActive ? 180 : 0 }}
+                                                            transition={{ duration: 0.2 }}
+                                                            className="text-[#8b949e]"
+                                                        >
+                                                            <ChevronDown size={16} />
+                                                        </motion.span>
+                                                    )}
+                                                </button>
 
-                                {/* Actions */}
-                                <div className="mt-auto pt-6 border-t border-white/10 flex flex-col gap-3">
+                                                <AnimatePresence>
+                                                    {item.subItems && isActive && (
+                                                        <motion.div
+                                                            initial={{ height: 0, opacity: 0 }}
+                                                            animate={{ height: "auto", opacity: 1 }}
+                                                            exit={{ height: 0, opacity: 0 }}
+                                                            transition={{ duration: 0.2, ease: "easeOut" }}
+                                                            className="overflow-hidden pl-2 border-l-2 border-[#21262d] ml-4 mt-1"
+                                                        >
+                                                            <div className="flex flex-col gap-1 py-2">
+                                                                {item.subItems.map((sub) => (
+                                                                    <Link
+                                                                        key={sub.label}
+                                                                        href={sub.href}
+                                                                        onClick={() => setIsOpen(false)}
+                                                                        className="block px-3 py-2 text-sm text-[#8b949e] hover:text-white hover:bg-[#161b22] rounded-md transition-colors"
+                                                                    >
+                                                                        {sub.label}
+                                                                    </Link>
+                                                                ))}
+                                                            </div>
+                                                        </motion.div>
+                                                    )}
+                                                </AnimatePresence>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+
+                            {/* Footer Actions (Auth) */}
+                            <div className="p-4 border-t border-[#30363d] bg-[#0d1117]">
+                                <div className="flex flex-col gap-3">
                                     <Link
-                                        href="#"
+                                        href="/login"
                                         onClick={() => setIsOpen(false)}
-                                        className="text-sm text-slate-300 hover:text-white transition"
+                                        className="w-full px-4 py-2 text-sm font-medium text-center text-[#c9d1d9] border border-[#30363d] rounded-md hover:bg-[#21262d] hover:text-white transition-colors"
                                     >
                                         Sign in
                                     </Link>
 
                                     <Link
-                                        href="#"
+                                        href="/register"
                                         onClick={() => setIsOpen(false)}
-                                        className="relative overflow-hidden rounded-xl px-4 py-3 text-center text-sm font-semibold text-white"
+                                        className="w-full px-4 py-2.5 text-sm font-semibold text-center text-white bg-[#238636] rounded-md hover:bg-[#2ea043] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#238636] focus:ring-offset-[#0d1117] transition-all"
                                     >
-                                        <span className="relative z-10">Sign up</span>
-                                        <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-600" />
-                                        <span className="absolute -inset-1 bg-gradient-to-r from-cyan-500/50 to-purple-600/50 blur opacity-70" />
+                                        Sign up
                                     </Link>
                                 </div>
                             </div>

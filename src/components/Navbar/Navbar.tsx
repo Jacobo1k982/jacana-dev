@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback, memo } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { Menu, X, ChevronDown, ExternalLink, Sparkles, LogOut, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { menuItems } from "./menuData"; // Asegúrate de que este archivo exista
+import { menuItems } from "./menuData";
 import Logo from "./Logo";
 import LogoTwo from "./LogoTwo";
 import type { MenuDataItem } from "./menuData";
@@ -15,21 +15,21 @@ import { useAuth } from "@/hooks/use-auth";
 const isInternalLink = (href: string) =>
     href.startsWith("/") && !href.startsWith("//") && !href.startsWith("http");
 
-// Custom Hook scroll
-function useScrollPosition(threshold = 20) {
+// Hook para detectar scroll y aplicar borde estilo GitHub
+function useScrollPosition(threshold = 10) {
     const [scrolled, setScrolled] = useState(false);
     const { scrollY } = useScroll();
-    const progress = useTransform(scrollY, [0, threshold], [0, 1]);
-    const smooth = useSpring(progress, { stiffness: 80, damping: 40 });
 
     useEffect(() => {
-        return smooth.on("change", (v) => setScrolled(v > 0.4));
-    }, [smooth]);
+        const unsubscribe = scrollY.on("change", (latest) => {
+            setScrolled(latest > threshold);
+        });
+        return () => unsubscribe();
+    }, [scrollY]);
 
     return scrolled;
 }
 
-// Click outside (para cerrar mobile si es necesario)
 function useClickOutside(ref: React.RefObject<HTMLElement>, callback: () => void) {
     useEffect(() => {
         const handle = (e: MouseEvent) => {
@@ -41,7 +41,7 @@ function useClickOutside(ref: React.RefObject<HTMLElement>, callback: () => void
 }
 
 // ============================================================================
-// Desktop Menu Item (hover + 3D sutil)
+// Desktop Menu Item – GitHub Layout + Original Icons (WIDE & ELEGANT)
 // ============================================================================
 
 interface DesktopMenuItemProps {
@@ -56,156 +56,134 @@ const DesktopMenuItem = memo(function DesktopMenuItem({
     onToggle,
 }: DesktopMenuItemProps) {
     const hasSubItems = Boolean(item.subItems?.length);
-    const triggerRef = useRef<HTMLButtonElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const handleMouseEnter = () => onToggle(item.label);
 
-    // ── SOLUCIÓN AL ERROR ────────────────────────────────────────────────
+    // CORRECCIÓN APLICADA AQUÍ:
     const handleMouseLeave = (e: React.MouseEvent) => {
-        const relatedTarget = e.relatedTarget;
+        const related = e.relatedTarget;
 
-        // Verificamos que relatedTarget sea realmente un Node antes de usar contains
-        if (
-            relatedTarget instanceof Node &&
-            dropdownRef.current?.contains(relatedTarget)
-        ) {
+        // Verificación de seguridad para evitar el error "parameter 1 is not of type 'Node'"
+        if (related && dropdownRef.current && dropdownRef.current.contains(related as Node)) {
             return;
         }
-
         onToggle(null);
-    };
-    // ──────────────────────────────────────────────────────────────────────
-
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            onToggle(isActive ? null : item.label);
-        }
     };
 
     return (
         <div
-            className="relative group perspective-[900px]"
+            className="relative h-full flex items-center"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
             {hasSubItems ? (
                 <>
-                    <motion.button
-                        ref={triggerRef}
+                    <button
                         type="button"
-                        onKeyDown={handleKeyDown}
                         aria-expanded={isActive}
-                        whileHover={{ scale: 1.04, rotateX: 8, rotateY: 10 }}
-                        whileTap={{ scale: 0.97 }}
-                        transition={{ type: "spring", stiffness: 420, damping: 26 }}
                         className={`
-              relative flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-medium tracking-tight
-              ${isActive ? "text-white bg-gradient-to-b from-white/12 to-white/4 shadow-sm" : "text-slate-300 hover:text-white"}
-              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950
-              transform-gpu transition-all duration-300
-            `}
+                            flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150
+                            ${isActive ? "text-white bg-[#161b22]" : "text-[#c9d1d9] hover:text-white"}
+                        `}
                     >
-                        <span className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/15 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-                        <span className="relative z-10">{item.label}</span>
-                        <motion.span animate={{ rotate: isActive ? 180 : 0 }} transition={{ duration: 0.4 }}>
-                            <ChevronDown className="h-4 w-4 text-slate-400" />
+                        {item.label}
+                        <motion.span
+                            animate={{ rotate: isActive ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            <ChevronDown className="h-3 w-3 text-[#8b949e]" />
                         </motion.span>
-                    </motion.button>
+                    </button>
 
                     <AnimatePresence>
                         {isActive && (
                             <motion.div
                                 ref={dropdownRef}
-                                initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                                initial={{ opacity: 0, y: 10, scale: 0.98 }}
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                                exit={{ opacity: 0, y: 16, scale: 0.96 }}
-                                className="absolute left-1/2 -translate-x-1/2 mt-5 z-50 perspective-[1100px]"
-                                onMouseEnter={() => onToggle(item.label)}
-                                onMouseLeave={() => onToggle(null)}
+                                exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                                transition={{ duration: 0.2, ease: "easeOut" }}
+                                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-50 w-[700px]"
                             >
-                                <motion.div
-                                    whileHover={{ rotateX: -3, rotateY: 4 }}
-                                    className="relative w-[560px] max-w-[calc(100vw-2.5rem)] rounded-2xl border border-white/9 bg-slate-950/82 backdrop-blur-xl shadow-2xl shadow-black/35 overflow-hidden transform-gpu"
-                                >
-                                    <div className="px-7 py-5 border-b border-white/6 bg-gradient-to-r from-white/[0.02] to-transparent">
-                                        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{item.label}</p>
+                                <div className="rounded-md border border-[#30363d] bg-[#161b22] shadow-2xl shadow-black/60 overflow-hidden">
+
+                                    <div className="px-5 py-4 border-b border-[#30363d] bg-[#0d1117]/50">
+                                        <span className="text-xs font-bold text-[#8b949e] uppercase tracking-wider">
+                                            {item.label}
+                                        </span>
                                     </div>
-                                    <div className="p-6 grid grid-cols-2 gap-4">
-                                        {item.subItems?.map((sub, i) => (
-                                            <motion.div
+
+                                    <div className="p-4 grid grid-cols-2 gap-3">
+                                        {item.subItems?.map((sub) => (
+                                            <Link
                                                 key={sub.label}
-                                                initial={{ opacity: 0, y: 12 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                transition={{ delay: 0.05 + i * 0.04 }}
+                                                href={sub.href}
+                                                onClick={() => onToggle(null)}
+                                                className="group flex items-start gap-4 p-3 rounded-md hover:bg-[#21262d] transition-colors"
                                             >
-                                                <Link
-                                                    href={sub.href}
-                                                    onClick={() => onToggle(null)}
-                                                    className="group relative flex items-start gap-4 p-4 rounded-xl border border-white/7 bg-white/[0.015] hover:border-indigo-400/25 hover:bg-white/[0.045] hover:shadow-md hover:shadow-indigo-500/10 transition-all duration-300"
-                                                >
-                                                    {sub.image ? (
-                                                        <img src={sub.image} alt={sub.label} className="w-10 h-10 rounded-lg object-cover ring-1 ring-white/10" />
-                                                    ) : (
-                                                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500/25 to-teal-500/20 flex items-center justify-center ring-1 ring-white/10">
-                                                            <Sparkles size={18} className="text-indigo-300/70" />
-                                                        </div>
-                                                    )}
-                                                    <div className="flex-1 min-w-0">
-                                                        <div className="flex items-center gap-2">
-                                                            <span className="text-sm font-medium text-slate-200 group-hover:text-white transition-colors">{sub.label}</span>
-                                                            <ExternalLink className="h-3.5 w-3.5 text-slate-500 group-hover:text-indigo-300/80 transition-colors" />
-                                                        </div>
-                                                        {sub.description && (
-                                                            <p className="mt-1 text-xs text-slate-500 group-hover:text-slate-400 line-clamp-2 transition-colors">
-                                                                {sub.description}
-                                                            </p>
-                                                        )}
+                                                {/* Icono Original: Imagen o Sparkles */}
+                                                {sub.image ? (
+                                                    <img
+                                                        src={sub.image}
+                                                        alt={sub.label}
+                                                        className="w-10 h-10 rounded-md object-cover ring-1 ring-[#30363d] flex-shrink-0"
+                                                    />
+                                                ) : (
+                                                    <div className="flex-shrink-0 w-10 h-10 rounded-md bg-[#21262d] border border-[#30363d] flex items-center justify-center ring-1 ring-[#30363d]">
+                                                        <Sparkles size={18} className="text-[#8b949e] group-hover:text-[#58a6ff] transition-colors" />
                                                     </div>
-                                                </Link>
-                                            </motion.div>
+                                                )}
+
+                                                <div className="flex-1 min-w-0 flex flex-col justify-center">
+                                                    <div className="flex items-center gap-2 mb-1">
+                                                        <span className="text-sm font-semibold text-[#c9d1d9] group-hover:text-white leading-tight">
+                                                            {sub.label}
+                                                        </span>
+                                                        {/* Icono Original: ExternalLink */}
+                                                        <ExternalLink className="h-3.5 w-3.5 text-[#8b949e] group-hover:text-[#58a6ff] flex-shrink-0" />
+                                                    </div>
+                                                    {sub.description && (
+                                                        <p className="text-xs text-[#8b949e] leading-relaxed line-clamp-3">
+                                                            {sub.description}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            </Link>
                                         ))}
                                     </div>
-                                    <div className="px-7 py-4 border-t border-white/6 bg-gradient-to-r from-white/[0.015] to-transparent">
-                                        <Link href={`/${item.label.toLowerCase()}`} className="text-xs font-medium text-indigo-300 hover:text-indigo-200 flex items-center gap-2 transition-colors hover:translate-x-0.5">
-                                            Ver todos {item.label.toLowerCase()}
+
+                                    <div className="border-t border-[#30363d] p-3 mt-1 bg-[#0d1117]/30">
+                                        <Link
+                                            href={`/${item.label.toLowerCase()}`}
+                                            onClick={() => onToggle(null)}
+                                            className="flex items-center justify-between px-3 py-2.5 text-xs font-semibold text-[#58a6ff] hover:text-[#79c0ff] hover:underline rounded-md hover:bg-[#21262d]/50 transition-colors"
+                                        >
+                                            <span>View all {item.label.toLowerCase()}</span>
                                             <ExternalLink className="h-3.5 w-3.5" />
                                         </Link>
                                     </div>
-                                </motion.div>
+                                </div>
                             </motion.div>
                         )}
                     </AnimatePresence>
                 </>
             ) : (
-                <motion.div
-                    whileHover={{ scale: 1.05, rotateX: 9, rotateY: 11 }}
-                    className="perspective-[900px]"
+                <Link
+                    href={item.href || "/"}
+                    className="px-3 py-2 text-sm font-medium text-[#c9d1d9] hover:text-white rounded-md transition-colors"
                 >
-                    {isInternalLink(item.href || "") ? (
-                        <Link href={item.href || "/"} className="block px-5 py-2.5 rounded-full text-sm font-medium tracking-tight text-slate-300 hover:text-white hover:bg-white/8 transition-all duration-300">
-                            {item.label}
-                        </Link>
-                    ) : (
-                        <a href={item.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-medium tracking-tight text-slate-300 hover:text-white hover:bg-white/8 transition-all duration-300">
-                            {item.label}
-                            <ExternalLink className="h-3.5 w-3.5 opacity-70" />
-                        </a>
-                    )}
-                </motion.div>
+                    {item.label}
+                </Link>
             )}
         </div>
     );
 });
 
-// ============================================================================
-// Mobile Menu Item (expande al tocar)
-// ============================================================================
-
+// Mobile Menu Item
 interface MobileMenuItemProps {
     item: MenuDataItem;
-    onItemClick: () => void; // cierra el menú completo al seleccionar un link
+    onItemClick: () => void;
 }
 
 const MobileMenuItem = memo(function MobileMenuItem({ item, onItemClick }: MobileMenuItemProps) {
@@ -214,31 +192,26 @@ const MobileMenuItem = memo(function MobileMenuItem({ item, onItemClick }: Mobil
 
     if (!hasSubItems) {
         return (
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-                <Link
-                    href={item.href || "/"}
-                    onClick={onItemClick}
-                    className="block px-5 py-4 rounded-xl text-slate-200 hover:text-white hover:bg-white/8 border border-white/10 hover:border-indigo-400/30 transition-all duration-300"
-                >
-                    {item.label}
-                </Link>
-            </motion.div>
+            <Link
+                href={item.href || "/"}
+                onClick={onItemClick}
+                className="block px-4 py-3 text-base text-[#c9d1d9] hover:text-white hover:bg-[#161b22] border-b border-[#30363d] last:border-0"
+            >
+                {item.label}
+            </Link>
         );
     }
 
     return (
-        <div className="space-y-2">
-            <motion.button
+        <div>
+            <button
                 type="button"
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="flex items-center justify-between w-full px-5 py-4 rounded-xl text-slate-200 hover:text-white hover:bg-white/8 border border-white/10 hover:border-indigo-400/30 transition-all duration-300"
-                aria-expanded={isExpanded}
+                className="flex items-center justify-between w-full px-4 py-3 text-base text-[#c9d1d9] hover:text-white hover:bg-[#161b22] border-b border-[#30363d]"
             >
-                <span className="font-medium">{item.label}</span>
-                <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.4 }}>
-                    <ChevronDown className="h-5 w-5" />
-                </motion.div>
-            </motion.button>
+                <span>{item.label}</span>
+                <ChevronDown className={`h-4 w-4 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
+            </button>
 
             <AnimatePresence>
                 {isExpanded && (
@@ -246,19 +219,43 @@ const MobileMenuItem = memo(function MobileMenuItem({ item, onItemClick }: Mobil
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="overflow-hidden pl-4 space-y-2"
+                        className="overflow-hidden bg-[#0d1117]"
                     >
-                        {item.subItems?.map((sub) => (
-                            <Link
-                                key={sub.label}
-                                href={sub.href}
-                                onClick={onItemClick}
-                                className="block px-5 py-3 rounded-xl text-slate-300 hover:text-white hover:bg-white/6 border border-white/10 hover:border-indigo-400/20 transition-all duration-300"
-                            >
-                                {sub.label}
-                            </Link>
-                        ))}
+                        <div className="p-2 grid grid-cols-1 gap-1">
+                            {item.subItems?.map((sub) => (
+                                <Link
+                                    key={sub.label}
+                                    href={sub.href}
+                                    onClick={onItemClick}
+                                    className="group flex items-start gap-3 p-3 rounded-md hover:bg-[#161b22] border border-[#21262d] hover:border-[#30363d] transition-colors"
+                                >
+                                    {/* Icono Original en Móvil */}
+                                    {sub.image ? (
+                                        <img
+                                            src={sub.image}
+                                            alt={sub.label}
+                                            className="w-8 h-8 rounded object-cover border border-[#30363d] flex-shrink-0"
+                                        />
+                                    ) : (
+                                        <div className="flex-shrink-0 w-8 h-8 rounded bg-[#21262d] border border-[#30363d] flex items-center justify-center">
+                                            <Sparkles size={14} className="text-[#8b949e] group-hover:text-[#58a6ff]" />
+                                        </div>
+                                    )}
+
+                                    <div className="flex-1 min-w-0">
+                                        <div className="flex items-center gap-1.5">
+                                            <span className="text-sm font-semibold text-[#c9d1d9] mb-0.5">{sub.label}</span>
+                                            <ExternalLink className="h-3 w-3 text-[#8b949e] flex-shrink-0" />
+                                        </div>
+                                        {sub.description && (
+                                            <span className="text-xs text-[#8b949e] leading-snug line-clamp-2">
+                                                {sub.description}
+                                            </span>
+                                        )}
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -273,12 +270,15 @@ const MobileMenuItem = memo(function MobileMenuItem({ item, onItemClick }: Mobil
 function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-    const scrolled = useScrollPosition(20);
+    const scrolled = useScrollPosition(10);
     const containerRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
     const { user, loading: authLoading, logout } = useAuth();
 
-    useClickOutside(containerRef, () => setIsMobileMenuOpen(false));
+    useClickOutside(containerRef, () => {
+        setIsMobileMenuOpen(false);
+        setActiveDropdown(null);
+    });
 
     const handleDropdownToggle = useCallback((label: string | null) => {
         setActiveDropdown(label);
@@ -292,7 +292,6 @@ function Navbar() {
         await logout();
         router.push("/");
         router.refresh();
-        setIsMobileMenuOpen(false);
     };
 
     return (
@@ -300,144 +299,144 @@ function Navbar() {
             <motion.nav
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5 }}
                 className={`
-          fixed top-0 inset-x-0 transition-all duration-700
-          ${scrolled ? "bg-slate-950/85 backdrop-blur-xl border-b border-white/8 shadow-xl shadow-black/25" : "bg-transparent"}
-        `}
+                    fixed top-0 inset-x-0 h-16 transition-colors duration-200
+                    bg-[#0d1117] 
+                    ${scrolled ? "border-b border-[#30363d]" : "border-b border-transparent"}
+                `}
             >
-                {scrolled && <div className="h-px w-full bg-gradient-to-r from-transparent via-indigo-500/40 to-teal-500/30" />}
+                <div className="max-w-7xl mx-auto px-4 sm:px-12 h-full flex items-center justify-between">
+                    {/* Logo */}
+                    <div
+                        onClick={() => router.push("/")}
+                        className="flex-shrink-0 cursor-pointer flex items-center gap-2 group"
+                    >
+                        <div className="lg:hidden text-white"><LogoTwo /></div>
+                        <div className="hidden lg:block text-white"><Logo /></div>
+                    </div>
 
-                <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-                    <div className="h-20 flex items-center justify-between">
-                        {/* Logo */}
-                        <motion.div
-                            whileHover={{ scale: 1.04 }}
-                            onClick={() => router.push('/')}
-                            className="cursor-pointer"
+                    {/* Desktop Menu */}
+                    <div className="hidden lg:flex items-center h-full gap-1" onMouseLeave={() => setActiveDropdown(null)}>
+                        {menuItems.map((item) => (
+                            <DesktopMenuItem
+                                key={item.label}
+                                item={item}
+                                isActive={activeDropdown === item.label}
+                                onToggle={handleDropdownToggle}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Auth Desktop */}
+                    <div className="hidden lg:flex items-center gap-4">
+                        {authLoading ? (
+                            <div className="h-8 w-24 bg-[#21262d] animate-pulse rounded-md" />
+                        ) : user ? (
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-blue-500 border border-[#30363d] cursor-pointer overflow-hidden">
+                                    <img
+                                        src={user.avatar || "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"}
+                                        alt="Avatar"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-xs font-medium text-white leading-tight">{user.name || "Usuario"}</span>
+                                </div>
+                                <button
+                                    onClick={handleLogout}
+                                    className="ml-2 text-xs font-medium text-[#8b949e] hover:text-white border border-[#30363d] bg-[#21262d] px-3 py-1.5 rounded-md hover:border-[#8b949e] transition-colors"
+                                >
+                                    Sign out
+                                </button>
+                            </div>
+                        ) : (
+                            <>
+                                <Link href="/login" className="text-sm font-medium text-[#c9d1d9] hover:text-white transition-colors">
+                                    Sign in
+                                </Link>
+                                <Link
+                                    href="/register"
+                                    className="group relative inline-flex items-center justify-center px-4 py-1.5 text-sm font-semibold text-white transition-all duration-200 bg-[#238636] border border-transparent rounded-md hover:bg-[#2ea043] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#238636] focus:ring-offset-[#0d1117]"
+                                >
+                                    Sign up
+                                </Link>
+                            </>
+                        )}
+                    </div>
+
+                    {/* Mobile Hamburger */}
+                    <div className="lg:hidden flex items-center">
+                        <button
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="text-[#c9d1d9] hover:text-white p-2 focus:outline-none"
                         >
-                            <div className="lg:hidden"><LogoTwo /></div>
-                            <div className="hidden lg:block"><Logo /></div>
-                        </motion.div>
-
-                        {/* Desktop Menu */}
-                        <div className="hidden lg:flex items-center gap-2" onMouseLeave={() => setActiveDropdown(null)}>
-                            {menuItems.map((item, i) => (
-                                <motion.div key={item.label} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 + i * 0.04 }}>
-                                    <DesktopMenuItem item={item} isActive={activeDropdown === item.label} onToggle={handleDropdownToggle} />
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        {/* Auth Desktop */}
-                        <div className="hidden lg:flex items-center gap-5">
-                            {authLoading ? (
-                                <div className="w-36 h-10 bg-white/6 rounded-full animate-pulse" />
-                            ) : user ? (
-                                <>
-                                    <div className="flex items-center gap-3 px-5 py-2 rounded-full bg-white/[0.04] border border-white/9 hover:border-white/16 transition-all">
-                                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-teal-600 flex items-center justify-center shadow-md shadow-indigo-500/25">
-                                            <User size={18} className="text-white" />
-                                        </div>
-                                        <div className="hidden sm:block">
-                                            <p className="text-sm font-medium text-white truncate max-w-[160px]">{user.name || "Usuario"}</p>
-                                            <p className="text-xs text-slate-400 truncate max-w-[160px]">{user.email}</p>
-                                        </div>
-                                    </div>
-                                    <motion.button
-                                        onClick={handleLogout}
-                                        whileHover={{ scale: 1.04 }}
-                                        className="px-5 py-2.5 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/7 transition-all flex items-center gap-2"
-                                    >
-                                        <LogOut size={16} />
-                                        <span className="hidden sm:inline">Salir</span>
-                                    </motion.button>
-                                </>
-                            ) : (
-                                <>
-                                    <Link href="/login" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
-                                        Iniciar sesión
-                                    </Link>
-                                    <Link
-                                        href="/register"
-                                        className="relative px-7 py-2.5 rounded-full font-semibold text-sm text-white overflow-hidden shadow-lg shadow-indigo-600/20 bg-gradient-to-r from-indigo-600 via-teal-600 to-indigo-600 hover:scale-105 transition-transform duration-300"
-                                    >
-                                        Registrarse
-                                        <Sparkles size={14} className="absolute right-4 top-1/2 -translate-y-1/2 opacity-80" />
-                                    </Link>
-                                </>
-                            )}
-                        </div>
-
-                        {/* Mobile Hamburger */}
-                        <div className="lg:hidden">
-                            <motion.button
-                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                whileTap={{ scale: 0.92 }}
-                                className={`p-3 rounded-full transition-all ${isMobileMenuOpen ? "bg-white/12 text-white" : "text-slate-300 hover:bg-white/7"}`}
-                            >
-                                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                            </motion.button>
-                        </div>
+                            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
                     </div>
                 </div>
             </motion.nav>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="lg:hidden fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-xl pt-20 overflow-y-auto"
+                        className="lg:hidden fixed inset-0 z-40 pt-16 bg-[#0d1117] overflow-y-auto"
                     >
-                        <div className="px-5 py-8 space-y-3">
-                            {menuItems.map((item, i) => (
-                                <motion.div
-                                    key={item.label}
-                                    initial={{ opacity: 0, y: 15 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.1 + i * 0.05 }}
-                                >
-                                    <MobileMenuItem item={item} onItemClick={handleMobileItemClick} />
-                                </motion.div>
+                        <div className="px-2 py-4 space-y-1">
+                            {menuItems.map((item) => (
+                                <MobileMenuItem key={item.label} item={item} onItemClick={handleMobileItemClick} />
                             ))}
+                        </div>
 
-                            {/* Auth en mobile */}
-                            <div className="pt-8 mt-6 border-t border-white/10 space-y-4">
-                                {authLoading ? (
-                                    <div className="h-12 bg-white/6 rounded-xl animate-pulse" />
-                                ) : user ? (
-                                    <>
-                                        <div className="flex items-center gap-3 px-5 py-4 rounded-xl bg-white/[0.04] border border-white/10">
-                                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-teal-600 flex items-center justify-center">
-                                                <User size={20} className="text-white" />
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium text-white">{user.name || "Usuario"}</p>
-                                                <p className="text-xs text-slate-400">{user.email}</p>
-                                            </div>
+                        {/* Mobile Auth */}
+                        <div className="px-4 py-6 border-t border-[#30363d]">
+                            {authLoading ? (
+                                <div className="h-10 bg-[#21262d] rounded-md animate-pulse" />
+                            ) : user ? (
+                                <div className="flex flex-col gap-4">
+                                    <div className="flex items-center gap-3 pb-4 border-b border-[#30363d]">
+                                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-blue-500 overflow-hidden">
+                                            <img
+                                                src={user.avatar || ""}
+                                                alt="Avatar"
+                                                className="w-full h-full object-cover"
+                                            />
                                         </div>
-                                        <button
-                                            onClick={handleLogout}
-                                            className="w-full px-5 py-4 rounded-xl text-slate-200 hover:text-white hover:bg-white/8 border border-white/10 hover:border-red-400/30 transition-all flex items-center justify-center gap-2"
-                                        >
-                                            <LogOut size={18} />
-                                            Cerrar sesión
-                                        </button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <Link href="/login" onClick={handleMobileItemClick} className="block w-full px-5 py-4 text-center rounded-xl text-slate-200 hover:text-white hover:bg-white/8 border border-white/10 hover:border-indigo-400/30 transition-all">
-                                            Iniciar sesión
-                                        </Link>
-                                        <Link href="/register" onClick={handleMobileItemClick} className="block w-full px-5 py-4 text-center rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 to-teal-600 hover:brightness-110 transition-all">
-                                            Registrarse
-                                        </Link>
-                                    </>
-                                )}
-                            </div>
+                                        <div>
+                                            <p className="text-sm font-bold text-white">{user.name || "Usuario"}</p>
+                                            <p className="text-xs text-[#8b949e]">{user.email}</p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="w-full py-2.5 text-sm font-medium text-[#c9d1d9] hover:text-white hover:bg-[#21262d] rounded-md border border-[#30363d] transition-colors"
+                                    >
+                                        Sign out
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="flex flex-col gap-3">
+                                    <Link
+                                        href="/login"
+                                        onClick={handleMobileItemClick}
+                                        className="w-full py-2.5 text-center text-sm font-medium text-[#c9d1d9] hover:text-white border border-[#30363d] rounded-md hover:bg-[#21262d] transition-colors"
+                                    >
+                                        Sign in
+                                    </Link>
+                                    <Link
+                                        href="/register"
+                                        onClick={handleMobileItemClick}
+                                        className="w-full py-2.5 text-center text-sm font-semibold text-white bg-[#238636] rounded-md hover:bg-[#2ea043] transition-colors"
+                                    >
+                                        Sign up
+                                    </Link>
+                                </div>
+                            )}
                         </div>
                     </motion.div>
                 )}
