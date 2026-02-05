@@ -5,9 +5,10 @@ declare module "next-auth" {
     interface User {
         avatar?: string;
     }
+}
 
-    // If you want Session.user to include it as well
-    interface Session {
-        user?: User;
+declare module "next-auth/jwt" {
+    interface JWT {
+        avatar?: string;
     }
 }
