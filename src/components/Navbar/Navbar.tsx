@@ -14,6 +14,7 @@ import { useAuth } from "@/hooks/use-auth";
 // Helpers
 const isInternalLink = (href: string) =>
     href.startsWith("/") && !href.startsWith("//") && !href.startsWith("http");
+const avatarSrc = (User as { image?: string | null }).image;
 
 // Hook para detectar scroll y aplicar borde estilo GitHub
 function useScrollPosition(threshold = 10) {
