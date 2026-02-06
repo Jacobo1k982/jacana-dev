@@ -33,6 +33,11 @@ export async function GET(req: NextRequest) {
                 { status: 401 }
             )
         }
+// example in app/api/auth/me/route.ts
+const jwtSecret = process.env.JWT_SECRET;
+if (!jwtSecret) {
+  throw new Error('JWT_SECRET is not set. Add it to your environment variables (Netlify site settings or .env.local).');
+}
 
         return NextResponse.json({ user })
     } catch {
