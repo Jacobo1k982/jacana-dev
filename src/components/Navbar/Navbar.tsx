@@ -345,7 +345,7 @@ function Navbar() {
                             <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-blue-500 border border-[#30363d] cursor-pointer overflow-hidden">
                                     <img
-                                        src={user.avatar || "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"}
+                                        src={user.image ?? "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"}
                                         alt="Avatar"
                                         className="w-full h-full object-cover"
                                     />
