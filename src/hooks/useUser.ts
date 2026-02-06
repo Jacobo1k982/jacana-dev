@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react"
 
-type User = {
-    id: number
-    name: string
-    email: string
+export interface User {
+    id: string
+    name: string | null
+    email: string | null
+    image?: string | null
 }
 
 export function useUser() {
