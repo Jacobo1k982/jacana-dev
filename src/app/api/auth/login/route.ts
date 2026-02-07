@@ -9,7 +9,17 @@ const loginSchema = z.object({
     password: z.string().min(1),
 })
 
-export async function POST(req: NextRequest) {
+function getJwtSecret() {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error('JWT_SECRET is not defined. Set it in your environment variables.');
+  }
+  return secret;
+}
+
+export async function POST(req:
+ const jwtSecret = getJwtSecret();
+NextRequest) {
     try {
         const body = await req.json()
         const parsed = loginSchema.safeParse(body)
