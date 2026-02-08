@@ -10,60 +10,61 @@ const loginSchema = z.object({
 })
 
 function getJwtSecret() {
-  const secret = process.env.JWT_SECRET;
-  if (!secret) {
-    throw new Error('JWT_SECRET is not defined. Set it in your environment variables.');
-  }
-  return secret;
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+        throw new Error('JWT_SECRET is not defined. Set it in your environment variables.');
+    }
+    return secret;
 }
 
-export async function POST(req:
- const jwtSecret = getJwtSecret();
-NextRequest) {
+// Solución: Usar export async function POST (Named Export) y limpiar el cuerpo de la función.
+export async function POST(request: Request) {
     try {
-        const body = await req.json()
-        const parsed = loginSchema.safeParse(body)
+        // Corrección: Leer el body una sola vez dentro del try.
+        const body = await request.json();
+
+        const parsed = loginSchema.safeParse(body);
 
         if (!parsed.success) {
             return NextResponse.json(
                 { error: parsed.error.flatten() },
                 { status: 400 }
-            )
+            );
         }
 
-        const { email, password } = parsed.data
+        const { email, password } = parsed.data;
 
         const user = await db.user.findUnique({
             where: { email },
-        })
+        });
 
         if (!user) {
             return NextResponse.json(
                 { error: "Invalid email or password" },
                 { status: 401 }
-            )
+            );
         }
 
         const isValid = await verifyPassword(
             password,
             user.password
-        )
+        );
 
         if (!isValid) {
             return NextResponse.json(
                 { error: "Invalid email or password" },
                 { status: 401 }
-            )
+            );
         }
 
         const token = createToken({
             userId: user.id,
             email: user.email,
-        })
+        });
 
         const expires = new Date(
             Date.now() + 7 * 24 * 60 * 60 * 1000
-        )
+        );
 
         await db.session.create({
             data: {
@@ -71,7 +72,7 @@ NextRequest) {
                 sessionToken: token,
                 expires,
             },
-        })
+        });
 
         const response = NextResponse.json(
             {
@@ -82,7 +83,7 @@ NextRequest) {
                 },
             },
             { status: 200 }
-        )
+        );
 
         response.cookies.set("auth-token", token, {
             httpOnly: true,
@@ -90,14 +91,14 @@ NextRequest) {
             sameSite: "lax",
             expires,
             path: "/",
-        })
+        });
 
-        return response
+        return response;
     } catch (error) {
-        console.error("LOGIN ERROR:", error)
+        console.error("LOGIN ERROR:", error);
         return NextResponse.json(
             { error: "Internal server error" },
             { status: 500 }
-        )
+        );
     }
 }
