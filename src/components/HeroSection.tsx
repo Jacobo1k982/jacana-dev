@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Terminal, GitBranch, ShieldCheck, Zap, ExternalLink } from 'lucide-react';
 import Lottie from 'lottie-react';
 import WebDevelopmentAnimation from './Lottie/code-dark.json';
+import Link from 'next/link';
 
 export default function HeroSection() {
     const [isVisible, setIsVisible] = useState(false);
@@ -82,10 +83,12 @@ export default function HeroSection() {
                                     Iniciar Proyecto
                                 </button>
 
-                                <button className="flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-[#c9d1d9] transition-colors bg-[#161b22] hover:text-white border border-[#30363d] hover:border-[#8b949e] rounded-md backdrop-blur-md">
+                                <Link
+                                    href="/docs"
+                                    className="flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-[#c9d1d9] transition-colors bg-[#161b22] hover:text-white border border-[#30363d] hover:border-[#8b949e] rounded-md backdrop-blur-md">
                                     <ExternalLink className="w-4 h-4" />
                                     Ver Documentación
-                                </button>
+                                </Link>
                             </motion.div>
 
                             {/* Stats minimalistas con fondo sutil para legibilidad sobre video */}
