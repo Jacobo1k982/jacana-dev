@@ -1,26 +1,26 @@
-'use client'
+'use client';
 
-import React from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import Link from 'next/link'
+import React from 'react';
+import Link from 'next/link';
+import { Check, Zap, ArrowRight, Briefcase, ShieldCheck } from 'lucide-react';
 
 interface PricingPlan {
-    name: string
-    price: string
-    period: string
-    description: string
-    features: string[]
-    ctaLabel: string
-    ctaHref: string
-    popular?: boolean
+    name: string;
+    price: string;
+    period: string;
+    description: string;
+    features: string[];
+    ctaLabel: string;
+    ctaHref: string;
+    popular?: boolean;
+    icon: React.ReactNode;
 }
 
 const pricingPlans: PricingPlan[] = [
     {
         name: "Freelance",
-        price: "Desde $1,200",
-        period: "por proyecto",
+        price: "$1,200",
+        period: "/proyecto",
         description: "Ideal para MVPs, landing pages o APIs pequeñas.",
         features: [
             "Hasta 40 horas de desarrollo",
@@ -32,12 +32,13 @@ const pricingPlans: PricingPlan[] = [
             "Documentación básica"
         ],
         ctaLabel: "Iniciar proyecto",
-        ctaHref: "/contact"
+        ctaHref: "/contact",
+        icon: <Briefcase className="w-5 h-5" />
     },
     {
         name: "Startup",
-        price: "Desde $3,500",
-        period: "por proyecto",
+        price: "$3,500",
+        period: "/proyecto",
         description: "Para productos con usuarios reales y escalamiento inicial.",
         features: [
             "Hasta 120 horas de desarrollo",
@@ -52,11 +53,12 @@ const pricingPlans: PricingPlan[] = [
         ],
         ctaLabel: "Solicitar cotización",
         ctaHref: "/contact",
-        popular: true
+        popular: true,
+        icon: <Zap className="w-5 h-5" />
     },
     {
         name: "Enterprise",
-        price: "Personalizado",
+        price: "Custom",
         period: "",
         description: "Soluciones a medida para empresas con alto tráfico o complejidad.",
         features: [
@@ -71,166 +73,127 @@ const pricingPlans: PricingPlan[] = [
             "Auditoría de deuda técnica"
         ],
         ctaLabel: "Hablemos",
-        ctaHref: "/contact"
+        ctaHref: "/contact",
+        icon: <ShieldCheck className="w-5 h-5" />
     }
-]
-
-const CheckIcon = () => (
-    <svg
-        className="h-5 w-5 flex-shrink-0"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        aria-hidden="true"
-    >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-    </svg>
-)
+];
 
 const PricingCard = ({ plan, index }: { plan: PricingPlan; index: number }) => {
-    const gradients = [
-        "from-cyan-500 to-blue-600",
-        "from-violet-500 to-purple-600",
-        "from-rose-500 to-pink-600"
-    ]
-
-    const gradient = gradients[index]
-    const borderClass = plan.popular ? "border-violet-400/50" : "border-cyan-500/30"
-
     return (
-        <Card className={`
-      relative overflow-hidden
-      bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50
-      backdrop-blur-xl border-2 ${borderClass}
-      hover:border-violet-400/50 transition-all duration-500
-      group ${plan.popular ? 'scale-[1.02]' : ''}
-    `}>
-            {/* Glow Effect */}
-            <div className={`
-        absolute inset-0 bg-gradient-to-br from-${gradient.split('-')[0]}-400/20 to-${gradient.split('-')[2]}-600/20
-        opacity-0 group-hover:opacity-100 transition-opacity duration-500
-      `} />
-
-            {/* Animated Border Glow */}
-            <div className={`
-        absolute inset-0 bg-gradient-to-br ${gradient}
-        opacity-0 group-hover:opacity-20 transition-opacity duration-500
-        blur-2xl
-      `} />
-
+        <div
+            className={`
+                relative flex flex-col h-full rounded-md border bg-[#161b22] p-6 transition-all duration-200
+                ${plan.popular
+                    ? 'border-[#238636] shadow-[0_0_0_1px_rgba(35,134,54,0.2)] z-10'
+                    : 'border-[#30363d] hover:border-[#8b949e]'
+                }
+            `}
+        >
             {/* Popular Badge */}
             {plan.popular && (
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-                    <Badge className="bg-gradient-to-r from-violet-500 to-purple-600 text-white border-none shadow-lg">
-                        Más popular
-                    </Badge>
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="bg-[#238636] text-[#f0f6fc] text-xs font-bold px-3 py-1 rounded-full shadow-lg border border-[#1f6feb]/30 flex items-center gap-1">
+                        <Zap className="w-3 h-3 fill-white" /> POPULAR
+                    </span>
                 </div>
             )}
 
-            {/* Content */}
-            <CardHeader className="relative z-10 text-center">
-                <CardTitle className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-2">
-                    {plan.name}
-                </CardTitle>
-                <div className="mb-4">
-                    <span className="text-4xl font-extrabold text-white">{plan.price}</span>
-                    {plan.period && (
-                        <span className="text-gray-400 ml-2">{plan.period}</span>
-                    )}
+            {/* Plan Header */}
+            <div className="mb-6">
+                <div className="flex items-center gap-2 mb-3">
+                    <div className={`p-2 rounded-md ${plan.popular ? 'bg-[#238636]/20 text-[#3fb950]' : 'bg-[#21262d] text-[#8b949e]'}`}>
+                        {plan.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold text-[#f0f6fc]">{plan.name}</h3>
                 </div>
-                <p className="text-gray-400 text-sm">{plan.description}</p>
-            </CardHeader>
 
-            <CardContent className="relative z-10 space-y-6">
-                <ul className="space-y-3">
-                    {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                            <div className={`mt-0.5 p-1 rounded-lg bg-gradient-to-br ${gradient}`}>
-                                <CheckIcon />
-                            </div>
-                            <span className="text-gray-300 text-sm leading-relaxed">{feature}</span>
-                        </li>
-                    ))}
-                </ul>
+                <p className="text-sm text-[#8b949e] mb-4 h-10 flex items-center">{plan.description}</p>
 
+                <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-bold text-[#f0f6fc] tracking-tight">{plan.price}</span>
+                    {plan.period && <span className="text-[#8b949e] text-sm">{plan.period}</span>}
+                </div>
+            </div>
+
+            {/* Features List */}
+            <ul className="space-y-3 mb-8 flex-1">
+                {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm group">
+                        <div className="mt-0.5">
+                            <Check className={`w-4 h-4 flex-shrink-0 ${plan.popular ? 'text-[#3fb950]' : 'text-[#8b949e] group-hover:text-[#c9d1d9] transition-colors'}`} />
+                        </div>
+                        <span className="text-[#c9d1d9] leading-relaxed group-hover:text-[#f0f6fc] transition-colors">{feature}</span>
+                    </li>
+                ))}
+            </ul>
+
+            {/* CTA Button */}
+            <div className="mt-auto pt-4 border-t border-[#30363d]">
                 <Link
                     href={plan.ctaHref}
                     className={`
-            w-full block text-center py-4 px-6 rounded-xl font-semibold
-            transition-all duration-300 hover:scale-105 shadow-lg
-            ${plan.popular
-                            ? "bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white hover:shadow-violet-500/50"
-                            : "bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white hover:shadow-cyan-500/50"
+                        w-full block text-center py-2.5 px-4 rounded-md text-sm font-semibold transition-all duration-200 border flex items-center justify-center gap-2
+                        ${plan.popular
+                            ? 'bg-[#238636] border-transparent text-white hover:bg-[#2ea043] shadow-sm'
+                            : 'bg-[#21262d] border-[#30363d] text-[#c9d1d9] hover:bg-[#30363d] hover:text-white hover:border-[#8b949e]'
                         }
-          `}
+                    `}
                 >
                     {plan.ctaLabel}
+                    <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity -translate-x-1 group-hover:translate-x-0" />
                 </Link>
-            </CardContent>
-        </Card>
-    )
-}
+            </div>
+        </div>
+    );
+};
 
 const PricingSection = () => {
     return (
-        <section className="relative py-24 px-4 sm:px-6 lg:px-8">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50" />
+        <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-[#0d1117] border-t border-[#30363d] overflow-hidden">
+            {/* GitHub Dot Pattern Background */}
+            <div
+                className="absolute inset-0 pointer-events-none opacity-[0.03]"
+                style={{
+                    backgroundImage: 'radial-gradient(#c9d1d9 1px, transparent 1px)',
+                    backgroundSize: '24px 24px'
+                }}
+            />
 
-            {/* Grid Pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
-
-            {/* Content */}
             <div className="relative z-10 max-w-7xl mx-auto">
-                {/* Header */}
-                <div className="text-center mb-16 space-y-6">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 to-violet-500/10 border border-cyan-500/20 backdrop-blur-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                        <span className="text-sm text-cyan-400 font-medium">Pricing Plans</span>
-                    </div>
 
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-                        <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-                            Precios transparentes,{" "}
-                        </span>
-                        <span className="bg-gradient-to-r from-cyan-400 via-violet-400 to-purple-400 bg-clip-text text-transparent">
-                            valor real
-                        </span>
+                {/* Header Section */}
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <h2 className="text-3xl md:text-4xl font-bold text-[#f0f6fc] mb-4">
+                        Planes de desarrollo
                     </h2>
-
-                    <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                        Sin sorpresas. Cada proyecto incluye{" "}
-                        <span className="text-cyan-400 font-semibold">código limpio</span>,{" "}
-                        <span className="text-violet-400 font-semibold">documentación</span> y{" "}
-                        <span className="text-purple-400 font-semibold">soporte</span> post-lanzamiento.
+                    <p className="text-lg text-[#8b949e] leading-relaxed">
+                        Soluciones escalables y código de calidad para empresas y startups.
+                        Elige el plan que mejor se adapte a tu proyecto.
                     </p>
                 </div>
 
-                {/* Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                {/* Pricing Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
                     {pricingPlans.map((plan, index) => (
                         <PricingCard key={index} plan={plan} index={index} />
                     ))}
                 </div>
 
-                {/* Bottom Note */}
-                <div className="text-center max-w-2xl mx-auto">
-                    <p className="text-gray-400 text-sm leading-relaxed">
-                        ¿No encuentras lo que necesitas? Ofrezco también{" "}
-                        <span className="text-cyan-400 font-semibold">mentoría</span>,{" "}
-                        <span className="text-violet-400 font-semibold">auditorías técnicas</span> y{" "}
-                        <span className="text-purple-400 font-semibold">servicios por hora</span>.
-                        <br />
-                        <Link href="/contact" className="text-cyan-400 hover:text-cyan-300 hover:underline font-medium mt-2 inline-block">
-                            Contáctame para una consulta gratuita.
-                        </Link>
+                {/* Footer Note */}
+                <div className="mt-20 text-center border-t border-[#30363d] pt-8">
+                    <p className="text-sm text-[#8b949e]">
+                        ¿Necesitas algo diferente? Ofrezco servicios por hora, auditorías técnicas y mentoría.
                     </p>
+                    <Link
+                        href="/contact"
+                        className="inline-block mt-3 text-[#58a6ff] hover:underline hover:text-[#79c0ff] font-medium"
+                    >
+                        Contáctame para una consulta gratuita &rarr;
+                    </Link>
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default PricingSection
+export default PricingSection;
