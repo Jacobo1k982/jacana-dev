@@ -1,20 +1,29 @@
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET!
+// 1. Eliminamos la declaración constante en la raíz.
+// 2. Creamos una función auxiliar que se llama solo cuando es necesario.
+function getJwtSecret(): string {
+    const secret = process.env.JWT_SECRET;
 
-if (!JWT_SECRET) {
-    throw new Error("JWT_SECRET is not defined")
+    // Si no existe el secreto cuando se intenta usar, lanzamos el error
+    if (!secret) {
+        throw new Error("FATAL: JWT_SECRET is not defined in environment variables.");
+    }
+
+    return secret;
 }
 
 export function createToken(payload: {
     userId: number
     email: string
 }) {
-    return jwt.sign(payload, JWT_SECRET, {
+    // El secreto se obtiene DENTRO de la función (en tiempo de ejecución)
+    return jwt.sign(payload, getJwtSecret(), {
         expiresIn: "7d",
     })
 }
 
 export function verifyToken(token: string) {
-    return jwt.verify(token, JWT_SECRET)
+    // El secreto se obtiene DENTRO de la función (en tiempo de ejecución)
+    return jwt.verify(token, getJwtSecret())
 }
