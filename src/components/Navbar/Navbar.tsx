@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback, memo } from "react";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
-import { Menu, X, ChevronDown, ExternalLink, Sparkles, LogOut, User } from "lucide-react";
+import { Menu, X, ChevronDown, ExternalLink, Sparkles, LogOut, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { menuItems } from "./menuData";
@@ -14,10 +14,10 @@ import { useAuth } from "@/hooks/use-auth";
 // Helpers
 const isInternalLink = (href: string) =>
     href.startsWith("/") && !href.startsWith("//") && !href.startsWith("http");
-const avatarSrc = (User as { image?: string | null }).image;
+const avatarSrc = (user: any) => user?.image;
 
-// Hook para detectar scroll y aplicar borde estilo GitHub
-function useScrollPosition(threshold = 10) {
+// Hook para detectar scroll y activar el borde superior
+function useScrollPosition(threshold = 0) {
     const [scrolled, setScrolled] = useState(false);
     const { scrollY } = useScroll();
 
@@ -31,7 +31,7 @@ function useScrollPosition(threshold = 10) {
     return scrolled;
 }
 
-// Hook actualizado con la firma corregida para aceptar null
+// Click Outside
 function useClickOutside(ref: React.RefObject<HTMLElement | null>, callback: () => void) {
     useEffect(() => {
         const handle = (e: MouseEvent) => {
@@ -43,7 +43,7 @@ function useClickOutside(ref: React.RefObject<HTMLElement | null>, callback: () 
 }
 
 // ============================================================================
-// Desktop Menu Item – GitHub Layout + Original Icons (WIDE & ELEGANT)
+// Desktop Menu Item – Estilo GitHub "Mega Menu"
 // ============================================================================
 
 interface DesktopMenuItemProps {
@@ -62,22 +62,15 @@ const DesktopMenuItem = memo(function DesktopMenuItem({
 
     const handleMouseEnter = () => onToggle(item.label);
 
-    // CORRECCIÓN ROBUSTA PARA EL ERROR "parameter 1 is not of type 'Node'"
     const handleMouseLeave = (e: React.MouseEvent) => {
         const related = e.relatedTarget;
-
-        // 1. Verificamos que relatedTarget exista y sea un nodo DOM real
         if (!related || !(related instanceof Node)) {
             onToggle(null);
             return;
         }
-
-        // 2. Verificamos si el ratón se movió hacia el dropdown actual
         if (dropdownRef.current && dropdownRef.current.contains(related)) {
             return;
         }
-
-        // 3. Si salimos del contenedor hacia algo que no es el dropdown, cerramos
         onToggle(null);
     };
 
@@ -93,8 +86,11 @@ const DesktopMenuItem = memo(function DesktopMenuItem({
                         type="button"
                         aria-expanded={isActive}
                         className={`
-                            flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150
-                            ${isActive ? "text-white bg-[#161b22]" : "text-[#c9d1d9] hover:text-white"}
+                            flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-md transition-all duration-150
+                            ${isActive
+                                ? "text-[#f0f6fc] bg-[#161b22]" // Active state: Dark Gray
+                                : "text-[#c9d1d9] hover:text-[#f0f6fc] hover:bg-[#161b22]/50" // Hover: Light Gray/Transp
+                            }
                         `}
                     >
                         {item.label}
@@ -114,47 +110,48 @@ const DesktopMenuItem = memo(function DesktopMenuItem({
                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                 exit={{ opacity: 0, y: 10, scale: 0.98 }}
                                 transition={{ duration: 0.2, ease: "easeOut" }}
-                                className="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-50 w-[700px]"
+                                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 w-[700px]"
                             >
-                                <div className="rounded-md border border-[#30363d] bg-[#161b22] shadow-2xl shadow-black/60 overflow-hidden">
+                                {/* Mega Menu Container: GitHub Dark Gray Card Style */}
+                                <div className="rounded-md border border-[#30363d] bg-[#161b22] shadow-2xl shadow-black/80 overflow-hidden">
 
-                                    <div className="px-5 py-4 border-b border-[#30363d] bg-[#0d1117]/50">
+                                    {/* Header */}
+                                    <div className="px-5 py-3 border-b border-[#30363d] bg-[#0d1117]">
                                         <span className="text-xs font-bold text-[#8b949e] uppercase tracking-wider">
                                             {item.label}
                                         </span>
                                     </div>
 
-                                    <div className="p-4 grid grid-cols-2 gap-3">
+                                    <div className="p-4 grid grid-cols-2 gap-2">
                                         {item.subItems?.map((sub) => (
                                             <Link
                                                 key={sub.label}
                                                 href={sub.href}
                                                 onClick={() => onToggle(null)}
-                                                className="group flex items-start gap-4 p-3 rounded-md hover:bg-[#21262d] transition-colors"
+                                                className="group flex items-start gap-3 p-3 rounded-md hover:bg-[#21262d] transition-colors border border-transparent hover:border-[#30363d]"
                                             >
-                                                {/* Icono Original: Imagen o Sparkles */}
+                                                {/* Icon */}
                                                 {sub.image ? (
                                                     <img
                                                         src={sub.image}
                                                         alt={sub.label}
-                                                        className="w-10 h-10 rounded-md object-cover ring-1 ring-[#30363d] flex-shrink-0"
+                                                        className="w-10 h-10 rounded-md object-cover border border-[#30363d] flex-shrink-0"
                                                     />
                                                 ) : (
-                                                    <div className="flex-shrink-0 w-10 h-10 rounded-md bg-[#21262d] border border-[#30363d] flex items-center justify-center ring-1 ring-[#30363d]">
+                                                    <div className="flex-shrink-0 w-10 h-10 rounded-md bg-[#21262d] border border-[#30363d] flex items-center justify-center">
                                                         <Sparkles size={18} className="text-[#8b949e] group-hover:text-[#58a6ff] transition-colors" />
                                                     </div>
                                                 )}
 
                                                 <div className="flex-1 min-w-0 flex flex-col justify-center">
                                                     <div className="flex items-center gap-2 mb-1">
-                                                        <span className="text-sm font-semibold text-[#c9d1d9] group-hover:text-white leading-tight">
+                                                        <span className="text-sm font-semibold text-[#c9d1d9] group-hover:text-[#f0f6fc] leading-tight transition-colors">
                                                             {sub.label}
                                                         </span>
-                                                        {/* Icono Original: ExternalLink */}
                                                         <ExternalLink className="h-3.5 w-3.5 text-[#8b949e] group-hover:text-[#58a6ff] flex-shrink-0" />
                                                     </div>
                                                     {sub.description && (
-                                                        <p className="text-xs text-[#8b949e] leading-relaxed line-clamp-3">
+                                                        <p className="text-xs text-[#8b949e] leading-relaxed line-clamp-2 group-hover:text-[#c9d1d9] transition-colors">
                                                             {sub.description}
                                                         </p>
                                                     )}
@@ -163,14 +160,15 @@ const DesktopMenuItem = memo(function DesktopMenuItem({
                                         ))}
                                     </div>
 
-                                    <div className="border-t border-[#30363d] p-3 mt-1 bg-[#0d1117]/30">
+                                    {/* Footer */}
+                                    <div className="border-t border-[#30363d] p-2 mt-1 bg-[#161b22]">
                                         <Link
                                             href={`/${item.label.toLowerCase()}`}
                                             onClick={() => onToggle(null)}
-                                            className="flex items-center justify-between px-3 py-2.5 text-xs font-semibold text-[#58a6ff] hover:text-[#79c0ff] hover:underline rounded-md hover:bg-[#21262d]/50 transition-colors"
+                                            className="flex items-center justify-between px-3 py-2 text-xs font-medium text-[#58a6ff] hover:text-[#79c0ff] hover:bg-[#21262d] rounded-md transition-colors group"
                                         >
-                                            <span>View all {item.label.toLowerCase()}</span>
-                                            <ExternalLink className="h-3.5 w-3.5" />
+                                            <span>Ver todo en {item.label.toLowerCase()}</span>
+                                            <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
                                         </Link>
                                     </div>
                                 </div>
@@ -181,7 +179,7 @@ const DesktopMenuItem = memo(function DesktopMenuItem({
             ) : (
                 <Link
                     href={item.href || "/"}
-                    className="px-3 py-2 text-sm font-medium text-[#c9d1d9] hover:text-white rounded-md transition-colors"
+                    className="px-3 py-2 text-sm font-medium text-[#c9d1d9] hover:text-[#f0f6fc] rounded-md hover:bg-[#161b22]/50 transition-colors"
                 >
                     {item.label}
                 </Link>
@@ -205,7 +203,7 @@ const MobileMenuItem = memo(function MobileMenuItem({ item, onItemClick }: Mobil
             <Link
                 href={item.href || "/"}
                 onClick={onItemClick}
-                className="block px-4 py-3 text-base text-[#c9d1d9] hover:text-white hover:bg-[#161b22] border-b border-[#30363d] last:border-0"
+                className="block px-4 py-3 text-base text-[#c9d1d9] hover:text-[#f0f6fc] hover:bg-[#161b22] border-b border-[#30363d] last:border-0 transition-colors"
             >
                 {item.label}
             </Link>
@@ -217,10 +215,10 @@ const MobileMenuItem = memo(function MobileMenuItem({ item, onItemClick }: Mobil
             <button
                 type="button"
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="flex items-center justify-between w-full px-4 py-3 text-base text-[#c9d1d9] hover:text-white hover:bg-[#161b22] border-b border-[#30363d]"
+                className="flex items-center justify-between w-full px-4 py-3 text-base text-[#c9d1d9] hover:text-[#f0f6fc] hover:bg-[#161b22] border-b border-[#30363d] transition-colors"
             >
                 <span>{item.label}</span>
-                <ChevronDown className={`h-4 w-4 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
+                <ChevronDown className={`h-4 w-4 transition-transform text-[#8b949e] ${isExpanded ? "rotate-180 text-[#c9d1d9]" : ""}`} />
             </button>
 
             <AnimatePresence>
@@ -237,9 +235,8 @@ const MobileMenuItem = memo(function MobileMenuItem({ item, onItemClick }: Mobil
                                     key={sub.label}
                                     href={sub.href}
                                     onClick={onItemClick}
-                                    className="group flex items-start gap-3 p-3 rounded-md hover:bg-[#161b22] border border-[#21262d] hover:border-[#30363d] transition-colors"
+                                    className="group flex items-start gap-3 p-3 rounded-md hover:bg-[#161b22] border border-[#30363d]/50 transition-colors"
                                 >
-                                    {/* Icono Original en Móvil */}
                                     {sub.image ? (
                                         <img
                                             src={sub.image}
@@ -253,12 +250,12 @@ const MobileMenuItem = memo(function MobileMenuItem({ item, onItemClick }: Mobil
                                     )}
 
                                     <div className="flex-1 min-w-0">
-                                        <div className="flex items-center gap-1.5">
-                                            <span className="text-sm font-semibold text-[#c9d1d9] mb-0.5">{sub.label}</span>
+                                        <div className="flex items-center gap-1.5 mb-0.5">
+                                            <span className="text-sm font-semibold text-[#c9d1d9] group-hover:text-[#f0f6fc] transition-colors">{sub.label}</span>
                                             <ExternalLink className="h-3 w-3 text-[#8b949e] flex-shrink-0" />
                                         </div>
                                         {sub.description && (
-                                            <span className="text-xs text-[#8b949e] leading-snug line-clamp-2">
+                                            <span className="text-xs text-[#8b949e] leading-snug line-clamp-2 group-hover:text-[#c9d1d9] transition-colors">
                                                 {sub.description}
                                             </span>
                                         )}
@@ -274,13 +271,13 @@ const MobileMenuItem = memo(function MobileMenuItem({ item, onItemClick }: Mobil
 });
 
 // ============================================================================
-// Navbar Principal
+// Navbar Principal – Estilo GitHub (Elegante y Técnico)
 // ============================================================================
 
 function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-    const scrolled = useScrollPosition(10);
+    const scrolled = useScrollPosition(0);
     const containerRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
     const { user, loading: authLoading, logout } = useAuth();
@@ -309,18 +306,24 @@ function Navbar() {
             <motion.nav
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
                 className={`
-                    fixed top-0 inset-x-0 h-16 transition-colors duration-200
-                    bg-[#0d1117] 
-                    ${scrolled ? "border-b border-[#30363d]" : "border-b border-transparent"}
+                    fixed top-0 inset-x-0 h-16 transition-all duration-200 border-b
+                    ${scrolled
+                        ? "bg-[#010409]/95 backdrop-blur-md border-[#30363d] shadow-[0_4px_20px_-5px_rgba(0,0,0,0.7)]"
+                        : "bg-[#010409]/90 backdrop-blur-sm border-[#30363d]"
+                    }
                 `}
             >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
+                {/* Shine Effect (Subtle gradient top) */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none opacity-50 h-full" />
+
+                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between relative z-10">
+
                     {/* Logo */}
                     <div
                         onClick={() => router.push("/")}
-                        className="flex-shrink-0 cursor-pointer flex items-center gap-2 group"
+                        className="flex-shrink-0 cursor-pointer flex items-center gap-2 group select-none"
                     >
                         <div className="lg:hidden text-white"><LogoTwo /></div>
                         <div className="hidden lg:block text-white"><Logo /></div>
@@ -343,34 +346,44 @@ function Navbar() {
                         {authLoading ? (
                             <div className="h-8 w-24 bg-[#21262d] animate-pulse rounded-md" />
                         ) : user ? (
-                            <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-blue-500 border border-[#30363d] cursor-pointer overflow-hidden">
-                                    <img
-                                        src={(user as any).image ?? "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"}
-                                        alt="Avatar"
-                                        className="w-full h-full object-cover"
-                                    />
+                            <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-2 pr-4 border-r border-[#30363d]">
+                                    <div className="w-8 h-8 rounded-full bg-[#21262d] border border-[#30363d] cursor-pointer overflow-hidden hover:border-[#8b949e] transition-colors relative">
+                                        <img
+                                            src={avatarSrc(user) ?? "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"}
+                                            alt="Avatar"
+                                            className="w-full h-full object-cover"
+                                        />
+                                        {/* Status Dot (Online) */}
+                                        <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-[#238636] border-2 border-[#010409] rounded-full" />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-xs font-semibold text-[#f0f6fc] leading-tight">{user.name || "Usuario"}</span>
+                                        <span className="text-[10px] text-[#8b949e]">En línea</span>
+                                    </div>
                                 </div>
-                                <div className="flex flex-col">
-                                    <span className="text-xs font-medium text-white leading-tight">{user.name || "Usuario"}</span>
-                                </div>
+
                                 <button
                                     onClick={handleLogout}
-                                    className="ml-2 text-xs font-medium text-[#8b949e] hover:text-white border border-[#30363d] bg-[#21262d] px-3 py-1.5 rounded-md hover:border-[#8b949e] transition-colors"
+                                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#8b949e] hover:text-[#f0f6fc] hover:bg-[#161b22] rounded-md border border-[#30363d] transition-all duration-200"
                                 >
-                                    Sign out
+                                    <LogOut className="h-3.5 w-3.5" />
+                                    Salir
                                 </button>
                             </div>
                         ) : (
                             <>
-                                <Link href="/login" className="text-sm font-medium text-[#c9d1d9] hover:text-white transition-colors">
-                                    Sign in
+                                <Link
+                                    href="/login"
+                                    className="text-sm font-medium text-[#c9d1d9] hover:text-[#f0f6fc] transition-colors"
+                                >
+                                    Iniciar sesión
                                 </Link>
                                 <Link
                                     href="/register"
-                                    className="group relative inline-flex items-center justify-center px-4 py-1.5 text-sm font-semibold text-white transition-all duration-200 bg-[#238636] border border-transparent rounded-md hover:bg-[#2ea043] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#238636] focus:ring-offset-[#0d1117]"
+                                    className="group relative inline-flex items-center justify-center px-4 py-1.5 text-sm font-semibold text-white bg-[#238636] border border-[#238636] rounded-md hover:bg-[#2ea043] hover:border-[#2ea043] transition-all duration-200 shadow-[0_0_10px_rgba(35,134,54,0.2)] hover:shadow-[0_0_15px_rgba(46,160,67,0.5)] focus:outline-none focus:ring-2 focus:ring-[#238636] focus:ring-offset-2 focus:ring-offset-[#010409]"
                                 >
-                                    Sign up
+                                    Crear cuenta
                                 </Link>
                             </>
                         )}
@@ -380,7 +393,7 @@ function Navbar() {
                     <div className="lg:hidden flex items-center">
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="text-[#c9d1d9] hover:text-white p-2 focus:outline-none"
+                            className="text-[#c9d1d9] hover:text-[#f0f6fc] p-2 focus:outline-none transition-colors"
                         >
                             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
@@ -395,38 +408,39 @@ function Navbar() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="lg:hidden fixed inset-0 z-40 pt-16 bg-[#0d1117] overflow-y-auto"
+                        className="lg:hidden fixed inset-0 z-40 pt-16 bg-[#010409] overflow-y-auto"
                     >
-                        <div className="px-2 py-4 space-y-1">
+                        <div className="px-2 py-2 space-y-1 border-b border-[#30363d]">
                             {menuItems.map((item) => (
                                 <MobileMenuItem key={item.label} item={item} onItemClick={handleMobileItemClick} />
                             ))}
                         </div>
 
                         {/* Mobile Auth */}
-                        <div className="px-4 py-6 border-t border-[#30363d]">
+                        <div className="px-4 py-6">
                             {authLoading ? (
                                 <div className="h-10 bg-[#21262d] rounded-md animate-pulse" />
                             ) : user ? (
                                 <div className="flex flex-col gap-4">
                                     <div className="flex items-center gap-3 pb-4 border-b border-[#30363d]">
-                                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-blue-500 overflow-hidden">
+                                        <div className="w-10 h-10 rounded-full bg-[#21262d] border border-[#30363d] overflow-hidden">
                                             <img
-                                                src={(user as any).avatar || ""}
+                                                src={avatarSrc(user) || ""}
                                                 alt="Avatar"
                                                 className="w-full h-full object-cover"
                                             />
                                         </div>
                                         <div>
-                                            <p className="text-sm font-bold text-white">{user.name || "Usuario"}</p>
+                                            <p className="text-sm font-bold text-[#f0f6fc]">{user.name || "Usuario"}</p>
                                             <p className="text-xs text-[#8b949e]">{user.email}</p>
                                         </div>
                                     </div>
                                     <button
                                         onClick={handleLogout}
-                                        className="w-full py-2.5 text-sm font-medium text-[#c9d1d9] hover:text-white hover:bg-[#21262d] rounded-md border border-[#30363d] transition-colors"
+                                        className="w-full py-2.5 text-sm font-medium text-[#c9d1d9] hover:text-[#f0f6fc] hover:bg-[#161b22] rounded-md border border-[#30363d] transition-colors flex items-center justify-center gap-2"
                                     >
-                                        Sign out
+                                        <LogOut size={16} />
+                                        Cerrar sesión
                                     </button>
                                 </div>
                             ) : (
@@ -434,16 +448,16 @@ function Navbar() {
                                     <Link
                                         href="/login"
                                         onClick={handleMobileItemClick}
-                                        className="w-full py-2.5 text-center text-sm font-medium text-[#c9d1d9] hover:text-white border border-[#30363d] rounded-md hover:bg-[#21262d] transition-colors"
+                                        className="w-full py-2.5 text-center text-sm font-medium text-[#c9d1d9] hover:text-[#f0f6fc] border border-[#30363d] rounded-md hover:bg-[#161b22] transition-colors"
                                     >
-                                        Sign in
+                                        Iniciar sesión
                                     </Link>
                                     <Link
                                         href="/register"
                                         onClick={handleMobileItemClick}
                                         className="w-full py-2.5 text-center text-sm font-semibold text-white bg-[#238636] rounded-md hover:bg-[#2ea043] transition-colors"
                                     >
-                                        Sign up
+                                        Crear cuenta
                                     </Link>
                                 </div>
                             )}
