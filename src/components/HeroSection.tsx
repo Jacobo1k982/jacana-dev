@@ -75,13 +75,13 @@ export default function HeroSection() {
     };
 
     const glowVariants = {
-        hidden: { scale: 0.8, opacity: 0 },
+        hidden: { scale: 1, opacity: 0 },
         visible: {
-            scale: 1,
+            scale: 1.05,
             opacity: 1,
             transition: {
-                duration: 1.2,
-                ease: "easeOut",
+                duration: 1.6,
+                ease: [0.42, 0, 0.58, 1],
             },
         },
     };
