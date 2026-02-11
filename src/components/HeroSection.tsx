@@ -80,8 +80,8 @@ export default function HeroSection() {
             scale: 1.05,
             opacity: 1,
             transition: {
-                duration: 1.6,
-                ease: [0.42, 0, 0.58, 1],
+                duration: 0.9, 
+                ease: "easeInOut",
             },
         },
     };
