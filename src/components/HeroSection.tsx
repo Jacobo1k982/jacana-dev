@@ -148,16 +148,7 @@ export default function HeroSection() {
                                     <div className="flex-1 p-6 relative overflow-hidden">
                                         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0d1117]/50 to-[#0d1117] z-10 pointer-events-none" />
 
-                                        {/* Líneas de código simuladas */}
-                                        <div className="relative z-0 font-mono text-sm space-y-1 opacity-40 pointer-events-none select-none">
-                                            <div><span className="text-[#ff7b72]">import</span> {`{ JacanaCore }`} <span className="text-[#ff7b72]">from</span> <span className="text-[#a5d6ff]">'@jacana/core'</span>;</div>
-                                            <div className="mt-4"><span className="text-[#8b949e]">// Initializing secure connection...</span></div>
-                                            <div><span className="text-[#d2a8ff]">const</span> app = <span className="text-[#ff7b72]">new</span> <span className="text-[#d2a8ff]">JacanaCore</span>({`{`}</div>
-                                            <div className="pl-4"><span className="text-[#79c0ff]">mode</span>: <span className="text-[#a5d6ff]">'production'</span>,</div>
-                                            <div className="pl-4"><span className="text-[#79c0ff]">optimize</span>: <span className="text-[#79c0ff]">true</span>,</div>
-                                            <div className="pl-4"><span className="text-[#79c0ff]">security</span>: <span className="text-[#79c0ff]">'enterprise'</span></div>
-                                            <div>{`})`};</div>
-                                        </div>
+                                       
 
                                         {/* Lottie Animation centrado */}
                                         <div className="absolute inset-0 flex items-center justify-center z-20 opacity-80">

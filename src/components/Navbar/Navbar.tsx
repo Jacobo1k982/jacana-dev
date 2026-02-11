@@ -350,7 +350,7 @@ function Navbar() {
                                 <div className="flex items-center gap-2 pr-4 border-r border-[#30363d]">
                                     <div className="w-8 h-8 rounded-full bg-[#21262d] border border-[#30363d] cursor-pointer overflow-hidden hover:border-[#8b949e] transition-colors relative">
                                         <img
-                                            src={avatarSrc(user) ?? "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"}
+                                            src={avatarSrc(user) ?? "https://github.com/Jacobo1k982/JACANA_img/blob/main/favicon.png"}
                                             alt="Avatar"
                                             className="w-full h-full object-cover"
                                         />
@@ -424,8 +424,9 @@ function Navbar() {
                                 <div className="flex flex-col gap-4">
                                     <div className="flex items-center gap-3 pb-4 border-b border-[#30363d]">
                                         <div className="w-10 h-10 rounded-full bg-[#21262d] border border-[#30363d] overflow-hidden">
+                                            {/* SOLUCIÓN APLICADA AQUÍ: Cambiado || "" por ?? URL_FALLBACK */}
                                             <img
-                                                src={avatarSrc(user) || ""}
+                                                src={avatarSrc(user) ?? "https://github.com/Jacobo1k982/JACANA_img/blob/main/favicon.png"}
                                                 alt="Avatar"
                                                 className="w-full h-full object-cover"
                                             />
