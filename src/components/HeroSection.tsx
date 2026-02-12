@@ -39,12 +39,13 @@ export default function HeroSection() {
         },
     };
 
+    // CORRECCIÓN: Cambiado a "easeOut" para evitar el error de Runtime con cubic-bezier
     const itemVariants = {
-        hidden: { opacity: 0, y: 10 },
+        hidden: { opacity: 0, y: 20 },
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.6, ease: [0.6, 0.01, -0.05, 0.95] as any },
+            transition: { duration: 0.6, ease: "easeOut" },
         },
     };
 
@@ -112,18 +113,6 @@ export default function HeroSection() {
                         </div>
                     </motion.div>
 
-                    {/* SPLIT LAYOUT: TERMINAL & LOTTIE */}
-                    <motion.div
-                        variants={itemVariants}
-                        className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6"
-                    >
-                    </motion.div>
-                    {/* Lottie Area */}
-                    <Lottie
-                        animationData={WebDevelopmentAnimation}
-                        loop={true}
-                        className="w-4/5 h-4/5"
-                    />
                     {/* Main Headline */}
                     <motion.div variants={itemVariants} className="mb-6">
                         <h1 className="text-5xl sm:text-6xl lg:text-[5.5rem] font-bold tracking-tighter leading-[1.05]">
@@ -170,6 +159,127 @@ export default function HeroSection() {
                             <ExternalLink className="w-4 h-4 text-[#8b949e] group-hover:text-[#58a6ff] transition-colors" />
                             Ver Documentación
                         </Link>
+                    </motion.div>
+
+                    {/* SPLIT LAYOUT: TERMINAL & LOTTIE (Estructura reparada) */}
+                    <motion.div
+                        variants={itemVariants}
+                        className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6 mb-16"
+                    >
+                        {/* Terminal Window */}
+                        <div className="relative group">
+                            {/* Glow effect */}
+                            <div className="absolute -inset-px rounded-xl bg-gradient-to-b from-[#58a6ff]/20 to-transparent opacity-0 group-hover:opacity-100 blur transition-opacity duration-500" />
+
+                            <div className="relative h-full rounded-xl border border-[#30363d] bg-[#0d1117]/80 backdrop-blur-xl shadow-2xl overflow-hidden">
+                                {/* Title Bar */}
+                                <div className="flex items-center justify-between px-4 py-3 bg-[#161b22]/90 border-b border-[#21262d]">
+                                    <div className="flex items-center gap-2">
+                                        <div className="flex gap-1.5">
+                                            <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+                                            <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                                            <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+                                        </div>
+                                        <div className="ml-4 px-3 py-1 rounded-md bg-[#0d1117] border border-[#30363d] text-xs text-[#8b949e] font-mono flex items-center gap-2">
+                                            <Terminal className="w-3 h-3" />
+                                            <span className="text-[#58a6ff]">cli</span>
+                                            <span className="text-[#30363d]">—</span>
+                                            <span>bash</span>
+                                        </div>
+                                    </div>
+                                    <span className="text-[10px] text-[#8b949e] font-mono">1280x720</span>
+                                </div>
+
+                                {/* Code Area */}
+                                <div className="relative min-h-[300px] bg-[#0d1117] p-6 font-mono text-sm flex flex-col justify-end text-left">
+                                    <div className="space-y-2">
+                                        <motion.div
+                                            initial={{ opacity: 0, x: -10 }}
+                                            animate={isVisible ? { opacity: 1, x: 0 } : {}}
+                                            transition={{ delay: 1.2 }}
+                                            className="flex gap-2"
+                                        >
+                                            <span className="text-[#3fb950]">❯</span>
+                                            <span className="text-white">jacana deploy --production</span>
+                                        </motion.div>
+
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={isVisible ? { opacity: 1 } : {}}
+                                            transition={{ delay: 1.5 }}
+                                            className="text-[#8b949e]"
+                                        >
+                                            <motion.p className="text-[#58a6ff]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}>➜ Validating environment...</motion.p>
+                                            <motion.p className="text-[#3fb950]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }}>✓ Environment secure.</motion.p>
+                                            <motion.p className="text-[#8b949e]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.0 }}>✓ Optimizing assets...</motion.p>
+                                            <motion.p className="text-[#8b949e]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2 }}>✓ Uploading to Edge Network...</motion.p>
+                                            <br />
+                                            <motion.p className="flex items-center gap-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }}>
+                                                <Sparkles className="w-4 h-4 text-[#e3b341]" />
+                                                <span className="text-[#e6edf3] font-semibold">Deployment successful</span>
+                                            </motion.p>
+                                            <motion.p className="text-[#3fb950] text-xs" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.7 }}>https://app.jacana.dev → Live</motion.p>
+                                        </motion.div>
+                                    </div>
+
+                                    {/* Cursor Blink */}
+                                    <motion.div
+                                        className="absolute bottom-6 left-6"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ delay: 3 }}
+                                    >
+                                        <span className="text-[#58a6ff]">❯</span>
+                                        <span className="inline-block w-2 h-4 bg-[#58a6ff] ml-1 animate-pulse" />
+                                    </motion.div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Lottie Window */}
+                        <div className="relative group">
+                            {/* Glow effect */}
+                            <div className="absolute -inset-px rounded-xl bg-gradient-to-b from-[#a371f7]/20 to-transparent opacity-0 group-hover:opacity-100 blur transition-opacity duration-500" />
+
+                            <div className="relative h-full rounded-xl border border-[#30363d] bg-[#0d1117]/80 backdrop-blur-xl shadow-2xl overflow-hidden">
+                                {/* Title Bar */}
+                                <div className="flex items-center justify-between px-4 py-3 bg-[#161b22]/90 border-b border-[#21262d]">
+                                    <div className="flex items-center gap-2">
+                                        <div className="flex gap-1.5">
+                                            <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+                                            <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                                            <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
+                                        </div>
+                                        <div className="ml-4 px-3 py-1 rounded-md bg-[#0d1117] border border-[#30363d] text-xs text-[#8b949e] font-mono flex items-center gap-2">
+                                            <Code2 className="w-3 h-3" />
+                                            <span className="text-[#a371f7]">preview</span>
+                                            <span className="text-[#30363d]">—</span>
+                                            <span>animation</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Lottie Content */}
+                                <div className="relative min-h-[300px] bg-[#0d1117] flex items-center justify-center">
+                                    <Lottie
+                                        animationData={WebDevelopmentAnimation}
+                                        loop={true}
+                                        className="w-4/5 h-4/5"
+                                    />
+
+                                    {/* Floating Badge */}
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                                        transition={{ delay: 2.5 }}
+                                        className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#a371f7]/20 border border-[#a371f7]/30 text-[#a371f7] text-[10px] font-mono backdrop-blur-sm"
+                                    >
+                                        <Sparkles className="w-3 h-3 inline mr-1" />
+                                        Interactive
+                                    </motion.div>
+                                </div>
+                            </div>
+                        </div>
                     </motion.div>
 
                     {/* FOOTER FEATURES */}
