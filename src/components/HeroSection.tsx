@@ -1,202 +1,388 @@
+// components/Hero.tsx
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Terminal, GitBranch, ShieldCheck, Zap, ExternalLink, Code2, Sparkles } from 'lucide-react';
-import Lottie from 'lottie-react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
-import WebDevelopmentAnimation from '@/components/Lottie/code-dark.json';
 
-export default function HeroSection() {
-    const [isVisible, setIsVisible] = useState(false);
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const heroRef = useRef<HTMLDivElement>(null);
-    const { scrollY } = useScroll();
-    const y = useTransform(scrollY, [0, 500], [0, 150]);
+// ============================================
+// TYPES & INTERFACES
+// ============================================
+interface GraphNode {
+  id: string;
+  x: number;
+  y: number;
+  radius: number;
+  color: string;
+  pulsePhase: number;
+}
 
-    useEffect(() => {
-        setIsVisible(true);
-    }, []);
+interface GraphLink {
+  id: string;
+  from: GraphNode;
+  to: GraphNode;
+  progress: number;
+  speed: number;
+  color: string;
+}
 
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            if (!heroRef.current) return;
-            const rect = heroRef.current.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width);
-            const y = ((e.clientY - rect.top) / rect.height);
-            setMousePosition({ x, y });
-        };
+interface Particle {
+  x: number;
+  y: number;
+  opacity: number;
+}
 
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, []);
+// ============================================
+// CONFIGURACIÓN GITHUB FUTURISTA
+// ============================================
+const GITHUB_CONFIG = {
+  colors: {
+    bgCanvas: '#0d1117',
+    border: '#30363d',
+    accentGreen: '#00FF9D',
+    accentBlue: '#58a6ff',
+    accentCyan: '#00F0FF',
+    line: 'rgba(48, 54, 61, 0.2)',
+  },
+  particleCount: 50, // Reducido ligeramente para mejor rendimiento
+  nodeCount: 30,
+};
 
-    const containerVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1, y: 0,
-            transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const},
-        },
+// ============================================
+// HOOK: Fondo Animado Optimizado
+// ============================================
+function useGitHubCanvas(canvasRef: React.RefObject<HTMLCanvasElement>) {
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let nodes: GraphNode[] = [];
+    let links: GraphLink[] = [];
+    let particles: Particle[] = [];
+    let time = 0;
+
+    // Inicialización encapsulada
+    const init = () => {
+      const handleResize = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        generateElements();
+      };
+
+      const generateElements = () => {
+        nodes = [];
+        links = [];
+        particles = [];
+
+        // Partículas (polvo de datos)
+        for (let i = 0; i < GITHUB_CONFIG.particleCount; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            opacity: Math.random() * 0.4 + 0.1,
+          });
+        }
+
+        // Nodos
+        for (let i = 0; i < GITHUB_CONFIG.nodeCount; i++) {
+          const isHub = Math.random() > 0.85;
+          nodes.push({
+            id: `node-${i}`,
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: isHub ? 3.5 : 1.5,
+            color: isHub ? GITHUB_CONFIG.colors.accentCyan : GITHUB_CONFIG.colors.accentGreen,
+            pulsePhase: Math.random() * Math.PI * 2,
+          });
+        }
+
+        // Conexiones
+        nodes.forEach((node, i) => {
+          if (Math.random() > 0.7) {
+            const target = nodes[Math.floor(Math.random() * nodes.length)];
+            if (target.id !== node.id) {
+              links.push({
+                id: `link-${i}`,
+                from: node,
+                to: target,
+                progress: 0,
+                speed: 0.002 + Math.random() * 0.002,
+                color: GITHUB_CONFIG.colors.line,
+              });
+            }
+          }
+        });
+      };
+
+      window.addEventListener('resize', handleResize);
+      handleResize();
+
+      return () => window.removeEventListener('resize', handleResize);
     };
 
-    // CORRECCIÓN: Cambiado a "easeOut" para evitar el error de Runtime con cubic-bezier
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] as const },
-        },
+    const animate = () => {
+      time += 0.008; // Velocidad ligeramente reducida para elegancia
+      ctx.fillStyle = GITHUB_CONFIG.colors.bgCanvas;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 1. Grid Sutil
+      ctx.strokeStyle = 'rgba(48, 54, 61, 0.04)';
+      ctx.lineWidth = 1;
+      const gridSize = 60;
+      // Dibujar grid optimizado
+      for (let x = 0; x < canvas.width; x += gridSize) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+      }
+      for (let y = 0; y < canvas.height; y += gridSize) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+      }
+
+      // 2. Centro de Resplandor (Ambient Light) - Más difuso
+      const centerGradient = ctx.createRadialGradient(
+        canvas.width / 2, canvas.height / 2, 0,
+        canvas.width / 2, canvas.height / 2, canvas.width * 0.7
+      );
+      centerGradient.addColorStop(0, 'rgba(0, 255, 157, 0.02)');
+      centerGradient.addColorStop(1, 'transparent');
+      ctx.fillStyle = centerGradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 3. Partículas
+      particles.forEach(p => {
+        p.y -= 0.2;
+        if (p.y < 0) { p.y = canvas.height; p.x = Math.random() * canvas.width; }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 255, 157, ${p.opacity})`;
+        ctx.fill();
+      });
+
+      // 4. Conexiones
+      links.forEach(link => {
+        ctx.beginPath();
+        ctx.moveTo(link.from.x, link.from.y);
+        ctx.lineTo(link.to.x, link.to.y);
+        ctx.strokeStyle = link.color;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+
+        // Paquete de datos viajando
+        link.progress += link.speed;
+        if (link.progress > 1) link.progress = 0;
+
+        const px = link.from.x + (link.to.x - link.from.x) * link.progress;
+        const py = link.from.y + (link.to.y - link.from.y) * link.progress;
+
+        ctx.save();
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = GITHUB_CONFIG.colors.accentCyan;
+        ctx.beginPath();
+        ctx.arc(px, py, 2, 0, Math.PI * 2);
+        ctx.fillStyle = GITHUB_CONFIG.colors.accentCyan;
+        ctx.fill();
+        ctx.restore();
+      });
+
+      // 5. Nodos
+      nodes.forEach(node => {
+        const pulse = Math.sin(time + node.pulsePhase) * 0.5 + 0.5;
+
+        // Glow exterior
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius + 3 + pulse, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 255, 157, ${pulse * 0.15})`;
+        ctx.fill();
+
+        // Core
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius + (pulse * 0.5), 0, Math.PI * 2);
+        ctx.fillStyle = node.color;
+        ctx.fill();
+      });
+
+      // Viñeta
+      const gradient = ctx.createRadialGradient(
+        canvas.width / 2, canvas.height / 2, canvas.height * 0.3,
+        canvas.width / 2, canvas.height / 2, canvas.width
+      );
+      gradient.addColorStop(0, 'transparent');
+      gradient.addColorStop(1, 'rgba(13, 17, 23, 0.9)');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      animationFrameId = requestAnimationFrame(animate);
     };
 
-    return (
-        <section
-            ref={heroRef}
-            className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0d1117] text-[#e6edf3]"
+    const cleanup = init();
+    animate();
+
+    return () => {
+      cleanup?.();
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [canvasRef]);
+}
+
+// ============================================
+// COMPONENTE HERO PRINCIPAL
+// ============================================
+export default function Hero() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [showContent, setShowContent] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useGitHubCanvas(canvasRef);
+
+  useEffect(() => {
+    setIsLoaded(true);
+    const timer = setTimeout(() => setShowContent(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <section className="relative overflow-hidden min-h-screen flex items-center font-sans text-[#c9d1d9]">
+
+      {/* Canvas de fondo */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }} />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 sm:pt-24 sm:pb-20 w-full z-10">
+
+        {/* Main Content */}
+        <div className={`grid lg:grid-cols-2 gap-16 items-center transition-all duration-1000 delay-200 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+
+          {/* Columna de contenido */}
+          <div className="text-center lg:text-left">
+
+            <h1 className={`text-5xl sm:text-6xl font-bold text-white leading-tight tracking-tight transition-all duration-700 delay-500 ${showContent ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'}`}>
+              Soluciones{' '}
+              <span className="relative inline-block">
+                <span className="relative text-[#58a6ff] drop-shadow-[0_0_10px_rgba(88,166,255,0.3)]">
+                  Fullstack
+                </span>
+                <span className="absolute bottom-1 left-0 w-full h-[2px] bg-[#00FF9D] shadow-[0_0_5px_#00FF9D]" />
+              </span>{' '}
+              <br className="hidden sm:block" />
+              que impulsan tu negocio.
+            </h1>
+
+            <p className={`mt-6 text-lg text-[#8b949e] max-w-xl mx-auto lg:mx-0 leading-relaxed transition-all duration-700 delay-700 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+              Desarrollo end-to-end con tecnologías modernas. Desde la idea hasta el deploy,
+              creamos aplicaciones <span className="text-[#00FF9D] font-medium drop-shadow-[0_0_5px_rgba(0,255,157,0.3)]">escalables</span>,
+              <span className="text-[#58a6ff] font-medium">seguras</span> y centradas en la
+              <span className="text-[#f0883e] font-medium"> experiencia</span>.
+            </p>
+
+            <div className={`mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start transition-all duration-700 delay-900 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+              {/* Primary Button */}
+              <Link
+                href="/contacto"
+                className="group inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-black bg-[#00FF9D] rounded-md transition-all duration-200 shadow-[0_0_10px_rgba(0,255,157,0.2)] hover:shadow-[0_0_20px_rgba(0,255,157,0.4)] active:scale-95"
+              >
+                Iniciar proyecto
+                <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Link>
+
+              {/* Secondary Button */}
+              <Link
+                href="/servicios"
+                className="group inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-[#c9d1d9] bg-transparent border border-[#30363d] rounded-md hover:bg-white/5 hover:border-[#8b949e] hover:text-white transition-all duration-200"
+              >
+                Ver servicios
+                <svg className="ml-2 w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          {/* Columna de código (Estilo Terminal) */}
+          <div className={`hidden lg:block transition-all duration-1000 delay-500 ${showContent ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+            <div className="relative bg-[#0d1117]/90 backdrop-blur-md rounded-md border border-[#30363d] shadow-[0_0_30px_rgba(0,0,0,0.5)] overflow-hidden group">
+
+              {/* Scanline effect overlay */}
+              <div className="pointer-events-none absolute inset-0 opacity-10 bg-scanline" />
+
+              {/* Header Terminal */}
+              <div className="flex items-center gap-2 px-4 py-2 bg-[#161b22] border-b border-[#30363d] relative z-10">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#f85149]" />
+                  <div className="w-3 h-3 rounded-full bg-[#f0883e]" />
+                  <div className="w-3 h-3 rounded-full bg-[#00FF9D]" />
+                </div>
+                <div className="flex-1 text-center text-xs text-[#8b949e] font-mono tracking-wider">~/SYSTEM/INIT</div>
+              </div>
+
+              {/* Code Content */}
+              <div className="p-6 font-mono text-sm leading-loose relative z-10">
+                <div className="text-[#8b949e]"># Estructura del proyecto v2.0</div>
+                <div className="mt-3">
+                  <span className="text-[#ff7b72]">const</span> <span className="text-[#79c0ff]">stack</span> <span className="text-[#c9d1d9]">=</span> <span className="text-[#c9d1d9]">{"{"}</span>
+                </div>
+
+                <div className="pl-6 space-y-1">
+                  <div><span className="text-[#7ee787]">frontend</span><span className="text-[#c9d1d9]">:</span> <span className="text-[#a5d6ff]">"React + Next.js"</span><span className="text-[#c9d1d9]">,</span></div>
+                  <div><span className="text-[#7ee787]">backend</span><span className="text-[#c9d1d9]">:</span> <span className="text-[#a5d6ff]">"Node.js + Python"</span><span className="text-[#c9d1d9]">,</span></div>
+                  <div><span className="text-[#7ee787]">database</span><span className="text-[#c9d1d9]">:</span> <span className="text-[#a5d6ff]">"PostgreSQL"</span><span className="text-[#c9d1d9]">,</span></div>
+                </div>
+
+                <div className="text-[#c9d1d9] mt-1">{"}"}</div>
+
+                <div className="mt-6 pt-4 border-t border-[#30363d] flex items-center gap-3">
+                  <div className="w-2 h-2 bg-[#00FF9D] rounded-full shadow-[0_0_8px_#00FF9D] animate-pulse" />
+                  <span className="text-xs text-[#00FF9D] font-medium tracking-wide">System Ready</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Tech Stack */}
+        <div className={`mt-28 pt-8 border-t border-[#30363d]/50 transition-all duration-1000 delay-1100 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+          <p className="text-center text-sm font-medium text-[#8b949e] mb-5 tracking-widest uppercase">
+            Stack tecnológico
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-3">
+            {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'PostgreSQL', 'MongoDB', 'AWS', 'Docker', 'GraphQL'].map((tech) => (
+              <span
+                key={tech}
+                className="px-3 py-1 text-xs font-medium text-[#8b949e] bg-[#161b22] border border-[#30363d] rounded-full hover:border-[#00FF9D]/50 hover:text-[#00FF9D] hover:shadow-[0_0_8px_rgba(0,255,157,0.1)] transition-all duration-200 cursor-default"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-700 delay-1200 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+        <button
+          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+          className="p-2 text-[#8b949e] hover:text-[#00FF9D] transition-colors group"
+          aria-label="Scroll down"
         >
-            {/* VIDEO DE FONDO */}
-            <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover z-0 opacity-30"
-                src="/video/medium.mp4"
-            >
-                Tu navegador no soporta video HTML5.
-            </video>
+          <svg className="w-6 h-6 animate-bounce group-hover:drop-shadow-[0_0_5px_rgba(0,255,157,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </button>
+      </div>
 
-            {/* OVERLAY GRADIENTE */}
-            <div className="absolute inset-0 z-[1] bg-gradient-to-br from-[#0d1117] via-[#0d1117]/80 to-transparent pointer-events-none" />
-
-            {/* Mouse Spotlight Gradient */}
-            <motion.div
-                className="absolute z-[1] pointer-events-none opacity-40"
-                style={{
-                    left: `${mousePosition.x * 100}%`,
-                    top: `${mousePosition.y * 100}%`,
-                    width: '800px',
-                    height: '800px',
-                    background: 'radial-gradient(circle, rgba(56, 139, 253, 0.15) 0%, transparent 60%)',
-                    transform: 'translate(-50%, -50%)',
-                }}
-            />
-
-            {/* Grid Pattern */}
-            <div
-                className="absolute inset-0 z-[1] pointer-events-none opacity-[0.03]"
-                style={{
-                    backgroundImage: 'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)',
-                    backgroundSize: '50px 50px',
-                }}
-            />
-
-            {/* CONTENT */}
-            <motion.div
-                style={{ y }}
-                className="relative z-20 max-w-7xl w-full mx-auto pt-10 pb-20"
-            >
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate={isVisible ? "visible" : "hidden"}
-                    className="flex flex-col items-center text-center"
-                >
-                    {/* Top Badge */}
-                    <motion.div variants={itemVariants} className="mb-8">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#30363d] bg-[#161b22]/60 backdrop-blur-md text-xs font-medium text-[#8b949e]">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3fb950] opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#3fb950]"></span>
-                            </span>
-                            Plataforma Enterprise lista para producción
-                        </div>
-                    </motion.div>
-
-                    {/* Lottie Window */}
-                    <div className="relative group flex items-center justify-center  ">
-                        {/* Lottie Content */}
-                        <Lottie
-                            animationData={WebDevelopmentAnimation}
-                            loop={true}
-                            className="w-4/5 h-4/5"
-                        />
-                    </div>
-
-                    {/* Main Headline */}
-                    <motion.div variants={itemVariants} className="mb-6">
-                        <h1 className="text-5xl sm:text-6xl lg:text-[5.5rem] font-bold tracking-tighter leading-[1.05]">
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#8b949e]">
-                                Construye el futuro,
-                            </span>
-                            <br />
-                            <span className="bg-gradient-to-r from-[#0852c9] to-[#020d62] bg-clip-text text-transparent">
-                                sin fricción.
-                            </span>
-                        </h1>
-                    </motion.div>
-
-                    {/* Subheadline */}
-                    <motion.p
-                        variants={itemVariants}
-                        className="text-lg sm:text-xl text-[#8b949e] max-w-2xl mb-10 leading-relaxed"
-                    >
-                        Infraestructura de código a producción. Diseñado para equipos que exigen
-                        <span className="text-[#e6edf3] font-medium"> rendimiento </span>,
-                        seguridad y flujo de trabajo integrado.
-                    </motion.p>
-
-                    {/* CTA Buttons */}
-                    <motion.div
-                        variants={itemVariants}
-                        className="flex flex-col sm:flex-row gap-4 mb-16"
-                    >
-                        <motion.button
-                            whileHover={{ scale: 1.02, y: -2 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="group relative flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold text-white transition-all bg-gradient-to-b from-[#3fb950] to-[#238636] rounded-lg border border-[#2ea043] shadow-[0_0_15px_-3px_rgba(63,185,80,0.4)] hover:shadow-[#3fb950]/40 overflow-hidden"
-                        >
-                            <span className="absolute inset-0 bg-gradient-to-t from-white/0 to-white/10" />
-                            <Terminal className="w-4 h-4" />
-                            Iniciar Proyecto
-                            <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                        </motion.button>
-
-                        <Link
-                            href="/docs"
-                            className="group flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold text-[#e6edf3] bg-[#21262d]/80 hover:bg-[#30363d] rounded-lg border border-[#30363d] backdrop-blur-sm transition-colors"
-                        >
-                            <ExternalLink className="w-4 h-4 text-[#8b949e] group-hover:text-[#58a6ff] transition-colors" />
-                            Ver Documentación
-                        </Link>
-                    </motion.div>
-
-                    {/* FOOTER FEATURES */}
-                    <motion.div
-                        variants={itemVariants}
-                        className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 border-t border-[#21262d] pt-8 w-full max-w-5xl"
-                    >
-                        {[
-                            { label: 'Latencia Ultra Baja', icon: Zap },
-                            { label: 'SSL por Defecto', icon: ShieldCheck },
-                            { label: 'CI/CD Integrado', icon: GitBranch },
-                            { label: '100% TypeScript', icon: Code2 },
-                        ].map((item, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                                transition={{ delay: 1 + i * 0.1 }}
-                                className="flex items-center gap-2 text-[#8b949e] text-xs sm:text-sm justify-center md:justify-start group cursor-default"
-                            >
-                                <item.icon className="w-4 h-4 text-[#3fb950] transition-colors group-hover:text-[#58a6ff]" />
-                                <span>{item.label}</span>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-
-                </motion.div>
-            </motion.div>
-        </section>
-    );
+      {/* CSS for Scanline effect (add to global css or keep inline style) */}
+      <style jsx global>{`
+        .bg-scanline {
+          background: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 157, 0.03) 3px,
+            rgba(0, 255, 157, 0.03) 4px
+          );
+        }
+      `}</style>
+    </section>
+  );
 }

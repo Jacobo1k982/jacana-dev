@@ -1,21 +1,21 @@
 // src/components/Navbar/menuData.ts
 
 // ── DEFINICIÓN DE TIPOS ─────────────────────────────────────────────────────
-// Definimos los tipos aquí para que coincidan exactamente con la estructura de tus datos
-// y resolver el error de importación "Module './menuData' does not have an exported member 'MenuDataItem'".
 
 export interface MenuSubItem {
-    id?: string;
+    id: string; // Hacer obligatorio el ID para mejor rendimiento en listas React
     label: string;
     href: string;
     image?: string;
+    icon?: string; // Añadido: Soporte para iconos (ej. nombre de icono de Lucide)
     description?: string;
     badge?: string;
+    badgeVariant?: 'default' | 'new' | 'popular'; // Añadido: Para estilizar badges
     isExternal?: boolean;
 }
 
 export interface MenuDataItem {
-    id?: string;
+    id: string; // Hacer obligatorio el ID
     label: string;
     href?: string;
     subItems?: MenuSubItem[];
@@ -24,116 +24,117 @@ export interface MenuDataItem {
 
 // ── UTILIDADES ────────────────────────────────────────────────────────────────
 
+// Helper para rutas de imágenes optimizado
 const img = (filename: string) => `/img/${filename}`;
 
 // ── DATOS SUB-ITEMS ────────────────────────────────────────────────────────────
 
-const productItems: MenuSubItem[] = [
+const servicesItems: MenuSubItem[] = [
     {
-        id: "dev-fullstack",
-        label: "Full-Stack Development",
+        id: "srv-fullstack",
+        label: "Desarrollo Full-Stack",
         href: "/product/FullStackDescription",
         image: img("coding.png"),
         description: "Aplicaciones web modernas de punta a punta",
     },
     {
-        id: "dev-api",
-        label: "Modern APIs",
+        id: "srv-api",
+        label: "APIs Modernas",
         href: "/product/ModernAPIDescription",
         image: img("cloud.png"),
         description: "REST, GraphQL y arquitecturas escalables",
     },
     {
-        id: "dev-devops",
+        id: "srv-devops",
         label: "DevOps & CI/CD",
-        href: "/product/DevOpsCICDDescription",
+        href: "/servicios/devops",
         image: img("devops.png"),
         description: "Automatización, despliegue y confiabilidad",
     },
     {
-        id: "dev-arch",
-        label: "Architecture & Refactors",
-        href: "/product/ArchitectureRefactorsDescription",
+        id: "srv-arch",
+        label: "Arquitectura & Refactors",
+        href: "/servicios/arquitectura",
         image: img("web-maintenance.png"),
         description: "Código limpio, escalable y mantenible",
     },
     {
-        id: "dev-ui",
-        label: "Technical UX / UI",
-        href: "/product/UXUIDescription",
+        id: "srv-ui",
+        label: "UX/UI Técnico",
+        href: "/servicios/ux-ui",
         image: img("landing-page.png"),
         description: "Interfaces pensadas para producto real",
     },
     {
-        id: "dev-mentorship",
-        label: "Mentorship & Code Review",
-        href: "/product/MentorshipCodeReviewDescription",
+        id: "srv-mentorship",
+        label: "Mentoría & Code Review",
+        href: "/servicios/mentoria",
         image: img("code-review.png"),
         description: "Mejora continua y estándares profesionales",
-        badge: "New",
+        badge: "Nuevo",
+        badgeVariant: "new", // Utilizado para el estilo visual (ej. color neón)
     },
     {
-        id: "dev-security",
-        label: "Security & Hardening",
-        href: "/product/SecurityHardeningDescription",
+        id: "srv-security",
+        label: "Seguridad & Hardening",
+        href: "/servicios/seguridad",
         image: img("binary-code.png"),
         description: "Protección, auditorías y buenas prácticas",
     },
     {
-        id: "dev-analytics",
-        label: "Analytics & Tracking",
-        href: "/product/AnalyticsTrackingDescription",
+        id: "srv-analytics",
+        label: "Analítica & Tracking",
+        href: "/servicios/analytics",
         image: img("data-analytics.png"),
         description: "Métricas, eventos y toma de decisiones",
     },
-] as const;
+];
 
-const solutionItems: MenuSubItem[] = [
+const solutionsItems: MenuSubItem[] = [
     {
         id: "sol-developers",
-        label: "For Developers",
-        href: "/solutions/developers",
+        label: "Para Desarrolladores",
+        href: "/soluciones/desarrolladores",
         image: img("programmer.png"),
         description: "Herramientas y soporte para devs",
     },
     {
         id: "sol-teams",
-        label: "For Teams",
-        href: "/solutions/teams",
+        label: "Para Equipos",
+        href: "/soluciones/equipos",
         image: img("development.png"),
         description: "Escalabilidad y colaboración",
     },
     {
         id: "sol-oss",
         label: "Open Source",
-        href: "/solutions/open-source",
+        href: "/soluciones/open-source",
         image: img("open-source.png"),
         description: "Proyectos y contribuciones públicas",
     },
-] as const;
+];
 
 // ── EXPORT PRINCIPAL ───────────────────────────────────────────────────────────
 
-// Importante: Aquí tipamos el array como MenuDataItem[] para que coincida con Navbar.tsx
 export const menuItems: MenuDataItem[] = [
     {
-        id: "nav-product",
-        label: "Product",
-        subItems: productItems,
+        id: "nav-servicios",
+        label: "Servicios",
+        subItems: servicesItems,
     },
     {
-        id: "nav-solutions",
-        label: "Solutions",
-        subItems: solutionItems,
+        id: "nav-soluciones",
+        label: "Soluciones",
+        subItems: solutionsItems,
     },
     {
-        id: "nav-pricing",
-        label: "Pricing",
-        href: "/product/PricingSection",
+        id: "nav-precios",
+        label: "Precios",
+        href: "/precios",
     },
     {
-        id: "nav-contact",
-        label: "Contact",
-        href: "/contact",
+        id: "nav-contacto",
+        label: "Contacto",
+        href: "/contacto",
     },
-] as const;
+];
