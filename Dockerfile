@@ -1,23 +1,34 @@
-# Imagen base de Node.js
+# Imagen base
 FROM node:18-alpine
 
 # Directorio de trabajo
 WORKDIR /app
 
-# Copiar dependencias primero
+# Copiar dependencias
 COPY package*.json ./
 
 # Instalar dependencias
 RUN npm install
 
-# Copiar todo el proyecto
+# Copiar la carpeta prisma
+COPY prisma ./prisma/
+
+# Generar el cliente de Prisma
+RUN npx prisma generate
+
+# Copiar el resto del proyecto
 COPY . .
 
-# Compilar la app en modo producción
+# Variables de entorno (se sobrescriben en docker-compose o al ejecutar)
+ENV DATABASE_URL="file:./db/custom.db"
+ENV NEXTAUTH_URL="http://localhost:3000"
+ENV NEXTAUTH_SECRET="cambiar-en-produccion"
+
+# Compilar la app
 RUN npm run build
 
-# Exponer el puerto interno de Next.js
+# Exponer puerto
 EXPOSE 3000
 
-# Comando de inicio en producción
+# Iniciar
 CMD ["npm", "start"]

@@ -12,10 +12,19 @@ model User {
   name              String
   email             String    @unique
   password          String
+  image             String?
+  emailVerified     DateTime?
   createdAt         DateTime  @default(now())
-  sessions          Session[]
+  updatedAt         DateTime  @updatedAt
+
+  // Tokens para verificación y reset
+  verificationToken String?
   resetToken        String?
   resetTokenExpires DateTime?
+
+  // Relaciones
+  sessions          Session[]
+  accounts          Account[]
 }
 
 model Session {
@@ -26,4 +35,31 @@ model Session {
   createdAt    DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Account {
+  id                Int     @id @default(autoincrement())
+  userId            Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
 }

@@ -241,6 +241,7 @@
   scrollbar-width: thin;
   scrollbar-color: #30363d #0d1117;
 }
+<<<<<<< Updated upstream
 
 /* ============================================
    ANIMACIONES PCB CIRCUIT SYSTEM
@@ -363,4 +364,17 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; }
   canvas { display: none !important; }
+=======
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+.cyber-extreme .bg-scanline {
+    opacity: 0.1 !important;
+    animation: scanline-fast 0.5s linear infinite;
+}
+
+@keyframes scanline-fast {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+>>>>>>> Stashed changes
 }

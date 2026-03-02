@@ -1,0 +1,6 @@
+jacana-dev.com {
+    reverse_proxy localhost:3000
+}
+stats.jacana-dev.com {
+    reverse_proxy localhost:3001
+}

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Check, Zap, ArrowRight, Briefcase, ShieldCheck, Sparkles } from 'lucide-react';
+import { Check, Zap, ArrowRight, Briefcase, ShieldCheck, Sparkles, Terminal, Cpu } from 'lucide-react';
 
 interface PricingPlan {
     name: string;
@@ -19,15 +19,15 @@ interface PricingPlan {
 const pricingPlans: PricingPlan[] = [
     {
         name: "Freelance",
-        price: "$1,200",
-        period: "/proyecto",
+        price: "1,200",
+        period: "USD / project",
         description: "Ideal para MVPs, landing pages o APIs pequeñas.",
         features: [
             "Hasta 40 horas de desarrollo",
-            "Frontend con Next.js + Tailwind",
-            "Backend con Node.js o Python",
-            "Base de datos (PostgreSQL/MongoDB)",
-            "Despliegue en Vercel/Render",
+            "Frontend Next.js + Tailwind",
+            "Backend Node.js / Python",
+            "Database PostgreSQL/MongoDB",
+            "Deploy Vercel/Render",
             "1 ronda de revisiones",
             "Documentación básica"
         ],
@@ -37,19 +37,19 @@ const pricingPlans: PricingPlan[] = [
     },
     {
         name: "Startup",
-        price: "$3,500",
-        period: "/proyecto",
+        price: "3,500",
+        period: "USD / project",
         description: "Para productos con usuarios reales y escalamiento inicial.",
         features: [
             "Hasta 120 horas de desarrollo",
-            "Arquitectura limpia (Clean/Hexagonal)",
+            "Arquitectura limpia (Clean/Hex)",
             "APIs REST/GraphQL con tRPC",
-            "Autenticación (OAuth/JWT)",
-            "Testing (unitario + integración)",
+            "Autenticación OAuth/JWT",
+            "Testing (unit + integration)",
             "CI/CD automatizado",
-            "Monitoreo básico (logs, errores)",
-            "2 semanas de soporte post-lanzamiento",
-            "Documentación técnica completa"
+            "Monitoreo básico",
+            "2 semanas soporte post-launch",
+            "Documentación técnica"
         ],
         ctaLabel: "Solicitar cotización",
         ctaHref: "/contact",
@@ -59,18 +59,18 @@ const pricingPlans: PricingPlan[] = [
     {
         name: "Enterprise",
         price: "Custom",
-        period: "",
-        description: "Soluciones a medida para empresas con alto tráfico o complejidad.",
+        period: "Contact",
+        description: "Soluciones a medida para empresas con alto tráfico.",
         features: [
-            "Equipo dedicado (dev + QA + DevOps)",
-            "Microservicios o monolito modular",
-            "Seguridad avanzada (OWASP, pentesting)",
-            "Observabilidad (Prometheus, Grafana)",
+            "Equipo dedicado (Dev + QA + DevOps)",
+            "Microservicios / Monolito modular",
+            "Seguridad avanzada (OWASP)",
+            "Observabilidad (Prometheus/Grafana)",
             "Hardening de infraestructura",
-            "Mentoría y code review incluidos",
+            "Mentoría y code review",
             "SLA de disponibilidad",
             "Soporte 24/7 (opcional)",
-            "Auditoría de deuda técnica"
+            "Auditoría deuda técnica"
         ],
         ctaLabel: "Hablemos",
         ctaHref: "/contact",
@@ -82,82 +82,107 @@ const PricingCard = ({ plan }: { plan: PricingPlan }) => {
     return (
         <div
             className={`
-                relative flex flex-col h-full rounded-xl border p-7 transition-all duration-300 ease-out
+                relative flex flex-col h-full rounded-xl border p-6 transition-all duration-500 ease-out overflow-hidden
                 ${plan.popular
-                    ? 'border-[#238636] bg-[#0d1117] shadow-[0_0_30px_-10px_rgba(35,134,54,0.3)] z-10 scale-[1.02]'
-                    : 'border-[#30363d] bg-[#161b22]/50 hover:border-[#8b949e] hover:bg-[#161b22] hover:-translate-y-1 hover:shadow-xl backdrop-blur-sm'
+                    ? 'border-[#00FF9D]/50 bg-[#0d1117]/90 shadow-[0_0_40px_-12px_rgba(0,255,157,0.2)] z-10 scale-[1.02]'
+                    : 'border-[#30363d] bg-[#161b22]/50 hover:border-[#8b949e] hover:bg-[#161b22]/80 backdrop-blur-sm hover:shadow-lg'
                 }
+                group
             `}
         >
+            {/* Scanline effect */}
+            <div className="absolute inset-0 opacity-5 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px]" />
+
+            {/* Top Accent Line */}
+            <div className={`absolute top-0 left-0 right-0 h-px ${plan.popular ? 'bg-[#00FF9D]' : 'bg-[#30363d]'}`} />
+
+            {/* Glow Effect on Hover */}
+            {plan.popular && (
+                <div className="absolute inset-0 bg-[#00FF9D]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+            )}
+
             {/* Popular Badge */}
             {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <div className="flex items-center gap-1.5 bg-gradient-to-r from-[#238636] to-[#2ea043] text-white text-[10px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-lg border border-[#1f6feb]/20">
-                        <Sparkles className="w-3 h-3 fill-white text-white" />
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
+                    <div className="flex items-center gap-1.5 bg-[#00FF9D] text-black text-[10px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-[0_0_15px_rgba(0,255,157,0.4)]">
+                        <Sparkles className="w-3 h-3 fill-black" />
                         Recomendado
                     </div>
                 </div>
             )}
 
             {/* Plan Header */}
-            <div className="mb-8">
-                <div className="flex items-center gap-3 mb-4">
-                    <div className={`
-                        p-2.5 rounded-lg flex items-center justify-center transition-colors
-                        ${plan.popular
-                            ? 'bg-[#238636]/15 text-[#3fb950]'
-                            : 'bg-[#21262d] text-[#8b949e]'
-                        }
-                    `}>
-                        {plan.icon}
+            <div className="mb-6 relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                        <div className={`
+                            p-2 rounded-md border flex items-center justify-center transition-all duration-300
+                            ${plan.popular
+                                ? 'bg-[#00FF9D]/10 border-[#00FF9D]/30 text-[#00FF9D] shadow-[0_0_10px_rgba(0,255,157,0.2)]'
+                                : 'bg-[#21262d] border-[#30363d] text-[#8b949e] group-hover:border-[#8b949e]'
+                            }
+                        `}>
+                            {plan.icon}
+                        </div>
+                        <h3 className="text-lg font-bold text-white tracking-tight">{plan.name}</h3>
                     </div>
-                    <h3 className="text-xl font-bold text-[#f0f6fc]">{plan.name}</h3>
+
+                    {/* Status indicator */}
+                    <span className={`text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 rounded border ${plan.popular ? 'text-[#00FF9D] border-[#00FF9D]/30 bg-[#00FF9D]/10' : 'text-[#8b949e] border-[#30363d] bg-[#21262d]'}`}>
+                        Active
+                    </span>
                 </div>
 
-                <p className="text-[#8b949e] text-sm leading-relaxed mb-6 min-h-[40px]">
+                <p className="text-[#8b949e] text-xs leading-relaxed mb-4 min-h-[32px]">
                     {plan.description}
                 </p>
 
-                <div className="flex items-baseline gap-1.5">
+                <div className="flex items-baseline gap-1 border-b border-[#30363d] pb-4">
                     {plan.price !== "Custom" ? (
                         <>
-                            <span className="text-sm font-medium text-[#8b949e]">$</span>
-                            <span className="text-5xl font-extrabold text-[#f0f6fc] tracking-tight">{plan.price.replace('$', '').replace(',', '')}</span>
-                            <span className="text-[#8b949e] text-sm ml-1">{plan.period}</span>
+                            <span className="text-sm font-medium text-[#00FF9D]">$</span>
+                            <span className="text-4xl font-extrabold text-white tracking-tighter">{plan.price}</span>
+                            <span className="text-[#8b949e] text-xs ml-2 font-mono uppercase">{plan.period}</span>
                         </>
                     ) : (
-                        <span className="text-4xl font-bold text-[#f0f6fc] tracking-tight">{plan.price}</span>
+                        <div className="flex flex-col">
+                            <span className="text-3xl font-bold text-white tracking-tight">{plan.price}</span>
+                            <span className="text-xs text-[#8b949e] font-mono mt-1">Based on requirements</span>
+                        </div>
                     )}
                 </div>
             </div>
 
             {/* Features List */}
-            <ul className="space-y-4 mb-8 flex-1">
+            <ul className="space-y-2.5 mb-6 flex-1 relative z-10">
+                <li className="text-[10px] font-semibold text-[#8b949e] uppercase tracking-widest mb-3 flex items-center gap-2">
+                    <Terminal size={10} /> Spec Includes
+                </li>
                 {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm group">
-                        <div className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-[#21262d] flex items-center justify-center border border-[#30363d] group-hover:border-[#238636]/50 transition-colors">
-                            <Check className={`w-3 h-3 ${plan.popular ? 'text-[#3fb950]' : 'text-[#8b949e] group-hover:text-[#3fb950]'}`} />
+                    <li key={i} className="flex items-start gap-2.5 text-xs group/item">
+                        <div className="flex-shrink-0 mt-0.5 w-3.5 h-3.5 rounded-full bg-[#21262d] flex items-center justify-center border border-[#30363d] group-hover/item:border-[#00FF9D]/50 transition-colors">
+                            <Check className={`w-2 h-2 ${plan.popular ? 'text-[#00FF9D]' : 'text-[#8b949e] group-hover/item:text-[#00FF9D]'}`} />
                         </div>
-                        <span className="text-[#c9d1d9] leading-snug group-hover:text-[#f0f6fc] transition-colors">{feature}</span>
+                        <span className="text-[#c9d1d9] leading-snug group-hover/item:text-white transition-colors font-mono">{feature}</span>
                     </li>
                 ))}
             </ul>
 
             {/* CTA Button */}
-            <div className="mt-auto pt-6 border-t border-[#30363d]/50">
+            <div className="mt-auto relative z-10">
                 <Link
                     href={plan.ctaHref}
                     className={`
-                        group relative w-full inline-flex items-center justify-center py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-200 overflow-hidden
+                        group/btn relative w-full inline-flex items-center justify-center py-2.5 px-4 rounded-md text-xs font-semibold transition-all duration-300 overflow-hidden
                         ${plan.popular
-                            ? 'bg-[#238636] text-white hover:bg-[#2ea043] shadow-[0_0_15px_rgba(46,160,67,0.4)] border border-transparent'
-                            : 'bg-[#21262d] text-[#c9d1d9] border border-[#30363d] hover:bg-[#30363d] hover:text-white hover:border-[#8b949e]'
+                            ? 'bg-[#00FF9D] text-black hover:shadow-[0_0_20px_rgba(0,255,157,0.4)] active:scale-95'
+                            : 'bg-[#21262d] text-[#c9d1d9] border border-[#30363d] hover:bg-[#30363d] hover:text-white hover:border-[#8b949e] active:scale-95'
                         }
                     `}
                 >
                     <span className="relative z-10 flex items-center gap-2">
                         {plan.ctaLabel}
-                        <ArrowRight className="w-4 h-4 transition-all duration-300 -translate-x-1 opacity-60 group-hover:opacity-100 group-hover:translate-x-0" />
+                        <ArrowRight className="w-3.5 h-3.5 transition-all duration-300 -translate-x-1 opacity-60 group-hover/btn:opacity-100 group-hover/btn:translate-x-0" />
                     </span>
                 </Link>
             </div>
@@ -167,18 +192,19 @@ const PricingCard = ({ plan }: { plan: PricingPlan }) => {
 
 const PricingSection = () => {
     return (
-        <section className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#010409] overflow-hidden selection:bg-[#1f6feb] selection:text-white">
+        <section className="relative py-20 px-2 sm:px-6 lg:px-8 bg-[#010409] overflow-hidden selection:bg-[#1f6feb] selection:text-white">
+
             {/* Background Effects */}
             <div className="absolute inset-0 z-0">
-                {/* Subtle radial gradient for "spotlight" effect */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#1f6feb]/5 rounded-full blur-[120px] pointer-events-none" />
+                {/* Ambient Glow */}
+                <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#00FF9D]/5 rounded-full blur-[150px] pointer-events-none" />
 
-                {/* Dot Pattern */}
+                {/* Grid Pattern */}
                 <div
-                    className="absolute inset-0 opacity-[0.04]"
+                    className="absolute inset-0 opacity-[0.03]"
                     style={{
-                        backgroundImage: 'radial-gradient(#c9d1d9 1px, transparent 1px)',
-                        backgroundSize: '32px 32px'
+                        backgroundImage: 'radial-gradient(#8b949e 1px, transparent 1px)',
+                        backgroundSize: '24px 24px'
                     }}
                 />
             </div>
@@ -186,41 +212,38 @@ const PricingSection = () => {
             <div className="relative z-10 max-w-7xl mx-auto">
 
                 {/* Header Section */}
-                <div className="text-center max-w-3xl mx-auto mb-20">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#21262d] border border-[#30363d] mb-6">
-                        <span className="flex h-2 w-2 rounded-full bg-[#3fb950] animate-pulse"></span>
-                        <span className="text-xs font-medium text-[#8b949e] uppercase tracking-wider">Precios Transparentes</span>
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#161b22] border border-[#30363d] mb-6 font-mono text-[10px] uppercase tracking-widest">
+                        <Cpu className="w-3 h-3 text-[#00FF9D]" />
+                        <span className="text-[#8b949e]">Resource Allocation</span>
                     </div>
 
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-[#f0f6fc] mb-6 tracking-tight">
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
                         Planes de desarrollo
-                        <span className="block text-[#8b949e] font-medium mt-2 text-2xl md:text-3xl">
-                            Escala a tu propio ritmo
-                        </span>
                     </h2>
 
                     <p className="text-lg text-[#8b949e] leading-relaxed max-w-2xl mx-auto">
-                        Soluciones escalables y arquitectura sólida. Selecciona el nivel de servicio que mejor se adapte a la fase actual de tu proyecto.
+                        Selecciona la capacidad de procesamiento y soporte necesaria para tu misión.
                     </p>
                 </div>
 
                 {/* Pricing Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
                     {pricingPlans.map((plan, index) => (
                         <PricingCard key={index} plan={plan} />
                     ))}
                 </div>
 
                 {/* Footer Note */}
-                <div className="mt-24 text-center border-t border-[#21262d] pt-10">
-                    <p className="text-[#8b949e] font-medium mb-4">
-                        ¿Necesitas algo diferente? Ofrezco servicios por hora, auditorías técnicas y mentoría.
+                <div className="mt-20 text-center border-t border-[#21262d] pt-10">
+                    <p className="text-[#8b949e] text-sm font-medium mb-4 font-mono">
+                        // También disponible para auditorías técnicas y mentoría por hora.
                     </p>
                     <Link
                         href="/contact"
-                        className="group inline-flex items-center text-[#58a6ff] hover:text-[#79c0ff] font-semibold transition-colors"
+                        className="group inline-flex items-center text-[#58a6ff] hover:text-[#00FF9D] font-semibold transition-colors text-sm"
                     >
-                        Contáctame para una consulta gratuita
+                        Consulta gratuita
                         <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                     </Link>
                 </div>

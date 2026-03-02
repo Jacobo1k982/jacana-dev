@@ -87,7 +87,11 @@ function useDropdownKeyboard(isOpen: boolean, onClose: () => void) {
     return { triggerRef, dropdownRef };
 }
 
+<<<<<<< Updated upstream
 // ── COMPONENTE INDIVIDUAL (Estilo Futurista) ───────────────────────────────────
+=======
+// ── COMPONENTE INDIVIDUAL (Estilo Jacana Futurista) ───────────────────────────────────
+>>>>>>> Stashed changes
 
 function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) {
     const hasSubItems = Boolean(item.subItems?.length);
@@ -144,17 +148,28 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                     className={`
                         flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 relative
                         ${isActive
+<<<<<<< Updated upstream
                             ? "text-[#00FF9D] bg-[#00FF9D]/10 border border-[#00FF9D]/30"
                             : "text-[#8b949e] hover:text-white hover:bg-white/5 border border-transparent"
                         }
                         focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#00FF9D] focus-visible:ring-offset-1 focus-visible:ring-offset-[#0d1117]
+=======
+                            ? "text-[#00A0E4] bg-[#00A0E4]/10 border border-[#00A0E4]/30"
+                            : "text-[#8b949e] hover:text-white hover:bg-white/5 border border-transparent"
+                        }
+                        focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#00A0E4] focus-visible:ring-offset-1 focus-visible:ring-offset-[#0d1117]
+>>>>>>> Stashed changes
                     `}
                 >
                     <span>{item.label}</span>
                     <motion.span
                         animate={{ rotate: isActive ? 180 : 0 }}
                         transition={{ duration: 0.2 }}
+<<<<<<< Updated upstream
                         className={`transition-colors duration-200 ${isActive ? 'text-[#00FF9D]' : 'text-[#8b949e]'}`}
+=======
+                        className={`transition-colors duration-200 ${isActive ? 'text-[#00A0E4]' : 'text-[#8b949e]'}`}
+>>>>>>> Stashed changes
                     >
                         <ChevronDown size={14} />
                     </motion.span>
@@ -167,8 +182,13 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                     className="px-3 py-2 rounded-lg text-sm font-medium text-[#8b949e] hover:text-white hover:bg-white/5 transition-colors relative group border border-transparent"
                 >
                     {item.label}
+<<<<<<< Updated upstream
                     {/* Underline neon effect */}
                     <span className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-[#00FF9D] group-hover:w-4/5 transition-all duration-300 -translate-x-1/2 shadow-[0_0_5px_#00FF9D]" />
+=======
+                    {/* Underline neon effect (Jacana blue) */}
+                    <span className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-[#00A0E4] group-hover:w-4/5 transition-all duration-300 -translate-x-1/2 shadow-[0_0_5px_#00A0E4]" />
+>>>>>>> Stashed changes
                 </Link>
             )}
 
@@ -180,18 +200,32 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                         {...motionProps}
                         className="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-50 w-[420px]"
                     >
+<<<<<<< Updated upstream
                         {/* Glow Effect */}
                         <div className="absolute inset-0 bg-[#00FF9D]/10 blur-3xl rounded-2xl opacity-50" />
+=======
+                        {/* Glow Effect (Jacana blue) */}
+                        <div className="absolute inset-0 bg-[#00A0E4]/10 blur-3xl rounded-2xl opacity-50" />
+>>>>>>> Stashed changes
 
                         {/* Contenedor Principal */}
                         <div className="relative rounded-xl border border-[#30363d] bg-[#0d1117]/90 backdrop-blur-xl shadow-2xl overflow-hidden ring-1 ring-black/5">
 
+<<<<<<< Updated upstream
                             {/* Scanline effect (sutil) */}
                             <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 157, 0.1) 3px)' }} />
 
                             {/* Header de categoría */}
                             <div className="px-4 py-2.5 border-b border-[#30363d] bg-white/[0.02]">
                                 <span className="text-xs font-bold text-[#00FF9D] uppercase tracking-widest flex items-center gap-2">
+=======
+                            {/* Scanline effect (sutil - Jacana blue) */}
+                            <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 160, 228, 0.1) 3px)' }} />
+
+                            {/* Header de categoría */}
+                            <div className="px-4 py-2.5 border-b border-[#30363d] bg-white/[0.02]">
+                                <span className="text-xs font-bold text-[#00A0E4] uppercase tracking-widest flex items-center gap-2">
+>>>>>>> Stashed changes
                                     <Zap size={12} />
                                     {item.label}
                                 </span>
@@ -208,10 +242,17 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                                     >
                                         <Link
                                             href={sub.href}
+<<<<<<< Updated upstream
                                             className="group flex items-start gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-all duration-200 border border-transparent hover:border-[#00FF9D]/20 relative overflow-hidden"
                                         >
                                             {/* Hover Glow dentro del item */}
                                             <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D]/0 to-purple-500/0 group-hover:from-[#00FF9D]/5 group-hover:to-purple-500/5 transition-all duration-300" />
+=======
+                                            className="group flex items-start gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-all duration-200 border border-transparent hover:border-[#00A0E4]/20 relative overflow-hidden"
+                                        >
+                                            {/* Hover Glow dentro del item (Jacana blue) */}
+                                            <div className="absolute inset-0 bg-gradient-to-r from-[#00A0E4]/0 to-[#005A9C]/0 group-hover:from-[#00A0E4]/5 group-hover:to-[#005A9C]/5 transition-all duration-300" />
+>>>>>>> Stashed changes
 
                                             {/* Icono o Imagen */}
                                             <div className="flex-shrink-0 mt-0.5 relative z-10">
@@ -219,10 +260,17 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                                                     <img
                                                         src={sub.image}
                                                         alt=""
+<<<<<<< Updated upstream
                                                         className="w-10 h-10 rounded-md border border-[#30363d] object-cover bg-[#161b22] group-hover:border-[#00FF9D]/50 transition-colors shadow-[0_0_0_0_rgba(0,255,157,0)] group-hover:shadow-[0_0_8px_rgba(0,255,157,0.3)]"
                                                     />
                                                 ) : (
                                                     <div className="w-10 h-10 rounded-md border border-[#30363d] bg-[#161b22] flex items-center justify-center text-[#8b949e] group-hover:text-[#00FF9D] group-hover:border-[#00FF9D]/50 transition-all duration-200 shadow-[0_0_0_0_rgba(0,255,157,0)] group-hover:shadow-[0_0_8px_rgba(0,255,157,0.3)]">
+=======
+                                                        className="w-10 h-10 rounded-md border border-[#30363d] object-cover bg-[#161b22] group-hover:border-[#00A0E4]/50 transition-colors shadow-[0_0_0_0_rgba(0,160,228,0)] group-hover:shadow-[0_0_8px_rgba(0,160,228,0.3)]"
+                                                    />
+                                                ) : (
+                                                    <div className="w-10 h-10 rounded-md border border-[#30363d] bg-[#161b22] flex items-center justify-center text-[#8b949e] group-hover:text-[#00A0E4] group-hover:border-[#00A0E4]/50 transition-all duration-200 shadow-[0_0_0_0_rgba(0,160,228,0)] group-hover:shadow-[0_0_8px_rgba(0,160,228,0.3)]">
+>>>>>>> Stashed changes
                                                         <Package size={18} />
                                                     </div>
                                                 )}
@@ -231,10 +279,17 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                                             {/* Texto */}
                                             <div className="flex-1 min-w-0 relative z-10">
                                                 <div className="flex items-center gap-1.5 mb-0.5">
+<<<<<<< Updated upstream
                                                     <span className="text-sm font-semibold text-gray-200 group-hover:text-[#00FF9D] transition-colors">
                                                         {sub.label}
                                                     </span>
                                                     <ExternalLink className="h-3 w-3 text-[#00FF9D]/50 opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0" />
+=======
+                                                    <span className="text-sm font-semibold text-gray-200 group-hover:text-[#00A0E4] transition-colors">
+                                                        {sub.label}
+                                                    </span>
+                                                    <ExternalLink className="h-3 w-3 text-[#00A0E4]/50 opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0" />
+>>>>>>> Stashed changes
                                                 </div>
                                                 {sub.description && (
                                                     <p className="text-xs text-[#8b949e] leading-relaxed line-clamp-2 group-hover:text-gray-400 transition-colors">
@@ -251,7 +306,11 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                             <div className="border-t border-[#30363d] px-2 py-1.5 bg-white/[0.01] mt-1">
                                 <Link
                                     href={`/${item.label.toLowerCase()}`}
+<<<<<<< Updated upstream
                                     className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#00FF9D] hover:text-white hover:bg-[#00FF9D]/10 rounded-md transition-colors group"
+=======
+                                    className="flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#00A0E4] hover:text-white hover:bg-[#00A0E4]/10 rounded-md transition-colors group"
+>>>>>>> Stashed changes
                                 >
                                     <span>Ver todo en {item.label.toLowerCase()}</span>
                                     <ExternalLink size={12} className="transform group-hover:translate-x-0.5 transition-transform" />
@@ -267,13 +326,8 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
 
 // ── COMPONENTE PRINCIPAL ─────────────────────────────────────────────────
 
-export default function MenuItemsUltra() {
+export default function MenuItems() {
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
-    const [isMounted, setIsMounted] = useState(false);
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
 
     const handleMenuEnter = (label: string) => {
         setActiveMenu(label);
@@ -300,8 +354,6 @@ export default function MenuItemsUltra() {
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
-
-    if (!isMounted) return null;
 
     return (
         <nav className="hidden lg:flex items-center h-full" role="navigation" aria-label="Navegación principal">

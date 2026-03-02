@@ -3,65 +3,108 @@
 import React from 'react';
 import Lottie from 'lottie-react';
 import codingAnimation from '../Lottie/Data-Security.json';
-import { Lock, ShieldCheck, CheckCircle, ArrowRight, Shield, ServerCrash } from 'lucide-react';
+import { Lock, ShieldCheck, ArrowRight, Shield, ServerCrash, Terminal, Layers, ScanLine } from 'lucide-react';
 
-// Datos refinados
+// ============================================
+// CONFIGURACIÓN ESTILO CYBER/SECURITY
+// ============================================
+const CYBER_THEME = {
+    colors: {
+        bgCanvas: '#0d1117',
+        bgCard: '#161b22',
+        border: '#30363d',
+        textMain: '#e6edf3',
+        textMuted: '#8b949e',
+        accentDanger: '#f85149', // Rojo GitHub
+        accentSuccess: '#00FF9D', // Verde Neón
+        accentWarning: '#f0883e', // Naranja
+        glowRed: 'rgba(248, 81, 73, 0.15)',
+        glowGreen: 'rgba(0, 255, 157, 0.15)',
+    }
+};
+
+// Datos refinados con colores de estado
 const appSecurityData = {
     title: "Seguridad en la Aplicación",
     description: "Protección activa contra vulnerabilidades OWASP Top 10. Implemento validación estricta, autenticación robusta y manejo seguro de secrets para blindar el código.",
     technologies: [
-        { name: "OWASP Top 10", color: "bg-red-600" },
-        { name: "JWT/OAuth 2.0", color: "bg-blue-500" },
-        { name: "Helmet.js", color: "bg-gray-500" },
-        { name: "CSP", color: "bg-purple-500" },
-        { name: "Argon2", color: "bg-red-500" },
-        { name: "Rate Limiting", color: "bg-orange-500" },
+        { name: "OWASP Top 10", color: "bg-[#f85149]" },
+        { name: "JWT/OAuth 2.0", color: "bg-[#58a6ff]" },
+        { name: "Helmet.js", color: "bg-[#8b949e]" },
+        { name: "CSP", color: "bg-[#a371f7]" },
+        { name: "Argon2", color: "bg-[#db61a2]" },
+        { name: "Rate Limiting", color: "bg-[#f0883e]" },
     ],
-    icon: <Lock size={28} />,
-    accentColor: "border-[#f85149]", // GitHub Red
+    icon: <Lock size={24} strokeWidth={1.5} />,
+    accentColor: "border-[#f85149]",
     accentText: "text-[#f85149]",
     bgAccent: "bg-[#f85149]/10",
+    glowColor: CYBER_THEME.colors.glowRed,
+    status: "CRITICAL PROTECTION"
 };
 
 const infraSecurityData = {
     title: "Hardening de Infraestructura",
     description: "Fortalecimiento de entornos mediante principios de mínimo privilegio, cifrado en tránsito/reposo y monitoreo continuo de amenazas en la nube.",
     technologies: [
-        { name: "Docker Bench", color: "bg-blue-500" },
-        { name: "K8s RBAC", color: "bg-blue-600" },
-        { name: "Terraform Sentinel", color: "bg-purple-600" },
-        { name: "Vault", color: "bg-red-500" },
-        { name: "TLS 1.3", color: "bg-green-500" },
-        { name: "WAF", color: "bg-orange-500" },
+        { name: "Docker Bench", color: "bg-[#58a6ff]" },
+        { name: "K8s RBAC", color: "bg-[#58a6ff]" },
+        { name: "Terraform", color: "bg-[#a371f7]" },
+        { name: "Vault", color: "bg-[#f85149]" },
+        { name: "TLS 1.3", color: "bg-[#00FF9D]" },
+        { name: "WAF", color: "bg-[#f0883e]" },
     ],
-    icon: <ShieldCheck size={28} />,
-    accentColor: "border-[#3fb950]", // GitHub Green
-    accentText: "text-[#3fb950]",
-    bgAccent: "bg-[#3fb950]/10",
+    icon: <ShieldCheck size={24} strokeWidth={1.5} />,
+    accentColor: "border-[#00FF9D]",
+    accentText: "text-[#00FF9D]",
+    bgAccent: "bg-[#00FF9D]/10",
+    glowColor: CYBER_THEME.colors.glowGreen,
+    status: "INTEGRITY VERIFIED"
 };
 
-// Componente Tarjeta Estilo GitHub (Nativo)
+// Componente Tarjeta Estilo Security Node
 const TechCard = ({ data }: { data: typeof appSecurityData }) => {
     return (
         <div className={`
-            relative flex flex-col h-full rounded-md border border-[#30363d] bg-[#161b22] 
-            transition-all duration-300 hover:border-[#8b949e] hover:shadow-lg
-        `}>
-            {/* Borde superior de color */}
-            <div className={`h-1 w-full rounded-t-sm ${data.bgAccent.replace('/10', '')} opacity-80`} />
+            relative flex flex-col h-full rounded-xl border border-[#30363d] bg-[#161b22]/80 backdrop-blur-md
+            transition-all duration-500 group overflow-hidden
+        `}
+            style={{
+                boxShadow: `0 0 0 1px rgba(48, 54, 61, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3)`
+            }}
+        >
+            {/* Hover Glow Effect */}
+            <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
+                style={{ background: `radial-gradient(circle at 50% 0%, ${data.glowColor}, transparent 70%)` }}
+            />
 
-            <div className="p-6 md:p-8 flex flex-col h-full">
+            {/* Scanline effect */}
+            <div className="absolute inset-0 opacity-5 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px]" />
+
+            {/* Top Accent Line */}
+            <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-current to-transparent ${data.accentText} opacity-80`} />
+
+            <div className="p-6 md:p-8 flex flex-col h-full relative z-10">
                 {/* Header */}
-                <div className="flex items-center gap-4 mb-6">
-                    <div className={`
-                        p-3 rounded-md border ${data.accentColor} bg-[#0d1117] ${data.bgAccent}
-                        flex items-center justify-center
-                    `}>
-                        <span className={data.accentText}>
-                            {data.icon}
-                        </span>
+                <div className="flex items-start justify-between gap-4 mb-6">
+                    <div className="flex items-center gap-4">
+                        <div className={`
+                            p-3 rounded-lg border ${data.accentColor} bg-[#0d1117]/50
+                            flex items-center justify-center transition-all duration-300
+                            group-hover:shadow-[0_0_15px_${data.glowColor}]
+                        `}>
+                            <span className={data.accentText}>
+                                {data.icon}
+                            </span>
+                        </div>
+                        <div>
+                            <h3 className="text-xl font-bold text-white tracking-tight">{data.title}</h3>
+                            <span className={`text-[9px] font-mono uppercase tracking-widest ${data.accentText} opacity-80`}>
+                                {data.status}
+                            </span>
+                        </div>
                     </div>
-                    <h3 className="text-xl font-semibold text-[#f0f6fc]">{data.title}</h3>
                 </div>
 
                 {/* Descripción */}
@@ -69,16 +112,18 @@ const TechCard = ({ data }: { data: typeof appSecurityData }) => {
                     {data.description}
                 </p>
 
-                {/* Tecnologías estilo GitHub */}
+                {/* Tecnologías estilo Tags */}
                 <div className="space-y-3">
-                    <h4 className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider">Tools & Protocols</h4>
+                    <h4 className="text-[10px] font-bold text-[#8b949e] uppercase tracking-[0.2em] flex items-center gap-2">
+                        <Layers size={12} /> Stack
+                    </h4>
                     <div className="flex flex-wrap gap-2">
                         {data.technologies.map((tech) => (
                             <span
                                 key={tech.name}
-                                className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#0d1117] border border-[#30363d] text-xs text-[#c9d1d9] hover:border-[#8b949e] transition-colors cursor-default"
+                                className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#0d1117] border border-[#30363d] text-xs text-[#c9d1d9] hover:border-[#8b949e] transition-colors cursor-default font-mono group/tag"
                             >
-                                <span className={`w-2 h-2 rounded-full ${tech.color}`}></span>
+                                <span className={`w-1.5 h-1.5 rounded-full ${tech.color} shadow-[0_0_4px_currentColor] group-hover/tag:animate-pulse`}></span>
                                 {tech.name}
                             </span>
                         ))}
@@ -93,16 +138,20 @@ const SecurityHardeningDescription = () => {
     return (
         <section className="relative min-h-screen flex flex-col bg-[#0d1117] border-t border-[#30363d]">
 
-            {/* Patrón de fondo sutil */}
+            {/* Patrón de fondo Grid Técnico */}
             <div
-                className="absolute inset-0 pointer-events-none opacity-[0.03]"
+                className="absolute inset-0 pointer-events-none opacity-[0.04]"
                 style={{
-                    backgroundImage: 'radial-gradient(#c9d1d9 1px, transparent 1px)',
-                    backgroundSize: '24px 24px'
+                    backgroundImage: 'linear-gradient(#8b949e 1px, transparent 1px), linear-gradient(90deg, #8b949e 1px, transparent 1px)',
+                    backgroundSize: '40px 40px'
                 }}
             />
 
-            <div className="relative z-10 flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 py-15">
+            {/* Ambient Glow */}
+            <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-[#f85149]/5 blur-[150px] rounded-full" />
+            <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[#00FF9D]/5 blur-[150px] rounded-full" />
+
+            <div className="relative z-10 flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
                 <div className="max-w-7xl mx-auto w-full">
 
                     {/* Header Section */}
@@ -110,51 +159,59 @@ const SecurityHardeningDescription = () => {
 
                         {/* Visual / Lottie Container */}
                         <div className="relative group">
-                            {/* Container estilo Monitor de Seguridad */}
-                            <div className="relative rounded-lg border border-[#30363d] bg-[#0d1117] shadow-2xl overflow-hidden">
-                                {/* Barra superior falsa con estado de seguridad */}
-                                <div className="flex items-center justify-between px-4 py-3 border-b border-[#30363d] bg-[#161b22]">
-                                    <div className="flex items-center gap-3">
-                                        <div className="flex gap-1.5">
-                                            <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                                            <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                                            <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-                                        </div>
-                                        <div className="ml-4 px-3 py-0.5 rounded bg-[#0d1117] border border-[#30363d] text-xs text-[#8b949e] font-mono">
-                                            security-monitor
-                                        </div>
+                            {/* Container estilo Security Terminal */}
+                            <div className="relative rounded-xl border border-[#30363d] bg-[#0d1117] shadow-2xl overflow-hidden backdrop-blur-sm">
+                                {/* Barra superior */}
+                                <div className="flex items-center justify-between px-4 py-3 border-b border-[#30363d] bg-[#161b22]/80">
+                                    <div className="flex gap-1.5">
+                                        <div className="w-3 h-3 rounded-full bg-[#f85149]"></div>
+                                        <div className="w-3 h-3 rounded-full bg-[#f0883e]"></div>
+                                        <div className="w-3 h-3 rounded-full bg-[#00FF9D]"></div>
                                     </div>
-                                    <div className="flex items-center gap-2 text-xs text-[#3fb950] font-mono">
-                                        <div className="w-2 h-2 rounded-full bg-[#3fb950] animate-pulse" />
-                                        SECURE
+                                    <div className="flex-1 flex justify-center ml-4">
+                                        <div className="flex items-center gap-2 px-3 py-1 rounded bg-[#0d1117] border border-[#30363d] text-xs text-[#f85149] font-mono">
+                                            <ScanLine size={12} className="animate-pulse" />
+                                            <span>threat-detection.sys</span>
+                                        </div>
                                     </div>
                                 </div>
 
                                 {/* Lottie */}
-                                <div className="p-4 bg-[#0d1117] flex items-center justify-center min-h-[300px]">
+                                <div className="p-4 bg-[#0d1117] flex items-center justify-center min-h-[300px] relative">
+                                    {/* Grid lines inside canvas */}
+                                    <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#30363d 1px, transparent 1px)', backgroundSize: '10px 10px' }} />
                                     <Lottie
                                         animationData={codingAnimation}
                                         loop={true}
                                         autoplay={true}
-                                        className="w-full max-w-sm h-auto opacity-90"
+                                        className="w-full max-w-sm h-auto relative z-10"
                                     />
+                                </div>
+
+                                {/* Bottom Status Bar */}
+                                <div className="px-4 py-2 border-t border-[#30363d] bg-[#161b22]/50 flex justify-between text-[10px] text-[#8b949e] font-mono">
+                                    <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#00FF9D] animate-pulse" /> SYSTEM_SECURE</span>
+                                    <span>LATEST_SCAN: 0_VULNS</span>
                                 </div>
                             </div>
 
-                            {/* Efecto de sutil brillo detrás */}
-                            <div className="absolute -inset-1 bg-gradient-to-r from-[#f85149] to-[#3fb950] rounded-lg blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500 -z-10" />
+                            {/* Efecto de brillo detrás (Glow) */}
+                            <div className="absolute -inset-2 bg-gradient-to-r from-[#f85149] to-[#00FF9D] rounded-2xl blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 -z-10" />
                         </div>
 
                         {/* Texto Principal */}
                         <div className="space-y-6">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f85149]/10 border border-[#f85149]/30 text-[#f85149] text-xs font-medium">
-                                <CheckCircle size={12} />
-                                Secure by Design
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#f85149]/30 bg-[#f85149]/10 text-[#f85149] text-xs font-mono uppercase tracking-wider">
+                                <Shield size={12} />
+                                Zero Trust Architecture
                             </div>
 
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#f0f6fc] tracking-tight leading-[1.1]">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1]">
                                 Security & <br />
-                                <span className="text-[#f85149]">Hardening</span>.
+                                <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#f85149] to-[#f0883e]">
+                                    Hardening
+                                    <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[#f85149] to-[#f0883e] opacity-50 blur-sm" />
+                                </span>.
                             </h2>
 
                             <p className="text-lg text-[#8b949e] leading-relaxed max-w-lg">
@@ -162,44 +219,49 @@ const SecurityHardeningDescription = () => {
                             </p>
 
                             <div className="flex flex-wrap gap-4 pt-4">
-                                <button className="flex items-center gap-2 px-6 py-3 bg-[#238636] hover:bg-[#2ea043] text-white text-sm font-semibold rounded-md transition-all border border-transparent focus:ring-2 focus:ring-[#238636] focus:ring-offset-2 focus:ring-offset-[#0d1117]">
-                                    Auditoría
-                                    <ServerCrash size={16} />
+                                <button className="group flex items-center gap-2 px-6 py-3 bg-[#f85149] text-white text-sm font-semibold rounded-md transition-all shadow-[0_0_10px_rgba(248,81,73,0.1)] hover:shadow-[0_0_20px_rgba(248,81,73,0.3)] active:scale-95">
+                                    Iniciar Auditoría
+                                    <ServerCrash size={16} className="group-hover:rotate-12 transition-transform" />
                                 </button>
-                                <button className="flex items-center gap-2 px-6 py-3 bg-[#161b22] hover:bg-[#21262d] text-[#c9d1d9] text-sm font-semibold rounded-md transition-all border border-[#30363d] hover:border-[#8b949e]">
-                                    <Shield size={16} />
-                                    Protocolos
+                                <button className="group flex items-center gap-2 px-6 py-3 bg-[#161b22] hover:bg-[#21262d] text-[#c9d1d9] text-sm font-semibold rounded-md transition-all border border-[#30363d] hover:border-[#00FF9D]/50">
+                                    <Terminal size={16} className="text-[#00FF9D]" />
+                                    Ver Protocolos
                                 </button>
                             </div>
                         </div>
                     </div>
 
                     {/* Tech Cards Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
                         <TechCard data={appSecurityData} />
                         <TechCard data={infraSecurityData} />
                     </div>
 
-                    {/* Elegant Bottom CTA (Alert/Note Style) */}
+                    {/* Elegant Bottom CTA (Terminal Style) */}
                     <div className="max-w-4xl mx-auto">
-                        <div className="relative rounded-md border border-[#30363d] bg-[#161b22] p-8 md:p-12 text-center overflow-hidden">
-                            <div className="absolute top-0 right-0 p-4 opacity-10 transform rotate-12">
-                                <Shield size={200} strokeWidth={1} />
+                        <div className="relative rounded-xl border border-[#30363d] bg-[#161b22]/90 backdrop-blur-md p-8 md:p-12 text-center overflow-hidden group">
+
+                            {/* Corner Accents */}
+                            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#f85149]" />
+                            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#00FF9D]" />
+
+                            <div className="absolute top-0 right-0 p-6 opacity-10 transform scale-125 rotate-12">
+                                <Shield size={150} strokeWidth={0.5} />
                             </div>
 
-                            <h3 className="text-2xl md:text-3xl font-bold text-[#f0f6fc] mb-4 relative z-10">
+                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 relative z-10">
                                 Confianza en cada línea
                             </h3>
-                            <p className="text-[#8b949e] mb-8 max-w-2xl mx-auto relative z-10">
+                            <p className="text-[#8b949e] mb-8 max-w-2xl mx-auto relative z-10 leading-relaxed">
                                 La seguridad no es una fase final del proyecto; es una responsabilidad continua y fundamental desde el primer commit.
                             </p>
 
                             <a
                                 href="/contact"
-                                className="inline-flex items-center gap-2 px-8 py-3 text-sm font-semibold text-[#58a6ff] border border-[#30363d] rounded-md hover:bg-[#161b22] hover:border-[#8b949e] hover:text-[#79c0ff] transition-all relative z-10"
+                                className="inline-flex items-center gap-2 px-8 py-3 text-sm font-semibold text-[#00FF9D] border border-[#30363d] rounded-lg hover:bg-[#00FF9D]/10 hover:border-[#00FF9D] transition-all relative z-10 group"
                             >
                                 Solicitar Pentest
-                                <ArrowRight size={16} />
+                                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                             </a>
                         </div>
                     </div>

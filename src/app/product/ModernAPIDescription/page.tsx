@@ -1,7 +1,14 @@
+<<<<<<< Updated upstream
 // src/app/product/APIs/page.tsx (o la ruta correspondiente)
 
 import ModernAPIDescription from "@/components/page/ModernAPIDescription";
 import { Server, Terminal, Layers, Cpu, ArrowRight, CheckCircle } from "lucide-react";
+=======
+// src/app/servicios/apis/page.tsx (o la ruta correspondiente)
+
+import ModernAPIDescription from "@/components/page/ModernAPIDescription";
+import { Server, Terminal, Layers, Cpu, ArrowRight, CheckCircle, Wifi, Database } from "lucide-react";
+>>>>>>> Stashed changes
 
 export default function APIsPage() {
     return (
@@ -10,9 +17,15 @@ export default function APIsPage() {
             {/* 1. Fondo Ambiental (Grid Técnico) */}
             <div className="fixed inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#8b949e 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
+<<<<<<< Updated upstream
             {/* Glow Effect (Púrpura/Cian para APIs) */}
             <div className="fixed top-0 right-0 w-[600px] h-[600px] bg-purple-500/5 blur-[150px] rounded-full pointer-events-none" />
             <div className="fixed bottom-0 left-0 w-[600px] h-[600px] bg-cyan-500/5 blur-[150px] rounded-full pointer-events-none" />
+=======
+            {/* Glow Effect (Cian para APIs) */}
+            <div className="fixed top-0 right-0 w-[600px] h-[600px] bg-cyan-500/5 blur-[150px] rounded-full pointer-events-none" />
+            <div className="fixed bottom-0 left-0 w-[600px] h-[600px] bg-purple-500/5 blur-[150px] rounded-full pointer-events-none" />
+>>>>>>> Stashed changes
 
             <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
 
@@ -106,9 +119,15 @@ export default function APIsPage() {
                                 Arquitectura
                             </h3>
                             <div className="space-y-2 text-xs text-[#8b949e]">
+<<<<<<< Updated upstream
                                 <div className="flex justify-between"><span>Gateway</span><span className="text-white">Kong / NGINX</span></div>
                                 <div className="flex justify-between"><span>Protocolo</span><span className="text-white">HTTP/2</span></div>
                                 <div className="flex justify-between"><span>Formato</span><span className="text-white">JSON / MsgPack</span></div>
+=======
+                                <div className="flex justify-between"><span>Gateway</span><span className="text-white font-mono">Kong</span></div>
+                                <div className="flex justify-between"><span>Protocolo</span><span className="text-white font-mono">HTTP/2</span></div>
+                                <div className="flex justify-between"><span>Formato</span><span className="text-white font-mono">JSON</span></div>
+>>>>>>> Stashed changes
                             </div>
                         </div>
                     </aside>

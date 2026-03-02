@@ -3,70 +3,112 @@
 import React from 'react';
 import Lottie from 'lottie-react';
 import codingAnimation from '../Lottie/Developer-Front-End.json';
-import { Monitor, Server, CheckCircle, ArrowRight, Terminal } from 'lucide-react';
+import { Monitor, Server, ArrowRight, Terminal, Layers, Activity, Cpu } from 'lucide-react';
+import ViewCodeButton from '@/components/ui/ViewCodeButton';
+
+// ============================================
+// CONFIGURACIÓN ESTILO CYBER/FULLSTACK
+// ============================================
+const CYBER_THEME = {
+    colors: {
+        bgCanvas: '#0d1117',
+        bgCard: '#161b22',
+        border: '#30363d',
+        textMain: '#e6edf3',
+        textMuted: '#8b949e',
+        accentBlue: '#58a6ff',
+        accentPurple: '#a371f7',
+        accentGreen: '#00FF9D',
+        glowBlue: 'rgba(88, 166, 255, 0.15)',
+        glowPurple: 'rgba(163, 113, 247, 0.15)',
+    }
+};
 
 // Datos refinados
 const frontendData = {
     title: "Frontend Moderno",
     description: "Desarrollo interfaces rápidas, accesibles y SEO-friendly. Implemento arquitecturas basadas en componentes (Atomic Design) y patrones reactivos para máxima mantenibilidad.",
     technologies: [
-        { name: "React", color: "bg-blue-500" },
+        { name: "React", color: "bg-[#58a6ff]" },
         { name: "Next.js 15", color: "bg-white" },
-        { name: "TypeScript", color: "bg-blue-600" },
-        { name: "Tailwind CSS", color: "bg-cyan-400" },
-        { name: "ShadCN/UI", color: "bg-slate-800" },
-        { name: "Zod", color: "bg-indigo-600" },
-        { name: "TanStack Query", color: "bg-orange-500" },
-        { name: "Framer Motion", color: "bg-pink-500" },
+        { name: "TypeScript", color: "bg-[#3178c6]" },
+        { name: "Tailwind CSS", color: "bg-[#00FF9D]" },
+        { name: "ShadCN/UI", color: "bg-[#e6edf3]" },
+        { name: "Zod", color: "bg-[#a371f7]" },
+        { name: "TanStack Query", color: "bg-[#f0883e]" },
+        { name: "Framer Motion", color: "bg-[#db61a2]" },
     ],
-    icon: <Monitor size={28} />,
+    icon: <Monitor size={24} strokeWidth={1.5} />,
     accentColor: "border-[#58a6ff]",
     accentText: "text-[#58a6ff]",
     bgAccent: "bg-[#58a6ff]/10",
+    glowColor: CYBER_THEME.colors.glowBlue,
+    status: "CLIENT_SIDE"
 };
 
 const backendData = {
     title: "Backend Robusto",
     description: "Construcción de APIs REST y GraphQL seguras. Arquitectura limpia (Clean Architecture), manejo de errores, validación de datos con Zod y observabilidad total.",
     technologies: [
-        { name: "Node.js", color: "bg-green-600" },
-        { name: "Python", color: "bg-yellow-500" },
-        { name: "PostgreSQL", color: "bg-blue-700" },
-        { name: "Prisma ORM", color: "bg-black dark:bg-white" },
-        { name: "Redis", color: "bg-red-600" },
-        { name: "NextAuth.js", color: "bg-slate-400" },
-        { name: "tRPC", color: "bg-indigo-500" },
-        { name: "Docker", color: "bg-blue-500" },
+        { name: "Node.js", color: "bg-[#3fb950]" },
+        { name: "Python", color: "bg-[#f0883e]" },
+        { name: "PostgreSQL", color: "bg-[#58a6ff]" },
+        { name: "Prisma ORM", color: "bg-white" },
+        { name: "Redis", color: "bg-[#f85149]" },
+        { name: "NextAuth.js", color: "bg-[#8b949e]" },
+        { name: "tRPC", color: "bg-[#a371f7]" },
+        { name: "Docker", color: "bg-[#58a6ff]" },
     ],
-    icon: <Server size={28} />,
-    accentColor: "border-[#8957e5]", // Purple
+    icon: <Server size={24} strokeWidth={1.5} />,
+    accentColor: "border-[#a371f7]",
     accentText: "text-[#a371f7]",
-    bgAccent: "bg-[#8957e5]/10",
+    bgAccent: "bg-[#a371f7]/10",
+    glowColor: CYBER_THEME.colors.glowPurple,
+    status: "SERVER_SIDE"
 };
 
-// Componente Tarjeta Estilo GitHub Repo
+// Componente Tarjeta Estilo System Module
 const TechCard = ({ data }: { data: typeof frontendData }) => {
     return (
         <div className={`
-            relative flex flex-col h-full rounded-md border border-[#30363d] bg-[#161b22] 
-            transition-all duration-300 hover:border-[#8b949e] hover:shadow-lg
-        `}>
-            {/* Borde superior de color para identificar la tarjeta */}
-            <div className={`h-1 w-full rounded-t-sm ${data.bgAccent.replace('/10', '')} opacity-80`} />
+            relative flex flex-col h-full rounded-xl border border-[#30363d] bg-[#161b22]/80 backdrop-blur-md
+            transition-all duration-500 group overflow-hidden
+        `}
+            style={{
+                boxShadow: `0 0 0 1px rgba(48, 54, 61, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3)`
+            }}
+        >
+            {/* Hover Glow Effect */}
+            <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
+                style={{ background: `radial-gradient(circle at 50% 0%, ${data.glowColor}, transparent 70%)` }}
+            />
 
-            <div className="p-6 md:p-8 flex flex-col h-full">
+            {/* Scanline effect */}
+            <div className="absolute inset-0 opacity-5 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px]" />
+
+            {/* Top Accent Line */}
+            <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-current to-transparent ${data.accentText} opacity-80`} />
+
+            <div className="p-6 md:p-8 flex flex-col h-full relative z-10">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-start justify-between gap-4 mb-6">
                     <div className="flex items-center gap-4">
                         <div className={`
-                            p-3 rounded-md border ${data.accentColor} bg-[#0d1117] ${data.bgAccent}
-                            flex items-center justify-center
+                            p-3 rounded-lg border ${data.accentColor} bg-[#0d1117]/50
+                            flex items-center justify-center transition-all duration-300
+                            group-hover:shadow-[0_0_15px_${data.glowColor}]
                         `}>
                             <span className={data.accentText}>
                                 {data.icon}
                             </span>
                         </div>
-                        <h3 className="text-xl font-semibold text-[#f0f6fc]">{data.title}</h3>
+                        <div>
+                            <h3 className="text-xl font-bold text-white tracking-tight">{data.title}</h3>
+                            <span className={`text-[9px] font-mono uppercase tracking-widest ${data.accentText} opacity-80`}>
+                                {data.status}
+                            </span>
+                        </div>
                     </div>
                 </div>
 
@@ -75,16 +117,18 @@ const TechCard = ({ data }: { data: typeof frontendData }) => {
                     {data.description}
                 </p>
 
-                {/* Tecnologías estilo GitHub */}
+                {/* Tecnologías estilo Tags */}
                 <div className="space-y-3">
-                    <h4 className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider">Tech Stack</h4>
+                    <h4 className="text-[10px] font-bold text-[#8b949e] uppercase tracking-[0.2em] flex items-center gap-2">
+                        <Layers size={12} /> Stack
+                    </h4>
                     <div className="flex flex-wrap gap-2">
                         {data.technologies.map((tech) => (
                             <span
                                 key={tech.name}
-                                className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#0d1117] border border-[#30363d] text-xs text-[#c9d1d9] hover:border-[#8b949e] transition-colors cursor-default"
+                                className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#0d1117] border border-[#30363d] text-xs text-[#c9d1d9] hover:border-[#8b949e] transition-colors cursor-default font-mono group/tag"
                             >
-                                <span className={`w-2 h-2 rounded-full ${tech.color}`}></span>
+                                <span className={`w-1.5 h-1.5 rounded-full ${tech.color} shadow-[0_0_4px_currentColor] group-hover/tag:animate-pulse`}></span>
                                 {tech.name}
                             </span>
                         ))}
@@ -99,16 +143,20 @@ const FullStackDescription = () => {
     return (
         <section className="relative min-h-screen flex flex-col bg-[#0d1117] border-t border-[#30363d]">
 
-            {/* Patrón de fondo sutil (Dot Grid) */}
+            {/* Patrón de fondo Dot Grid */}
             <div
-                className="absolute inset-0 pointer-events-none opacity-[0.03]"
+                className="absolute inset-0 pointer-events-none opacity-[0.04]"
                 style={{
-                    backgroundImage: 'radial-gradient(#c9d1d9 1px, transparent 1px)',
+                    backgroundImage: 'radial-gradient(#8b949e 1px, transparent 1px)',
                     backgroundSize: '24px 24px'
                 }}
             />
 
-            <div className="relative z-10 flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 py-15">
+            {/* Ambient Glow */}
+            <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-blue-500/5 blur-[150px] rounded-full" />
+            <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-purple-500/5 blur-[150px] rounded-full" />
+
+            <div className="relative z-10 flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
                 <div className="max-w-7xl mx-auto w-full">
 
                     {/* Header Section */}
@@ -116,94 +164,116 @@ const FullStackDescription = () => {
 
                         {/* Visual / Lottie Container */}
                         <div className="relative group">
-                            {/* Container estilo Editor de Código */}
-                            <div className="relative rounded-lg border border-[#30363d] bg-[#0d1117] shadow-2xl overflow-hidden">
-                                {/* Barra superior falsa */}
-                                <div className="flex items-center px-4 py-3 border-b border-[#30363d] bg-[#161b22]">
+                            {/* Container estilo IDE Terminal */}
+                            <div className="relative rounded-xl border border-[#30363d] bg-[#0d1117] shadow-2xl overflow-hidden backdrop-blur-sm">
+                                {/* Barra superior */}
+                                <div className="flex items-center justify-between px-4 py-3 border-b border-[#30363d] bg-[#161b22]/80">
                                     <div className="flex gap-1.5">
-                                        <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                                        <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                                        <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                                        <div className="w-3 h-3 rounded-full bg-[#f85149]"></div>
+                                        <div className="w-3 h-3 rounded-full bg-[#f0883e]"></div>
+                                        <div className="w-3 h-3 rounded-full bg-[#00FF9D]"></div>
                                     </div>
-                                    <div className="ml-4 px-3 py-0.5 rounded bg-[#0d1117] border border-[#30363d] text-xs text-[#8b949e] font-mono">
-                                        dev-environment
+                                    <div className="flex-1 flex justify-center ml-4">
+                                        <div className="flex items-center gap-2 px-3 py-1 rounded bg-[#0d1117] border border-[#30363d] text-xs text-[#58a6ff] font-mono">
+                                            <Activity size={12} className="animate-pulse" />
+                                            <span>dev-environment.tsx</span>
+                                        </div>
                                     </div>
                                 </div>
 
                                 {/* Lottie */}
-                                <div className="p-4 bg-[#0d1117] flex items-center justify-center min-h-[300px]">
+                                <div className="p-4 bg-[#0d1117] flex items-center justify-center min-h-[300px] relative">
+                                    {/* Grid lines inside canvas */}
+                                    <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#30363d 1px, transparent 1px)', backgroundSize: '10px 10px' }} />
                                     <Lottie
                                         animationData={codingAnimation}
                                         loop={true}
                                         autoplay={true}
-                                        className="w-full max-w-sm h-auto opacity-90"
+                                        className="w-full max-w-sm h-auto relative z-10"
                                     />
+                                </div>
+
+                                {/* Bottom Status Bar */}
+                                <div className="px-4 py-2 border-t border-[#30363d] bg-[#161b22]/50 flex justify-between text-[10px] text-[#8b949e] font-mono">
+                                    <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#00FF9D] animate-pulse" /> BUILD: SUCCESS</span>
+                                    <span>TS v5.3</span>
                                 </div>
                             </div>
 
-                            {/* Efecto de sutil brillo detrás */}
-                            <div className="absolute -inset-1 bg-gradient-to-r from-[#58a6ff] to-[#8957e5] rounded-lg blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500 -z-10" />
+                            {/* Efecto de brillo detrás (Glow) */}
+                            <div className="absolute -inset-2 bg-gradient-to-r from-[#58a6ff] to-[#a371f7] rounded-2xl blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 -z-10" />
                         </div>
 
                         {/* Texto Principal */}
                         <div className="space-y-6">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#30363d] bg-[#161b22] text-xs text-[#00FF9D] font-mono uppercase tracking-wider">
+                                <Cpu size={12} />
+                                System Core
+                            </div>
 
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#f0f6fc] tracking-tight leading-[1.1]">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1]">
                                 Full Stack <br />
-                                <span className="text-[#58a6ff]">Engineering</span>.
+                                <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#58a6ff] to-[#a371f7]">
+                                    Engineering
+                                    <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-[#58a6ff] to-[#a371f7] opacity-50 blur-sm" />
+                                </span>.
                             </h2>
 
                             <p className="text-lg text-[#8b949e] leading-relaxed max-w-lg">
-                                Diseño, construyo y despliego aplicaciones completas con un enfoque riguroso en arquitectura limpia, seguridad y experiencia de usuario de alto rendimiento.
+                                Diseño, construyo y despliego aplicaciones completas con un enfoque riguroso en arquitectura limpia, seguridad y rendimiento.
                             </p>
 
                             <div className="flex flex-wrap gap-4 pt-4">
-                                {/* BOTÓN MODIFICADO: Ahora es un enlace a tu portafolio */}
-                                <a
+                                {/* Botón Principal (Portafolio) */}
+                                <ViewCodeButton
                                     href="https://cv-desarrolloweb.netlify.app/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-6 py-3 bg-[#238636] hover:bg-[#2ea043] text-white text-sm font-semibold rounded-md transition-all border border-transparent focus:ring-2 focus:ring-[#238636] focus:ring-offset-2 focus:ring-offset-[#0d1117]"
-                                >
-                                    Ver Portafolio
-                                    <ArrowRight size={16} />
-                                </a>
-                                <button className="flex items-center gap-2 px-6 py-3 bg-[#161b22] hover:bg-[#21262d] text-[#c9d1d9] text-sm font-semibold rounded-md transition-all border border-[#30363d] hover:border-[#8b949e]">
-                                    <Terminal size={16} />
-                                    Ver Código
-                                </button>
+                                    label="Ver Portafolio"
+                                    variant="primary"
+                                />
+
+                                {/* Botón Secundario (Ver Código) */}
+                                <ViewCodeButton
+                                    href="https://github.com/Jacobo1k982"
+                                    label="Ver Código"
+                                    variant="secondary"
+                                />
                             </div>
                         </div>
                     </div>
+
                     {/* Tech Cards Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
                         <TechCard data={frontendData} />
                         <TechCard data={backendData} />
                     </div>
 
-                    {/* Elegant Bottom CTA (Callout Style) */}
+                    {/* Elegant Bottom CTA (Terminal Style) */}
                     <div className="max-w-4xl mx-auto">
-                        <div className="relative rounded-md border border-[#30363d] bg-[#161b22] p-8 md:p-12 text-center overflow-hidden">
-                            {/* Decoración de fondo */}
-                            <div className="absolute top-0 right-0 p-4 opacity-10">
-                                <svg width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-[#c9d1d9]">
+                        <div className="relative rounded-xl border border-[#30363d] bg-[#161b22]/90 backdrop-blur-md p-8 md:p-12 text-center overflow-hidden group">
+
+                            {/* Corner Accents */}
+                            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#58a6ff]" />
+                            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#a371f7]" />
+
+                            <div className="absolute top-0 right-0 p-6 opacity-10 transform scale-125 rotate-12">
+                                <svg width="150" height="150" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-[#c9d1d9]">
                                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
                                 </svg>
                             </div>
 
-                            <h3 className="text-2xl md:text-3xl font-bold text-[#f0f6fc] mb-4 relative z-10">
+                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 relative z-10">
                                 ¿Listo para escalar tu proyecto?
                             </h3>
-                            <p className="text-[#8b949e] mb-8 max-w-2xl mx-auto relative z-10">
+                            <p className="text-[#8b949e] mb-8 max-w-2xl mx-auto relative z-10 leading-relaxed">
                                 Desde la arquitectura inicial hasta el despliegue final. Entrego código limpio, documentado y optimizado para crecer contigo.
                             </p>
 
                             <a
                                 href="/contact"
-                                className="inline-flex items-center gap-2 px-8 py-3 text-sm font-semibold text-[#58a6ff] border border-[#30363d] rounded-md hover:bg-[#161b22] hover:border-[#8b949e] hover:text-[#79c0ff] transition-all relative z-10"
+                                className="inline-flex items-center gap-2 px-8 py-3 text-sm font-semibold text-[#00FF9D] border border-[#30363d] rounded-lg hover:bg-[#00FF9D]/10 hover:border-[#00FF9D] transition-all relative z-10 group"
                             >
                                 Iniciar conversación
-                                <ArrowRight size={16} />
+                                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                             </a>
                         </div>
                     </div>

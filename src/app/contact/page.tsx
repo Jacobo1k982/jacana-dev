@@ -1,88 +1,75 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Navbar } from "@/components/Navbar";
 import ContactForm from "@/components/ContactForm";
-import { Mail, Github, Linkedin, ArrowRight } from "lucide-react";
 
 export default function ContactPage() {
     return (
-        <main className="relative min-h-screen flex flex-col items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-[#0d1117]">
+        <div className="min-h-screen flex flex-col bg-[#0D1117]">
+            <Navbar />
 
-            {/* Patrón de fondo sutil estilo GitHub */}
-            <div
-                className="absolute inset-0 pointer-events-none opacity-[0.03]"
-                style={{
-                    backgroundImage: 'radial-gradient(#c9d1d9 1px, transparent 1px)',
-                    backgroundSize: '24px 24px'
-                }}
-            />
-
-            <div className="relative z-10 w-full max-w-4xl mx-auto">
-
-                {/* --- Header --- */}
-                <div className="text-center mb-12 max-w-2xl mx-auto">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#30363d] bg-[#161b22] text-xs font-medium text-[#8b949e] mb-6">
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#58a6ff] opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#58a6ff]"></span>
-                        </span>
-                        Disponible para nuevos proyectos
+            <main className="flex-1 flex items-center justify-center px-4 pt-24 pb-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-full"
+                >
+                    {/* Header */}
+                    <div className="text-center mb-8">
+                        <motion.div
+                            initial={{ scale: 0.9 }}
+                            animate={{ scale: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#00A0E4]/10 border border-[#00A0E4]/30 mb-4"
+                        >
+                            <svg className="w-8 h-8 text-[#00A0E4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </motion.div>
+                        <h1 className="text-3xl font-bold text-white mb-2">
+                            Contáctanos
+                        </h1>
+                        <p className="text-[#8B949E] text-sm max-w-md mx-auto">
+                            ¿Tienes un proyecto en mente? Establece un canal seguro con nuestro equipo.
+                        </p>
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl font-bold text-[#f0f6fc] mb-4 tracking-tight">
-                        ¿Hablemos de código?
-                    </h1>
-                    <p className="text-lg text-[#8b949e] leading-relaxed">
-                        Desarrollo soluciones fullstack de alto rendimiento. Ya sea un MVP complejo o una consultoría técnica, estoy listo para escuchar tu idea.
-                    </p>
-                </div>
+                    {/* Contact Form Component */}
+                    <ContactForm />
 
-                {/* --- Main Card (Formulario) --- */}
-                <div className="relative group">
-                    {/* Efecto de brillo en el borde (hover) */}
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#58a6ff] to-[#a371f7] rounded-xl opacity-20 group-hover:opacity-40 transition duration-500 blur"></div>
-
-                    <div className="relative bg-[#161b22] border border-[#30363d] rounded-xl shadow-2xl overflow-hidden">
-                        {/* Barra de acento superior */}
-                        <div className="h-1 w-full bg-gradient-to-r from-[#58a6ff] to-[#a371f7]"></div>
-
-                        <div className="p-8 sm:p-10">
-                            <div className="mb-8 pb-6 border-b border-[#30363d]">
-                                <h2 className="text-xl font-semibold text-[#f0f6fc]">Envíame un mensaje</h2>
-                                <p className="text-sm text-[#8b949e] mt-1">Rellena el formulario y te responderé en menos de 24 horas.</p>
+                    {/* Contact Info */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        className="mt-8 max-w-lg mx-auto"
+                    >
+                        <div className="grid grid-cols-3 gap-4 text-center py-6 border-t border-[#30363D]">
+                            <div className="flex flex-col items-center gap-2">
+                                <svg className="w-5 h-5 text-[#00A0E4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <span className="text-xs text-[#8B949E] font-mono">info@jacana.dev</span>
                             </div>
-
-                            <ContactForm />
+                            <div className="flex flex-col items-center gap-2">
+                                <svg className="w-5 h-5 text-[#00A0E4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                <span className="text-xs text-[#8B949E] font-mono">Latinoamérica</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-2">
+                                <svg className="w-5 h-5 text-[#00A0E4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span className="text-xs text-[#8B949E] font-mono">Respuesta 24h</span>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                {/* --- Footer / Alternativa Directa --- */}
-                <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-6 bg-[#161b22] border border-[#30363d] p-6 rounded-lg">
-                    <div className="flex items-center gap-4">
-                        <div className="p-3 rounded-md bg-[#0d1117] text-[#58a6ff] border border-[#30363d]">
-                            <Mail className="w-6 h-6" />
-                        </div>
-                        <div>
-                            <p className="text-sm font-semibold text-[#f0f6fc]">Correo directo</p>
-                            <a
-                                href="mailto:ventas@jacana-dev.com"
-                                className="text-sm text-[#8b949e] hover:text-[#58a6ff] transition-colors"
-                            >
-                                ventas@jacana-dev.com
-                            </a>
-                        </div>
-                    </div>
-
-                    <div className="flex items-center gap-4">
-                        {/* Enlaces sociales opcionales */}
-                        <a href="#" className="p-2 rounded-md text-[#8b949e] hover:text-white hover:bg-[#30363d] transition-all">
-                            <Github className="w-5 h-5" />
-                        </a>
-                        <a href="#" className="p-2 rounded-md text-[#8b949e] hover:text-white hover:bg-[#30363d] transition-all">
-                            <Linkedin className="w-5 h-5" />
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </main>
+                    </motion.div>
+                </motion.div>
+            </main>
+        </div>
     );
 }

@@ -1,49 +1,71 @@
-import { NextRequest, NextResponse } from "next/server"
-import { db } from "@/lib/db"
-import { verifyToken } from "@/lib/auth/jwt"
+// src/app/api/auth/me/route.ts
+import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { db } from "@/lib/db";
+import { verifyToken } from "@/lib/auth/jwt";
+
+// Validación de entorno (Solo para advertencia, no rompe el build)
+if (!process.env.JWT_SECRET) {
+    console.warn("[AUTH_WARN] JWT_SECRET no está definido en las variables de entorno.");
+}
 
 export async function GET(req: NextRequest) {
     try {
-        const token = req.cookies.get("auth-token")?.value
+        // 1. Obtener token
+        const token = req.cookies.get("auth-token")?.value;
 
         if (!token) {
             return NextResponse.json(
-                { user: null },
+                { user: null, authenticated: false, message: "No autenticado" },
                 { status: 401 }
-            )
+            );
         }
 
-        const payload = verifyToken(token) as {
-            userId: number
-            email: string
+        // 2. Verificar y decodificar token
+        let payload;
+        try {
+            // Asegúrate que verifyToken maneja errores internos o usa try/catch aquí
+            payload = verifyToken(token) as { userId: number; email: string };
+        } catch (error) {
+            console.warn("[AUTH_WARN] Token inválido:", error);
+            const response = NextResponse.json(
+                { user: null, authenticated: false, message: "Sesión expirada" },
+                { status: 401 }
+            );
+            response.cookies.delete("auth-token");
+            return response;
         }
 
+        // 3. Buscar usuario en base de datos
+        // NOTA: Eliminamos 'image' porque no existe en tu schema.prisma actual
         const user = await db.user.findUnique({
             where: { id: payload.userId },
             select: {
                 id: true,
                 name: true,
                 email: true,
+                // image: true, // <--- ELIMINADO para solucionar el error de build
             },
-        })
+        });
 
         if (!user) {
             return NextResponse.json(
-                { user: null },
+                { user: null, authenticated: false, message: "Usuario no encontrado" },
                 { status: 401 }
-            )
+            );
         }
-// example in app/api/auth/me/route.ts
-const jwtSecret = process.env.JWT_SECRET;
-if (!jwtSecret) {
-  throw new Error('JWT_SECRET is not set. Add it to your environment variables (Netlify site settings or .env.local).');
-}
 
-        return NextResponse.json({ user })
-    } catch {
+        // 4. Retornar respuesta exitosa
         return NextResponse.json(
-            { user: null },
-            { status: 401 }
-        )
+            { user, authenticated: true },
+            { status: 200 }
+        );
+
+    } catch (error) {
+        console.error("[ME_ERROR]", error);
+        return NextResponse.json(
+            { user: null, authenticated: false, error: "Error interno del servidor" },
+            { status: 500 }
+        );
     }
 }
