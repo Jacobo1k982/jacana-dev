@@ -16,8 +16,8 @@ export default function RegisterPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [acceptTerms, setAcceptTerms] = useState(false);
-
-    const { user, register } = useContext(AuthContext);
+    
+    const { register } = useAuth();
     const router = useRouter();
 
     // Password strength calculator
@@ -363,8 +363,8 @@ export default function RegisterPage() {
                             type="button"
                             onClick={() => setAcceptTerms(!acceptTerms)}
                             className={`mt-0.5 w-4 h-4 rounded border flex items-center justify-center transition-all duration-200 ${acceptTerms
-                                ? "bg-[#00A0E4] border-[#00A0E4]"
-                                : "bg-transparent border-[#30363d] hover:border-[#484f58]"
+                                    ? "bg-[#00A0E4] border-[#00A0E4]"
+                                    : "bg-transparent border-[#30363d] hover:border-[#484f58]"
                                 }`}
                         >
                             {acceptTerms && (
