@@ -11,12 +11,12 @@ export interface MenuSubItem {
     image?: string;
     icon?: string;
     description?: string;
-    shortDesc?: string;
+    shortDesc?: string; // Para tooltips o vistas compactas
     badge?: string;
     badgeVariant?: BadgeVariant;
     isExternal?: boolean;
-    tags?: string[];
-    hot?: boolean;
+    tags?: string[]; // Para filtros o categorías visuales
+    hot?: boolean; // Para efecto de pulso en items destacados
 }
 
 export interface MenuDataItem {
@@ -25,9 +25,9 @@ export interface MenuDataItem {
     href?: string;
     subItems?: MenuSubItem[];
     isExternal?: boolean;
-    icon?: string;
-    gradient?: 'blue' | 'purple' | 'cyan';
-    hot?: boolean;
+    icon?: string; // Icono para versión mobile o desktop
+    gradient?: 'blue' | 'purple' | 'cyan'; // Para efectos visuales en hover (adaptado a Jacana)
+    hot?: boolean; // Para efecto de pulso en items destacados
     badge?: string;
     badgeVariant?: BadgeVariant;
 }
@@ -71,7 +71,7 @@ const servicesItems: MenuSubItem[] = [
     {
         id: "srv-devops",
         label: "DevOps & CI/CD",
-        href: "/servicios/devops",
+        href: "/product/DevOpsCICDDescription",
         image: img("devops.png"),
         description: "Pipelines automatizados con GitHub Actions, Docker multi-stage, Kubernetes y monitoreo con Prometheus/Grafana.",
         shortDesc: "CI/CD • Docker • K8s • Observability",
@@ -201,10 +201,16 @@ export const menuItems: MenuDataItem[] = [
 
 // ── UTILIDADES ADICIONALES ───────────────────────────────────────────────────
 
+/**
+ * Obtiene un item por ID (útil para highlights o breadcrumbs)
+ */
 export function getMenuItemById(id: string): MenuDataItem | undefined {
     return menuItems.find(item => item.id === id);
 }
 
+/**
+ * Obtiene un sub-item por ID (útil para tracking o analytics)
+ */
 export function getSubItemById(id: string): MenuSubItem | undefined {
     for (const item of menuItems) {
         const found = item.subItems?.find(sub => sub.id === id);
@@ -213,6 +219,9 @@ export function getSubItemById(id: string): MenuSubItem | undefined {
     return undefined;
 }
 
+/**
+ * Filtra items con badge "new" o "hot" para destacar en UI
+ */
 export function getHighlightedItems(): { main: MenuDataItem[]; sub: MenuSubItem[] } {
     const main = menuItems.filter(item => item.hot);
     const sub = menuItems.flatMap(item => item.subItems || []).filter(sub => sub.badgeVariant === 'new' || sub.hot);

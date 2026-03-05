@@ -114,6 +114,7 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
         }
     }, [isActive, handleClickOutside]);
 
+    // Animación Fluida
     const motionProps: MotionProps = {
         initial: { opacity: 0, y: 10, scale: 0.95 },
         animate: { opacity: 1, y: 0, scale: 1 },
@@ -127,6 +128,7 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
             onMouseEnter={() => hasSubItems && onEnter(item.label)}
             onMouseLeave={onLeave}
         >
+            {/* Trigger Button / Link */}
             {hasSubItems ? (
                 <button
                     ref={triggerRef as React.RefObject<HTMLButtonElement>}
@@ -165,10 +167,12 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                     className="px-3 py-2 rounded-lg text-sm font-medium text-[#8b949e] hover:text-white hover:bg-white/5 transition-colors relative group border border-transparent"
                 >
                     {item.label}
+                    {/* Underline neon effect (Jacana blue) */}
                     <span className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-[#00A0E4] group-hover:w-4/5 transition-all duration-300 -translate-x-1/2 shadow-[0_0_5px_#00A0E4]" />
                 </Link>
             )}
 
+            {/* Dropdown */}
             <AnimatePresence>
                 {isActive && hasSubItems && (
                     <motion.div
@@ -176,11 +180,16 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                         {...motionProps}
                         className="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-50 w-[420px]"
                     >
+                        {/* Glow Effect (Jacana blue) */}
                         <div className="absolute inset-0 bg-[#00A0E4]/10 blur-3xl rounded-2xl opacity-50" />
 
+                        {/* Contenedor Principal */}
                         <div className="relative rounded-xl border border-[#30363d] bg-[#0d1117]/90 backdrop-blur-xl shadow-2xl overflow-hidden ring-1 ring-black/5">
+
+                            {/* Scanline effect (sutil - Jacana blue) */}
                             <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 160, 228, 0.1) 3px)' }} />
 
+                            {/* Header de categoría */}
                             <div className="px-4 py-2.5 border-b border-[#30363d] bg-white/[0.02]">
                                 <span className="text-xs font-bold text-[#00A0E4] uppercase tracking-widest flex items-center gap-2">
                                     <Zap size={12} />
@@ -188,6 +197,7 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                                 </span>
                             </div>
 
+                            {/* Grid de Items */}
                             <div className="p-2 grid grid-cols-1 gap-1">
                                 {item.subItems?.map((sub, i) => (
                                     <motion.div
@@ -200,8 +210,10 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                                             href={sub.href}
                                             className="group flex items-start gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-all duration-200 border border-transparent hover:border-[#00A0E4]/20 relative overflow-hidden"
                                         >
+                                            {/* Hover Glow dentro del item (Jacana blue) */}
                                             <div className="absolute inset-0 bg-gradient-to-r from-[#00A0E4]/0 to-[#005A9C]/0 group-hover:from-[#00A0E4]/5 group-hover:to-[#005A9C]/5 transition-all duration-300" />
 
+                                            {/* Icono o Imagen */}
                                             <div className="flex-shrink-0 mt-0.5 relative z-10">
                                                 {sub.image ? (
                                                     <img
@@ -216,6 +228,7 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                                                 )}
                                             </div>
 
+                                            {/* Texto */}
                                             <div className="flex-1 min-w-0 relative z-10">
                                                 <div className="flex items-center gap-1.5 mb-0.5">
                                                     <span className="text-sm font-semibold text-gray-200 group-hover:text-[#00A0E4] transition-colors">
@@ -234,6 +247,7 @@ function MenuItem({ item, isActive, onEnter, onLeave, onFocus }: MenuItemProps) 
                                 ))}
                             </div>
 
+                            {/* Footer "View all" */}
                             <div className="border-t border-[#30363d] px-2 py-1.5 bg-white/[0.01] mt-1">
                                 <Link
                                     href={`/${item.label.toLowerCase()}`}
@@ -270,6 +284,7 @@ export default function MenuItems() {
         }
     };
 
+    // Cerrar al hacer click fuera de la navegación
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
