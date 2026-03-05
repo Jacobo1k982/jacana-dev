@@ -241,7 +241,6 @@
   scrollbar-width: thin;
   scrollbar-color: #30363d #0d1117;
 }
-<<<<<<< Updated upstream
 
 /* ============================================
    ANIMACIONES PCB CIRCUIT SYSTEM
@@ -249,89 +248,199 @@
 
 /* Pulse lento para elementos de circuito */
 @keyframes pulse-slow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.02); }
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.02);
+  }
 }
 
 /* Float suave para tarjetas flotantes */
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-16px) rotate(0.5deg); }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-16px) rotate(0.5deg);
+  }
 }
 
 /* Gradiente animado para texto holográfico */
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* Flujo de energía en líneas de circuito */
 @keyframes energy-flow {
-  0% { transform: translateX(-150%); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateX(400%); opacity: 0; }
+  0% {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(400%);
+    opacity: 0;
+  }
 }
 
 /* Fade-in secuencial para typewriter */
 @keyframes typing-fade {
-  0% { opacity: 0; transform: translateY(8px); }
-  25% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Blink para cursor de terminal */
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
 }
 
 /* Ping lento para indicadores de estado */
 @keyframes ping-slow {
-  0% { transform: scale(1); opacity: 1; }
-  70% { transform: scale(3.5); opacity: 0; }
-  100% { transform: scale(4); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  70% {
+    transform: scale(3.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
 
 /* Bounce suave para scroll indicator */
 @keyframes bounce-slow {
-  0%, 100% { transform: translateY(0) translateX(-50%); }
-  50% { transform: translateY(-12px) translateX(-50%); }
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(-50%);
+  }
+
+  50% {
+    transform: translateY(-12px) translateX(-50%);
+  }
 }
 
 /* Clases de utilidad */
-.animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
-.animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
-.animate-gradient-shift { 
-  background-size: 200% 200%; 
-  animation: gradient-shift 5s ease infinite; 
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
 }
-.animate-energy-flow { animation: energy-flow 3s linear infinite; }
-.animate-ping-slow { animation: ping-slow 2.5s cubic-bezier(0, 0, 0.2, 1) infinite; }
-.animate-bounce-slow { animation: bounce-slow 3s ease-in-out infinite; }
-.animate-blink { animation: blink 1s step-end infinite; }
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+}
+
+.animate-energy-flow {
+  animation: energy-flow 3s linear infinite;
+}
+
+.animate-ping-slow {
+  animation: ping-slow 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
 
 /* Delays escalonados para stagger animations */
-.animation-delay-1500 { animation-delay: 1500ms; }
-.animation-delay-2000 { animation-delay: 2000ms; }
-.animation-delay-2500 { animation-delay: 2500ms; }
+.animation-delay-1500 {
+  animation-delay: 1500ms;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2000ms;
+}
+
+.animation-delay-2500 {
+  animation-delay: 2500ms;
+}
 
 /* Efecto scanline opcional para estética CRT */
 @keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(1000%); }
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(1000%);
+  }
 }
 
 /* Preferencias de movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     animation-delay: 0ms !important;
   }
-  canvas { display: none !important; }
+
+  canvas {
+    display: none !important;
+  }
 }
 
 /* Optimizaciones de rendimiento para canvas */
@@ -341,40 +450,149 @@ canvas {
 }
 
 /* Smooth scroll */
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 /* Anti-aliasing de texto */
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-@keyframes pulse-slow { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.5; } }
-@keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-@keyframes energy-flow { 0% { transform: translateX(-150%); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(400%); opacity: 0; } }
-@keyframes typing-fade { 0% { opacity: 0; transform: translateY(8px); } 25% { opacity: 1; transform: translateY(0); } }
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-@keyframes ping-slow { 0% { transform: scale(1); opacity: 1; } 70% { transform: scale(3.5); opacity: 0; } }
 
-.animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
-.animate-gradient-shift { background-size: 200% 200%; animation: gradient-shift 5s ease infinite; }
-.animate-energy-flow { animation: energy-flow 3s linear infinite; }
-.animate-blink { animation: blink 1s step-end infinite; }
-.animate-ping-slow { animation: ping-slow 2.5s cubic-bezier(0, 0, 0.2, 1) infinite; }
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes energy-flow {
+  0% {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(400%);
+    opacity: 0;
+  }
+}
+
+@keyframes typing-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes ping-slow {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  70% {
+    transform: scale(3.5);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+}
+
+.animate-energy-flow {
+  animation: energy-flow 3s linear infinite;
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.animate-ping-slow {
+  animation: ping-slow 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; }
-  canvas { display: none !important; }
-=======
-@keyframes shimmer {
-  100% { transform: translateX(100%); }
-}
-.cyber-extreme .bg-scanline {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+  }
+
+  canvas {
+    display: none !important;
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .cyber-extreme .bg-scanline {
     opacity: 0.1 !important;
     animation: scanline-fast 0.5s linear infinite;
-}
+  }
 
-@keyframes scanline-fast {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
->>>>>>> Stashed changes
+  @keyframes scanline-fast {
+    0% {
+      transform: translateY(-100%);
+    }
+
+    100% {
+      transform: translateY(100%);
+    }
+  }
 }

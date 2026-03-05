@@ -2,18 +2,14 @@
 
 import { useState, useEffect, createContext, useContext, ReactNode } from "react";
 
-// ============================================
-// TYPES
-// ============================================
-
-export interface User {
+interface User {
     id: string;
     name?: string;
     email?: string;
     image?: string;
 }
 
-export interface AuthContextType {
+interface AuthContextType {
     user: User | null;
     loading: boolean;
     login: (email: string, password: string) => Promise<void>;
@@ -21,133 +17,58 @@ export interface AuthContextType {
     register: (name: string, email: string, password: string) => Promise<void>;
 }
 
-// ============================================
-// CONTEXT
-// ============================================
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-// ============================================
-// DEFAULT STATE FOR SSR/SSG
-// ============================================
 
 const defaultAuthState: AuthContextType = {
     user: null,
     loading: true,
-    login: async () => {
-        console.warn("Auth not available during SSR");
-    },
-    logout: async () => {
-        console.warn("Auth not available during SSR");
-    },
-    register: async () => {
-        console.warn("Auth not available during SSR");
-    },
+    login: async () => { },
+    logout: async () => { },
+    register: async () => { },
 };
-
-// ============================================
-// PROVIDER
-// ============================================
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                const savedUser = localStorage.getItem("user");
-                if (savedUser) {
-                    setUser(JSON.parse(savedUser));
-                }
-            } catch (error) {
-                console.error("Error checking auth:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        checkAuth();
+        const savedUser = localStorage.getItem("user");
+        if (savedUser) setUser(JSON.parse(savedUser));
+        setLoading(false);
     }, []);
 
-    const login = async (email: string, password: string): Promise<void> => {
+    const login = async (email: string, password: string) => {
         setLoading(true);
-        try {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            const newUser: User = {
-                id: "1",
-                name: email.split("@")[0],
-                email,
-                image: "/perfil.png",
-            };
-            setUser(newUser);
-            localStorage.setItem("user", JSON.stringify(newUser));
-        } catch (error) {
-            console.error("Login error:", error);
-            throw error;
-        } finally {
-            setLoading(false);
-        }
+        const newUser = { id: "1", name: email.split("@")[0], email, image: "/perfil.png" };
+        setUser(newUser);
+        localStorage.setItem("user", JSON.stringify(newUser));
+        setLoading(false);
     };
 
-    const logout = async (): Promise<void> => {
+    const logout = async () => {
         setLoading(true);
-        try {
-            await new Promise((resolve) => setTimeout(resolve, 500));
-            setUser(null);
-            localStorage.removeItem("user");
-        } catch (error) {
-            console.error("Logout error:", error);
-        } finally {
-            setLoading(false);
-        }
+        setUser(null);
+        localStorage.removeItem("user");
+        setLoading(false);
     };
 
-    const register = async (name: string, email: string, password: string): Promise<void> => {
+    const register = async (name: string, email: string, password: string) => {
         setLoading(true);
-        try {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            const newUser: User = {
-                id: Date.now().toString(),
-                name,
-                email,
-                image: "/perfil.png",
-            };
-            setUser(newUser);
-            localStorage.setItem("user", JSON.stringify(newUser));
-        } catch (error) {
-            console.error("Register error:", error);
-            throw error;
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const value: AuthContextType = {
-        user,
-        loading,
-        login,
-        logout,
-        register,
+        const newUser = { id: Date.now().toString(), name, email, image: "/perfil.png" };
+        setUser(newUser);
+        localStorage.setItem("user", JSON.stringify(newUser));
+        setLoading(false);
     };
 
     return (
-        <AuthContext.Provider value={value}>
+        <AuthContext.Provider value={{ user, loading, login, logout, register }}>
             {children}
         </AuthContext.Provider>
     );
 }
 
-// ============================================
-// HOOK
-// ============================================
-
 export function useAuth(): AuthContextType {
     const context = useContext(AuthContext);
-
-    // During SSR/SSG, return default value instead of throwing
-    if (context === undefined) {
-        return defaultAuthState;
-    }
-
+    if (context === undefined) return defaultAuthState;
     return context;
 }

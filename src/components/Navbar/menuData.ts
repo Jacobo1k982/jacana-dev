@@ -1,15 +1,6 @@
 // src/components/Navbar/menuData.ts
 
 // ── DEFINICIÓN DE TIPOS ─────────────────────────────────────────────────────
-<<<<<<< Updated upstream
-
-export interface MenuSubItem {
-    id: string; // Hacer obligatorio el ID para mejor rendimiento en listas React
-    label: string;
-    href: string;
-    image?: string;
-    icon?: string; // Añadido: Soporte para iconos (ej. nombre de icono de Lucide)
-=======
 
 export type BadgeVariant = 'default' | 'new' | 'popular' | 'pro' | 'cyber';
 
@@ -19,46 +10,34 @@ export interface MenuSubItem {
     href: string;
     image?: string;
     icon?: string;
->>>>>>> Stashed changes
     description?: string;
-    shortDesc?: string; // Para tooltips o vistas compactas
+    shortDesc?: string;
     badge?: string;
-<<<<<<< Updated upstream
-    badgeVariant?: 'default' | 'new' | 'popular'; // Añadido: Para estilizar badges
-=======
     badgeVariant?: BadgeVariant;
->>>>>>> Stashed changes
     isExternal?: boolean;
-    tags?: string[]; // Para filtros o categorías visuales
-    hot?: boolean; // Para efecto de pulso en items destacados
+    tags?: string[];
+    hot?: boolean;
 }
 
 export interface MenuDataItem {
-<<<<<<< Updated upstream
-    id: string; // Hacer obligatorio el ID
-=======
     id: string;
->>>>>>> Stashed changes
     label: string;
     href?: string;
     subItems?: MenuSubItem[];
     isExternal?: boolean;
-    icon?: string; // Icono para versión mobile o desktop
-    gradient?: 'blue' | 'purple' | 'cyan'; // Para efectos visuales en hover (adaptado a Jacana)
-    hot?: boolean; // Para efecto de pulso en items destacados
+    icon?: string;
+    gradient?: 'blue' | 'purple' | 'cyan';
+    hot?: boolean;
     badge?: string;
     badgeVariant?: BadgeVariant;
 }
 
 // ── UTILIDADES ────────────────────────────────────────────────────────────────
 
-// Helper para rutas de imágenes optimizado
 const img = (filename: string) => `/img/${filename}`;
 
 // ── BADGE CONFIG - Adaptado a paleta Jacana ──────────────────────────────────
 
-<<<<<<< Updated upstream
-=======
 export const badgeStyles: Record<BadgeVariant, { bg: string; text: string; border: string }> = {
     default: { bg: 'bg-[#30363d]', text: 'text-[#c9d1d9]', border: 'border-[#484f58]' },
     new: { bg: 'bg-[#00A0E4]/15', text: 'text-[#00A0E4]', border: 'border-[#00A0E4]/40' },
@@ -69,7 +48,6 @@ export const badgeStyles: Record<BadgeVariant, { bg: string; text: string; borde
 
 // ── DATOS SUB-ITEMS: SERVICIOS ───────────────────────────────────────────────
 
->>>>>>> Stashed changes
 const servicesItems: MenuSubItem[] = [
     {
         id: "srv-fullstack",
@@ -104,11 +82,7 @@ const servicesItems: MenuSubItem[] = [
     {
         id: "srv-arch",
         label: "Arquitectura & Refactors",
-<<<<<<< Updated upstream
-        href: "/servicios/arquitectura",
-=======
         href: "/product/ArchitectureRefactorsDescription",
->>>>>>> Stashed changes
         image: img("web-maintenance.png"),
         description: "Patrones clean architecture, DDD, migraciones progresivas y deuda técnica cero. Código que escala contigo.",
         shortDesc: "Clean Arch • DDD • Legacy modernization",
@@ -117,11 +91,7 @@ const servicesItems: MenuSubItem[] = [
     {
         id: "srv-ui",
         label: "UX/UI Técnico",
-<<<<<<< Updated upstream
-        href: "/servicios/ux-ui",
-=======
         href: "/product/UXUIDescription",
->>>>>>> Stashed changes
         image: img("landing-page.png"),
         description: "Interfaces con Framer Motion, dark mode nativo, accesibilidad WCAG 2.2 y performance Core Web Vitals ≥ 95.",
         shortDesc: "Animaciones • A11y • Perf. optimizada",
@@ -130,13 +100,6 @@ const servicesItems: MenuSubItem[] = [
     {
         id: "srv-mentorship",
         label: "Mentoría & Code Review",
-<<<<<<< Updated upstream
-        href: "/servicios/mentoria",
-        image: img("code-review.png"),
-        description: "Mejora continua y estándares profesionales",
-        badge: "Nuevo",
-        badgeVariant: "new", // Utilizado para el estilo visual (ej. color neón)
-=======
         href: "/product/MentorshipCodeReviewDescription",
         image: img("code-review.png"),
         description: "Feedback estructurado, pair programming remoto y estándares de equipo. Eleva el nivel técnico de tu squad.",
@@ -145,16 +108,11 @@ const servicesItems: MenuSubItem[] = [
         badge: "Nuevo",
         badgeVariant: "new",
         hot: true,
->>>>>>> Stashed changes
     },
     {
         id: "srv-security",
         label: "Seguridad & Hardening",
-<<<<<<< Updated upstream
-        href: "/servicios/seguridad",
-=======
         href: "/product/SecurityHardeningDescription",
->>>>>>> Stashed changes
         image: img("binary-code.png"),
         description: "Auditorías OWASP, CSP headers, sanitización de inputs y penetration testing. Tu app, blindada por diseño.",
         shortDesc: "OWASP • CSP • Pentesting",
@@ -164,11 +122,7 @@ const servicesItems: MenuSubItem[] = [
     {
         id: "srv-analytics",
         label: "Analítica & Tracking",
-<<<<<<< Updated upstream
-        href: "/servicios/analytics",
-=======
         href: "/product/AnalyticsTrackingDescription",
->>>>>>> Stashed changes
         image: img("data-analytics.png"),
         description: "Event tracking con PostHog/Plausible, dashboards en tiempo real y funnel analysis para decisiones data-driven.",
         shortDesc: "Real-time • Funnels • Privacy-first",
@@ -176,11 +130,8 @@ const servicesItems: MenuSubItem[] = [
     },
 ];
 
-<<<<<<< Updated upstream
-=======
 // ── DATOS SUB-ITEMS: SOLUCIONES ──────────────────────────────────────────────
 
->>>>>>> Stashed changes
 const solutionsItems: MenuSubItem[] = [
     {
         id: "sol-developers",
@@ -221,42 +172,27 @@ export const menuItems: MenuDataItem[] = [
         id: "nav-servicios",
         label: "Servicios",
         subItems: servicesItems,
-<<<<<<< Updated upstream
-=======
         icon: "Zap",
         gradient: "blue",
->>>>>>> Stashed changes
     },
     {
         id: "nav-soluciones",
         label: "Soluciones",
         subItems: solutionsItems,
-<<<<<<< Updated upstream
-=======
         icon: "Layers",
         gradient: "purple",
->>>>>>> Stashed changes
     },
     {
         id: "nav-precios",
         label: "Precios",
-<<<<<<< Updated upstream
-        href: "/precios",
-=======
         href: "/product/PricingSection",
         icon: "Tag",
         badge: "Transparente",
         badgeVariant: "default",
->>>>>>> Stashed changes
     },
     {
         id: "nav-contacto",
         label: "Contacto",
-<<<<<<< Updated upstream
-        href: "/contacto",
-    },
-];
-=======
         href: "/contact",
         icon: "MessageSquare",
         hot: true,
@@ -265,16 +201,10 @@ export const menuItems: MenuDataItem[] = [
 
 // ── UTILIDADES ADICIONALES ───────────────────────────────────────────────────
 
-/**
- * Obtiene un item por ID (útil para highlights o breadcrumbs)
- */
 export function getMenuItemById(id: string): MenuDataItem | undefined {
     return menuItems.find(item => item.id === id);
 }
 
-/**
- * Obtiene un sub-item por ID (útil para tracking o analytics)
- */
 export function getSubItemById(id: string): MenuSubItem | undefined {
     for (const item of menuItems) {
         const found = item.subItems?.find(sub => sub.id === id);
@@ -283,12 +213,8 @@ export function getSubItemById(id: string): MenuSubItem | undefined {
     return undefined;
 }
 
-/**
- * Filtra items con badge "new" o "hot" para destacar en UI
- */
 export function getHighlightedItems(): { main: MenuDataItem[]; sub: MenuSubItem[] } {
     const main = menuItems.filter(item => item.hot);
     const sub = menuItems.flatMap(item => item.subItems || []).filter(sub => sub.badgeVariant === 'new' || sub.hot);
     return { main, sub };
 }
->>>>>>> Stashed changes
