@@ -1,0 +1,879 @@
+{
+    "categories": [
+        {
+            "id": "all",
+            "label": "Todos",
+            "count": 12
+        },
+        {
+            "id": "web",
+            "label": "Aplicaciones Web",
+            "count": 5
+        },
+        {
+            "id": "mobile",
+            "label": "Apps Móviles",
+            "count": 3
+        },
+        {
+            "id": "ai",
+            "label": "IA & Machine Learning",
+            "count": 2
+        },
+        {
+            "id": "ecommerce",
+            "label": "E-commerce",
+            "count": 2
+        }
+    ],
+    "projects": [
+        {
+            "id": "fintech-pro",
+            "title": "FinTech Pro Platform",
+            "slug": "fintech-pro-platform",
+            "category": "web",
+            "client": {
+                "name": "Banco Nacional Dominicano",
+                "industry": "Servicios Financieros",
+                "logo": "/clients/banco-nacional.svg",
+                "website": "https://bancolonial.com"
+            },
+            "shortDescription": "Plataforma bancaria digital completa con procesamiento de pagos en tiempo real y análisis de fraudes con IA.",
+            "fullDescription": "Desarrollamos una plataforma bancaria digital integral que revolucionó la forma en que el Banco Nacional Dominicano atiende a sus clientes. La solución incluye banca personal, empresarial, procesamiento de pagos internacionales y un sistema avanzado de detección de fraudes basado en machine learning que redujo las transacciones fraudulentas en un 94%.",
+            "images": {
+                "cover": "/projects/fintech-cover.jpg",
+                "gallery": [
+                    "/projects/fintech-1.jpg",
+                    "/projects/fintech-2.jpg",
+                    "/projects/fintech-3.jpg"
+                ]
+            },
+            "technologies": [
+                "React",
+                "Node.js",
+                "PostgreSQL",
+                "Redis",
+                "AWS",
+                "TensorFlow",
+                "Kubernetes"
+            ],
+            "features": [
+                "Onboarding digital con verificación biométrica",
+                "Transferencias internacionales en tiempo real",
+                "Dashboard analítico para empresas",
+                "Sistema de detección de fraude con ML",
+                "API abierta para integraciones B2B"
+            ],
+            "metrics": {
+                "users": "2.5M+",
+                "transactions": "15M/mes",
+                "uptime": "99.99%",
+                "performance": "45% más rápido",
+                "fraudReduction": "94%",
+                "satisfaction": "4.8/5"
+            },
+            "timeline": {
+                "duration": "14 meses",
+                "start": "Enero 2023",
+                "end": "Marzo 2024"
+            },
+            "team": {
+                "size": 8,
+                "roles": [
+                    "2 Frontend",
+                    "3 Backend",
+                    "1 DevOps",
+                    "1 UI/UX",
+                    "1 PM"
+                ]
+            },
+            "testimonial": {
+                "quote": "Jacana Dev transformó completamente nuestra presencia digital. La plataforma superó todas nuestras expectativas y nuestros clientes están más satisfechos que nunca.",
+                "author": "Carlos Martínez",
+                "role": "CTO, Banco Nacional Dominicano",
+                "avatar": "/testimonials/carlos-martinez.jpg"
+            },
+            "awards": [
+                "Best Digital Banking Platform 2024",
+                "Innovation in FinTech Award"
+            ],
+            "featured": true,
+            "color": "cyan"
+        },
+        {
+            "id": "healthsync",
+            "title": "HealthSync App",
+            "slug": "healthsync-app",
+            "category": "mobile",
+            "client": {
+                "name": "Red Médica Integral",
+                "industry": "Salud & Bienestar",
+                "logo": "/clients/red-medica.svg",
+                "website": "https://redmedicaintegral.com"
+            },
+            "shortDescription": "Aplicación móvil de telemedicina con gestión de citas, historial médico electrónico y monitoreo remoto de pacientes.",
+            "fullDescription": "HealthSync es una solución integral de telemedicina que conecta pacientes con médicos certificados. La app permite agendar consultas virtuales, acceder al historial médico electrónico, recibir prescripciones digitales y monitorear signos vitales a través de dispositivos wearables integrados.",
+            "images": {
+                "cover": "/projects/healthsync-cover.jpg",
+                "gallery": [
+                    "/projects/healthsync-1.jpg",
+                    "/projects/healthsync-2.jpg",
+                    "/projects/healthsync-3.jpg"
+                ]
+            },
+            "technologies": [
+                "React Native",
+                "Node.js",
+                "MongoDB",
+                "WebRTC",
+                "AWS",
+                "FHIR API",
+                "HealthKit"
+            ],
+            "features": [
+                "Videoconsultas HD con baja latencia",
+                "Integración con wearables (Apple Watch, Fitbit)",
+                "Historial médico electrónico (HME)",
+                "Prescripciones digitales verificadas",
+                "Chat encriptado con médicos"
+            ],
+            "metrics": {
+                "downloads": "500K+",
+                "consultations": "80K/mes",
+                "rating": "4.9★",
+                "responseTime": "<30s",
+                "retention": "89%",
+                "savings": "60% costo"
+            },
+            "timeline": {
+                "duration": "10 meses",
+                "start": "Marzo 2023",
+                "end": "Enero 2024"
+            },
+            "team": {
+                "size": 6,
+                "roles": [
+                    "2 Mobile",
+                    "2 Backend",
+                    "1 UI/UX",
+                    "1 PM"
+                ]
+            },
+            "testimonial": {
+                "quote": "La app de HealthSync nos permitió expandir nuestros servicios a todo el país. La calidad técnica y la atención al detalle de Jacana Dev fueron excepcionales.",
+                "author": "Dra. Ana Gómez",
+                "role": "Directora Médica, Red Médica Integral",
+                "avatar": "/testimonials/ana-gomez.jpg"
+            },
+            "awards": [
+                "Best Health Tech App 2023"
+            ],
+            "featured": true,
+            "color": "green"
+        },
+        {
+            "id": "ecomm-galaxy",
+            "title": "Galaxy Commerce",
+            "slug": "galaxy-commerce",
+            "category": "ecommerce",
+            "client": {
+                "name": "Grupo Retail Caribbean",
+                "industry": "Retail & E-commerce",
+                "logo": "/clients/grupo-retail.svg",
+                "website": "https://gruporetail.com"
+            },
+            "shortDescription": "Marketplace multi-vendor con más de 5,000 tiendas, procesamiento de pagos integrado y logística automatizada.",
+            "fullDescription": "Galaxy Commerce es un marketplace B2B2C que conecta a más de 5,000 vendedores con millones de consumidores en el Caribe. La plataforma incluye un sistema de gestión de inventario en tiempo real, múltiples pasarelas de pago, motor de recomendaciones con IA y un dashboard analítico para vendedores.",
+            "images": {
+                "cover": "/projects/galaxy-cover.jpg",
+                "gallery": [
+                    "/projects/galaxy-1.jpg",
+                    "/projects/galaxy-2.jpg",
+                    "/projects/galaxy-3.jpg"
+                ]
+            },
+            "technologies": [
+                "Next.js",
+                "Node.js",
+                "PostgreSQL",
+                "Elasticsearch",
+                "Redis",
+                "AWS",
+                "Stripe",
+                "ML Kit"
+            ],
+            "features": [
+                "Multi-vendor con dashboard individual",
+                "Motor de recomendaciones personalizado",
+                "Gestión de inventario en tiempo real",
+                "Múltiples pasarelas de pago",
+                "Sistema de logística integrado"
+            ],
+            "metrics": {
+                "vendors": "5,000+",
+                "products": "1.2M+",
+                "monthlySales": "$8.5M",
+                "conversion": "3.2%",
+                "avgOrderValue": "$85",
+                "growth": "340%"
+            },
+            "timeline": {
+                "duration": "18 meses",
+                "start": "Junio 2022",
+                "end": "Diciembre 2023"
+            },
+            "team": {
+                "size": 10,
+                "roles": [
+                    "3 Frontend",
+                    "4 Backend",
+                    "1 DevOps",
+                    "1 UI/UX",
+                    "1 PM"
+                ]
+            },
+            "testimonial": {
+                "quote": "Galaxy Commerce revolucionó nuestro modelo de negocio. Pasamos de ser una cadena local a operar en toda la región con una plataforma escalable y robusta.",
+                "author": "Roberto Santos",
+                "role": "CEO, Grupo Retail Caribbean",
+                "avatar": "/testimonials/roberto-santos.jpg"
+            },
+            "awards": [
+                "Best E-commerce Platform LATAM 2023",
+                "Fastest Growing Marketplace"
+            ],
+            "featured": true,
+            "color": "purple"
+        },
+        {
+            "id": "ai-analytics",
+            "title": "DataMind Analytics",
+            "slug": "datamind-analytics",
+            "category": "ai",
+            "client": {
+                "name": "Consultoría Estratégica RD",
+                "industry": "Consultoría & Analytics",
+                "logo": "/clients/consultoria-rd.svg",
+                "website": "https://consultoriaestrategica.com"
+            },
+            "shortDescription": "Plataforma de business intelligence con IA predictiva para análisis de mercado y toma de decisiones estratégicas.",
+            "fullDescription": "DataMind es una plataforma de inteligencia empresarial que utiliza modelos de machine learning para predecir tendencias de mercado, analizar comportamiento del consumidor y optimizar decisiones de negocio. Incluye dashboards personalizables, alertas automáticas y reportes automatizados.",
+            "images": {
+                "cover": "/projects/datamind-cover.jpg",
+                "gallery": [
+                    "/projects/datamind-1.jpg",
+                    "/projects/datamind-2.jpg",
+                    "/projects/datamind-3.jpg"
+                ]
+            },
+            "technologies": [
+                "Python",
+                "TensorFlow",
+                "React",
+                "PostgreSQL",
+                "Apache Kafka",
+                "AWS SageMaker",
+                "dbt"
+            ],
+            "features": [
+                "Modelos predictivos personalizados",
+                "Dashboards interactivos en tiempo real",
+                "ETL automatizado desde múltiples fuentes",
+                "Alertas inteligentes configurables",
+                "API para integraciones enterprise"
+            ],
+            "metrics": {
+                "dataProcessed": "50TB+",
+                "predictions": "1M/día",
+                "accuracy": "94.5%",
+                "timeSaved": "20h/semana",
+                "insights": "15K generados",
+                "roi": "420%"
+            },
+            "timeline": {
+                "duration": "12 meses",
+                "start": "Febrero 2023",
+                "end": "Febrero 2024"
+            },
+            "team": {
+                "size": 7,
+                "roles": [
+                    "2 ML Engineers",
+                    "2 Backend",
+                    "1 Frontend",
+                    "1 Data Engineer",
+                    "1 PM"
+                ]
+            },
+            "testimonial": {
+                "quote": "DataMind nos dio una ventaja competitiva enorme. Ahora podemos anticipar tendencias del mercado antes que nadie. El ROI fue increíble.",
+                "author": "Michelle Rodríguez",
+                "role": "Directora de Estrategia, Consultoría Estratégica RD",
+                "avatar": "/testimonials/michelle-rodriguez.jpg"
+            },
+            "awards": [
+                "Best AI Implementation 2024"
+            ],
+            "featured": true,
+            "color": "pink"
+        },
+        {
+            "id": "delivery-express",
+            "title": "Express Delivery",
+            "slug": "express-delivery",
+            "category": "mobile",
+            "client": {
+                "name": "Logística Express Caribbean",
+                "industry": "Logística & Delivery",
+                "logo": "/clients/logistica-express.svg",
+                "website": "https://logisticaexpress.com"
+            },
+            "shortDescription": "App de delivery con tracking en tiempo real, optimización de rutas con IA y gestión de flotas para 3,000+ conductores.",
+            "fullDescription": "Express Delivery es una plataforma completa de logística last-mile que incluye apps para clientes, conductores y comercios. El sistema utiliza algoritmos de optimización para reducir tiempos de entrega en un 40% y permite tracking en tiempo real con notificaciones push.",
+            "images": {
+                "cover": "/projects/express-cover.jpg",
+                "gallery": [
+                    "/projects/express-1.jpg",
+                    "/projects/express-2.jpg",
+                    "/projects/express-3.jpg"
+                ]
+            },
+            "technologies": [
+                "Flutter",
+                "Node.js",
+                "MongoDB",
+                "Google Maps API",
+                "Redis",
+                "AWS",
+                "Socket.io"
+            ],
+            "features": [
+                "Tracking GPS en tiempo real",
+                "Optimización de rutas con IA",
+                "Gestión de flota completa",
+                "Pagos integrados y propinas",
+                "Notificaciones push inteligentes"
+            ],
+            "metrics": {
+                "drivers": "3,000+",
+                "deliveries": "200K/mes",
+                "avgDeliveryTime": "28 min",
+                "rating": "4.7★",
+                "coverage": "50 ciudades",
+                "efficiency": "+40%"
+            },
+            "timeline": {
+                "duration": "8 meses",
+                "start": "Mayo 2023",
+                "end": "Enero 2024"
+            },
+            "team": {
+                "size": 6,
+                "roles": [
+                    "2 Mobile",
+                    "2 Backend",
+                    "1 DevOps",
+                    "1 PM"
+                ]
+            },
+            "testimonial": {
+                "quote": "Explicar lo que Jacana Dev logró con Express Delivery es simple: transformamos nuestra operación completa y ahora somos líderes en el mercado.",
+                "author": "Luis Mejía",
+                "role": "COO, Logística Express Caribbean",
+                "avatar": "/testimonials/luis-mejia.jpg"
+            },
+            "featured": false,
+            "color": "orange"
+        },
+        {
+            "id": "learning-platform",
+            "title": "EduPro Academy",
+            "slug": "edupro-academy",
+            "category": "web",
+            "client": {
+                "name": "Ministerio de Educación",
+                "industry": "Educación & Gobierno",
+                "logo": "/clients/ministerio-educacion.svg",
+                "website": "https://educacion.gob.do"
+            },
+            "shortDescription": "Plataforma educativa online con cursos interactivos, evaluaciones adaptativas y certificaciones digitales para 500K+ estudiantes.",
+            "fullDescription": "EduPro Academy es una plataforma LMS (Learning Management System) que atiende a más de 500,000 estudiantes en toda la República Dominicana. Incluye cursos interactivos, sistema de evaluación adaptativo, gamificación, certificaciones digitales verificables y herramientas de colaboración para docentes.",
+            "images": {
+                "cover": "/projects/edupro-cover.jpg",
+                "gallery": [
+                    "/projects/edupro-1.jpg",
+                    "/projects/edupro-2.jpg",
+                    "/projects/edupro-3.jpg"
+                ]
+            },
+            "technologies": [
+                "Next.js",
+                "Node.js",
+                "PostgreSQL",
+                "Redis",
+                "AWS",
+                "WebRTC",
+                "H5P"
+            ],
+            "features": [
+                "Cursos interactivos multimedia",
+                "Evaluaciones adaptativas con IA",
+                "Certificaciones blockchain",
+                "Aulas virtuales con video",
+                "Dashboard de progreso para padres"
+            ],
+            "metrics": {
+                "students": "500K+",
+                "courses": "2,500+",
+                "completion": "78%",
+                "satisfaction": "4.6/5",
+                "hoursTaught": "5M+",
+                "schools": "850+"
+            },
+            "timeline": {
+                "duration": "16 meses",
+                "start": "Enero 2022",
+                "end": "Mayo 2023"
+            },
+            "team": {
+                "size": 9,
+                "roles": [
+                    "3 Frontend",
+                    "3 Backend",
+                    "1 DevOps",
+                    "1 UI/UX",
+                    "1 PM"
+                ]
+            },
+            "testimonial": {
+                "quote": "EduPro Academy democratizó la educación en nuestro país. Jacana Dev entendió perfectamente nuestras necesidades y entregó más de lo que esperábamos.",
+                "author": "Lic. Patricia Fernández",
+                "role": "Viceministra de Educación",
+                "avatar": "/testimonials/patricia-fernandez.jpg"
+            },
+            "awards": [
+                "Best EdTech Platform Caribbean 2023"
+            ],
+            "featured": false,
+            "color": "blue"
+        },
+        {
+            "id": "real-estate",
+            "title": "PropIntel",
+            "slug": "propintel",
+            "category": "web",
+            "client": {
+                "name": "Inmobiliaria Premium RD",
+                "industry": "Bienes Raíces",
+                "logo": "/clients/inmobiliaria-premium.svg",
+                "website": "https://inmobiliariapremium.com"
+            },
+            "shortDescription": "Plataforma inmobiliaria con tours virtuales 3D, valuación automática con IA y CRM integrado para agentes.",
+            "fullDescription": "PropIntel es una plataforma integral para el sector inmobiliario que incluye listados de propiedades con tours virtuales 360°, sistema de valuación automática basado en IA, CRM para gestión de leads y un portal para agentes con métricas de rendimiento en tiempo real.",
+            "images": {
+                "cover": "/projects/propintel-cover.jpg",
+                "gallery": [
+                    "/projects/propintel-1.jpg",
+                    "/projects/propintel-2.jpg",
+                    "/projects/propintel-3.jpg"
+                ]
+            },
+            "technologies": [
+                "React",
+                "Node.js",
+                "MongoDB",
+                "Three.js",
+                "AWS",
+                "TensorFlow",
+                "PostgreSQL"
+            ],
+            "features": [
+                "Tours virtuales 3D interactivos",
+                "Valuación automática con IA",
+                "CRM integrado para agentes",
+                "Búsqueda avanzada con filtros",
+                "Comparables de mercado en tiempo real"
+            ],
+            "metrics": {
+                "properties": "25K+",
+                "agents": "500+",
+                "sales": "$45M/año",
+                "avgTimeToSell": "45 días",
+                "leads": "15K/mes",
+                "conversion": "12%"
+            },
+            "timeline": {
+                "duration": "11 meses",
+                "start": "Abril 2023",
+                "end": "Marzo 2024"
+            },
+            "team": {
+                "size": 7,
+                "roles": [
+                    "2 Frontend",
+                    "2 Backend",
+                    "1 3D Developer",
+                    "1 UI/UX",
+                    "1 PM"
+                ]
+            },
+            "testimonial": {
+                "quote": "PropIntel nos posicionó como líderes tecnológicos en el sector. La experiencia de nuestros clientes mejoró drásticamente.",
+                "author": "Arq. Ricardo Peña",
+                "role": "CEO, Inmobiliaria Premium RD",
+                "avatar": "/testimonials/ricardo-pena.jpg"
+            },
+            "featured": false,
+            "color": "cyan"
+        },
+        {
+            "id": "restaurant-pos",
+            "title": "ChefPOS System",
+            "slug": "chefpos-system",
+            "category": "web",
+            "client": {
+                "name": "Asociación de Restaurantes RD",
+                "industry": "Restaurantes & Food Service",
+                "logo": "/clients/restaurantes-rd.svg",
+                "website": "https://restaurantesrd.com"
+            },
+            "shortDescription": "Sistema POS integral para restaurantes con gestión de mesas, inventario, reservaciones y análisis de ventas.",
+            "fullDescription": "ChefPOS es un sistema punto de venta diseñado específicamente para la industria de restaurantes. Incluye gestión de mesas y pedidos, integración con plataformas de delivery, control de inventario en tiempo real, reservaciones online y análisis avanzado de ventas y márgenes.",
+            "images": {
+                "cover": "/projects/chefpos-cover.jpg",
+                "gallery": [
+                    "/projects/chefpos-1.jpg",
+                    "/projects/chefpos-2.jpg",
+                    "/projects/chefpos-3.jpg"
+                ]
+            },
+            "technologies": [
+                "React",
+                "Node.js",
+                "PostgreSQL",
+                "Redis",
+                "AWS",
+                "Socket.io",
+                "Stripe"
+            ],
+            "features": [
+                "Gestión de mesas visual",
+                "Integración UberEats, DoorDash",
+                "Control de inventario automático",
+                "Reservaciones online",
+                "Reportes y análisis de ventas"
+            ],
+            "metrics": {
+                "restaurants": "800+",
+                "ordersProcessed": "2M/mes",
+                "revenue": "$12M procesado",
+                "avgServiceTime": "-25%",
+                "customerSatisfaction": "4.5/5",
+                "efficiency": "+35%"
+            },
+            "timeline": {
+                "duration": "9 meses",
+                "start": "Julio 2023",
+                "end": "Abril 2024"
+            },
+            "team": {
+                "size": 5,
+                "roles": [
+                    "2 Frontend",
+                    "2 Backend",
+                    "1 PM"
+                ]
+            },
+            "testimonial": {
+                "quote": "ChefPOS transformó la operación de nuestros restaurantes. La eficiencia mejoró notablemente y nuestros clientes están más satisfechos.",
+                "author": "Chef María Santos",
+                "role": "Presidenta, Asociación de Restaurantes RD",
+                "avatar": "/testimonials/maria-santos.jpg"
+            },
+            "featured": false,
+            "color": "orange"
+        },
+        {
+            "id": "chatbot-ai",
+            "title": "Asistente Virtual Pro",
+            "slug": "asistente-virtual-pro",
+            "category": "ai",
+            "client": {
+                "name": "Telco Dominicana",
+                "industry": "Telecomunicaciones",
+                "logo": "/clients/telco-dom.svg",
+                "website": "https://telcodominicana.com"
+            },
+            "shortDescription": "Chatbot con IA para atención al cliente que maneja 80% de consultas automáticamente con satisfaction del 92%.",
+            "fullDescription": "Desarrollamos un asistente virtual impulsado por GPT-4 y modelos propios entrenados con datos específicos de telecomunicaciones. El chatbot maneja consultas técnicas, ventas, facturación y soporte técnico, escalando automáticamente a agentes humanos cuando es necesario.",
+            "images": {
+                "cover": "/projects/chatbot-cover.jpg",
+                "gallery": [
+                    "/projects/chatbot-1.jpg",
+                    "/projects/chatbot-2.jpg",
+                    "/projects/chatbot-3.jpg"
+                ]
+            },
+            "technologies": [
+                "Python",
+                "LangChain",
+                "OpenAI API",
+                "Node.js",
+                "PostgreSQL",
+                "AWS",
+                "Redis"
+            ],
+            "features": [
+                "Procesamiento de lenguaje natural avanzado",
+                "Integración omnicanal (Web, WhatsApp, App)",
+                "Escalamiento inteligente a humanos",
+                "Análisis de sentimiento en tiempo real",
+                "Base de conocimiento auto-actualizable"
+            ],
+            "metrics": {
+                "automation": "80%",
+                "satisfaction": "92%",
+                "avgResponse": "<2s",
+                "queriesHandled": "500K/mes",
+                "costReduction": "60%",
+                "availability": "24/7"
+            },
+            "timeline": {
+                "duration": "6 meses",
+                "start": "Septiembre 2023",
+                "end": "Marzo 2024"
+            },
+            "team": {
+                "size": 4,
+                "roles": [
+                    "2 ML Engineers",
+                    "1 Backend",
+                    "1 PM"
+                ]
+            },
+            "testimonial": {
+                "quote": "El asistente virtual redujo nuestros costos de soporte en un 60% mientras mejoraba la satisfacción del cliente. Una inversión que valió cada peso.",
+                "author": "Ing. Pedro Almonte",
+                "role": "Director de Tecnología, Telco Dominicana",
+                "avatar": "/testimonials/pedro-almonte.jpg"
+            },
+            "awards": [
+                "Best AI Customer Service 2024"
+            ],
+            "featured": false,
+            "color": "pink"
+        },
+        {
+            "id": "travel-booking",
+            "title": "Caribbean Trips",
+            "slug": "caribbean-trips",
+            "category": "ecommerce",
+            "client": {
+                "name": "Turismo Caribbean Group",
+                "industry": "Turismo & Viajes",
+                "logo": "/clients/turismo-caribbean.svg",
+                "website": "https://caribbeantripsgroup.com"
+            },
+            "shortDescription": "Plataforma de reservaciones turísticas con paquetes personalizados, pagos flexibles y experiencias únicas en el Caribe.",
+            "fullDescription": "Caribbean Trips es una plataforma completa para la reserva de viajes turísticos que incluye vuelos, hoteles, actividades y paquetes personalizados. El sistema utiliza IA para recomendar experiencias basadas en preferencias del usuario y ofrece planes de pago flexibles.",
+            "images": {
+                "cover": "/projects/caribbean-cover.jpg",
+                "gallery": [
+                    "/projects/caribbean-1.jpg",
+                    "/projects/caribbean-2.jpg",
+                    "/projects/caribbean-3.jpg"
+                ]
+            },
+            "technologies": [
+                "Next.js",
+                "Node.js",
+                "PostgreSQL",
+                "Amadeus API",
+                "Stripe",
+                "AWS",
+                "Redis"
+            ],
+            "features": [
+                "Búsqueda de vuelos y hoteles",
+                "Paquetes personalizados con IA",
+                "Pagos en cuotas sin intereses",
+                "Reviews y ratings verificados",
+                "App móvil complementaria"
+            ],
+            "metrics": {
+                "bookings": "50K/año",
+                "destinations": "25 países",
+                "partners": "500+ hoteles",
+                "revenue": "$15M/año",
+                "nps": "72",
+                "repeat": "45%"
+            },
+            "timeline": {
+                "duration": "10 meses",
+                "start": "Octubre 2022",
+                "end": "Agosto 2023"
+            },
+            "team": {
+                "size": 6,
+                "roles": [
+                    "2 Frontend",
+                    "2 Backend",
+                    "1 DevOps",
+                    "1 PM"
+                ]
+            },
+            "testimonial": {
+                "quote": "Caribbean Trips nos permitió competir con los grandes players del turismo. La plataforma es robusta y la experiencia de usuario es excepcional.",
+                "author": "José Ramírez",
+                "role": "CEO, Turismo Caribbean Group",
+                "avatar": "/testimonials/jose-ramirez.jpg"
+            },
+            "featured": false,
+            "color": "purple"
+        },
+        {
+            "id": "fitness-app",
+            "title": "FitLife Pro",
+            "slug": "fitlife-pro",
+            "category": "mobile",
+            "client": {
+                "name": "Cadena Fitness Nacional",
+                "industry": "Fitness & Salud",
+                "logo": "/clients/fitness-nacional.svg",
+                "website": "https://cadenafitness.com"
+            },
+            "shortDescription": "App de fitness con rutinas personalizadas, tracking de progreso y comunidad social para 100K+ usuarios activos.",
+            "fullDescription": "FitLife Pro es una aplicación integral de fitness que ofrece rutinas personalizadas basadas en objetivos del usuario, tracking de progreso con IA, integración con wearables, challenges sociales y una comunidad activa de más de 100,000 usuarios.",
+            "images": {
+                "cover": "/projects/fitlife-cover.jpg",
+                "gallery": [
+                    "/projects/fitlife-1.jpg",
+                    "/projects/fitlife-2.jpg",
+                    "/projects/fitlife-3.jpg"
+                ]
+            },
+            "technologies": [
+                "React Native",
+                "Node.js",
+                "MongoDB",
+                "TensorFlow Lite",
+                "AWS",
+                "HealthKit",
+                "Google Fit"
+            ],
+            "features": [
+                "Rutinas personalizadas con IA",
+                "Tracking de progreso visual",
+                "Integración con wearables",
+                "Challenges y leaderboards",
+                "Comunidad social activa"
+            ],
+            "metrics": {
+                "users": "100K+",
+                "activeUsers": "65K",
+                "workouts": "2M completados",
+                "retention": "72%",
+                "rating": "4.8★",
+                "premium": "25%"
+            },
+            "timeline": {
+                "duration": "7 meses",
+                "start": "Junio 2023",
+                "end": "Enero 2024"
+            },
+            "team": {
+                "size": 5,
+                "roles": [
+                    "2 Mobile",
+                    "1 Backend",
+                    "1 UI/UX",
+                    "1 PM"
+                ]
+            },
+            "testimonial": {
+                "quote": "FitLife Pro transformó nuestra relación con los miembros. Ahora tenemos una comunidad digital vibrante y nuestros usuarios están más comprometidos.",
+                "author": "Carolina Hernández",
+                "role": "Directora de Marketing, Cadena Fitness Nacional",
+                "avatar": "/testimonials/carolina-hernandez.jpg"
+            },
+            "featured": false,
+            "color": "green"
+        },
+        {
+            "id": "hr-platform",
+            "title": "TalentHub HR",
+            "slug": "talenthub-hr",
+            "category": "web",
+            "client": {
+                "name": "Grupo Empresarial Caribbean",
+                "industry": "Recursos Humanos",
+                "logo": "/clients/grupo-empresarial.svg",
+                "website": "https://grupoempresarial.com"
+            },
+            "shortDescription": "Plataforma HR con reclutamiento ATS, gestión de nómina, evaluaciones de desempeño y portal del empleado.",
+            "fullDescription": "TalentHub HR es una solución completa de recursos humanos que incluye sistema ATS para reclutamiento, gestión de nómina y beneficios, evaluaciones de desempeño 360°, portal de autoservicio para empleados y analytics avanzados para toma de decisiones.",
+            "images": {
+                "cover": "/projects/talenthub-cover.jpg",
+                "gallery": [
+                    "/projects/talenthub-1.jpg",
+                    "/projects/talenthub-2.jpg",
+                    "/projects/talenthub-3.jpg"
+                ]
+            },
+            "technologies": [
+                "React",
+                "Node.js",
+                "PostgreSQL",
+                "AWS",
+                "Redis",
+                "BambooHR API",
+                "Stripe"
+            ],
+            "features": [
+                "ATS con screening automático",
+                "Gestión de nómina integrada",
+                "Evaluaciones 360°",
+                "Portal de autoservicio",
+                "Analytics y reportes HR"
+            ],
+            "metrics": {
+                "employees": "50K+",
+                "companies": "200+",
+                "hires": "5K/año",
+                "timeToHire": "-40%",
+                "retention": "+15%",
+                "satisfaction": "4.4/5"
+            },
+            "timeline": {
+                "duration": "12 meses",
+                "start": "Marzo 2023",
+                "end": "Marzo 2024"
+            },
+            "team": {
+                "size": 7,
+                "roles": [
+                    "2 Frontend",
+                    "3 Backend",
+                    "1 DevOps",
+                    "1 PM"
+                ]
+            },
+            "testimonial": {
+                "quote": "TalentHub HR centralizó toda nuestra operación de RRHH. El ROI fue visible desde el primer trimestre con una reducción significativa en tiempo administrativo.",
+                "author": "Lic. Daniela Cruz",
+                "role": "Directora de RRHH, Grupo Empresarial Caribbean",
+                "avatar": "/testimonials/daniela-cruz.jpg"
+            },
+            "featured": false,
+            "color": "blue"
+        }
+    ],
+    "stats": {
+        "totalProjects": "10+",
+        "clientsServed": "10+",
+        "countriesReached": "3",
+        "teamSize": "5",
+        "yearsExperience": "4+",
+        "satisfactionRate": "98%"
+    }
+}

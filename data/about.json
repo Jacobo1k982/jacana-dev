@@ -1,0 +1,277 @@
+{
+    "company": {
+        "name": "Jacana Dev",
+        "tagline": "Fullstack Studio",
+        "founded": 2024,
+        "description": "Somos un equipo apasionado de desarrolladores, diseñadores y estrategas tecnológicos comprometidos con crear soluciones digitales excepcionales. Combinamos creatividad, innovación técnica y metodologías ágiles para transformar ideas en productos digitales de alto impacto.",
+        "mission": "Impulsar la transformación digital de empresas y emprendedores a través de soluciones tecnológicas innovadoras, escalables y centradas en el usuario.",
+        "vision": "Ser el socio tecnológico de referencia para empresas que buscan excelencia digital, reconocidos por nuestra calidad técnica, creatividad y compromiso con el éxito de nuestros clientes.",
+        "location": "San Pedro, Montes de Oca, Costa Rica",
+        "website": "https://jacana-dev.com",
+        "timezone": "GMT-6"
+    },
+    "values": [
+        {
+            "id": "innovation",
+            "title": "Innovación",
+            "description": "Exploramos constantemente nuevas tecnologías y metodologías para ofrecer soluciones vanguardistas.",
+            "icon": "Sparkles",
+            "color": "cyan"
+        },
+        {
+            "id": "quality",
+            "title": "Calidad",
+            "description": "Cada línea de código escribimos con estándares de excelencia y mejores prácticas de la industria.",
+            "icon": "Award",
+            "color": "blue"
+        },
+        {
+            "id": "collaboration",
+            "title": "Colaboración",
+            "description": "Trabajamos como un verdadero equipo con nuestros clientes, integrando sus conocimientos con nuestra expertise.",
+            "icon": "Users",
+            "color": "purple"
+        },
+        {
+            "id": "transparency",
+            "title": "Transparencia",
+            "description": "Comunicación clara y honesta en cada etapa del proyecto, sin sorpresas ni costos ocultos.",
+            "icon": "Eye",
+            "color": "green"
+        },
+        {
+            "id": "commitment",
+            "title": "Compromiso",
+            "description": "Nos dedicamos completamente a cada proyecto como si fuera nuestro propio negocio.",
+            "icon": "Heart",
+            "color": "pink"
+        },
+        {
+            "id": "growth",
+            "title": "Crecimiento",
+            "description": "Fomentamos el aprendizaje continuo y la evolución profesional de nuestro equipo y clientes.",
+            "icon": "TrendingUp",
+            "color": "orange"
+        }
+    ],
+    "stats": [
+        {
+            "id": "projects",
+            "value": 10,
+            "suffix": "+",
+            "label": "Proyectos Completados",
+            "description": "Soluciones entregadas exitosamente"
+        },
+        {
+            "id": "clients",
+            "value": 10,
+            "suffix": "+",
+            "label": "Clientes Satisfechos",
+            "description": "Empresas y emprendedores"
+        },
+        {
+            "id": "years",
+            "value": 4,
+            "suffix": "+",
+            "label": "Años de Experiencia",
+            "description": "Perfeccionando nuestro craft"
+        },
+        {
+            "id": "team",
+            "value": 5,
+            "suffix": "",
+            "label": "Expertos en el Equipo",
+            "description": "Talentos especializados"
+        }
+    ],
+    "team": [
+        {
+            "id": "jacobo-gutierrez",
+            "name": "Jacobo Gutiérrez",
+            "role": "CEO & Founder",
+            "specialty": "Arquitectura de Software",
+            "bio": "Apasionado por crear soluciones tecnológicas que transformen negocios. +2 años de experiencia en desarrollo fullstack y liderazgo técnico.",
+            "avatar": "/team/juan-carlos.jpg",
+            "socials": {
+                "linkedin": "https://linkedin.com/in/",
+                "github": "https://github.com/",
+                "twitter": "https://twitter.com/",
+                "facebook": "https://facebook.com/"
+            },
+            "skills": [
+                "React",
+                "Node.js",
+                "AWS",
+                "System Design"
+            ],
+            "color": "cyan"
+        },
+        {
+            "id": "maria-garcia",
+            "name": "María García",
+            "role": "CTO",
+            "specialty": "Cloud Architecture & DevOps",
+            "bio": "Especialista en infraestructura cloud y automatización. Certificada en AWS, Azure y GCP. Experta en Kubernetes y CI/CD.",
+            "avatar": "/team/maria-garcia.jpg",
+            "socials": {
+                "linkedin": "https://linkedin.com/in/mariagarcia",
+                "github": "https://github.com/mariagarcia"
+            },
+            "skills": [
+                "AWS",
+                "Kubernetes",
+                "Terraform",
+                "Python"
+            ],
+            "color": "purple"
+        },
+        {
+            "id": "carlos-mendez",
+            "name": "Carlos Méndez",
+            "role": "Lead Frontend Developer",
+            "specialty": "React & Next.js Expert",
+            "bio": "Desarrollador frontend con pasión por crear interfaces excepcionales. Especialista en React, Next.js y animaciones web.",
+            "avatar": "/team/carlos-mendez.jpg",
+            "socials": {
+                "linkedin": "https://linkedin.com/in/carlosmendez",
+                "github": "https://github.com/carlosmendez",
+                "twitter": "https://twitter.com/carlosmendez"
+            },
+            "skills": [
+                "React",
+                "Next.js",
+                "TypeScript",
+                "Tailwind"
+            ],
+            "color": "blue"
+        },
+        {
+            "id": "ana-rodriguez",
+            "name": "Ana Rodríguez",
+            "role": "Lead Backend Developer",
+            "specialty": "APIs & Microservices",
+            "bio": "Arquitecta de backend especializada en sistemas distribuidos y APIs escalables. Experta en Node.js, Python y bases de datos.",
+            "avatar": "/team/ana-rodriguez.jpg",
+            "socials": {
+                "linkedin": "https://linkedin.com/in/anarodriguez",
+                "github": "https://github.com/anarodriguez"
+            },
+            "skills": [
+                "Node.js",
+                "Python",
+                "PostgreSQL",
+                "GraphQL"
+            ],
+            "color": "green"
+        },
+        {
+            "id": "luis-perez",
+            "name": "Luis Pérez",
+            "role": "Lead UI/UX Designer",
+            "specialty": "Product Design & User Experience",
+            "bio": "Diseñador de producto con enfoque en experiencias digitales memorables. Especialista en design systems y prototipado.",
+            "avatar": "/team/luis-perez.jpg",
+            "socials": {
+                "linkedin": "https://linkedin.com/in/luisperez",
+                "dribbble": "https://dribbble.com/luisperez"
+            },
+            "skills": [
+                "Figma",
+                "Design Systems",
+                "Prototyping",
+                "Research"
+            ],
+            "color": "pink"
+        },
+        {
+            "id": "sofia-hernandez",
+            "name": "Sofía Hernández",
+            "role": "AI/ML Engineer",
+            "specialty": "Machine Learning & LLMs",
+            "bio": "Ingeniera de IA especializada en modelos de lenguaje y machine learning. PhD en Ciencias de la Computación.",
+            "avatar": "/team/sofia-hernandez.jpg",
+            "socials": {
+                "linkedin": "https://linkedin.com/in/sofiahernandez",
+                "github": "https://github.com/sofiahernandez"
+            },
+            "skills": [
+                "PyTorch",
+                "TensorFlow",
+                "OpenAI",
+                "LangChain"
+            ],
+            "color": "orange"
+        }
+    ],
+    "timeline": [
+        {
+            "year": 2020,
+            "title": "Fundación",
+            "description": "Jacana Dev nace como un estudio de desarrollo freelance con visión de convertirse en referente tecnológico."
+        },
+        {
+            "year": 2021,
+            "title": "Primer Equipo",
+            "description": "Incorporamos los primeros miembros especializados y establecemos metodologías ágiles."
+        },
+        {
+            "year": 2022,
+            "title": "Expansión Internacional",
+            "description": "Comenzamos a servir clientes en Estados Unidos, Canadá y Europa."
+        },
+        {
+            "year": 2023,
+            "title": "Especialización en IA",
+            "description": "Creamos el departamento de IA/ML para ofrecer soluciones de vanguardia."
+        },
+        {
+            "year": 2024,
+            "title": "Crecimiento Exponencial",
+            "description": "Alcanzamos más de 150 proyectos entregados y expandimos el equipo a 15 especialistas."
+        }
+    ],
+    "process": [
+        {
+            "step": 1,
+            "title": "Discovery",
+            "description": "Entendemos tu negocio, objetivos y desafíos técnicos.",
+            "icon": "Search",
+            "duration": "1-2 semanas"
+        },
+        {
+            "step": 2,
+            "title": "Planificación",
+            "description": "Diseñamos la arquitectura y roadmap del proyecto.",
+            "icon": "ClipboardList",
+            "duration": "1-2 semanas"
+        },
+        {
+            "step": 3,
+            "title": "Desarrollo",
+            "description": "Construimos con sprints ágiles y entregas continuas.",
+            "icon": "Code",
+            "duration": "Variable"
+        },
+        {
+            "step": 4,
+            "title": "QA & Testing",
+            "description": "Validamos calidad con tests automatizados y manuales.",
+            "icon": "CheckCircle",
+            "duration": "Continuo"
+        },
+        {
+            "step": 5,
+            "title": "Deployment",
+            "description": "Desplegamos en producción con zero-downtime.",
+            "icon": "Rocket",
+            "duration": "1-2 días"
+        },
+        {
+            "step": 6,
+            "title": "Soporte",
+            "description": "Acompañamiento post-lanzamiento y mantenimiento.",
+            "icon": "HeadphonesIcon",
+            "duration": "Continuo"
+        }
+    ]
+}

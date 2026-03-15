@@ -1,0 +1,478 @@
+{
+    "project-ecommerce": {
+        "id": "project-ecommerce",
+        "title": "E-Commerce Premium",
+        "subtitle": "Plataforma de Comercio Electrónico Escalable",
+        "category": "Proyectos",
+        "description": "Plataforma de comercio electrónico con +50,000 productos y pagos integrados.",
+        "longDescription": "Desarrollamos una plataforma de e-commerce completa para TechStore Inc., capaz de manejar más de 50,000 productos con búsqueda avanzada, filtrado dinámico y un proceso de checkout optimizado. La plataforma incluye un panel de administración completo, gestión de inventario en tiempo real y analíticas avanzadas.",
+        "icon": "ShoppingCart",
+        "color": "cyan",
+        "image": "/projects/ecommerce.jpg",
+        "client": "TechStore Inc.",
+        "industry": "Retail / E-Commerce",
+        "year": 2024,
+        "duration": "6 meses",
+        "team": "6 desarrolladores",
+        "features": [
+            {
+                "name": "Catálogo de 50K+ productos",
+                "description": "Sistema de gestión de productos con variantes, atributos y búsqueda avanzada."
+            },
+            {
+                "name": "Checkout optimizado",
+                "description": "Proceso de compra en 3 pasos con tasa de conversión del 12%."
+            },
+            {
+                "name": "Pagos integrados",
+                "description": "Stripe, PayPal y pagos locales con 3D Secure."
+            },
+            {
+                "name": "Panel administrativo",
+                "description": "Dashboard completo con métricas en tiempo real y gestión de pedidos."
+            },
+            {
+                "name": "Inventario en tiempo real",
+                "description": "Sincronización con ERP y alertas de stock bajo."
+            },
+            {
+                "name": "SEO optimizado",
+                "description": "SSR, meta tags dinámicos y sitemap automático."
+            }
+        ],
+        "technologies": [
+            {
+                "name": "Next.js 14",
+                "category": "Frontend",
+                "icon": "code"
+            },
+            {
+                "name": "PostgreSQL",
+                "category": "Database",
+                "icon": "database"
+            },
+            {
+                "name": "Stripe",
+                "category": "Payments",
+                "icon": "credit-card"
+            },
+            {
+                "name": "Redis",
+                "category": "Cache",
+                "icon": "server"
+            },
+            {
+                "name": "Elasticsearch",
+                "category": "Search",
+                "icon": "search"
+            },
+            {
+                "name": "AWS",
+                "category": "Cloud",
+                "icon": "cloud"
+            },
+            {
+                "name": "Prisma",
+                "category": "ORM",
+                "icon": "layers"
+            },
+            {
+                "name": "Tailwind CSS",
+                "category": "Styling",
+                "icon": "palette"
+            }
+        ],
+        "architecture": {
+            "frontend": "Next.js 14 con App Router, Server Components y Streaming",
+            "backend": "API Routes de Next.js + Servicios en Go para procesamiento pesado",
+            "database": "PostgreSQL con réplica de lectura + Redis para caché",
+            "search": "Elasticsearch para búsqueda full-text y filtros",
+            "storage": "S3 para assets + CloudFront CDN",
+            "payments": "Stripe Connect para marketplace multi-vendedor"
+        },
+        "stats": {
+            "users": "50K+",
+            "revenue": "$2M+",
+            "uptime": "99.9%",
+            "pageSpeed": "95/100",
+            "conversion": "12%",
+            "products": "50,000+"
+        },
+        "highlights": [
+            "Reducción del tiempo de carga en 60% con Server Components",
+            "Tasa de conversión incrementada de 6% a 12%",
+            "Soporta 10,000 usuarios concurrentes",
+            "Tiempo medio de checkout: 45 segundos"
+        ],
+        "testimonials": [
+            {
+                "quote": "La plataforma superó todas nuestras expectativas. Las ventas aumentaron 150% en los primeros 3 meses.",
+                "author": "Juan Pérez",
+                "role": "CEO, TechStore Inc.",
+                "avatar": "/testimonials/juan.jpg"
+            }
+        ],
+        "screenshots": [
+            "/projects/ecommerce-1.jpg",
+            "/projects/ecommerce-2.jpg",
+            "/projects/ecommerce-3.jpg"
+        ]
+    },
+    "project-fintech": {
+        "id": "project-fintech",
+        "title": "App Fintech",
+        "subtitle": "Gestión Financiera con Inteligencia Artificial",
+        "category": "Proyectos",
+        "description": "Aplicación de gestión financiera con IA para análisis de gastos e inversiones.",
+        "longDescription": "FinanceApp nos encargó desarrollar una aplicación móvil que revolucionara la forma en que los usuarios manejan sus finanzas personales. La app utiliza machine learning para categorizar gastos automáticamente, predecir flujos de efectivo y ofrecer recomendaciones personalizadas de inversión.",
+        "icon": "Wallet",
+        "color": "blue",
+        "image": "/projects/fintech.jpg",
+        "client": "FinanceApp",
+        "industry": "Fintech / Banca",
+        "year": 2024,
+        "duration": "8 meses",
+        "team": "8 desarrolladores",
+        "features": [
+            {
+                "name": "Categorización automática",
+                "description": "IA que categoriza el 95% de las transacciones correctamente."
+            },
+            {
+                "name": "Análisis de gastos",
+                "description": "Gráficos interactivos y alertas de gasto excesivo."
+            },
+            {
+                "name": "Predicción de flujo",
+                "description": "Proyecciones de ingresos y gastos a 30, 60 y 90 días."
+            },
+            {
+                "name": "Inversiones",
+                "description": "Recomendaciones personalizadas basadas en perfil de riesgo."
+            },
+            {
+                "name": "Multi-cuenta",
+                "description": "Conexión con +10,000 instituciones financieras vía Plaid."
+            },
+            {
+                "name": "Seguridad",
+                "description": "Biometría, 2FA y encriptación de grado militar."
+            }
+        ],
+        "technologies": [
+            {
+                "name": "React Native",
+                "category": "Mobile",
+                "icon": "smartphone"
+            },
+            {
+                "name": "Python",
+                "category": "Backend",
+                "icon": "code"
+            },
+            {
+                "name": "TensorFlow",
+                "category": "ML",
+                "icon": "brain"
+            },
+            {
+                "name": "PostgreSQL",
+                "category": "Database",
+                "icon": "database"
+            },
+            {
+                "name": "AWS Lambda",
+                "category": "Serverless",
+                "icon": "cloud"
+            },
+            {
+                "name": "Plaid API",
+                "category": "Banking",
+                "icon": "building"
+            },
+            {
+                "name": "Redis",
+                "category": "Cache",
+                "icon": "server"
+            },
+            {
+                "name": "GraphQL",
+                "category": "API",
+                "icon": "share-2"
+            }
+        ],
+        "architecture": {
+            "mobile": "React Native con Redux y navegación optimizada",
+            "backend": "FastAPI con arquitectura de microservicios en AWS Lambda",
+            "database": "PostgreSQL con RDS + ElastiCache Redis",
+            "ml": "Modelos TensorFlow entrenados con SageMaker",
+            "security": "AWS Cognito + WAF + KMS para encriptación",
+            "banking": "Integración Plaid con webhooks en tiempo real"
+        },
+        "stats": {
+            "users": "100K+",
+            "transactions": "1M+",
+            "rating": "4.9",
+            "retention": "85%",
+            "dailyActive": "45K",
+            "transactionsProcessed": "$50M+"
+        },
+        "highlights": [
+            "4.9 estrellas en App Store y Google Play",
+            "Procesa más de $50M en transacciones mensuales",
+            "85% de retención a 30 días",
+            "Modelo ML con 95% de accuracy en categorización"
+        ],
+        "testimonials": [
+            {
+                "quote": "La app ha transformado cómo miles de personas manejan sus finanzas. El equipo entendió perfectamente nuestra visión.",
+                "author": "Laura Gómez",
+                "role": "Fundadora, FinanceApp",
+                "avatar": "/testimonials/laura.jpg"
+            }
+        ],
+        "screenshots": [
+            "/projects/fintech-1.jpg",
+            "/projects/fintech-2.jpg",
+            "/projects/fintech-3.jpg"
+        ]
+    },
+    "project-healthcare": {
+        "id": "project-healthcare",
+        "title": "Plataforma Salud",
+        "subtitle": "Telemedicina y Gestión Médica",
+        "category": "Proyectos",
+        "description": "Sistema de telemedicina con videollamadas y gestión de expedientes médicos.",
+        "longDescription": "MediConnect necesitaba una plataforma de telemedicina que cumpliera con los más altos estándares de seguridad y privacidad (HIPAA). Desarrollamos un sistema completo que permite a pacientes agendar consultas, tener videollamadas con médicos, recibir recetas digitales y gestionar su historial médico de forma segura.",
+        "icon": "Heart",
+        "color": "pink",
+        "image": "/projects/healthcare.jpg",
+        "client": "MediConnect",
+        "industry": "Salud / Telemedicina",
+        "year": 2023,
+        "duration": "10 meses",
+        "team": "10 desarrolladores",
+        "features": [
+            {
+                "name": "Videollamadas HD",
+                "description": "WebRTC con calidad 1080p y baja latencia."
+            },
+            {
+                "name": "Expedientes electrónicos",
+                "description": "Historial médico completo con acceso controlado."
+            },
+            {
+                "name": "Agenda inteligente",
+                "description": "Scheduling con recordatorios y zonas horarias."
+            },
+            {
+                "name": "Recetas digitales",
+                "description": "Prescripciones digitales firmadas electrónicamente."
+            },
+            {
+                "name": "Pagos integrados",
+                "description": "Procesamiento de copagos y facturación a seguros."
+            },
+            {
+                "name": "HIPAA Compliance",
+                "description": "Cumplimiento total con regulaciones de salud de EE.UU."
+            }
+        ],
+        "technologies": [
+            {
+                "name": "Next.js",
+                "category": "Frontend",
+                "icon": "code"
+            },
+            {
+                "name": "WebRTC",
+                "category": "Video",
+                "icon": "video"
+            },
+            {
+                "name": "Node.js",
+                "category": "Backend",
+                "icon": "server"
+            },
+            {
+                "name": "MongoDB",
+                "category": "Database",
+                "icon": "database"
+            },
+            {
+                "name": "AWS",
+                "category": "Cloud",
+                "icon": "cloud"
+            },
+            {
+                "name": "Twilio",
+                "category": "Comms",
+                "icon": "phone"
+            },
+            {
+                "name": "S3",
+                "category": "Storage",
+                "icon": "hard-drive"
+            },
+            {
+                "name": "KMS",
+                "category": "Security",
+                "icon": "shield"
+            }
+        ],
+        "architecture": {
+            "frontend": "Next.js con streaming y SSR para optimización SEO",
+            "video": "WebRTC vía Twilio Programmable Video",
+            "backend": "Node.js con Express, microservicios en ECS",
+            "database": "MongoDB Atlas con encriptación at-rest",
+            "storage": "S3 con encriptación KMS para documentos médicos",
+            "compliance": "AWS Artifact + HIPAA BAA configurado"
+        },
+        "stats": {
+            "patients": "30K+",
+            "doctors": "500+",
+            "consultations": "100K+",
+            "satisfaction": "4.8/5",
+            "uptime": "99.95%",
+            "avgWaitTime": "< 2 min"
+        },
+        "highlights": [
+            "100K+ consultas virtuales realizadas",
+            "Cumplimiento HIPAA certificado",
+            "Tiempo promedio de espera menor a 2 minutos",
+            "Disponibilidad 99.95% en el último año"
+        ],
+        "testimonials": [
+            {
+                "quote": "La plataforma nos permitió escalar nuestra práctica médica a todo el país sin perder la calidad de atención.",
+                "author": "Dr. Miguel Ángel Ruiz",
+                "role": "Director Médico, MediConnect",
+                "avatar": "/testimonials/miguel.jpg"
+            }
+        ],
+        "screenshots": [
+            "/projects/healthcare-1.jpg",
+            "/projects/healthcare-2.jpg",
+            "/projects/healthcare-3.jpg"
+        ]
+    },
+    "project-logistics": {
+        "id": "project-logistics",
+        "title": "Sistema Logística",
+        "subtitle": "Seguimiento en Tiempo Real con IA",
+        "category": "Proyectos",
+        "description": "Plataforma de seguimiento de envíos en tiempo real con IA predictiva.",
+        "longDescription": "LogiTrack buscaba modernizar su operación logística con una plataforma que ofreciera visibilidad total de los envíos. Desarrollamos un sistema que integra IoT sensors, GPS tracking y algoritmos de machine learning para predecir tiempos de entrega, optimizar rutas y alertar sobre posibles retrasos antes de que ocurran.",
+        "icon": "Truck",
+        "color": "orange",
+        "image": "/projects/logistics.jpg",
+        "client": "LogiTrack",
+        "industry": "Logística / Supply Chain",
+        "year": 2024,
+        "duration": "7 meses",
+        "team": "7 desarrolladores",
+        "features": [
+            {
+                "name": "Tracking en tiempo real",
+                "description": "Ubicación GPS actualizada cada 5 segundos."
+            },
+            {
+                "name": "Predicción de ETA",
+                "description": "ML con accuracy del 95% en estimación de llegada."
+            },
+            {
+                "name": "Optimización de rutas",
+                "description": "Algoritmos que reducen km recorridos en 30%."
+            },
+            {
+                "name": "Alertas proactivas",
+                "description": "Notificaciones de retrasos antes de que ocurran."
+            },
+            {
+                "name": "Dashboard analítico",
+                "description": "Métricas de rendimiento y KPIs en tiempo real."
+            },
+            {
+                "name": "Integración IoT",
+                "description": "Sensores de temperatura, humedad y movimiento."
+            }
+        ],
+        "technologies": [
+            {
+                "name": "Vue.js",
+                "category": "Frontend",
+                "icon": "code"
+            },
+            {
+                "name": "Go",
+                "category": "Backend",
+                "icon": "server"
+            },
+            {
+                "name": "PostgreSQL",
+                "category": "Database",
+                "icon": "database"
+            },
+            {
+                "name": "Redis",
+                "category": "Cache",
+                "icon": "layers"
+            },
+            {
+                "name": "Google Maps",
+                "category": "Maps",
+                "icon": "map"
+            },
+            {
+                "name": "IoT Core",
+                "category": "IoT",
+                "icon": "radio"
+            },
+            {
+                "name": "Kafka",
+                "category": "Streaming",
+                "icon": "activity"
+            },
+            {
+                "name": "TensorFlow",
+                "category": "ML",
+                "icon": "brain"
+            }
+        ],
+        "architecture": {
+            "frontend": "Vue 3 con Vite y Pinia para state management",
+            "backend": "Go con arquitectura de eventos en Kafka",
+            "database": "PostgreSQL + TimescaleDB para datos temporales",
+            "cache": "Redis para tracking en tiempo real",
+            "maps": "Google Maps Platform con Directions API",
+            "iot": "AWS IoT Core para ingest de sensores"
+        },
+        "stats": {
+            "shipments": "500K+",
+            "routes": "1,000+",
+            "efficiency": "+40%",
+            "onTime": "97%",
+            "costReduction": "25%",
+            "dailyTracking": "1M+"
+        },
+        "highlights": [
+            "Más de 500,000 envíos rastreados mensualmente",
+            "Mejora del 40% en eficiencia de rutas",
+            "97% de entregas a tiempo (vs 82% antes)",
+            "Reducción de 25% en costos de combustible"
+        ],
+        "testimonials": [
+            {
+                "quote": "El sistema transformó nuestra operación. Ahora sabemos exactamente dónde está cada paquete y cuándo llegará.",
+                "author": "Pedro Hernández",
+                "role": "COO, LogiTrack",
+                "avatar": "/testimonials/pedro.jpg"
+            }
+        ],
+        "screenshots": [
+            "/projects/logistics-1.jpg",
+            "/projects/logistics-2.jpg",
+            "/projects/logistics-3.jpg"
+        ]
+    }
+}

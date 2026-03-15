@@ -1,26 +1,289 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================
+   JACANA DEVELOPERS - TEMA FUTURISTA
+   Paleta basada en el logo Jacana
+   ============================================ */
+
+:root {
+  --radius: 0.625rem;
+
+  /* Colores Jacana */
+  --jacana-primary: #005A9C;
+  --jacana-primary-light: #00A0E4;
+  --jacana-primary-dark: #003D6B;
+
+  /* Tema oscuro por defecto (estilo GitHub futurista) */
+  --background: #0D1117;
+  --foreground: #E6EDF3;
+  --card: #161B22;
+  --card-foreground: #E6EDF3;
+  --popover: #161B22;
+  --popover-foreground: #E6EDF3;
+  --primary: #00A0E4;
+  --primary-foreground: #000000;
+  --secondary: #21262D;
+  --secondary-foreground: #E6EDF3;
+  --muted: #21262D;
+  --muted-foreground: #8B949E;
+  --accent: #005A9C;
+  --accent-foreground: #E6EDF3;
+  --destructive: #F85149;
+  --border: #30363D;
+  --input: #21262D;
+  --ring: #00A0E4;
+
+  /* Chart colors - Jacana palette */
+  --chart-1: #00A0E4;
+  --chart-2: #005A9C;
+  --chart-3: #003D6B;
+  --chart-4: #3498DB;
+  --chart-5: #0066CC;
+
+  /* Sidebar */
+  --sidebar: #0D1117;
+  --sidebar-foreground: #E6EDF3;
+  --sidebar-primary: #00A0E4;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #21262D;
+  --sidebar-accent-foreground: #E6EDF3;
+  --sidebar-border: #30363D;
+  --sidebar-ring: #00A0E4;
+}
+
+.dark {
+  --background: #0D1117;
+  --foreground: #E6EDF3;
+  --card: #161B22;
+  --card-foreground: #E6EDF3;
+  --popover: #161B22;
+  --popover-foreground: #E6EDF3;
+  --primary: #00A0E4;
+  --primary-foreground: #000000;
+  --secondary: #21262D;
+  --secondary-foreground: #E6EDF3;
+  --muted: #21262D;
+  --muted-foreground: #8B949E;
+  --accent: #005A9C;
+  --accent-foreground: #E6EDF3;
+  --destructive: #F85149;
+  --border: #30363D;
+  --input: #21262D;
+  --ring: #00A0E4;
+
+  /* Chart colors */
+  --chart-1: #00A0E4;
+  --chart-2: #005A9C;
+  --chart-3: #003D6B;
+  --chart-4: #3498DB;
+  --chart-5: #0066CC;
+
+  /* Sidebar */
+  --sidebar: #0D1117;
+  --sidebar-foreground: #E6EDF3;
+  --sidebar-primary: #00A0E4;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #21262D;
+  --sidebar-accent-foreground: #E6EDF3;
+  --sidebar-border: #30363D;
+  --sidebar-ring: #00A0E4;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================
+   CUSTOM SCROLLBAR - Estilo Jacana
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0D1117;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #005A9C, #00A0E4);
+  border-radius: 4px;
+  border: 2px solid #0D1117;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00A0E4, #005A9C);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #005A9C #0D1117;
+}
+
+/* ============================================
+   SELECTION - Estilo Jacana
+   ============================================ */
+
+::selection {
+  background: rgba(0, 160, 228, 0.3);
+  color: #E6EDF3;
+}
+
+::-moz-selection {
+  background: rgba(0, 160, 228, 0.3);
+  color: #E6EDF3;
+}
+
+/* ============================================
+   FOCUS STYLES - Accesibilidad
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid #00A0E4;
+  outline-offset: 2px;
+}
+
+/* ============================================
+   ANIMATIONS - Suaves y elegantes
+   ============================================ */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(0, 160, 228, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 30px rgba(0, 160, 228, 0.5);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+  background-size: 200% 100%;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s infinite ease-in-out;
+}
+
+.animate-float {
+  animation: float 3s infinite ease-in-out;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.text-gradient-jacana {
+  background: linear-gradient(135deg, #005A9C, #00A0E4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gradient-jacana {
+  background: linear-gradient(135deg, #005A9C, #00A0E4);
+}
+
+.glow-jacana {
+  box-shadow: 0 0 20px rgba(0, 160, 228, 0.3);
+}
+
+.glow-jacana-intense {
+  box-shadow: 0 0 40px rgba(0, 160, 228, 0.5);
+}
+
+.border-glow-jacana {
+  border: 1px solid rgba(0, 160, 228, 0.3);
+  box-shadow: 0 0 15px rgba(0, 160, 228, 0.15);
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(22, 27, 34, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Cyber grid background */
+.cyber-grid {
+  background-image:
+    linear-gradient(rgba(0, 160, 228, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 160, 228, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
 }

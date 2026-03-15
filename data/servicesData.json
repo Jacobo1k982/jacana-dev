@@ -1,0 +1,402 @@
+[
+    {
+        "id": "frontend",
+        "title": "Desarrollo Frontend",
+        "shortDescription": "React, Vue, Angular, Next.js",
+        "description": "Creamos interfaces de usuario modernas, responsivas y de alto rendimiento utilizando las tecnologías frontend más avanzadas del mercado.",
+        "icon": "Monitor",
+        "color": "cyan",
+        "features": [
+            "Aplicaciones SPA y SSR",
+            "Diseño responsivo y adaptable",
+            "Optimización de rendimiento",
+            "Accesibilidad WCAG",
+            "PWA (Progressive Web Apps)",
+            "Micro-frontends"
+        ],
+        "technologies": [
+            {
+                "name": "React",
+                "level": 95
+            },
+            {
+                "name": "Next.js",
+                "level": 90
+            },
+            {
+                "name": "Vue.js",
+                "level": 85
+            },
+            {
+                "name": "Angular",
+                "level": 80
+            },
+            {
+                "name": "TypeScript",
+                "level": 95
+            },
+            {
+                "name": "Tailwind CSS",
+                "level": 90
+            }
+        ],
+        "benefits": [
+            "Experiencia de usuario excepcional",
+            "Carga rápida y optimizada",
+            "SEO mejorado con SSR",
+            "Mantenibilidad a largo plazo"
+        ],
+        "projects": 45,
+        "satisfaction": 98
+    },
+    {
+        "id": "backend",
+        "title": "Desarrollo Backend",
+        "shortDescription": "Node.js, Python, Java, Go",
+        "description": "Construimos arquitecturas backend robustas, escalables y seguras que impulsan aplicaciones de misión crítica.",
+        "icon": "Server",
+        "color": "emerald",
+        "features": [
+            "APIs RESTful y GraphQL",
+            "Arquitectura de microservicios",
+            "Autenticación y autorización",
+            "Procesamiento de colas",
+            "WebSockets y tiempo real",
+            "Integración de terceros"
+        ],
+        "technologies": [
+            {
+                "name": "Node.js",
+                "level": 95
+            },
+            {
+                "name": "Python",
+                "level": 90
+            },
+            {
+                "name": "Go",
+                "level": 85
+            },
+            {
+                "name": "Java/Spring",
+                "level": 80
+            },
+            {
+                "name": "Rust",
+                "level": 70
+            },
+            {
+                "name": "GraphQL",
+                "level": 85
+            }
+        ],
+        "benefits": [
+            "Alta disponibilidad",
+            "Escalabilidad horizontal",
+            "Seguridad robusta",
+            "Rendimiento óptimo"
+        ],
+        "projects": 38,
+        "satisfaction": 97
+    },
+    {
+        "id": "mobile",
+        "title": "Aplicaciones Móviles",
+        "shortDescription": "React Native, Flutter, iOS, Android",
+        "description": "Desarrollamos aplicaciones móviles nativas y multiplataforma que ofrecen experiencias excepcionales en cualquier dispositivo.",
+        "icon": "Smartphone",
+        "color": "violet",
+        "features": [
+            "Apps nativas iOS/Android",
+            "Desarrollo multiplataforma",
+            "UI/UX móvil optimizada",
+            "Integración con hardware",
+            "Push notifications",
+            "Offline-first"
+        ],
+        "technologies": [
+            {
+                "name": "React Native",
+                "level": 95
+            },
+            {
+                "name": "Flutter",
+                "level": 90
+            },
+            {
+                "name": "Swift",
+                "level": 85
+            },
+            {
+                "name": "Kotlin",
+                "level": 85
+            },
+            {
+                "name": "Expo",
+                "level": 90
+            },
+            {
+                "name": "Firebase",
+                "level": 88
+            }
+        ],
+        "benefits": [
+            "Una base de código, múltiples plataformas",
+            "Actualizaciones instantáneas",
+            "Experiencia nativa",
+            "Time-to-market reducido"
+        ],
+        "projects": 32,
+        "satisfaction": 96
+    },
+    {
+        "id": "cloud",
+        "title": "Cloud & DevOps",
+        "shortDescription": "AWS, Azure, GCP, Docker, Kubernetes",
+        "description": "Implementamos infraestructura cloud moderna y pipelines CI/CD que automatizan y optimizan tu flujo de desarrollo.",
+        "icon": "Cloud",
+        "color": "blue",
+        "features": [
+            "Infraestructura como código",
+            "Contenedores y orquestación",
+            "CI/CD pipelines",
+            "Monitoreo y logging",
+            "Auto-escalado",
+            "Disaster recovery"
+        ],
+        "technologies": [
+            {
+                "name": "AWS",
+                "level": 95
+            },
+            {
+                "name": "Azure",
+                "level": 85
+            },
+            {
+                "name": "GCP",
+                "level": 80
+            },
+            {
+                "name": "Docker",
+                "level": 95
+            },
+            {
+                "name": "Kubernetes",
+                "level": 90
+            },
+            {
+                "name": "Terraform",
+                "level": 85
+            }
+        ],
+        "benefits": [
+            "Despliegues automáticos",
+            "Costos optimizados",
+            "Alta disponibilidad",
+            "Recuperación ante desastres"
+        ],
+        "projects": 28,
+        "satisfaction": 99
+    },
+    {
+        "id": "database",
+        "title": "Bases de Datos",
+        "shortDescription": "PostgreSQL, MongoDB, Redis, MySQL",
+        "description": "Diseñamos y optimizamos arquitecturas de datos que garantizan integridad, rendimiento y escalabilidad.",
+        "icon": "Database",
+        "color": "amber",
+        "features": [
+            "Diseño de esquemas",
+            "Optimización de queries",
+            "Replicación y sharding",
+            "Migración de datos",
+            "Backup y recuperación",
+            "Data warehousing"
+        ],
+        "technologies": [
+            {
+                "name": "PostgreSQL",
+                "level": 95
+            },
+            {
+                "name": "MongoDB",
+                "level": 90
+            },
+            {
+                "name": "Redis",
+                "level": 90
+            },
+            {
+                "name": "MySQL",
+                "level": 85
+            },
+            {
+                "name": "Elasticsearch",
+                "level": 80
+            },
+            {
+                "name": "Prisma ORM",
+                "level": 90
+            }
+        ],
+        "benefits": [
+            "Consultas ultra-rápidas",
+            "Integridad de datos",
+            "Escalabilidad horizontal",
+            "Análisis en tiempo real"
+        ],
+        "projects": 42,
+        "satisfaction": 98
+    },
+    {
+        "id": "ai",
+        "title": "Inteligencia Artificial",
+        "shortDescription": "Machine Learning, NLP, Computer Vision",
+        "description": "Implementamos soluciones de IA que automatizan procesos, extraen insights y crean experiencias inteligentes.",
+        "icon": "Brain",
+        "color": "rose",
+        "features": [
+            "Modelos de Machine Learning",
+            "Procesamiento de lenguaje natural",
+            "Visión por computadora",
+            "Chatbots y asistentes",
+            "Análisis predictivo",
+            "Automatización inteligente"
+        ],
+        "technologies": [
+            {
+                "name": "TensorFlow",
+                "level": 85
+            },
+            {
+                "name": "PyTorch",
+                "level": 85
+            },
+            {
+                "name": "OpenAI API",
+                "level": 95
+            },
+            {
+                "name": "LangChain",
+                "level": 90
+            },
+            {
+                "name": "Hugging Face",
+                "level": 85
+            },
+            {
+                "name": "scikit-learn",
+                "level": 90
+            }
+        ],
+        "benefits": [
+            "Automatización avanzada",
+            "Decisiones basadas en datos",
+            "Experiencias personalizadas",
+            "Ventaja competitiva"
+        ],
+        "projects": 18,
+        "satisfaction": 100
+    },
+    {
+        "id": "api",
+        "title": "APIs & Integraciones",
+        "shortDescription": "REST, GraphQL, WebSockets",
+        "description": "Diseñamos APIs robustas y realizamos integraciones seamless con sistemas externos y servicios de terceros.",
+        "icon": "Plug",
+        "color": "teal",
+        "features": [
+            "Diseño de APIs REST",
+            "APIs GraphQL",
+            "WebSockets en tiempo real",
+            "Integración de pagos",
+            "Webhooks y eventos",
+            "Documentación automática"
+        ],
+        "technologies": [
+            {
+                "name": "REST API",
+                "level": 95
+            },
+            {
+                "name": "GraphQL",
+                "level": 90
+            },
+            {
+                "name": "WebSockets",
+                "level": 90
+            },
+            {
+                "name": "gRPC",
+                "level": 75
+            },
+            {
+                "name": "OpenAPI/Swagger",
+                "level": 90
+            },
+            {
+                "name": "Webhooks",
+                "level": 95
+            }
+        ],
+        "benefits": [
+            "Integración sin fricción",
+            "Documentación clara",
+            "Seguridad robusta",
+            "Fácil mantenimiento"
+        ],
+        "projects": 35,
+        "satisfaction": 97
+    },
+    {
+        "id": "consulting",
+        "title": "Consultoría Técnica",
+        "shortDescription": "Arquitectura, Auditoría, Optimización",
+        "description": "Ofrecemos asesoría experta para ayudarte a tomar las mejores decisiones tecnológicas para tu negocio.",
+        "icon": "Users",
+        "color": "indigo",
+        "features": [
+            "Arquitectura de software",
+            "Auditoría de código",
+            "Optimización de rendimiento",
+            "Estrategia cloud",
+            "Revisión de seguridad",
+            "Capacitación técnica"
+        ],
+        "technologies": [
+            {
+                "name": "Arquitectura",
+                "level": 95
+            },
+            {
+                "name": "Code Review",
+                "level": 95
+            },
+            {
+                "name": "Performance",
+                "level": 90
+            },
+            {
+                "name": "Seguridad",
+                "level": 85
+            },
+            {
+                "name": "DevOps",
+                "level": 90
+            },
+            {
+                "name": "Scrum/Agile",
+                "level": 95
+            }
+        ],
+        "benefits": [
+            "Decisiones informadas",
+            "Reducción de riesgos",
+            "Mejora continua",
+            "Transferencia de conocimiento"
+        ],
+        "projects": 25,
+        "satisfaction": 100
+    }
+]

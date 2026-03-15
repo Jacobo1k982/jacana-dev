@@ -1,0 +1,242 @@
+[
+    {
+        "id": "frontend-service",
+        "title": "Desarrollo Frontend",
+        "category": "Servicios",
+        "description": "Creamos interfaces modernas, responsivas y con experiencias de usuario excepcionales usando las últimas tecnologías.",
+        "icon": "Monitor",
+        "color": "cyan",
+        "image": "/services/frontend.jpg",
+        "features": [
+            "React & Next.js",
+            "Vue & Nuxt",
+            "Angular",
+            "Tailwind CSS",
+            "Animaciones",
+            "PWA"
+        ],
+        "stats": {
+            "projects": 150,
+            "clients": 80,
+            "satisfaction": 98
+        },
+        "price": "Desde $2,000",
+        "popular": true
+    },
+    {
+        "id": "backend-service",
+        "title": "Desarrollo Backend",
+        "category": "Servicios",
+        "description": "APIs robustas, arquitecturas escalables y microservicios que potencian tu aplicación.",
+        "icon": "Server",
+        "color": "blue",
+        "image": "/services/backend.jpg",
+        "features": [
+            "Node.js",
+            "Python",
+            "Go",
+            "GraphQL",
+            "REST APIs",
+            "Microservicios"
+        ],
+        "stats": {
+            "projects": 120,
+            "clients": 65,
+            "satisfaction": 97
+        },
+        "price": "Desde $3,000",
+        "popular": false
+    },
+    {
+        "id": "mobile-service",
+        "title": "Apps Móviles",
+        "category": "Servicios",
+        "description": "Aplicaciones nativas y multiplataforma que llegan a millones de usuarios.",
+        "icon": "Smartphone",
+        "color": "purple",
+        "image": "/services/mobile.jpg",
+        "features": [
+            "React Native",
+            "Flutter",
+            "iOS Nativo",
+            "Android Nativo",
+            "Push Notifications",
+            "Offline First"
+        ],
+        "stats": {
+            "projects": 85,
+            "clients": 50,
+            "satisfaction": 96
+        },
+        "price": "Desde $5,000",
+        "popular": true
+    },
+    {
+        "id": "cloud-service",
+        "title": "Cloud & DevOps",
+        "category": "Servicios",
+        "description": "Infraestructura en la nube, CI/CD y monitoreo para aplicaciones de alto rendimiento.",
+        "icon": "Cloud",
+        "color": "orange",
+        "image": "/services/cloud.jpg",
+        "features": [
+            "AWS",
+            "Azure",
+            "GCP",
+            "Docker",
+            "Kubernetes",
+            "CI/CD"
+        ],
+        "stats": {
+            "projects": 70,
+            "clients": 45,
+            "satisfaction": 99
+        },
+        "price": "Desde $2,500",
+        "popular": false
+    },
+    {
+        "id": "ai-service",
+        "title": "Inteligencia Artificial",
+        "category": "Servicios",
+        "description": "Soluciones de IA que transforman datos en decisiones inteligentes.",
+        "icon": "Brain",
+        "color": "pink",
+        "image": "/services/ai.jpg",
+        "features": [
+            "Machine Learning",
+            "NLP",
+            "Computer Vision",
+            "Chatbots",
+            "Análisis Predictivo",
+            "Automatización"
+        ],
+        "stats": {
+            "projects": 45,
+            "clients": 30,
+            "satisfaction": 100
+        },
+        "price": "Desde $8,000",
+        "popular": true
+    },
+    {
+        "id": "database-service",
+        "title": "Bases de Datos",
+        "category": "Servicios",
+        "description": "Diseño, optimización y migración de bases de datos para máximo rendimiento.",
+        "icon": "Database",
+        "color": "green",
+        "image": "/services/database.jpg",
+        "features": [
+            "PostgreSQL",
+            "MongoDB",
+            "Redis",
+            "MySQL",
+            "Migraciones",
+            "Optimización"
+        ],
+        "stats": {
+            "projects": 90,
+            "clients": 55,
+            "satisfaction": 98
+        },
+        "price": "Desde $1,500",
+        "popular": false
+    },
+    {
+        "id": "project-ecommerce",
+        "title": "E-Commerce Premium",
+        "category": "Proyectos",
+        "description": "Plataforma de comercio electrónico con +50,000 productos y pagos integrados.",
+        "icon": "ShoppingCart",
+        "color": "cyan",
+        "image": "/projects/ecommerce.jpg",
+        "features": [
+            "Next.js 14",
+            "Stripe",
+            "PostgreSQL",
+            "Redis",
+            "Elasticsearch",
+            "AWS"
+        ],
+        "stats": {
+            "users": "50K+",
+            "revenue": "$2M+",
+            "uptime": "99.9%"
+        },
+        "client": "TechStore Inc.",
+        "year": 2024
+    },
+    {
+        "id": "project-fintech",
+        "title": "App Fintech",
+        "category": "Proyectos",
+        "description": "Aplicación de gestión financiera con IA para análisis de gastos e inversiones.",
+        "icon": "Wallet",
+        "color": "blue",
+        "image": "/projects/fintech.jpg",
+        "features": [
+            "React Native",
+            "Python",
+            "TensorFlow",
+            "PostgreSQL",
+            "AWS Lambda",
+            "Plaid API"
+        ],
+        "stats": {
+            "users": "100K+",
+            "transactions": "1M+",
+            "rating": "4.9"
+        },
+        "client": "FinanceApp",
+        "year": 2024
+    },
+    {
+        "id": "project-healthcare",
+        "title": "Plataforma Salud",
+        "category": "Proyectos",
+        "description": "Sistema de telemedicina con videollamadas y gestión de expedientes médicos.",
+        "icon": "Heart",
+        "color": "pink",
+        "image": "/projects/healthcare.jpg",
+        "features": [
+            "Next.js",
+            "WebRTC",
+            "Node.js",
+            "MongoDB",
+            "HIPAA Compliance",
+            "AWS"
+        ],
+        "stats": {
+            "patients": "30K+",
+            "doctors": "500+",
+            "consultations": "100K+"
+        },
+        "client": "MediConnect",
+        "year": 2023
+    },
+    {
+        "id": "project-logistics",
+        "title": "Sistema Logística",
+        "category": "Proyectos",
+        "description": "Plataforma de seguimiento de envíos en tiempo real con IA predictiva.",
+        "icon": "Truck",
+        "color": "orange",
+        "image": "/projects/logistics.jpg",
+        "features": [
+            "Vue.js",
+            "Go",
+            "PostgreSQL",
+            "Redis",
+            "Google Maps",
+            "IoT Sensors"
+        ],
+        "stats": {
+            "shipments": "500K+",
+            "routes": "1,000+",
+            "efficiency": "+40%"
+        },
+        "client": "LogiTrack",
+        "year": 2024
+    }
+]

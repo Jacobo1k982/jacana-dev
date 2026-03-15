@@ -1,0 +1,120 @@
+[
+    {
+        "label": "Inicio",
+        "href": "/",
+        "icon": "Home",
+        "description": "Página principal"
+    },
+    {
+        "label": "Servicios",
+        "href": "#services",
+        "icon": "Layers",
+        "description": "Nuestros servicios de desarrollo",
+        "submenu": [
+            {
+                "label": "Desarrollo Frontend",
+                "href": "/services/FrontendService",
+                "icon": "Monitor",
+                "description": "React, Vue, Angular, Next.js"
+            },
+            {
+                "label": "Desarrollo Backend",
+                "href": "/services/BackendService",
+                "icon": "Server",
+                "description": "Node.js, Python, Java, Go"
+            },
+            {
+                "label": "Aplicaciones Móviles",
+                "href": "/services/MobileService",
+                "icon": "Smartphone",
+                "description": "React Native, Flutter, iOS, Android"
+            },
+            {
+                "label": "Cloud & DevOps",
+                "href": "/services/CloudService",
+                "icon": "Cloud",
+                "description": "AWS, Azure, GCP, Docker, Kubernetes"
+            },
+            {
+                "label": "Bases de Datos",
+                "href": "/services/DatabaseService",
+                "icon": "Database",
+                "description": "PostgreSQL, MongoDB, Redis, MySQL"
+            },
+            {
+                "label": "Inteligencia Artificial",
+                "href": "/services/AIService",
+                "icon": "Brain",
+                "description": "Machine Learning, NLP, Computer Vision"
+            },
+            {
+                "label": "APIs & Integraciones",
+                "href": "/services/APIService",
+                "icon": "Plug",
+                "description": "REST, GraphQL, WebSockets"
+            },
+            {
+                "label": "Consultoría Técnica",
+                "href": "/services/ConsultingService",
+                "icon": "Users",
+                "description": "Arquitectura, Auditoría, Optimización"
+            }
+        ]
+    },
+    {
+        "label": "Proyectos",
+        "href": "/projects",
+        "icon": "FolderKanban",
+        "description": "Portafolio de trabajos"
+    },
+    {
+        "label": "Tecnologías",
+        "href": "#tech",
+        "icon": "Code2",
+        "description": "Stack tecnológico",
+        "submenu": [
+            {
+                "label": "Frontend",
+                "href": "#tech-frontend",
+                "icon": "Palette",
+                "description": "React, Vue, Next.js, Tailwind"
+            },
+            {
+                "label": "Backend",
+                "href": "#tech-backend",
+                "icon": "Terminal",
+                "description": "Node.js, Python, Go, Rust"
+            },
+            {
+                "label": "Cloud",
+                "href": "#tech-cloud",
+                "icon": "CloudCog",
+                "description": "AWS, Azure, GCP, Vercel"
+            },
+            {
+                "label": "DevOps",
+                "href": "#tech-devops",
+                "icon": "GitBranch",
+                "description": "Docker, Kubernetes, CI/CD"
+            }
+        ]
+    },
+    {
+        "label": "Nosotros",
+        "href": "/About",
+        "icon": "Users",
+        "description": "Conoce al equipo"
+    },
+    {
+        "label": "Blog",
+        "href": "#blog",
+        "icon": "FileText",
+        "description": "Artículos y tutoriales"
+    },
+    {
+        "label": "Contacto",
+        "href": "/Contact",
+        "icon": "Mail",
+        "description": "Contáctanos"
+    }
+]

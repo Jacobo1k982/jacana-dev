@@ -1,0 +1,550 @@
+{
+    "frontend": {
+        "title": "Frontend",
+        "description": "Tecnologías modernas para interfaces de usuario excepcionales",
+        "icon": "Monitor",
+        "color": "cyan",
+        "technologies": [
+            {
+                "id": "react",
+                "name": "React",
+                "icon": "ReactIcon",
+                "description": "Biblioteca JavaScript para construir interfaces de usuario interactivas y componentizadas",
+                "features": [
+                    "Virtual DOM para renderizado optimizado",
+                    "Componentes reutilizables",
+                    "Estado local y global (Redux, Zustand)",
+                    "Hooks para lógica reutilizable",
+                    "Ecosistema extenso de librerías"
+                ],
+                "stats": {
+                    "performance": 92,
+                    "popularity": 98,
+                    "learning": 75
+                },
+                "version": "18.2",
+                "category": "Framework"
+            },
+            {
+                "id": "vue",
+                "name": "Vue.js",
+                "icon": "VueIcon",
+                "description": "Framework progresivo para construir interfaces de usuario con sintaxis intuitiva",
+                "features": [
+                    "Sistema de reactividad automática",
+                    "Single File Components (.vue)",
+                    "Directivas integradas (v-if, v-for, v-bind)",
+                    "Composition API flexible",
+                    "Curva de aprendizaje suave"
+                ],
+                "stats": {
+                    "performance": 94,
+                    "popularity": 85,
+                    "learning": 90
+                },
+                "version": "3.4",
+                "category": "Framework"
+            },
+            {
+                "id": "nextjs",
+                "name": "Next.js",
+                "icon": "NextjsIcon",
+                "description": "Framework React con renderizado híbrido y optimizaciones automáticas",
+                "features": [
+                    "SSR, SSG e ISR",
+                    "App Router con Server Components",
+                    "Optimización automática de imágenes",
+                    "API Routes integradas",
+                    "Soporte TypeScript nativo"
+                ],
+                "stats": {
+                    "performance": 96,
+                    "popularity": 95,
+                    "learning": 70
+                },
+                "version": "15.0",
+                "category": "Meta Framework"
+            },
+            {
+                "id": "tailwind",
+                "name": "Tailwind CSS",
+                "icon": "TailwindIcon",
+                "description": "Framework CSS utility-first para desarrollo rápido de interfaces",
+                "features": [
+                    "Clases utilitarias predefinidas",
+                    "Diseño responsive integrado",
+                    "Personalización completa",
+                    "Purge automático de CSS",
+                    "Dark mode nativo"
+                ],
+                "stats": {
+                    "performance": 98,
+                    "popularity": 92,
+                    "learning": 85
+                },
+                "version": "4.0",
+                "category": "CSS Framework"
+            },
+            {
+                "id": "typescript",
+                "name": "TypeScript",
+                "icon": "TypescriptIcon",
+                "description": "Superset de JavaScript con tipado estático opcional",
+                "features": [
+                    "Tipado estático opcional",
+                    "Autocompletado mejorado",
+                    "Detección temprana de errores",
+                    "Refactorización segura",
+                    "Compatibilidad total con JS"
+                ],
+                "stats": {
+                    "performance": 95,
+                    "popularity": 97,
+                    "learning": 65
+                },
+                "version": "5.3",
+                "category": "Lenguaje"
+            }
+        ]
+    },
+    "backend": {
+        "title": "Backend",
+        "description": "Tecnologías robustas para lógica de servidor y APIs",
+        "icon": "Server",
+        "color": "blue",
+        "technologies": [
+            {
+                "id": "nodejs",
+                "name": "Node.js",
+                "icon": "NodejsIcon",
+                "description": "Entorno de ejecución JavaScript del lado del servidor",
+                "features": [
+                    "Event-driven non-blocking I/O",
+                    "NPM ecosystem con millones de paquetes",
+                    "Escalabilidad horizontal nativa",
+                    "Streaming de datos eficiente",
+                    "Isomorfismo con frontend"
+                ],
+                "stats": {
+                    "performance": 88,
+                    "popularity": 96,
+                    "learning": 80
+                },
+                "version": "20 LTS",
+                "category": "Runtime"
+            },
+            {
+                "id": "python",
+                "name": "Python",
+                "icon": "PythonIcon",
+                "description": "Lenguaje versátil ideal para backend, IA y ciencia de datos",
+                "features": [
+                    "Sintaxis limpia y legible",
+                    "Frameworks web potentes (Django, FastAPI)",
+                    "Ecosistema de IA/ML extenso",
+                    "Tipado dinámico con hints opcionales",
+                    "Gran comunidad y documentación"
+                ],
+                "stats": {
+                    "performance": 75,
+                    "popularity": 98,
+                    "learning": 95
+                },
+                "version": "3.12",
+                "category": "Lenguaje"
+            },
+            {
+                "id": "go",
+                "name": "Go",
+                "icon": "GoIcon",
+                "description": "Lenguaje compilado diseñado para sistemas distribuidos y microservicios",
+                "features": [
+                    "Compilación rápida y binarios pequeños",
+                    "Goroutines para concurrencia ligera",
+                    "Garbage collection eficiente",
+                    "Tipado estático simple",
+                    "Standard library completa"
+                ],
+                "stats": {
+                    "performance": 95,
+                    "popularity": 82,
+                    "learning": 70
+                },
+                "version": "1.22",
+                "category": "Lenguaje"
+            },
+            {
+                "id": "rust",
+                "name": "Rust",
+                "icon": "RustIcon",
+                "description": "Lenguaje de sistemas con seguridad de memoria sin garbage collector",
+                "features": [
+                    "Memory safety sin GC",
+                    "Ownership system único",
+                    "Performance comparable a C/C++",
+                    "Pattern matching avanzado",
+                    "WebAssembly nativo"
+                ],
+                "stats": {
+                    "performance": 99,
+                    "popularity": 75,
+                    "learning": 45
+                },
+                "version": "1.75",
+                "category": "Lenguaje"
+            }
+        ]
+    },
+    "cloud": {
+        "title": "Cloud",
+        "description": "Plataformas de nube para despliegue y escalabilidad global",
+        "icon": "Cloud",
+        "color": "purple",
+        "technologies": [
+            {
+                "id": "aws",
+                "name": "AWS",
+                "icon": "AwsIcon",
+                "description": "Plataforma de servicios en la nube más completa del mercado",
+                "features": [
+                    "200+ servicios disponibles",
+                    "EC2, Lambda, S3, RDS",
+                    "Redshift para data warehousing",
+                    "CDN CloudFront global",
+                    "IAM para control de acceso"
+                ],
+                "stats": {
+                    "performance": 95,
+                    "popularity": 97,
+                    "learning": 55
+                },
+                "version": "N/A",
+                "category": "Cloud Platform"
+            },
+            {
+                "id": "azure",
+                "name": "Azure",
+                "icon": "AzureIcon",
+                "description": "Plataforma cloud de Microsoft con integración enterprise",
+                "features": [
+                    "Integración con Microsoft 365",
+                    "Azure Functions serverless",
+                    "Azure DevOps integrado",
+                    "Kubernetes Service (AKS)",
+                    "Active Directory nativo"
+                ],
+                "stats": {
+                    "performance": 93,
+                    "popularity": 90,
+                    "learning": 60
+                },
+                "version": "N/A",
+                "category": "Cloud Platform"
+            },
+            {
+                "id": "gcp",
+                "name": "Google Cloud",
+                "icon": "GcpIcon",
+                "description": "Infraestructura de Google con foco en datos y ML",
+                "features": [
+                    "BigQuery para analytics",
+                    "Cloud Functions serverless",
+                    "Kubernetes Engine (GKE)",
+                    "Vertex AI para ML",
+                    "Red global de Google"
+                ],
+                "stats": {
+                    "performance": 94,
+                    "popularity": 78,
+                    "learning": 58
+                },
+                "version": "N/A",
+                "category": "Cloud Platform"
+            },
+            {
+                "id": "vercel",
+                "name": "Vercel",
+                "icon": "VercelIcon",
+                "description": "Plataforma optimizada para frameworks frontend y serverless",
+                "features": [
+                    "Deploy automático desde Git",
+                    "Edge Functions globales",
+                    "Preview deployments",
+                    "Optimización automática",
+                    "Integración Next.js nativa"
+                ],
+                "stats": {
+                    "performance": 97,
+                    "popularity": 88,
+                    "learning": 90
+                },
+                "version": "N/A",
+                "category": "Platform"
+            }
+        ]
+    },
+    "devops": {
+        "title": "DevOps",
+        "description": "Herramientas para CI/CD, contenedores y orquestación",
+        "icon": "GitBranch",
+        "color": "green",
+        "technologies": [
+            {
+                "id": "docker",
+                "name": "Docker",
+                "icon": "DockerIcon",
+                "description": "Plataforma de contenedores para empaquetar y desplegar aplicaciones",
+                "features": [
+                    "Contenedores portables",
+                    "Docker Compose para orquestación local",
+                    "Imágenes layerizadas",
+                    "Registry distribuido",
+                    "Integración con todos los clouds"
+                ],
+                "stats": {
+                    "performance": 90,
+                    "popularity": 96,
+                    "learning": 75
+                },
+                "version": "24.0",
+                "category": "Containerization"
+            },
+            {
+                "id": "kubernetes",
+                "name": "Kubernetes",
+                "icon": "KubernetesIcon",
+                "description": "Orquestador de contenedores para despliegue a escala",
+                "features": [
+                    "Auto-scaling horizontal/vertical",
+                    "Service discovery automático",
+                    "Rolling updates y rollbacks",
+                    "Health checks y auto-healing",
+                    "Helm para package management"
+                ],
+                "stats": {
+                    "performance": 92,
+                    "popularity": 90,
+                    "learning": 45
+                },
+                "version": "1.29",
+                "category": "Orchestration"
+            },
+            {
+                "id": "github-actions",
+                "name": "GitHub Actions",
+                "icon": "GithubIcon",
+                "description": "Plataforma CI/CD integrada con repositorios GitHub",
+                "features": [
+                    "Workflows como código (YAML)",
+                    "Marketplace de actions",
+                    "Matriz de builds paralelos",
+                    "Self-hosted runners",
+                    "Secrets management"
+                ],
+                "stats": {
+                    "performance": 88,
+                    "popularity": 92,
+                    "learning": 80
+                },
+                "version": "N/A",
+                "category": "CI/CD"
+            },
+            {
+                "id": "terraform",
+                "name": "Terraform",
+                "icon": "TerraformIcon",
+                "description": "Infraestructura como código multi-cloud",
+                "features": [
+                    "Lenguaje HCL declarativo",
+                    "Estado remoto compartido",
+                    "Múltiples providers",
+                    "Plan previo a apply",
+                    "Modules reutilizables"
+                ],
+                "stats": {
+                    "performance": 85,
+                    "popularity": 85,
+                    "learning": 60
+                },
+                "version": "1.7",
+                "category": "IaC"
+            }
+        ]
+    },
+    "database": {
+        "title": "Bases de Datos",
+        "description": "Sistemas de almacenamiento para diferentes necesidades de datos",
+        "icon": "Database",
+        "color": "orange",
+        "technologies": [
+            {
+                "id": "postgresql",
+                "name": "PostgreSQL",
+                "icon": "PostgresqlIcon",
+                "description": "Base de datos relacional avanzada con características enterprise",
+                "features": [
+                    "ACID compliance completo",
+                    "JSON/JSONB nativo",
+                    "Extensiones (PostGIS, pg_trgm)",
+                    "CTEs y window functions",
+                    "Replicación streaming"
+                ],
+                "stats": {
+                    "performance": 92,
+                    "popularity": 90,
+                    "learning": 70
+                },
+                "version": "16",
+                "category": "Relational"
+            },
+            {
+                "id": "mongodb",
+                "name": "MongoDB",
+                "icon": "MongodbIcon",
+                "description": "Base de datos NoSQL orientada a documentos",
+                "features": [
+                    "Esquema flexible JSON",
+                    "Aggregation pipeline",
+                    "Sharding horizontal",
+                    "Atlas cloud managed",
+                    "Change streams en tiempo real"
+                ],
+                "stats": {
+                    "performance": 88,
+                    "popularity": 88,
+                    "learning": 80
+                },
+                "version": "7.0",
+                "category": "NoSQL"
+            },
+            {
+                "id": "redis",
+                "name": "Redis",
+                "icon": "RedisIcon",
+                "description": "Base de datos en memoria para caching y tiempo real",
+                "features": [
+                    "Sub-millisecond latency",
+                    "Pub/Sub messaging",
+                    "Streams para event sourcing",
+                    "Clustering nativo",
+                    "Múltiples estructuras de datos"
+                ],
+                "stats": {
+                    "performance": 99,
+                    "popularity": 85,
+                    "learning": 85
+                },
+                "version": "7.2",
+                "category": "In-Memory"
+            },
+            {
+                "id": "supabase",
+                "name": "Supabase",
+                "icon": "SupabaseIcon",
+                "description": "Backend-as-a-Service basado en PostgreSQL",
+                "features": [
+                    "PostgreSQL managed",
+                    "Autenticación integrada",
+                    "Storage de archivos",
+                    "Realtime subscriptions",
+                    "Edge Functions serverless"
+                ],
+                "stats": {
+                    "performance": 90,
+                    "popularity": 82,
+                    "learning": 90
+                },
+                "version": "N/A",
+                "category": "BaaS"
+            }
+        ]
+    },
+    "ai": {
+        "title": "Inteligencia Artificial",
+        "description": "Tecnologías de vanguardia para ML y procesamiento de lenguaje",
+        "icon": "Brain",
+        "color": "pink",
+        "technologies": [
+            {
+                "id": "pytorch",
+                "name": "PyTorch",
+                "icon": "PytorchIcon",
+                "description": "Framework de deep learning con grafos dinámicos",
+                "features": [
+                    "Grafos computacionales dinámicos",
+                    "Integración con Python nativo",
+                    "CUDA acceleration",
+                    "TorchScript para producción",
+                    "Ecosistema Hugging Face"
+                ],
+                "stats": {
+                    "performance": 94,
+                    "popularity": 92,
+                    "learning": 55
+                },
+                "version": "2.2",
+                "category": "ML Framework"
+            },
+            {
+                "id": "tensorflow",
+                "name": "TensorFlow",
+                "icon": "TensorflowIcon",
+                "description": "Plataforma end-to-end para machine learning",
+                "features": [
+                    "Keras API de alto nivel",
+                    "TensorFlow Serving",
+                    "TensorFlow Lite para móvil",
+                    "TensorBoard visualización",
+                    "TPU support"
+                ],
+                "stats": {
+                    "performance": 93,
+                    "popularity": 85,
+                    "learning": 50
+                },
+                "version": "2.15",
+                "category": "ML Framework"
+            },
+            {
+                "id": "openai",
+                "name": "OpenAI API",
+                "icon": "OpenaiIcon",
+                "description": "APIs de modelos de lenguaje de última generación",
+                "features": [
+                    "GPT-4 y GPT-4 Turbo",
+                    "DALL-E para generación de imágenes",
+                    "Whisper para speech-to-text",
+                    "Embeddings para búsqueda",
+                    "Function calling"
+                ],
+                "stats": {
+                    "performance": 96,
+                    "popularity": 98,
+                    "learning": 85
+                },
+                "version": "v1",
+                "category": "LLM API"
+            },
+            {
+                "id": "langchain",
+                "name": "LangChain",
+                "icon": "LangchainIcon",
+                "description": "Framework para aplicaciones con LLMs",
+                "features": [
+                    "Chains y agents composables",
+                    "Memory para conversaciones",
+                    "RAG pipelines",
+                    "Múltiples LLM providers",
+                    "LangSmith para debugging"
+                ],
+                "stats": {
+                    "performance": 85,
+                    "popularity": 90,
+                    "learning": 65
+                },
+                "version": "0.1",
+                "category": "LLM Framework"
+            }
+        ]
+    }
+}
