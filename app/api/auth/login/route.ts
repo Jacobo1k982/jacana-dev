@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Create session and JWT in transaction
-        const result = await db.$transaction(async (tx) => {
+        const result = await db.$transaction(async (tx: typeof db) => {
             // Clean up old sessions for this user (optional: keep only recent sessions)
             await tx.session.deleteMany({
                 where: {
