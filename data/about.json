@@ -71,7 +71,7 @@
         },
         {
             "id": "years",
-            "value": 4,
+            "value": 2,
             "suffix": "+",
             "label": "Años de Experiencia",
             "description": "Perfeccionando nuestro craft"
@@ -205,29 +205,29 @@
     ],
     "timeline": [
         {
-            "year": 2020,
+            "year": 2024,
             "title": "Fundación",
             "description": "Jacana Dev nace como un estudio de desarrollo freelance con visión de convertirse en referente tecnológico."
         },
         {
-            "year": 2021,
+            "year": 2024,
             "title": "Primer Equipo",
             "description": "Incorporamos los primeros miembros especializados y establecemos metodologías ágiles."
         },
         {
-            "year": 2022,
+            "year": 2024,
             "title": "Expansión Internacional",
             "description": "Comenzamos a servir clientes en Estados Unidos, Canadá y Europa."
         },
         {
-            "year": 2023,
+            "year": 2024,
             "title": "Especialización en IA",
             "description": "Creamos el departamento de IA/ML para ofrecer soluciones de vanguardia."
         },
         {
             "year": 2024,
             "title": "Crecimiento Exponencial",
-            "description": "Alcanzamos más de 150 proyectos entregados y expandimos el equipo a 15 especialistas."
+            "description": "Alcanzamos más de 10 proyectos entregados y expandimos el equipo a 5 especialistas."
         }
     ],
     "process": [
