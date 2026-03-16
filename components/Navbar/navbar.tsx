@@ -359,8 +359,8 @@ export default function Navbar() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${isScrolled
-                        ? 'bg-[#030712]/90 backdrop-blur-3xl border-b border-white/[0.03] shadow-2xl shadow-black/20'
-                        : 'bg-transparent'
+                    ? 'bg-[#030712]/90 backdrop-blur-3xl border-b border-white/[0.03] shadow-2xl shadow-black/20'
+                    : 'bg-transparent'
                     }`}
             >
                 <ScrollProgress />
@@ -1017,20 +1017,6 @@ export default function Navbar() {
                 onClose={() => setShowRegister(false)}
                 onSwitchToLogin={() => { setShowRegister(false); setShowLogin(true); }}
             />
-
-            {/* Custom styles */}
-            <style jsx global>{`
-                .custom-scrollbar-nav::-webkit-scrollbar {
-                    width: 4px;
-                }
-                .custom-scrollbar-nav::-webkit-scrollbar-track {
-                    background: transparent;
-                }
-                .custom-scrollbar-nav::-webkit-scrollbar-thumb {
-                    background: linear-gradient(180deg, rgba(6, 182, 212, 0.3), rgba(139, 92, 246, 0.3));
-                    border-radius: 2px;
-                }
-            `}</style>
         </>
     );
 }
