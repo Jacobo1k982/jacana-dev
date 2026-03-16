@@ -5,70 +5,38 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     Mail, Phone, MapPin, Clock, Send, Github, Linkedin,
     Twitter, MessageSquare, CheckCircle, AlertCircle,
-    User, Building, FileText, ArrowRight,
+    User, Building, FileText, ArrowRight, Plus, Minus,
     Facebook
 } from 'lucide-react';
 
 const contactInfo = [
-    {
-        icon: Mail,
-        title: 'Email',
-        value: 'jgutierrez@jacana-dev.com',
-        link: 'mailto:jgutierrez@jacana-dev.com',
-        color: 'cyan',
-    },
-    {
-        icon: Phone,
-        title: 'Teléfono',
-        value: '+506 6454 1700',
-        link: 'tel:+50664541700',
-        color: 'blue',
-    },
-    {
-        icon: MapPin,
-        title: 'Ubicación',
-        value: 'San Pedro, Montes de Oca, Costa Rica',
-        link: '#',
-        color: 'purple',
-    },
-    {
-        icon: Clock,
-        title: 'Horario',
-        value: 'Lun - Vie: 9:00 AM - 6:00 PM',
-        link: '#',
-        color: 'emerald',
-    },
+    { icon: Mail, title: 'Email', value: 'jgutierrez@jacana-dev.com', link: 'mailto:jgutierrez@jacana-dev.com' },
+    { icon: Phone, title: 'Teléfono', value: '+506 6454 1700', link: 'tel:+50664541700' },
+    { icon: MapPin, title: 'Ubicación', value: 'San Pedro, Montes de Oca, Costa Rica', link: '#' },
+    { icon: Clock, title: 'Horario', value: 'Lun – Vie · 9:00 – 18:00', link: '#' },
 ];
 
 const socialLinks = [
-    { icon: Github, href: 'https://github.com/', label: 'GitHub', color: 'hover:text-white' },
-    { icon: Linkedin, href: 'https://linkedin.com/', label: 'LinkedIn', color: 'hover:text-blue-400' },
-    { icon: Twitter, href: 'https://twitter.com/', label: 'Twitter', color: 'hover:text-cyan-400' },
-    { icon: Facebook, href: 'https://facebook.com/', label: 'Facebook', color: 'hover:text-cyan-400' },
+    { icon: Github, href: 'https://github.com/', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://linkedin.com/', label: 'LinkedIn' },
+    { icon: Twitter, href: 'https://twitter.com/', label: 'Twitter' },
+    { icon: Facebook, href: 'https://facebook.com/', label: 'Facebook' },
 ];
 
 const services = [
-    'Desarrollo Web',
-    'Aplicaciones Móviles',
-    'Cloud & DevOps',
-    'Inteligencia Artificial',
-    'Consultoría Técnica',
-    'Diseño UI/UX',
-    'Otro',
+    'Desarrollo Web', 'Aplicaciones Móviles', 'Cloud & DevOps',
+    'Inteligencia Artificial', 'Consultoría Técnica', 'Diseño UI/UX', 'Otro',
 ];
 
 const budgetRanges = [
-    'Menos de $5,000',
-    '$5,000 - $15,000',
-    '$15,000 - $50,000',
-    'Más de $50,000',
-    'Por definir',
+    'Menos de $5,000', '$5,000 – $15,000', '$15,000 – $50,000',
+    'Más de $50,000', 'Por definir',
 ];
 
 const faqs = [
     {
         question: '¿Cuánto tiempo toma desarrollar un proyecto?',
-        answer: 'El tiempo varía según la complejidad del proyecto. Una landing page puede tomar 1-2 semanas, mientras que una aplicación completa puede requerir 2-6 meses.',
+        answer: 'El tiempo varía según la complejidad del proyecto. Una landing page puede tomar 1–2 semanas, mientras que una aplicación completa puede requerir 2–6 meses.',
     },
     {
         question: '¿Ofrecen mantenimiento post-lanzamiento?',
@@ -84,15 +52,59 @@ const faqs = [
     },
 ];
 
+const stats = [
+    { value: '10+', label: 'Proyectos' },
+    { value: '98%', label: 'Satisfacción' },
+    { value: '4+', label: 'Años' },
+    { value: '24/7', label: 'Soporte' },
+];
+
+const InputField = ({
+    label, icon: Icon, required, ...props
+}: {
+    label: string; icon: React.ElementType; required?: boolean;
+} & React.InputHTMLAttributes<HTMLInputElement>) => (
+    <div className="group space-y-2">
+        <label className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-slate-400">
+            <Icon className="w-3.5 h-3.5 text-amber-400/80" />
+            {label}{required && <span className="text-amber-400/60">*</span>}
+        </label>
+        <input
+            {...props}
+            required={required}
+            className="w-full px-0 py-3.5 rounded-none bg-transparent border-b border-slate-700/60 text-white placeholder-slate-600 text-sm
+                focus:border-amber-400/60 focus:outline-none transition-colors duration-300 hover:border-slate-500/80"
+        />
+    </div>
+);
+
+const SelectField = ({
+    label, icon: Icon, options, placeholder, ...props
+}: {
+    label: string; icon: React.ElementType; options: string[]; placeholder: string;
+} & React.SelectHTMLAttributes<HTMLSelectElement>) => (
+    <div className="space-y-2">
+        <label className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-slate-400">
+            <Icon className="w-3.5 h-3.5 text-amber-400/80" />
+            {label}
+        </label>
+        <select
+            {...props}
+            className="w-full px-0 py-3.5 rounded-none bg-transparent border-b border-slate-700/60 text-sm text-white
+                focus:border-amber-400/60 focus:outline-none transition-colors duration-300
+                hover:border-slate-500/80 appearance-none cursor-pointer"
+        >
+            <option value="" className="bg-[#0d0d1a] text-slate-500">{placeholder}</option>
+            {options.map((opt) => (
+                <option key={opt} value={opt} className="bg-[#0d0d1a] text-white">{opt}</option>
+            ))}
+        </select>
+    </div>
+);
+
 export default function Contact() {
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        service: '',
-        budget: '',
-        message: '',
+        name: '', email: '', company: '', phone: '', service: '', budget: '', message: '',
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -105,271 +117,161 @@ export default function Contact() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-
-        // Simulate API call
         await new Promise(resolve => setTimeout(resolve, 2000));
-
         setIsSubmitting(false);
         setSubmitStatus('success');
-
-        // Reset form after success
         setTimeout(() => {
-            setFormData({
-                name: '',
-                email: '',
-                company: '',
-                phone: '',
-                service: '',
-                budget: '',
-                message: '',
-            });
+            setFormData({ name: '', email: '', company: '', phone: '', service: '', budget: '', message: '' });
             setSubmitStatus('idle');
         }, 3000);
     };
 
     return (
-        <section id="contact" className="relative py-20 md:py-32 overflow-hidden">
-            {/* Background */}
-            <div className="absolute inset-0 bg-[#06051d]" />
-
-            {/* Decorative elements */}
-            <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+        <section id="contact" className="relative py-24 md:py-36 overflow-hidden bg-[#080810]">
+            {/* Grain overlay */}
+            <div
+                className="pointer-events-none absolute inset-0 opacity-[0.025]"
+                style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                    backgroundRepeat: 'repeat',
+                    backgroundSize: '128px 128px',
+                }}
+            />
+            <div className="absolute top-1/4 left-0 w-[500px] h-[500px] rounded-full bg-indigo-900/10 blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full bg-amber-900/8 blur-[120px] pointer-events-none" />
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8">
+
                 {/* Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="mb-20"
                 >
-                    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium mb-6">
-                        <MessageSquare className="w-4 h-4" />
-                        Contacto
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-                        ¿Tienes un proyecto en mente?
-                    </h2>
-                    <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                        Cuéntanos sobre tu idea y trabajemos juntos para hacerla realidad.
-                        Estamos listos para ayudarte.
+                    <p className="text-xs font-medium uppercase tracking-[0.3em] text-amber-400/70 mb-5">
+                        — Contacto
                     </p>
+                    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                        <h2
+                            className="text-4xl md:text-6xl font-light text-white leading-[1.1] tracking-tight"
+                            style={{ fontFamily: "'Cormorant Garamond', 'Garamond', Georgia, serif" }}
+                        >
+                            ¿Tienes un proyecto<br />
+                            <em className="text-slate-400 not-italic">en mente?</em>
+                        </h2>
+                        <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
+                            Cuéntanos sobre tu idea y construyamos algo memorable juntos.
+                        </p>
+                    </div>
+                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-amber-400/20 to-transparent" />
                 </motion.div>
 
-                <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
-                    {/* Contact Info - Left Side */}
+                {/* Main Grid */}
+                <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
+
+                    {/* Left */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="lg:col-span-2 space-y-8"
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="lg:col-span-2 space-y-10"
                     >
-                        {/* Contact Cards */}
-                        <div className="space-y-4">
-                            {contactInfo.map((item, index) => {
+                        <div className="space-y-0">
+                            {contactInfo.map((item, i) => {
                                 const Icon = item.icon;
-                                const colorClasses: Record<string, string> = {
-                                    cyan: 'from-cyan-500/20 to-cyan-600/10 border-cyan-500/30 text-cyan-400',
-                                    blue: 'from-blue-500/20 to-blue-600/10 border-blue-500/30 text-blue-400',
-                                    purple: 'from-purple-500/20 to-purple-600/10 border-purple-500/30 text-purple-400',
-                                    emerald: 'from-emerald-500/20 to-emerald-600/10 border-emerald-500/30 text-emerald-400',
-                                };
-
                                 return (
                                     <motion.a
                                         key={item.title}
                                         href={item.link}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0, x: -12 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
-                                        transition={{ delay: index * 0.1 }}
-                                        className="group flex items-start gap-4 p-4 rounded-xl bg-gradient-to-br border border-white/5 hover:border-white/10 transition-all"
+                                        transition={{ delay: i * 0.08, duration: 0.5 }}
+                                        className="group flex items-center justify-between py-5 border-b border-slate-800/60 hover:border-slate-600/60 transition-colors"
                                     >
-                                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${colorClasses[item.color]} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>
-                                            <Icon className="w-5 h-5" />
+                                        <div className="flex items-center gap-4">
+                                            <span className="w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-amber-400/40 transition-colors">
+                                                <Icon className="w-3.5 h-3.5 text-slate-500 group-hover:text-amber-400/80 transition-colors" />
+                                            </span>
+                                            <div>
+                                                <p className="text-[10px] uppercase tracking-[0.2em] text-slate-600 mb-0.5">{item.title}</p>
+                                                <p className="text-sm text-slate-300 group-hover:text-white transition-colors">{item.value}</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <h4 className="text-sm text-gray-400 mb-0.5">{item.title}</h4>
-                                            <p className="text-white font-medium group-hover:text-cyan-400 transition-colors">{item.value}</p>
-                                        </div>
+                                        <ArrowRight className="w-4 h-4 text-slate-700 group-hover:text-amber-400/60 group-hover:translate-x-1 transition-all" />
                                     </motion.a>
                                 );
                             })}
                         </div>
 
-                        {/* Social Links */}
+                        {/* Stats */}
+                        <div className="grid grid-cols-2 gap-px bg-slate-800/30">
+                            {stats.map((s, i) => (
+                                <motion.div
+                                    key={s.label}
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.06 + 0.2 }}
+                                    className="bg-[#080810] p-6 text-center"
+                                >
+                                    <p
+                                        className="text-3xl font-light text-white mb-1"
+                                        style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                                    >{s.value}</p>
+                                    <p className="text-[10px] uppercase tracking-[0.2em] text-slate-600">{s.label}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        {/* Social */}
                         <div>
-                            <h4 className="text-sm text-gray-400 mb-4 uppercase tracking-wider">Síguenos</h4>
+                            <p className="text-[10px] uppercase tracking-[0.25em] text-slate-600 mb-4">Síguenos</p>
                             <div className="flex gap-3">
-                                {socialLinks.map((social) => {
-                                    const Icon = social.icon;
+                                {socialLinks.map((s) => {
+                                    const Icon = s.icon;
                                     return (
                                         <motion.a
-                                            key={social.label}
-                                            href={social.href}
+                                            key={s.label}
+                                            href={s.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            whileHover={{ scale: 1.05, y: -2 }}
-                                            whileTap={{ scale: 0.95 }}
-                                            className={`w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 ${social.color} transition-all`}
+                                            whileHover={{ y: -2 }}
+                                            className="w-10 h-10 flex items-center justify-center border border-slate-800/80 hover:border-slate-600 text-slate-600 hover:text-slate-300 transition-all"
                                         >
-                                            <Icon className="w-5 h-5" />
+                                            <Icon className="w-4 h-4" />
                                         </motion.a>
                                     );
                                 })}
                             </div>
                         </div>
-
-                        {/* Quick Stats */}
-                        <div className="p-6 rounded-xl bg-gradient-to-br from-cyan-500/5 to-blue-500/5 border border-cyan-500/10">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="text-center p-3">
-                                    <div className="text-3xl font-bold text-white mb-1">150+</div>
-                                    <div className="text-sm text-gray-400">Proyectos</div>
-                                </div>
-                                <div className="text-center p-3">
-                                    <div className="text-3xl font-bold text-white mb-1">98%</div>
-                                    <div className="text-sm text-gray-400">Satisfacción</div>
-                                </div>
-                                <div className="text-center p-3">
-                                    <div className="text-3xl font-bold text-white mb-1">5+</div>
-                                    <div className="text-sm text-gray-400">Años</div>
-                                </div>
-                                <div className="text-center p-3">
-                                    <div className="text-3xl font-bold text-white mb-1">24/7</div>
-                                    <div className="text-sm text-gray-400">Soporte</div>
-                                </div>
-                            </div>
-                        </div>
                     </motion.div>
 
-                    {/* Contact Form - Right Side */}
+                    {/* Right: Form */}
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-3"
                     >
-                        <form onSubmit={handleSubmit} className="p-6 md:p-8 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm">
-                            <div className="grid md:grid-cols-2 gap-6">
-                                {/* Name */}
-                                <div className="space-y-2">
-                                    <label className="text-sm text-gray-300 flex items-center gap-2">
-                                        <User className="w-4 h-4 text-cyan-400" />
-                                        Nombre completo *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="Tu nombre"
-                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all"
-                                    />
-                                </div>
-
-                                {/* Email */}
-                                <div className="space-y-2">
-                                    <label className="text-sm text-gray-300 flex items-center gap-2">
-                                        <Mail className="w-4 h-4 text-cyan-400" />
-                                        Email *
-                                    </label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="tu@email.com"
-                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all"
-                                    />
-                                </div>
-
-                                {/* Company */}
-                                <div className="space-y-2">
-                                    <label className="text-sm text-gray-300 flex items-center gap-2">
-                                        <Building className="w-4 h-4 text-cyan-400" />
-                                        Empresa
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="company"
-                                        value={formData.company}
-                                        onChange={handleChange}
-                                        placeholder="Nombre de tu empresa"
-                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all"
-                                    />
-                                </div>
-
-                                {/* Phone */}
-                                <div className="space-y-2">
-                                    <label className="text-sm text-gray-300 flex items-center gap-2">
-                                        <Phone className="w-4 h-4 text-cyan-400" />
-                                        Teléfono
-                                    </label>
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                        placeholder="+1 809 555 0123"
-                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all"
-                                    />
-                                </div>
-
-                                {/* Service */}
-                                <div className="space-y-2">
-                                    <label className="text-sm text-gray-300 flex items-center gap-2">
-                                        <FileText className="w-4 h-4 text-cyan-400" />
-                                        Servicio de interés
-                                    </label>
-                                    <select
-                                        name="service"
-                                        value={formData.service}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all appearance-none cursor-pointer"
-                                    >
-                                        <option value="" className="bg-[#0a0a1a]">Selecciona un servicio</option>
-                                        {services.map((service) => (
-                                            <option key={service} value={service} className="bg-[#0a0a1a]">
-                                                {service}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                {/* Budget */}
-                                <div className="space-y-2">
-                                    <label className="text-sm text-gray-300 flex items-center gap-2">
-                                        <FileText className="w-4 h-4 text-cyan-400" />
-                                        Presupuesto estimado
-                                    </label>
-                                    <select
-                                        name="budget"
-                                        value={formData.budget}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all appearance-none cursor-pointer"
-                                    >
-                                        <option value="" className="bg-[#0a0a1a]">Selecciona un rango</option>
-                                        {budgetRanges.map((range) => (
-                                            <option key={range} value={range} className="bg-[#0a0a1a]">
-                                                {range}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
+                        <form onSubmit={handleSubmit} className="space-y-8">
+                            <div className="grid md:grid-cols-2 gap-8">
+                                <InputField label="Nombre completo" icon={User} type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Tu nombre" />
+                                <InputField label="Email" icon={Mail} type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="tu@email.com" />
+                                <InputField label="Empresa" icon={Building} type="text" name="company" value={formData.company} onChange={handleChange} placeholder="Nombre de tu empresa" />
+                                <InputField label="Teléfono" icon={Phone} type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+506 0000 0000" />
+                                <SelectField label="Servicio de interés" icon={FileText} options={services} placeholder="Selecciona un servicio" name="service" value={formData.service} onChange={handleChange} />
+                                <SelectField label="Presupuesto estimado" icon={FileText} options={budgetRanges} placeholder="Selecciona un rango" name="budget" value={formData.budget} onChange={handleChange} />
                             </div>
 
-                            {/* Message */}
-                            <div className="mt-6 space-y-2">
-                                <label className="text-sm text-gray-300 flex items-center gap-2">
-                                    <MessageSquare className="w-4 h-4 text-cyan-400" />
-                                    Mensaje *
+                            <div className="space-y-2">
+                                <label className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-slate-400">
+                                    <MessageSquare className="w-3.5 h-3.5 text-amber-400/80" />
+                                    Mensaje <span className="text-amber-400/60">*</span>
                                 </label>
                                 <textarea
                                     name="message"
@@ -377,64 +279,52 @@ export default function Contact() {
                                     onChange={handleChange}
                                     required
                                     rows={5}
-                                    placeholder="Cuéntanos sobre tu proyecto, objetivos y cualquier detalle importante..."
-                                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all resize-none"
+                                    placeholder="Cuéntanos sobre tu proyecto, objetivos y cualquier detalle importante…"
+                                    className="w-full px-0 py-3.5 rounded-none bg-transparent border-b border-slate-700/60 text-white placeholder-slate-600 text-sm
+                                        focus:border-amber-400/60 focus:outline-none transition-colors duration-300 hover:border-slate-500/80 resize-none"
                                 />
                             </div>
 
-                            {/* Submit Button */}
-                            <motion.button
-                                type="submit"
-                                disabled={isSubmitting}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="mt-6 w-full flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold text-base hover:from-cyan-400 hover:to-blue-500 transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-cyan-500/20"
-                            >
-                                {isSubmitting ? (
-                                    <>
-                                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                        Enviando...
-                                    </>
-                                ) : submitStatus === 'success' ? (
-                                    <>
-                                        <CheckCircle className="w-5 h-5" />
-                                        ¡Mensaje enviado!
-                                    </>
-                                ) : (
-                                    <>
-                                        <Send className="w-5 h-5" />
-                                        Enviar mensaje
-                                        <ArrowRight className="w-4 h-4" />
-                                    </>
-                                )}
-                            </motion.button>
+                            <div className="flex items-center justify-between pt-2">
+                                <p className="text-[11px] text-slate-600">
+                                    Los campos con <span className="text-amber-400/60">*</span> son requeridos.
+                                </p>
+                                <motion.button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="group flex items-center gap-3 px-8 py-4 bg-white text-[#080810]
+                                        text-sm font-medium uppercase tracking-[0.15em]
+                                        hover:bg-amber-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    {isSubmitting ? (
+                                        <><div className="w-4 h-4 border-2 border-slate-400 border-t-slate-800 rounded-full animate-spin" />Enviando…</>
+                                    ) : submitStatus === 'success' ? (
+                                        <><CheckCircle className="w-4 h-4 text-emerald-600" />Enviado</>
+                                    ) : (
+                                        <><Send className="w-4 h-4" />Enviar mensaje</>
+                                    )}
+                                </motion.button>
+                            </div>
 
-                            {/* Status Messages */}
                             <AnimatePresence>
                                 {submitStatus === 'success' && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                        className="mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-3"
+                                        initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                                        className="flex items-center gap-3 p-4 border-l-2 border-emerald-500/60 bg-emerald-500/5"
                                     >
-                                        <CheckCircle className="w-5 h-5 text-emerald-400" />
-                                        <p className="text-emerald-400 text-sm">
-                                            ¡Gracias! Hemos recibido tu mensaje. Te contactaremos pronto.
-                                        </p>
+                                        <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                                        <p className="text-sm text-emerald-400/80">¡Gracias! Hemos recibido tu mensaje. Te contactaremos pronto.</p>
                                     </motion.div>
                                 )}
                                 {submitStatus === 'error' && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                        className="mt-4 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center gap-3"
+                                        initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                                        className="flex items-center gap-3 p-4 border-l-2 border-red-500/60 bg-red-500/5"
                                     >
-                                        <AlertCircle className="w-5 h-5 text-red-400" />
-                                        <p className="text-red-400 text-sm">
-                                            Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.
-                                        </p>
+                                        <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                                        <p className="text-sm text-red-400/80">Hubo un error al enviar. Por favor, intenta de nuevo.</p>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -442,60 +332,66 @@ export default function Contact() {
                     </motion.div>
                 </div>
 
-                {/* FAQ Section */}
+                {/* FAQ */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="mt-20"
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="mt-28"
                 >
-                    <h3 className="text-2xl md:text-3xl font-bold text-white text-center mb-10">
-                        Preguntas Frecuentes
-                    </h3>
-
-                    <div className="max-w-3xl mx-auto space-y-3">
-                        {faqs.map((faq, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="rounded-xl bg-white/[0.02] border border-white/5 overflow-hidden"
+                    <div className="h-px bg-gradient-to-r from-transparent via-slate-700/40 to-transparent mb-16" />
+                    <div className="grid md:grid-cols-3 gap-12">
+                        <div>
+                            <p className="text-[10px] uppercase tracking-[0.3em] text-amber-400/70 mb-4">— FAQ</p>
+                            <h3
+                                className="text-3xl md:text-4xl font-light text-white leading-snug"
+                                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                             >
-                                <button
-                                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                                    className="w-full flex items-center justify-between p-5 text-left group"
+                                Preguntas<br />
+                                <em className="text-slate-500 not-italic">frecuentes</em>
+                            </h3>
+                        </div>
+                        <div className="md:col-span-2 space-y-0">
+                            {faqs.map((faq, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 16 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.07 }}
+                                    className="border-b border-slate-800/60 last:border-b-0"
                                 >
-                                    <span className="text-white font-medium group-hover:text-cyan-400 transition-colors pr-4">
-                                        {faq.question}
-                                    </span>
-                                    <motion.div
-                                        animate={{ rotate: openFaq === index ? 180 : 0 }}
-                                        transition={{ duration: 0.2 }}
-                                        className="shrink-0"
+                                    <button
+                                        onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                        className="w-full flex items-center justify-between py-5 text-left group"
                                     >
-                                        <ArrowRight className="w-5 h-5 text-cyan-400 rotate-90" />
-                                    </motion.div>
-                                </button>
-                                <AnimatePresence>
-                                    {openFaq === index && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: 'auto', opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.2 }}
-                                            className="overflow-hidden"
-                                        >
-                                            <div className="px-5 pb-5 text-gray-400 leading-relaxed">
-                                                {faq.answer}
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </motion.div>
-                        ))}
+                                        <span className="text-sm text-slate-300 group-hover:text-white transition-colors pr-6 leading-relaxed">
+                                            {faq.question}
+                                        </span>
+                                        <span className="shrink-0 w-7 h-7 flex items-center justify-center border border-slate-700/60 group-hover:border-amber-400/40 transition-colors">
+                                            {openFaq === i
+                                                ? <Minus className="w-3 h-3 text-amber-400/80" />
+                                                : <Plus className="w-3 h-3 text-slate-500 group-hover:text-amber-400/80 transition-colors" />
+                                            }
+                                        </span>
+                                    </button>
+                                    <AnimatePresence>
+                                        {openFaq === i && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                                                className="overflow-hidden"
+                                            >
+                                                <p className="pb-5 text-sm text-slate-500 leading-relaxed pr-12">{faq.answer}</p>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
                 </motion.div>
             </div>

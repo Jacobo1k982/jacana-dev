@@ -1,10 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-    Sparkles, Award, Users, Eye, Heart, TrendingUp,
-    LucideIcon
-} from 'lucide-react';
+import { Sparkles, Award, Users, Eye, Heart, TrendingUp, LucideIcon } from 'lucide-react';
+
+// ─────────────────────────────────────────────
+// TYPES
+// ─────────────────────────────────────────────
 
 interface Value {
     id: string;
@@ -19,6 +20,10 @@ interface ValueCardProps {
     index: number;
 }
 
+// ─────────────────────────────────────────────
+// MAPS
+// ─────────────────────────────────────────────
+
 const iconMap: Record<string, LucideIcon> = {
     Sparkles,
     Award,
@@ -28,101 +33,61 @@ const iconMap: Record<string, LucideIcon> = {
     TrendUp: TrendingUp,
 };
 
-const colorVariants = {
-    cyan: {
-        border: 'border-cyan-500/30',
-        borderHover: 'group-hover:border-cyan-400/60',
-        glow: 'shadow-cyan-500/20',
-        text: 'text-cyan-400',
-        bg: 'bg-cyan-500/10',
-        bgSubtle: 'bg-cyan-500/5',
-        gradient: 'from-cyan-500/20 to-cyan-600/5',
-    },
-    blue: {
-        border: 'border-blue-500/30',
-        borderHover: 'group-hover:border-blue-400/60',
-        glow: 'shadow-blue-500/20',
-        text: 'text-blue-400',
-        bg: 'bg-blue-500/10',
-        bgSubtle: 'bg-blue-500/5',
-        gradient: 'from-blue-500/20 to-blue-600/5',
-    },
-    purple: {
-        border: 'border-purple-500/30',
-        borderHover: 'group-hover:border-purple-400/60',
-        glow: 'shadow-purple-500/20',
-        text: 'text-purple-400',
-        bg: 'bg-purple-500/10',
-        bgSubtle: 'bg-purple-500/5',
-        gradient: 'from-purple-500/20 to-purple-600/5',
-    },
-    green: {
-        border: 'border-emerald-500/30',
-        borderHover: 'group-hover:border-emerald-400/60',
-        glow: 'shadow-emerald-500/20',
-        text: 'text-emerald-400',
-        bg: 'bg-emerald-500/10',
-        bgSubtle: 'bg-emerald-500/5',
-        gradient: 'from-emerald-500/20 to-emerald-600/5',
-    },
-    pink: {
-        border: 'border-pink-500/30',
-        borderHover: 'group-hover:border-pink-400/60',
-        glow: 'shadow-pink-500/20',
-        text: 'text-pink-400',
-        bg: 'bg-pink-500/10',
-        bgSubtle: 'bg-pink-500/5',
-        gradient: 'from-pink-500/20 to-pink-600/5',
-    },
-    orange: {
-        border: 'border-orange-500/30',
-        borderHover: 'group-hover:border-orange-400/60',
-        glow: 'shadow-orange-500/20',
-        text: 'text-orange-400',
-        bg: 'bg-orange-500/10',
-        bgSubtle: 'bg-orange-500/5',
-        gradient: 'from-orange-500/20 to-orange-600/5',
-    },
+const accentMap: Record<string, { text: string; border: string; bar: string }> = {
+    cyan: { text: 'text-sky-400', border: 'border-sky-400/30', bar: 'bg-sky-400/60' },
+    blue: { text: 'text-indigo-400', border: 'border-indigo-400/30', bar: 'bg-indigo-400/60' },
+    purple: { text: 'text-violet-400', border: 'border-violet-400/30', bar: 'bg-violet-400/60' },
+    green: { text: 'text-emerald-400', border: 'border-emerald-400/30', bar: 'bg-emerald-400/60' },
+    pink: { text: 'text-rose-400', border: 'border-rose-400/30', bar: 'bg-rose-400/60' },
+    orange: { text: 'text-orange-400', border: 'border-orange-400/30', bar: 'bg-orange-400/60' },
 };
 
+// ─────────────────────────────────────────────
+// COMPONENT
+// ─────────────────────────────────────────────
+
 export default function ValueCard({ value, index }: ValueCardProps) {
-    const Icon = iconMap[value.icon] || Sparkles;
-    const colors = colorVariants[value.color as keyof typeof colorVariants] || colorVariants.cyan;
+    const Icon = iconMap[value.icon] ?? Sparkles;
+    const accent = accentMap[value.color] ?? accentMap.cyan;
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 30 }}
+        <motion.article
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group relative"
+            transition={{ duration: 0.45, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative bg-[#080810] border border-slate-800/70 hover:border-slate-700/80 transition-colors duration-300 overflow-hidden flex flex-col"
         >
-            <div className={`relative h-full rounded-2xl border ${colors.border} ${colors.borderHover} bg-[#0a0a1a]/60 backdrop-blur-sm transition-all duration-300 overflow-hidden hover:shadow-xl ${colors.glow}`}>
-                {/* Gradient overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+            {/* Top accent line on hover */}
+            <div className={`absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${accent.bar}`} />
 
-                <div className="relative p-6 text-center">
-                    {/* Icon */}
-                    <div className={`w-14 h-14 mx-auto mb-4 rounded-xl ${colors.bg} border ${colors.border} flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                        <Icon className={`w-7 h-7 ${colors.text}`} />
-                    </div>
+            <div className="px-5 py-6 flex flex-col items-center text-center gap-4 flex-1">
+                {/* Step number — decorative, behind content */}
+                <span
+                    className="absolute top-3 right-3 text-[10px] font-medium text-slate-800 group-hover:text-slate-700 transition-colors select-none"
+                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                >
+                    {String(index + 1).padStart(2, '0')}
+                </span>
 
-                    {/* Title */}
-                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-white transition-colors">
-                        {value.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-sm text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
-                        {value.description}
-                    </p>
+                {/* Icon */}
+                <div className={`w-10 h-10 flex items-center justify-center border ${accent.border} group-hover:border-opacity-60 transition-colors`}>
+                    <Icon className={`w-4 h-4 ${accent.text}`} />
                 </div>
-            </div>
 
-            {/* Number indicator */}
-            <div className={`absolute -top-2 -right-2 w-8 h-8 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center text-sm font-bold ${colors.text} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
-                {String(index + 1).padStart(2, '0')}
+                {/* Title */}
+                <h3
+                    className="text-base font-light text-white leading-tight"
+                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                >
+                    {value.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-[11px] text-slate-600 leading-relaxed group-hover:text-slate-500 transition-colors">
+                    {value.description}
+                </p>
             </div>
-        </motion.div>
+        </motion.article>
     );
 }

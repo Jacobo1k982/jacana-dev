@@ -2,69 +2,43 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    X, CheckCircle2, Star, Clock, Users, Calendar, Building2,
+    X, CheckCircle2, Users, Calendar, Building2,
     ArrowRight, Code, Server, Smartphone, Cloud, Database, Brain,
     ShoppingCart, Wallet, Heart, Truck, ExternalLink, MapPin,
-    TrendingUp, Award, Target, Layers
+    TrendingUp, Layers, Quote
 } from 'lucide-react';
 import projectDetailsData from '@/data/projectDetails.json';
 
-// Icon map
+// ─────────────────────────────────────────────
+// MAPS
+// ─────────────────────────────────────────────
+
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
     Monitor: Code, Server, Smartphone, Cloud, Database, Brain,
-    ShoppingCart, Wallet, Heart, Truck
+    ShoppingCart, Wallet, Heart, Truck,
 };
 
-// Color themes
-const colorThemes: Record<string, { gradient: string; border: string; text: string; bg: string; glow: string }> = {
-    cyan: {
-        gradient: 'from-cyan-500 to-blue-500',
-        border: 'border-cyan-500/30',
-        text: 'text-cyan-400',
-        bg: 'bg-cyan-500/10',
-        glow: 'shadow-cyan-500/20'
-    },
-    blue: {
-        gradient: 'from-blue-500 to-indigo-500',
-        border: 'border-blue-500/30',
-        text: 'text-blue-400',
-        bg: 'bg-blue-500/10',
-        glow: 'shadow-blue-500/20'
-    },
-    purple: {
-        gradient: 'from-purple-500 to-pink-500',
-        border: 'border-purple-500/30',
-        text: 'text-purple-400',
-        bg: 'bg-purple-500/10',
-        glow: 'shadow-purple-500/20'
-    },
-    orange: {
-        gradient: 'from-orange-500 to-red-500',
-        border: 'border-orange-500/30',
-        text: 'text-orange-400',
-        bg: 'bg-orange-500/10',
-        glow: 'shadow-orange-500/20'
-    },
-    green: {
-        gradient: 'from-green-500 to-emerald-500',
-        border: 'border-green-500/30',
-        text: 'text-green-400',
-        bg: 'bg-green-500/10',
-        glow: 'shadow-green-500/20'
-    },
-    pink: {
-        gradient: 'from-pink-500 to-rose-500',
-        border: 'border-pink-500/30',
-        text: 'text-pink-400',
-        bg: 'bg-pink-500/10',
-        glow: 'shadow-pink-500/20'
-    }
+const accentMap: Record<string, { text: string; border: string; bar: string }> = {
+    cyan: { text: 'text-sky-400', border: 'border-sky-400/30', bar: 'bg-sky-400/60' },
+    blue: { text: 'text-indigo-400', border: 'border-indigo-400/30', bar: 'bg-indigo-400/60' },
+    purple: { text: 'text-violet-400', border: 'border-violet-400/30', bar: 'bg-violet-400/60' },
+    orange: { text: 'text-orange-400', border: 'border-orange-400/30', bar: 'bg-orange-400/60' },
+    green: { text: 'text-emerald-400', border: 'border-emerald-400/30', bar: 'bg-emerald-400/60' },
+    pink: { text: 'text-rose-400', border: 'border-rose-400/30', bar: 'bg-rose-400/60' },
 };
+
+// ─────────────────────────────────────────────
+// TYPES
+// ─────────────────────────────────────────────
 
 interface ProjectDetailDialogProps {
     projectId: string | null;
     onClose: () => void;
 }
+
+// ─────────────────────────────────────────────
+// COMPONENT
+// ─────────────────────────────────────────────
 
 export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogProps) {
     if (!projectId) return null;
@@ -72,8 +46,8 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
     const project = projectDetailsData[projectId as keyof typeof projectDetailsData];
     if (!project) return null;
 
-    const Icon = iconMap[project.icon] || Code;
-    const theme = colorThemes[project.color] || colorThemes.cyan;
+    const Icon = iconMap[project.icon] ?? Code;
+    const accent = accentMap[project.color] ?? accentMap.cyan;
 
     return (
         <AnimatePresence>
@@ -81,104 +55,115 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#06051d]/85 backdrop-blur-md"
                 onClick={onClose}
             >
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                    transition={{ type: 'spring', duration: 0.5 }}
-                    className="relative w-full max-w-5xl max-h-[90vh] overflow-hidden bg-[#0a0a1f] border border-white/10 rounded-3xl shadow-2xl"
-                    onClick={(e) => e.stopPropagation()}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 16 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="relative w-full max-w-4xl max-h-[90vh] bg-[#080810] border border-slate-800/80 shadow-2xl shadow-black/60 overflow-hidden flex flex-col"
+                    onClick={e => e.stopPropagation()}
                 >
-                    {/* Close button */}
-                    <button
-                        onClick={onClose}
-                        className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors"
-                    >
-                        <X className="w-5 h-5 text-gray-400" />
-                    </button>
+                    {/* Top accent */}
+                    <div className={`shrink-0 h-px ${accent.bar}`} />
 
-                    {/* Scrollable content */}
-                    <div className="overflow-y-auto max-h-[90vh] custom-scrollbar">
-                        {/* Header */}
-                        <div className={`relative h-56 bg-gradient-to-br ${theme.gradient} p-8`}>
-                            <div className="absolute inset-0 bg-black/20" />
-                            <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/4" />
-                            <div className="absolute bottom-0 left-0 w-56 h-56 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/4" />
+                    {/* Grain */}
+                    <div
+                        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+                        style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                            backgroundSize: '128px 128px',
+                        }}
+                    />
 
-                            <div className="relative h-full flex flex-col justify-end">
-                                <div className="flex items-end gap-4">
-                                    <div className={`w-16 h-16 rounded-2xl ${theme.bg} border ${theme.border} flex items-center justify-center`}>
-                                        <Icon className={`w-8 h-8 ${theme.text}`} />
-                                    </div>
-                                    <div className="flex-1">
-                                        <div className="flex items-center gap-2 mb-1">
-                                            <span className="text-sm text-white/70">{project.category}</span>
-                                            <span className="text-white/40">•</span>
-                                            <span className="text-sm text-white/70">{project.year}</span>
-                                        </div>
-                                        <h2 className="text-3xl font-bold text-white">{project.title}</h2>
-                                        <p className="text-white/80">{project.subtitle}</p>
-                                    </div>
+                    {/* ── HEADER ── */}
+                    <div className="relative px-8 pt-8 pb-6 border-b border-slate-800/60 shrink-0">
+                        <button
+                            onClick={onClose}
+                            className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center border border-slate-700/60 hover:border-amber-400/40 text-slate-600 hover:text-slate-300 transition-all"
+                        >
+                            <X className="w-3.5 h-3.5" />
+                        </button>
+
+                        <div className="flex items-start gap-4 pr-12">
+                            <div className={`w-11 h-11 flex items-center justify-center border ${accent.border} shrink-0`}>
+                                <Icon className={`w-5 h-5 ${accent.text}`} />
+                            </div>
+                            <div>
+                                <p className="text-[9px] uppercase tracking-[0.3em] text-amber-400/60 mb-1">
+                                    {project.category} · {project.year}
+                                </p>
+                                <h2
+                                    className="text-2xl md:text-3xl font-light text-white leading-tight"
+                                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                                >
+                                    {project.title}
+                                </h2>
+                                {project.subtitle && (
+                                    <p className="text-sm text-slate-500 mt-1">{project.subtitle}</p>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Meta row */}
+                        <div className="flex flex-wrap gap-6 mt-5">
+                            {[
+                                { icon: Building2, value: project.client },
+                                { icon: MapPin, value: project.industry },
+                                { icon: Calendar, value: project.duration },
+                                { icon: Users, value: project.team },
+                            ].map(({ icon: MetaIcon, value }) => value && (
+                                <div key={value} className="flex items-center gap-2">
+                                    <MetaIcon className="w-3.5 h-3.5 text-slate-600" />
+                                    <span className="text-xs text-slate-500">{value}</span>
                                 </div>
-                            </div>
+                            ))}
                         </div>
+                    </div>
 
-                        {/* Project info bar */}
-                        <div className="flex flex-wrap items-center gap-6 px-8 py-4 border-b border-white/5 bg-white/5">
-                            <div className="flex items-center gap-2">
-                                <Building2 className="w-4 h-4 text-gray-500" />
-                                <span className="text-sm text-gray-400">{project.client}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <MapPin className="w-4 h-4 text-gray-500" />
-                                <span className="text-sm text-gray-400">{project.industry}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Calendar className="w-4 h-4 text-gray-500" />
-                                <span className="text-sm text-gray-400">{project.duration}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <Users className="w-4 h-4 text-gray-500" />
-                                <span className="text-sm text-gray-400">{project.team}</span>
-                            </div>
-                        </div>
+                    {/* ── SCROLLABLE BODY ── */}
+                    <div className="overflow-y-auto flex-1">
+                        <div className="px-8 py-8 space-y-10">
 
-                        <div className="p-8 space-y-8">
                             {/* Description */}
                             <div>
-                                <h3 className="text-lg font-semibold text-white mb-2">Sobre el Proyecto</h3>
-                                <p className="text-gray-400 leading-relaxed">{project.longDescription}</p>
+                                <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-3">Sobre el proyecto</p>
+                                <p className="text-sm text-slate-400 leading-relaxed">{project.longDescription}</p>
                             </div>
 
-                            {/* Stats Grid */}
-                            <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
+                            {/* Stats */}
+                            <div className="grid grid-cols-3 md:grid-cols-6 gap-px bg-slate-800/40">
                                 {Object.entries(project.stats).slice(0, 6).map(([key, value]) => (
-                                    <div key={key} className={`p-4 rounded-xl ${theme.bg} border ${theme.border} text-center`}>
-                                        <div className={`text-xl font-bold ${theme.text}`}>{value}</div>
-                                        <div className="text-[10px] text-gray-500 uppercase tracking-wider">{key}</div>
+                                    <div key={key} className="bg-[#080810] px-3 py-4 text-center">
+                                        <p
+                                            className={`text-xl font-light ${accent.text} leading-none mb-1`}
+                                            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                                        >
+                                            {value as string}
+                                        </p>
+                                        <p className="text-[9px] uppercase tracking-[0.15em] text-slate-600">
+                                            {key}
+                                        </p>
                                     </div>
                                 ))}
                             </div>
 
                             {/* Highlights */}
                             <div>
-                                <h3 className="text-lg font-semibold text-white mb-4">Resultados Destacados</h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                    {project.highlights.map((highlight, idx) => (
+                                <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Resultados destacados</p>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-800/30">
+                                    {project.highlights.map((highlight, i) => (
                                         <motion.div
-                                            key={idx}
-                                            initial={{ opacity: 0, x: -20 }}
+                                            key={i}
+                                            initial={{ opacity: 0, x: -12 }}
                                             animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: idx * 0.05 }}
-                                            className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5"
+                                            transition={{ delay: i * 0.04 }}
+                                            className="bg-[#080810] flex items-center gap-3 px-4 py-3"
                                         >
-                                            <div className={`w-8 h-8 rounded-lg ${theme.bg} flex items-center justify-center`}>
-                                                <TrendingUp className={`w-4 h-4 ${theme.text}`} />
-                                            </div>
-                                            <span className="text-sm text-gray-300">{highlight}</span>
+                                            <TrendingUp className={`w-3.5 h-3.5 ${accent.text} shrink-0 opacity-70`} />
+                                            <span className="text-xs text-slate-400">{highlight}</span>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -186,21 +171,21 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
 
                             {/* Features */}
                             <div>
-                                <h3 className="text-lg font-semibold text-white mb-4">Características Principales</h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                    {project.features.map((feature, idx) => (
+                                <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Características principales</p>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-800/30">
+                                    {project.features.map((feature: { name: string; description: string }, i: number) => (
                                         <motion.div
-                                            key={idx}
-                                            initial={{ opacity: 0, y: 10 }}
+                                            key={i}
+                                            initial={{ opacity: 0, y: 8 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: idx * 0.05 }}
-                                            className={`p-4 rounded-xl ${theme.bg} border ${theme.border}`}
+                                            transition={{ delay: i * 0.04 }}
+                                            className="bg-[#080810] px-5 py-4"
                                         >
                                             <div className="flex items-start gap-3">
-                                                <CheckCircle2 className={`w-5 h-5 ${theme.text} shrink-0 mt-0.5`} />
+                                                <div className={`w-1 h-4 shrink-0 mt-0.5 ${accent.bar}`} />
                                                 <div>
-                                                    <h4 className="font-medium text-white">{feature.name}</h4>
-                                                    <p className="text-sm text-gray-500">{feature.description}</p>
+                                                    <p className="text-xs font-medium text-white mb-0.5">{feature.name}</p>
+                                                    <p className="text-xs text-slate-600 leading-relaxed">{feature.description}</p>
                                                 </div>
                                             </div>
                                         </motion.div>
@@ -208,17 +193,17 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
                                 </div>
                             </div>
 
-                            {/* Technologies */}
+                            {/* Tech stack */}
                             <div>
-                                <h3 className="text-lg font-semibold text-white mb-4">Stack Tecnológico</h3>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                    {project.technologies.map((tech, idx) => (
+                                <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Stack tecnológico</p>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {project.technologies.map((tech: { name: string; category: string }, i: number) => (
                                         <div
-                                            key={idx}
-                                            className="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/30 transition-colors"
+                                            key={i}
+                                            className={`px-3 py-1.5 border ${accent.border} flex items-center gap-2`}
                                         >
-                                            <div className={`text-sm font-medium ${theme.text}`}>{tech.name}</div>
-                                            <div className="text-xs text-gray-500">{tech.category}</div>
+                                            <span className={`text-xs ${accent.text}`}>{tech.name}</span>
+                                            <span className="text-[9px] text-slate-700 uppercase tracking-[0.1em]">{tech.category}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -226,18 +211,15 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
 
                             {/* Architecture */}
                             <div>
-                                <h3 className="text-lg font-semibold text-white mb-4">Arquitectura del Sistema</h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                                    {Object.entries(project.architecture).map(([key, value], idx) => (
-                                        <div
-                                            key={key}
-                                            className="p-4 rounded-xl bg-white/5 border border-white/10"
-                                        >
+                                <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Arquitectura del sistema</p>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-800/30">
+                                    {Object.entries(project.architecture).map(([key, value], i) => (
+                                        <div key={key} className="bg-[#080810] px-4 py-4">
                                             <div className="flex items-center gap-2 mb-2">
-                                                <Layers className={`w-4 h-4 ${theme.text}`} />
-                                                <span className="text-sm font-medium text-white capitalize">{key}</span>
+                                                <Layers className={`w-3 h-3 ${accent.text} opacity-70`} />
+                                                <span className="text-[10px] uppercase tracking-[0.15em] text-slate-500 capitalize">{key}</span>
                                             </div>
-                                            <p className="text-xs text-gray-500">{value}</p>
+                                            <p className="text-xs text-slate-600 leading-relaxed">{value as string}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -245,41 +227,51 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
 
                             {/* Testimonial */}
                             {project.testimonials && project.testimonials.length > 0 && (
-                                <div className={`p-6 rounded-xl ${theme.bg} border ${theme.border}`}>
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-bold text-lg shrink-0">
+                                <div className="border-l-2 border-amber-400/30 pl-6">
+                                    <Quote className="w-4 h-4 text-amber-400/40 mb-3" />
+                                    <p className="text-sm text-slate-400 italic leading-relaxed mb-4">
+                                        "{project.testimonials[0].quote}"
+                                    </p>
+                                    <div className="flex items-center gap-3">
+                                        <div className={`w-8 h-8 flex items-center justify-center border ${accent.border} text-[10px] font-medium ${accent.text}`}>
                                             {project.testimonials[0].author.charAt(0)}
                                         </div>
                                         <div>
-                                            <p className="text-gray-300 italic mb-3">&ldquo;{project.testimonials[0].quote}&rdquo;</p>
-                                            <div className="font-medium text-white">{project.testimonials[0].author}</div>
-                                            <div className="text-sm text-gray-500">{project.testimonials[0].role}</div>
+                                            <p className="text-xs text-white font-medium leading-none mb-0.5">
+                                                {project.testimonials[0].author}
+                                            </p>
+                                            <p className="text-[10px] text-slate-600">
+                                                {project.testimonials[0].role}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             )}
 
-                            {/* CTA */}
-                            <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-white/5">
+                            {/* CTAs */}
+                            <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-800/60">
                                 <motion.button
-                                    whileHover={{ scale: 1.02 }}
+                                    whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r ${theme.gradient} text-white font-bold rounded-xl`}
+                                    className="flex-1 flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
                                 >
-                                    <span>Ver Sitio en Vivo</span>
-                                    <ExternalLink className="w-5 h-5" />
+                                    Ver sitio en vivo
+                                    <ExternalLink className="w-3.5 h-3.5" />
                                 </motion.button>
                                 <motion.button
-                                    whileHover={{ scale: 1.02 }}
+                                    whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-white/5 border border-white/10 text-white font-medium rounded-xl hover:bg-white/10 transition-colors"
+                                    className="flex-1 flex items-center justify-center gap-2.5 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
                                 >
-                                    <span>Proyecto Similar</span>
-                                    <ArrowRight className="w-5 h-5" />
+                                    Proyecto similar
+                                    <ArrowRight className="w-3.5 h-3.5" />
                                 </motion.button>
                             </div>
                         </div>
                     </div>
+
+                    {/* Bottom accent */}
+                    <div className={`shrink-0 h-px ${accent.bar} opacity-30`} />
                 </motion.div>
             </motion.div>
         </AnimatePresence>

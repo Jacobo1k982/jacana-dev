@@ -1,66 +1,28 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-    Monitor, Server, Cloud, GitBranch, Database, Brain,
-    ChevronDown
+    Monitor, Server, Cloud, GitBranch, Database, Brain, ArrowRight
 } from 'lucide-react';
 import TechnologyCard from '@/components/TechnologyCard';
 import technologiesData from '@/data/technologies.json';
 
+// ─────────────────────────────────────────────
+// CONSTANTS
+// ─────────────────────────────────────────────
+
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-    Monitor,
-    Server,
-    Cloud,
-    GitBranch,
-    Database,
-    Brain,
+    Monitor, Server, Cloud, GitBranch, Database, Brain,
 };
 
-const colorVariants = {
-    cyan: {
-        text: 'text-cyan-400',
-        bg: 'bg-cyan-500/10',
-        border: 'border-cyan-500/30',
-        gradient: 'from-cyan-400 to-cyan-600',
-        glow: 'shadow-cyan-500/30',
-    },
-    blue: {
-        text: 'text-blue-400',
-        bg: 'bg-blue-500/10',
-        border: 'border-blue-500/30',
-        gradient: 'from-blue-400 to-blue-600',
-        glow: 'shadow-blue-500/30',
-    },
-    purple: {
-        text: 'text-purple-400',
-        bg: 'bg-purple-500/10',
-        border: 'border-purple-500/30',
-        gradient: 'from-purple-400 to-purple-600',
-        glow: 'shadow-purple-500/30',
-    },
-    green: {
-        text: 'text-emerald-400',
-        bg: 'bg-emerald-500/10',
-        border: 'border-emerald-500/30',
-        gradient: 'from-emerald-400 to-emerald-600',
-        glow: 'shadow-emerald-500/30',
-    },
-    orange: {
-        text: 'text-orange-400',
-        bg: 'bg-orange-500/10',
-        border: 'border-orange-500/30',
-        gradient: 'from-orange-400 to-orange-600',
-        glow: 'shadow-orange-500/30',
-    },
-    pink: {
-        text: 'text-pink-400',
-        bg: 'bg-pink-500/10',
-        border: 'border-pink-500/30',
-        gradient: 'from-pink-400 to-pink-600',
-        glow: 'shadow-pink-500/30',
-    },
+const accentMap: Record<string, { text: string; border: string; bar: string }> = {
+    cyan: { text: 'text-sky-400', border: 'border-sky-400/30', bar: 'bg-sky-400/60' },
+    blue: { text: 'text-indigo-400', border: 'border-indigo-400/30', bar: 'bg-indigo-400/60' },
+    purple: { text: 'text-violet-400', border: 'border-violet-400/30', bar: 'bg-violet-400/60' },
+    green: { text: 'text-emerald-400', border: 'border-emerald-400/30', bar: 'bg-emerald-400/60' },
+    orange: { text: 'text-orange-400', border: 'border-orange-400/30', bar: 'bg-orange-400/60' },
+    pink: { text: 'text-rose-400', border: 'border-rose-400/30', bar: 'bg-rose-400/60' },
 };
 
 interface TechCategory {
@@ -74,138 +36,132 @@ interface TechCategory {
         icon: string;
         description: string;
         features: string[];
-        stats: {
-            performance: number;
-            popularity: number;
-            learning: number;
-        };
+        stats: { performance: number; popularity: number; learning: number };
         version: string;
         category: string;
     }>;
 }
 
+// ─────────────────────────────────────────────
+// COMPONENT
+// ─────────────────────────────────────────────
+
 export default function TechSection() {
     const [activeCategory, setActiveCategory] = useState<string>('frontend');
     const categories = Object.entries(technologiesData) as [string, TechCategory][];
+    const active = categories.find(([key]) => key === activeCategory);
 
     return (
-        <section id="tech" className="relative py-20 md:py-32 bg-[#06051d]">
-            {/* Background elements */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/3 rounded-full blur-3xl" />
-            </div>
+        <section id="tech" className="relative py-24 md:py-36 bg-[#080810] overflow-hidden">
+
+            {/* Grain */}
+            <div
+                className="absolute inset-0 opacity-[0.025] pointer-events-none"
+                style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                    backgroundSize: '128px 128px',
+                }}
+            />
+            <div className="absolute top-1/3 left-0 w-[500px] h-[500px] rounded-full bg-indigo-900/10 blur-[140px] pointer-events-none" />
+            <div className="absolute bottom-1/3 right-0 w-[400px] h-[400px] rounded-full bg-amber-900/8 blur-[140px] pointer-events-none" />
 
             <div className="relative max-w-7xl mx-auto px-6 md:px-8">
-                {/* Section Header */}
+
+                {/* ── HEADER ── */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-12 md:mb-16"
+                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    className="mb-16"
                 >
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 mb-6"
-                    >
-                        <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                        <span className="text-sm text-cyan-400 font-medium">
-                            Stack Tecnológico
-                        </span>
-                    </motion.div>
-
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                        Tecnologías que{' '}
-                        <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-                            Dominamos
-                        </span>
-                    </h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-                        Utilizamos las herramientas más modernas y eficientes para construir
-                        soluciones tecnológicas de alto rendimiento y escalabilidad.
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/70 mb-5">
+                        — Stack Tecnológico
                     </p>
+                    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                        <h2
+                            className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.05] tracking-tight"
+                            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                        >
+                            Tecnologías que<br />
+                            <em className="text-slate-400 not-italic">dominamos</em>
+                        </h2>
+                        <p className="text-slate-500 text-sm max-w-xs leading-relaxed md:text-right">
+                            Herramientas modernas para construir soluciones de alto rendimiento y escalabilidad.
+                        </p>
+                    </div>
+                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-amber-400/20 to-transparent" />
                 </motion.div>
 
-                {/* Category Tabs */}
+                {/* ── CATEGORY TABS — horizontal bar ── */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 md:mb-12"
+                    transition={{ duration: 0.5, delay: 0.15 }}
+                    className="flex flex-wrap border border-slate-800/60 mb-12"
                 >
-                    {categories.map(([key, category]) => {
-                        const Icon = iconMap[category.icon] || Monitor;
-                        const colors = colorVariants[category.color as keyof typeof colorVariants] || colorVariants.cyan;
+                    {categories.map(([key, category], i) => {
+                        const Icon = iconMap[category.icon] ?? Monitor;
+                        const accent = accentMap[category.color] ?? accentMap.cyan;
                         const isActive = activeCategory === key;
 
                         return (
-                            <motion.button
+                            <button
                                 key={key}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
                                 onClick={() => setActiveCategory(key)}
-                                className={`relative flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 rounded-xl text-sm md:text-base font-medium transition-all duration-300 ${isActive
-                                        ? `${colors.bg} ${colors.text} border ${colors.border} shadow-lg ${colors.glow}`
-                                        : 'bg-gray-800/30 text-gray-400 border border-gray-700/30 hover:text-white hover:bg-gray-800/50'
+                                className={`relative flex items-center gap-2.5 px-5 py-3.5 text-xs font-medium uppercase tracking-[0.12em] transition-all border-r border-slate-800/60 last:border-r-0 ${isActive
+                                        ? 'text-white bg-slate-900/60'
+                                        : 'text-slate-500 hover:text-slate-300 hover:bg-slate-900/30'
                                     }`}
                             >
-                                <Icon className="w-4 h-4 md:w-5 md:h-5" />
-                                <span className="hidden sm:inline">{category.title}</span>
-                                <span className="sm:hidden">{category.title.slice(0, 3)}</span>
-
+                                {/* Active top line */}
                                 {isActive && (
-                                    <motion.div
-                                        layoutId="activeTab"
-                                        className={`absolute inset-0 rounded-xl bg-gradient-to-r ${colors.gradient} opacity-10`}
-                                        transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                                    <motion.span
+                                        layoutId="techTabIndicator"
+                                        className={`absolute top-0 left-0 right-0 h-px ${accent.bar}`}
+                                        transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
                                     />
                                 )}
-                            </motion.button>
+                                <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? accent.text : 'text-slate-600'}`} />
+                                <span className="hidden sm:inline">{category.title}</span>
+                                <span className="sm:hidden">{category.title.slice(0, 3)}</span>
+                            </button>
                         );
                     })}
                 </motion.div>
 
-                {/* Category Description */}
-                {categories.map(([key, category]) => {
-                    const colors = colorVariants[category.color as keyof typeof colorVariants] || colorVariants.cyan;
-
-                    if (activeCategory !== key) return null;
-
-                    return (
+                {/* ── ACTIVE CATEGORY DESCRIPTION ── */}
+                <AnimatePresence mode="wait">
+                    {active && (
                         <motion.div
-                            key={key}
-                            initial={{ opacity: 0, y: 10 }}
+                            key={activeCategory + '-desc'}
+                            initial={{ opacity: 0, y: 6 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.3 }}
-                            className="mb-8 text-center"
+                            exit={{ opacity: 0, y: -6 }}
+                            transition={{ duration: 0.25 }}
+                            className="mb-8 flex items-center gap-4"
                         >
-                            <p className={`${colors.text} text-sm md:text-base`}>
-                                {category.description}
+                            <div className={`w-1 h-4 shrink-0 ${accentMap[active[1].color]?.bar ?? 'bg-amber-400/60'}`} />
+                            <p className="text-sm text-slate-500 leading-relaxed">
+                                {active[1].description}
                             </p>
                         </motion.div>
-                    );
-                })}
+                    )}
+                </AnimatePresence>
 
-                {/* Technology Cards Grid */}
-                <div className="relative">
+                {/* ── TECHNOLOGY CARDS GRID ── */}
+                <AnimatePresence mode="wait">
                     {categories.map(([key, category]) => {
                         if (activeCategory !== key) return null;
-
                         return (
                             <motion.div
                                 key={key}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+                                initial={{ opacity: 0, y: 12 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -8 }}
+                                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-800/30"
                             >
                                 {category.technologies.map((tech, index) => (
                                     <TechnologyCard
@@ -218,31 +174,42 @@ export default function TechSection() {
                             </motion.div>
                         );
                     })}
-                </div>
+                </AnimatePresence>
 
-                {/* Bottom CTA */}
+                {/* ── CTA ── */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="mt-16 text-center"
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="mt-16 pt-12 border-t border-slate-800/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
                 >
-                    <div className="inline-flex flex-col sm:flex-row items-center gap-4">
-                        <motion.button
-                            whileHover={{ scale: 1.02 }}
+                    <div>
+                        <p className="text-[10px] uppercase tracking-[0.25em] text-amber-400/60 mb-1">
+                            — ¿Necesitas asesoría?
+                        </p>
+                        <p className="text-sm text-slate-500">
+                            Hablemos sobre cuál stack es el adecuado para tu proyecto.
+                        </p>
+                    </div>
+                    <div className="flex flex-wrap gap-3">
+                        <motion.a
+                            href="#contact"
+                            whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.98 }}
-                            className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium text-sm md:text-base shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 transition-all"
+                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
                         >
-                            Ver Todas las Tecnologías
-                        </motion.button>
-                        <motion.button
-                            whileHover={{ scale: 1.02 }}
+                            Consulta técnica
+                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                        </motion.a>
+                        <motion.a
+                            href="#projects"
+                            whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.98 }}
-                            className="px-6 py-3 rounded-xl border border-gray-700 text-gray-300 font-medium text-sm md:text-base hover:border-cyan-500/30 hover:text-cyan-400 transition-all"
+                            className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
                         >
-                            Solicitar Consulta Técnica
-                        </motion.button>
+                            Ver proyectos
+                        </motion.a>
                     </div>
                 </motion.div>
             </div>

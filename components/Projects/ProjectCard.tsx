@@ -3,72 +3,16 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    ExternalLink, Users, Calendar, Clock, TrendingUp,
-    Award, Quote, ChevronRight, Star, Building2
+    ExternalLink, Users, Calendar, Clock,
+    Award, Quote, ChevronRight, Star, Building2, Plus, Minus
 } from 'lucide-react';
 
+// ─────────────────────────────────────────────
+// TYPES
+// ─────────────────────────────────────────────
+
 interface ProjectMetrics {
-    users?: string;
-    transactions?: string;
-    uptime?: string;
-    performance?: string;
-    satisfaction?: string;
-    downloads?: string;
-    consultations?: string;
-    rating?: string;
-    responseTime?: string;
-    retention?: string;
-    savings?: string;
-    vendors?: string;
-    products?: string;
-    monthlySales?: string;
-    conversion?: string;
-    avgOrderValue?: string;
-    growth?: string;
-    dataProcessed?: string;
-    predictions?: string;
-    accuracy?: string;
-    timeSaved?: string;
-    insights?: string;
-    roi?: string;
-    drivers?: string;
-    deliveries?: string;
-    avgDeliveryTime?: string;
-    coverage?: string;
-    efficiency?: string;
-    students?: string;
-    courses?: string;
-    completion?: string;
-    hoursTaught?: string;
-    schools?: string;
-    properties?: string;
-    agents?: string;
-    sales?: string;
-    avgTimeToSell?: string;
-    leads?: string;
-    restaurants?: string;
-    ordersProcessed?: string;
-    revenue?: string;
-    avgServiceTime?: string;
-    customerSatisfaction?: string;
-    automation?: string;
-    avgResponse?: string;
-    queriesHandled?: string;
-    costReduction?: string;
-    availability?: string;
-    bookings?: string;
-    destinations?: string;
-    partners?: string;
-    nps?: string;
-    repeat?: string;
-    activeUsers?: string;
-    workouts?: string;
-    premium?: string;
-    employees?: string;
-    companies?: string;
-    hires?: string;
-    timeToHire?: string;
-    fraudReduction?: string;
+    [key: string]: string | undefined;
 }
 
 interface ProjectClient {
@@ -120,295 +64,263 @@ interface ProjectCardProps {
     index: number;
 }
 
-const colorVariants = {
-    cyan: {
-        border: 'border-cyan-500/30',
-        borderHover: 'hover:border-cyan-400/60',
-        glow: 'shadow-cyan-500/20',
-        text: 'text-cyan-400',
-        bg: 'bg-cyan-500/10',
-        bgSubtle: 'bg-cyan-500/5',
-        gradient: 'from-cyan-500/30 to-cyan-600/10',
-        badge: 'bg-cyan-500/20 text-cyan-400',
-    },
-    blue: {
-        border: 'border-blue-500/30',
-        borderHover: 'hover:border-blue-400/60',
-        glow: 'shadow-blue-500/20',
-        text: 'text-blue-400',
-        bg: 'bg-blue-500/10',
-        bgSubtle: 'bg-blue-500/5',
-        gradient: 'from-blue-500/30 to-blue-600/10',
-        badge: 'bg-blue-500/20 text-blue-400',
-    },
-    purple: {
-        border: 'border-purple-500/30',
-        borderHover: 'hover:border-purple-400/60',
-        glow: 'shadow-purple-500/20',
-        text: 'text-purple-400',
-        bg: 'bg-purple-500/10',
-        bgSubtle: 'bg-purple-500/5',
-        gradient: 'from-purple-500/30 to-purple-600/10',
-        badge: 'bg-purple-500/20 text-purple-400',
-    },
-    green: {
-        border: 'border-emerald-500/30',
-        borderHover: 'hover:border-emerald-400/60',
-        glow: 'shadow-emerald-500/20',
-        text: 'text-emerald-400',
-        bg: 'bg-emerald-500/10',
-        bgSubtle: 'bg-emerald-500/5',
-        gradient: 'from-emerald-500/30 to-emerald-600/10',
-        badge: 'bg-emerald-500/20 text-emerald-400',
-    },
-    orange: {
-        border: 'border-orange-500/30',
-        borderHover: 'hover:border-orange-400/60',
-        glow: 'shadow-orange-500/20',
-        text: 'text-orange-400',
-        bg: 'bg-orange-500/10',
-        bgSubtle: 'bg-orange-500/5',
-        gradient: 'from-orange-500/30 to-orange-600/10',
-        badge: 'bg-orange-500/20 text-orange-400',
-    },
-    pink: {
-        border: 'border-pink-500/30',
-        borderHover: 'hover:border-pink-400/60',
-        glow: 'shadow-pink-500/20',
-        text: 'text-pink-400',
-        bg: 'bg-pink-500/10',
-        bgSubtle: 'bg-pink-500/5',
-        gradient: 'from-pink-500/30 to-pink-600/10',
-        badge: 'bg-pink-500/20 text-pink-400',
-    },
+// ─────────────────────────────────────────────
+// ACCENT MAP — single color per category
+// ─────────────────────────────────────────────
+
+const accentMap: Record<string, { text: string; border: string; bg: string }> = {
+    cyan: { text: 'text-sky-400', border: 'border-sky-400/30', bg: 'bg-sky-400/6' },
+    blue: { text: 'text-indigo-400', border: 'border-indigo-400/30', bg: 'bg-indigo-400/6' },
+    purple: { text: 'text-violet-400', border: 'border-violet-400/30', bg: 'bg-violet-400/6' },
+    green: { text: 'text-emerald-400', border: 'border-emerald-400/30', bg: 'bg-emerald-400/6' },
+    orange: { text: 'text-orange-400', border: 'border-orange-400/30', bg: 'bg-orange-400/6' },
+    pink: { text: 'text-rose-400', border: 'border-rose-400/30', bg: 'bg-rose-400/6' },
 };
 
 const categoryLabels: Record<string, string> = {
-    web: 'Aplicación Web',
-    mobile: 'App Móvil',
+    web: 'Web App',
+    mobile: 'Móvil',
     ai: 'IA & ML',
     ecommerce: 'E-commerce',
 };
 
-export default function ProjectCard({ project, index }: ProjectCardProps) {
-    const [isHovered, setIsHovered] = useState(false);
-    const [showDetails, setShowDetails] = useState(false);
-    const colors = colorVariants[project.color as keyof typeof colorVariants] || colorVariants.cyan;
+// Converts camelCase key → readable label
+function formatMetricKey(key: string): string {
+    return key
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/^./, s => s.toUpperCase())
+        .trim();
+}
 
-    // Get key metrics (first 3)
-    const keyMetrics = Object.entries(project.metrics).slice(0, 3);
+// ─────────────────────────────────────────────
+// COMPONENT
+// ─────────────────────────────────────────────
+
+export default function ProjectCard({ project, index }: ProjectCardProps) {
+    const [showDetails, setShowDetails] = useState(false);
+    const accent = accentMap[project.color] ?? accentMap.cyan;
+    const metrics = Object.entries(project.metrics).filter(([, v]) => v).slice(0, 3);
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 40 }}
+        <motion.article
+            initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            onHoverStart={() => setIsHovered(true)}
-            onHoverEnd={() => setIsHovered(false)}
-            className={`relative group rounded-2xl border ${colors.border} ${colors.borderHover} bg-[#0a0a1a]/90 backdrop-blur-sm transition-all duration-300 overflow-hidden ${isHovered ? `shadow-xl ${colors.glow}` : ''}`}
+            transition={{ duration: 0.55, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative flex flex-col bg-[#080810] border border-slate-800/70 hover:border-slate-700/80 transition-colors duration-300 overflow-hidden"
         >
-            {/* Featured Badge */}
-            {project.featured && (
-                <div className="absolute top-4 left-4 z-20">
-                    <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full ${colors.badge} text-xs font-semibold backdrop-blur-sm`}>
-                        <Star className="w-3 h-3 fill-current" />
-                        <span>Destacado</span>
-                    </div>
-                </div>
-            )}
+            {/* Top accent line — colored, appears on hover */}
+            <div className={`absolute top-0 left-0 right-0 h-px ${accent.border.replace('border-', 'bg-').replace('/30', '/60')} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
-            {/* Header with Client Info */}
-            <div className={`relative p-6 border-b border-gray-800/50`}>
-                {/* Background gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${colors.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
-                <div className="relative">
-                    {/* Category & Duration */}
-                    <div className="flex items-center justify-between mb-3">
-                        <span className={`px-2.5 py-1 rounded-lg text-xs font-medium ${colors.bgSubtle} ${colors.text} border ${colors.border}`}>
-                            {categoryLabels[project.category]}
+            {/* ── HEADER ── */}
+            <div className="px-6 pt-6 pb-5 border-b border-slate-800/60">
+                {/* Row: category + duration + featured */}
+                <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                        <span className={`text-[9px] uppercase tracking-[0.25em] font-medium ${accent.text}`}>
+                            {categoryLabels[project.category] ?? project.category}
                         </span>
-                        <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                            <Clock className="w-3 h-3" />
-                            <span>{project.timeline.duration}</span>
-                        </div>
+                        {project.featured && (
+                            <>
+                                <span className="text-slate-700">·</span>
+                                <span className="flex items-center gap-1 text-[9px] uppercase tracking-[0.2em] text-amber-400/70">
+                                    <Star className="w-2.5 h-2.5 fill-current" />
+                                    Destacado
+                                </span>
+                            </>
+                        )}
                     </div>
-
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-white transition-colors">
-                        {project.title}
-                    </h3>
-
-                    {/* Client */}
-                    <div className="flex items-center gap-2 mb-3">
-                        <Building2 className={`w-4 h-4 ${colors.text}`} />
-                        <div>
-                            <span className="text-sm font-medium text-gray-300">{project.client.name}</span>
-                            <span className="text-xs text-gray-500 ml-2">• {project.client.industry}</span>
-                        </div>
+                    <div className="flex items-center gap-1.5 text-[10px] text-slate-600">
+                        <Clock className="w-3 h-3" />
+                        {project.timeline.duration}
                     </div>
-
-                    {/* Description */}
-                    <p className="text-sm text-gray-400 leading-relaxed line-clamp-2">
-                        {project.shortDescription}
-                    </p>
                 </div>
+
+                {/* Title */}
+                <h3
+                    className="text-xl font-light text-white mb-3 leading-snug group-hover:text-white transition-colors"
+                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                >
+                    {project.title}
+                </h3>
+
+                {/* Client */}
+                <div className="flex items-center gap-2 mb-4">
+                    <Building2 className={`w-3.5 h-3.5 ${accent.text} shrink-0`} />
+                    <span className="text-xs text-slate-400">{project.client.name}</span>
+                    <span className="text-slate-700 text-xs">·</span>
+                    <span className="text-xs text-slate-600">{project.client.industry}</span>
+                </div>
+
+                {/* Description */}
+                <p className="text-sm text-slate-500 leading-relaxed line-clamp-2">
+                    {project.shortDescription}
+                </p>
             </div>
 
-            {/* Metrics Section */}
-            <div className="p-4 border-b border-gray-800/50">
-                <div className="grid grid-cols-3 gap-2">
-                    {keyMetrics.map(([key, value]) => (
-                        <div key={key} className={`p-3 rounded-xl ${colors.bgSubtle} text-center`}>
-                            <div className={`text-lg font-bold ${colors.text}`}>
-                                {value}
-                            </div>
-                            <div className="text-[10px] text-gray-500 uppercase tracking-wider mt-0.5">
-                                {key.replace(/([A-Z])/g, ' $1').trim()}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Technologies */}
-            <div className="p-4 border-b border-gray-800/50">
-                <div className="flex flex-wrap gap-1.5">
-                    {project.technologies.slice(0, 5).map((tech, i) => (
-                        <span
-                            key={i}
-                            className={`px-2 py-0.5 text-[10px] ${colors.bgSubtle} ${colors.text} rounded-full border ${colors.border}`}
+            {/* ── METRICS ── */}
+            <div className="grid grid-cols-3 divide-x divide-slate-800/60 border-b border-slate-800/60">
+                {metrics.map(([key, value]) => (
+                    <div key={key} className="px-4 py-4 text-center">
+                        <p
+                            className={`text-xl font-light ${accent.text} leading-none mb-1`}
+                            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                         >
-                            {tech}
-                        </span>
-                    ))}
-                    {project.technologies.length > 5 && (
-                        <span className={`px-2 py-0.5 text-[10px] ${colors.bgSubtle} text-gray-400 rounded-full border border-gray-700/50`}>
-                            +{project.technologies.length - 5}
-                        </span>
-                    )}
-                </div>
-            </div>
-
-            {/* Testimonial Preview */}
-            {project.testimonial && (
-                <div className="p-4 bg-gradient-to-r from-gray-900/50 to-transparent">
-                    <div className="flex items-start gap-2">
-                        <Quote className={`w-4 h-4 ${colors.text} mt-1 shrink-0`} />
-                        <p className="text-xs text-gray-400 italic line-clamp-2">
-                            &ldquo;{project.testimonial.quote}&rdquo;
+                            {value}
+                        </p>
+                        <p className="text-[9px] uppercase tracking-[0.18em] text-slate-600 leading-tight">
+                            {formatMetricKey(key)}
                         </p>
                     </div>
-                    <div className="flex items-center gap-2 mt-2 ml-6">
-                        <div className={`w-5 h-5 rounded-full ${colors.bg} flex items-center justify-center`}>
-                            <span className={`text-[8px] font-bold ${colors.text}`}>
-                                {project.testimonial.author.split(' ').map(n => n[0]).join('')}
-                            </span>
-                        </div>
+                ))}
+            </div>
+
+            {/* ── TECHNOLOGIES ── */}
+            <div className="px-6 py-4 border-b border-slate-800/60 flex flex-wrap gap-1.5">
+                {project.technologies.slice(0, 5).map((tech, i) => (
+                    <span
+                        key={i}
+                        className={`px-2.5 py-1 text-[10px] uppercase tracking-[0.1em] border ${accent.border} ${accent.text} transition-colors`}
+                    >
+                        {tech}
+                    </span>
+                ))}
+                {project.technologies.length > 5 && (
+                    <span className="px-2.5 py-1 text-[10px] uppercase tracking-[0.1em] border border-slate-800/60 text-slate-600">
+                        +{project.technologies.length - 5}
+                    </span>
+                )}
+            </div>
+
+            {/* ── TESTIMONIAL ── */}
+            {project.testimonial && (
+                <div className="px-6 py-4 border-b border-slate-800/60">
+                    <div className="flex items-start gap-3">
+                        <Quote className={`w-3.5 h-3.5 ${accent.text} shrink-0 mt-0.5 opacity-60`} />
                         <div>
-                            <span className="text-[10px] text-gray-300">{project.testimonial.author}</span>
-                            <span className="text-[10px] text-gray-500 ml-1">• {project.testimonial.role.split(',')[0]}</span>
+                            <p className="text-xs text-slate-500 italic leading-relaxed line-clamp-2 mb-2">
+                                "{project.testimonial.quote}"
+                            </p>
+                            <div className="flex items-center gap-2">
+                                <div className={`w-5 h-5 flex items-center justify-center border ${accent.border} ${accent.text} text-[8px] font-medium`}>
+                                    {project.testimonial.author.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                                </div>
+                                <span className="text-[10px] text-slate-500">
+                                    {project.testimonial.author}
+                                    <span className="text-slate-700 mx-1">·</span>
+                                    {project.testimonial.role.split(',')[0]}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
             )}
 
-            {/* Awards */}
+            {/* ── AWARDS ── */}
             {project.awards && project.awards.length > 0 && (
-                <div className="px-4 py-3 border-t border-gray-800/30 flex items-center gap-2">
-                    <Award className={`w-4 h-4 ${colors.text}`} />
-                    <span className="text-[10px] text-gray-400">{project.awards[0]}</span>
+                <div className="px-6 py-3 border-b border-slate-800/60 flex items-center gap-2">
+                    <Award className={`w-3.5 h-3.5 ${accent.text} shrink-0`} />
+                    <span className="text-[10px] uppercase tracking-[0.15em] text-slate-600">
+                        {project.awards[0]}
+                    </span>
                 </div>
             )}
 
-            {/* Action Buttons */}
-            <div className="p-4 flex gap-2">
+            {/* ── ACTIONS ── */}
+            <div className="px-6 py-4 flex items-center gap-3 mt-auto">
                 <motion.button
-                    whileHover={{ scale: 1.02 }}
+                    whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setShowDetails(!showDetails)}
-                    className={`flex-1 py-2.5 rounded-xl ${colors.bg} border ${colors.border} text-sm font-medium ${colors.text} flex items-center justify-center gap-2 hover:shadow-lg transition-all`}
+                    className={`flex-1 flex items-center justify-between px-4 py-2.5 border ${showDetails
+                            ? `${accent.border} ${accent.text}`
+                            : 'border-slate-700/60 text-slate-400 hover:text-white hover:border-slate-600'
+                        } text-xs font-medium uppercase tracking-[0.1em] transition-all`}
                 >
-                    Ver Detalles
-                    <ChevronRight className={`w-4 h-4 transition-transform ${showDetails ? 'rotate-90' : ''}`} />
+                    {showDetails ? 'Ocultar' : 'Ver detalles'}
+                    <motion.span
+                        animate={{ rotate: showDetails ? 45 : 0 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <Plus className="w-3.5 h-3.5" />
+                    </motion.span>
                 </motion.button>
-                <motion.button
-                    whileHover={{ scale: 1.02 }}
+
+                <motion.a
+                    href={project.client.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
-                    className="px-4 py-2.5 rounded-xl border border-gray-700 text-gray-400 hover:text-white hover:border-gray-600 transition-all"
+                    className="w-10 h-10 flex items-center justify-center border border-slate-700/60 hover:border-amber-400/40 text-slate-600 hover:text-slate-300 transition-all"
+                    title="Ver proyecto"
                 >
-                    <ExternalLink className="w-4 h-4" />
-                </motion.button>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                </motion.a>
             </div>
 
-            {/* Expandable Details */}
+            {/* ── EXPANDABLE DETAILS ── */}
             <AnimatePresence>
                 {showDetails && (
                     <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                     >
-                        <div className="p-4 border-t border-gray-800/50 bg-gray-900/30">
-                            {/* Full Description */}
-                            <div className="mb-4">
-                                <h4 className="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
-                                    Descripción
-                                </h4>
-                                <p className="text-sm text-gray-400 leading-relaxed">
-                                    {project.fullDescription}
-                                </p>
-                            </div>
+                        <div className="border-t border-slate-800/60">
+                            {/* Colored top bar */}
+                            <div className={`h-px bg-gradient-to-r from-transparent ${accent.border.replace('border-', 'via-').replace('/30', '/40')} to-transparent`} />
 
-                            {/* Features */}
-                            <div className="mb-4">
-                                <h4 className="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">
-                                    Características
-                                </h4>
-                                <ul className="grid grid-cols-2 gap-1.5">
-                                    {project.features.map((feature, i) => (
-                                        <li key={i} className="flex items-start gap-1.5 text-xs text-gray-400">
-                                            <div className={`w-1 h-1 rounded-full ${colors.text.replace('text-', 'bg-')} mt-1.5 shrink-0`} />
-                                            <span>{feature}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            {/* Team & Timeline */}
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="px-6 py-6 space-y-6">
+                                {/* Full description */}
                                 <div>
-                                    <h4 className="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                                        <Users className="w-3 h-3" />
-                                        Equipo
-                                    </h4>
-                                    <p className="text-sm text-gray-400">
-                                        {project.team.size} personas
-                                    </p>
-                                    <p className="text-xs text-gray-500">
-                                        {project.team.roles.join(', ')}
+                                    <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-2">Descripción</p>
+                                    <p className="text-sm text-slate-400 leading-relaxed">
+                                        {project.fullDescription}
                                     </p>
                                 </div>
+
+                                {/* Features */}
                                 <div>
-                                    <h4 className="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                                        <Calendar className="w-3 h-3" />
-                                        Timeline
-                                    </h4>
-                                    <p className="text-sm text-gray-400">
-                                        {project.timeline.start} - {project.timeline.end}
-                                    </p>
+                                    <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-3">Características</p>
+                                    <ul className="grid grid-cols-2 gap-y-2 gap-x-4">
+                                        {project.features.map((feature, i) => (
+                                            <li key={i} className="flex items-start gap-2 text-xs text-slate-500">
+                                                <span className={`w-px h-3 mt-0.5 shrink-0 ${accent.border.replace('border-', 'bg-').replace('/30', '/60')}`} />
+                                                {feature}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                {/* Team + Timeline */}
+                                <div className="grid grid-cols-2 gap-px bg-slate-800/40">
+                                    <div className="bg-[#080810] pr-6 py-4">
+                                        <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-2 flex items-center gap-1.5">
+                                            <Users className="w-3 h-3" /> Equipo
+                                        </p>
+                                        <p className="text-sm text-slate-300 mb-1">{project.team.size} personas</p>
+                                        <p className="text-[11px] text-slate-600 leading-relaxed">
+                                            {project.team.roles.join(' · ')}
+                                        </p>
+                                    </div>
+                                    <div className="bg-[#080810] pl-6 py-4">
+                                        <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-2 flex items-center gap-1.5">
+                                            <Calendar className="w-3 h-3" /> Timeline
+                                        </p>
+                                        <p className="text-sm text-slate-300 mb-1">{project.timeline.duration}</p>
+                                        <p className="text-[11px] text-slate-600">
+                                            {project.timeline.start} – {project.timeline.end}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-
-            {/* Decorative corner accent */}
-            <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${colors.gradient} blur-3xl opacity-0 group-hover:opacity-50 transition-opacity duration-300`} />
-        </motion.div>
+        </motion.article>
     );
 }

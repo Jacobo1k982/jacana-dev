@@ -2,35 +2,77 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { verifyToken } from '@/lib/auth';
 
-// ============================================
-// SESSION CHECK HANDLER
-// ============================================
+// ─────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────
+
+function extractBearer(req: NextRequest): string | null {
+    const header = req.headers.get('authorization') ?? '';
+    if (!header.startsWith('Bearer ')) return null;
+    const token = header.slice(7).trim();
+    return token.length > 0 ? token : null;
+}
+
+/** Consistent unauthenticated response — never leaks why auth failed. */
+function unauthResponse(status: 401 | 403 = 401) {
+    return NextResponse.json(
+        { success: false, authenticated: false, user: null },
+        { status }
+    );
+}
+
+function serializeUser(user: {
+    id: string;
+    email: string;
+    name: string | null;
+    username: string | null;
+    avatar: string | null;
+    bio: string | null;
+    role: string;
+    emailVerified: Date | null;
+    isActive: boolean;
+    createdAt: Date;
+}) {
+    return {
+        ...user,
+        emailVerified: user.emailVerified?.toISOString() ?? null,
+        createdAt: user.createdAt.toISOString(),
+    };
+}
+
+// ─────────────────────────────────────────────
+// HANDLER
+// ─────────────────────────────────────────────
 
 export async function GET(request: NextRequest) {
+    // ── 1. Extract token ──────────────────────
+    const rawToken = extractBearer(request);
+    if (!rawToken) return unauthResponse();
+
+    // ── 2. Verify JWT ─────────────────────────
+    let payload: { userId: string } | null = null;
     try {
-        // Get token from Authorization header
-        const authHeader = request.headers.get('authorization');
-        const token = authHeader?.replace('Bearer ', '');
+        payload = verifyToken(rawToken) as { userId: string } | null;
+    } catch {
+        // Expired or malformed — not authenticated
+        return unauthResponse();
+    }
 
-        if (!token) {
-            return NextResponse.json(
-                { success: false, authenticated: false, user: null },
-                { status: 401 }
-            );
-        }
+    if (!payload?.userId) return unauthResponse();
 
-        // Verify JWT token
-        const payload = verifyToken(token);
-
-        if (!payload?.userId) {
-            return NextResponse.json(
-                { success: false, authenticated: false, user: null },
-                { status: 401 }
-            );
-        }
-
-        // Find user
-        const user = await db.user.findUnique({
+    // ── 3. Validate session in DB ─────────────
+    // Rejects tokens that were explicitly invalidated via logout,
+    // even if the JWT signature is still valid.
+    const [session, user] = await Promise.all([
+        db.session.findFirst({
+            where: {
+                userId: payload.userId,
+                token: rawToken,
+                expiresAt: { gt: new Date() },
+            },
+            select: { id: true },
+        }),
+        db.user.findUnique({
             where: { id: payload.userId },
             select: {
                 id: true,
@@ -44,37 +86,17 @@ export async function GET(request: NextRequest) {
                 isActive: true,
                 createdAt: true,
             },
-        });
+        }),
+    ]);
 
-        if (!user) {
-            return NextResponse.json(
-                { success: false, authenticated: false, user: null },
-                { status: 401 }
-            );
-        }
+    // ── 4. Guard checks ───────────────────────
+    if (!session) return unauthResponse();
+    if (!user) return unauthResponse();
+    if (!user.isActive) return unauthResponse(403);
 
-        // Check if user is active
-        if (!user.isActive) {
-            return NextResponse.json(
-                { success: false, authenticated: false, user: null, error: 'Cuenta desactivada' },
-                { status: 403 }
-            );
-        }
-
-        return NextResponse.json({
-            success: true,
-            authenticated: true,
-            user: {
-                ...user,
-                createdAt: user.createdAt.toISOString(),
-                emailVerified: user.emailVerified?.toISOString() || null,
-            },
-        });
-    } catch (error) {
-        console.error('Session check error:', error);
-        return NextResponse.json(
-            { success: false, authenticated: false, user: null },
-            { status: 500 }
-        );
-    }
+    // ── 5. Respond ────────────────────────────
+    return NextResponse.json(
+        { success: true, authenticated: true, user: serializeUser(user) },
+        { status: 200 }
+    );
 }

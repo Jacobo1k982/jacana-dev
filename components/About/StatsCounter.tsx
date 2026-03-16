@@ -3,6 +3,10 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
+// ─────────────────────────────────────────────
+// TYPES
+// ─────────────────────────────────────────────
+
 interface Stat {
     id: string;
     value: number;
@@ -15,86 +19,77 @@ interface StatsCounterProps {
     stats: Stat[];
 }
 
-function AnimatedCounter({ value, suffix, inView }: { value: number; suffix: string; inView: boolean }) {
+// ─────────────────────────────────────────────
+// ANIMATED COUNTER
+// ─────────────────────────────────────────────
+
+function AnimatedCounter({ value, suffix, inView }: {
+    value: number;
+    suffix: string;
+    inView: boolean;
+}) {
     const [count, setCount] = useState(0);
-    const countRef = useRef(0);
-    const duration = 2000; // 2 seconds
 
     useEffect(() => {
         if (!inView) return;
 
         const startTime = Date.now();
-        const startValue = 0;
-        const endValue = value;
+        const duration = 1800;
 
-        const animate = () => {
-            const now = Date.now();
-            const progress = Math.min((now - startTime) / duration, 1);
-
-            // Easing function for smooth animation
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-            const currentValue = Math.floor(startValue + (endValue - startValue) * easeOutQuart);
-
-            setCount(currentValue);
-
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            }
+        const tick = () => {
+            const progress = Math.min((Date.now() - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 4); // easeOutQuart
+            setCount(Math.floor(value * eased));
+            if (progress < 1) requestAnimationFrame(tick);
         };
 
-        requestAnimationFrame(animate);
-
-        return () => {
-            countRef.current = 0;
-        };
+        requestAnimationFrame(tick);
     }, [inView, value]);
 
-    return (
-        <span>
-            {count}
-            {suffix}
-        </span>
-    );
+    return <>{count}{suffix}</>;
 }
+
+// ─────────────────────────────────────────────
+// COMPONENT
+// ─────────────────────────────────────────────
 
 export default function StatsCounter({ stats }: StatsCounterProps) {
     const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once: true, margin: '-100px' });
+    const inView = useInView(ref, { once: true, margin: '-80px' });
 
     return (
-        <div ref={ref} className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div
+            ref={ref}
+            className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-800/40"
+        >
             {stats.map((stat, index) => (
                 <motion.div
                     key={stat.id}
-                    initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                    animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="relative group"
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    className="group bg-[#080810] px-6 py-8 md:px-8 md:py-10 text-center hover:bg-slate-900/40 transition-colors relative overflow-hidden"
                 >
-                    <div className="relative p-6 md:p-8 rounded-2xl border border-gray-700/30 bg-gradient-to-br from-gray-800/20 to-gray-900/20 backdrop-blur-sm overflow-hidden hover:border-cyan-500/30 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300">
-                        {/* Background gradient */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    {/* Hover top line */}
+                    <div className="absolute top-0 left-0 right-0 h-px bg-amber-400/40 scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
 
-                        <div className="relative text-center">
-                            {/* Value */}
-                            <div className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">
-                                <AnimatedCounter value={stat.value} suffix={stat.suffix} inView={isInView} />
-                            </div>
-
-                            {/* Label */}
-                            <div className="text-sm md:text-base font-medium text-white mb-1">
-                                {stat.label}
-                            </div>
-
-                            {/* Description */}
-                            <div className="text-xs text-gray-500">
-                                {stat.description}
-                            </div>
-                        </div>
-
-                        {/* Decorative line */}
-                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                    {/* Value */}
+                    <div
+                        className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-none mb-3"
+                        style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                    >
+                        <AnimatedCounter value={stat.value} suffix={stat.suffix} inView={inView} />
                     </div>
+
+                    {/* Label */}
+                    <p className="text-xs font-medium uppercase tracking-[0.15em] text-slate-400 mb-1">
+                        {stat.label}
+                    </p>
+
+                    {/* Description */}
+                    <p className="text-[11px] text-slate-600 leading-relaxed">
+                        {stat.description}
+                    </p>
                 </motion.div>
             ))}
         </div>

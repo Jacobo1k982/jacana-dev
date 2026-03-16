@@ -1,19 +1,27 @@
-"use client";
+import Hero from '@/components/hero/hero';
+import Navbar from '@/components/Navbar/navbar';
+import TechSection from '@/components/TechSection';
+import type { Metadata } from 'next';
 
-import Hero from "@/components/hero/hero";
-import Navbar from "@/components/Navbar/navbar";
-import TechSection from "@/components/TechSection";
+// ─────────────────────────────────────────────
+// METADATA — hereda el template del layout
+// ─────────────────────────────────────────────
+
+export const metadata: Metadata = {
+  title: 'Inicio',
+  description: 'Estudio de desarrollo fullstack especializado en experiencias digitales de alto rendimiento. Web, móvil, cloud, IA y consultoría técnica.',
+  alternates: { canonical: '/' },
+};
+
+// ─────────────────────────────────────────────
+// PAGE
+// ─────────────────────────────────────────────
 
 export default function Home() {
   return (
-    <div className="bg-[#06051d] font-mono min-h-screen">
-
-      {/* Navbar */}
+    <div className="bg-[#06051d] min-h-screen">
       <Navbar />
-
-      {/* Main Content */}
-      <main className="flex flex-col items-stretch justify-start">
-        {/* Hero Section with animated background */}
+      <main>
         <Hero />
         <TechSection />
       </main>

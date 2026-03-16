@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     FolderKanban, TrendingUp, Users, Globe, Award,
-    ArrowRight, Sparkles, Filter
+    ArrowRight, Star
 } from 'lucide-react';
 import ProjectCard from './ProjectCard';
 import projectsData from '@/data/projects.json';
@@ -19,235 +19,265 @@ export default function ProjectsSection() {
 
     const featuredProjects = projects.filter(p => p.featured);
 
+    const statsRow = [
+        { label: 'Proyectos', value: stats.totalProjects, icon: FolderKanban },
+        { label: 'Clientes', value: stats.clientsServed, icon: Users },
+        { label: 'Países', value: stats.countriesReached, icon: Globe },
+        { label: 'Equipo', value: stats.teamSize, icon: Users },
+        { label: 'Experiencia', value: stats.yearsExperience, icon: TrendingUp },
+        { label: 'Satisfacción', value: stats.satisfactionRate, icon: Award },
+    ];
+
     return (
-        <section className="relative py-20 md:py-32 bg-[#06051d] overflow-hidden min-h-screen pt-24">
-            {/* Background elements */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-3xl" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-blue-500/3 rounded-full blur-3xl" />
-            </div>
+        <section className="relative py-24 md:py-36 bg-[#080810] overflow-hidden">
+
+            {/* Grain */}
+            <div
+                className="absolute inset-0 opacity-[0.025] pointer-events-none"
+                style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                    backgroundSize: '128px 128px',
+                }}
+            />
+            {/* Ambient left */}
+            <div className="absolute top-1/4 left-0 w-[500px] h-[500px] rounded-full bg-indigo-900/10 blur-[140px] pointer-events-none" />
+            {/* Ambient right */}
+            <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full bg-amber-900/8 blur-[140px] pointer-events-none" />
 
             <div className="relative max-w-7xl mx-auto px-6 md:px-8">
-                {/* ============================================ */}
-                {/* SECTION HEADER */}
-                {/* ============================================ */}
+
+                {/* ── HEADER ── */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-12 md:mb-16"
+                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    className="mb-16"
                 >
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 mb-6"
-                    >
-                        <FolderKanban className="w-4 h-4 text-cyan-400" />
-                        <span className="text-sm text-cyan-400 font-medium">Portafolio</span>
-                    </motion.div>
-
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                        Proyectos que{' '}
-                        <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-                            Transforman Negocios
-                        </span>
-                    </h2>
-                    <p className="text-gray-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-                        Cada proyecto es una historia de éxito. Descubre cómo hemos ayudado a empresas
-                        a alcanzar sus objetivos digitales con soluciones innovadoras.
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/70 mb-5">
+                        — Portafolio
                     </p>
+                    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                        <h2
+                            className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.05] tracking-tight"
+                            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                        >
+                            Proyectos que<br />
+                            <em className="text-slate-400 not-italic">transforman negocios</em>
+                        </h2>
+                        <p className="text-slate-500 text-sm max-w-xs leading-relaxed md:text-right">
+                            Cada proyecto es una historia de éxito construida con precisión técnica y visión estratégica.
+                        </p>
+                    </div>
+                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-amber-400/20 to-transparent" />
                 </motion.div>
 
-                {/* ============================================ */}
-                {/* STATS BAR */}
-                {/* ============================================ */}
+                {/* ── STATS BAR ── */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12"
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="grid grid-cols-3 md:grid-cols-6 gap-px bg-slate-800/40 mb-20"
                 >
-                    {[
-                        { label: 'Proyectos', value: stats.totalProjects, icon: FolderKanban },
-                        { label: 'Clientes', value: stats.clientsServed, icon: Users },
-                        { label: 'Países', value: stats.countriesReached, icon: Globe },
-                        { label: 'Equipo', value: stats.teamSize, icon: Users },
-                        { label: 'Experiencia', value: stats.yearsExperience, icon: TrendingUp },
-                        { label: 'Satisfacción', value: stats.satisfactionRate, icon: Award },
-                    ].map((stat, index) => (
+                    {statsRow.map((stat, i) => (
                         <motion.div
                             key={stat.label}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 12 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: index * 0.05 }}
-                            className="relative group"
+                            transition={{ delay: i * 0.05 + 0.15 }}
+                            className="bg-[#080810] px-4 py-5 text-center"
                         >
-                            <div className="p-4 rounded-xl border border-gray-700/30 bg-[#0a0a1a]/60 backdrop-blur-sm text-center hover:border-cyan-500/30 transition-all duration-300">
-                                <stat.icon className="w-5 h-5 text-cyan-400 mx-auto mb-2" />
-                                <div className="text-xl font-bold text-white">{stat.value}</div>
-                                <div className="text-[10px] text-gray-500 uppercase tracking-wider">{stat.label}</div>
-                            </div>
+                            <p
+                                className="text-2xl font-light text-white leading-none mb-1"
+                                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                            >
+                                {stat.value}
+                            </p>
+                            <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600">
+                                {stat.label}
+                            </p>
                         </motion.div>
                     ))}
                 </motion.div>
 
-                {/* ============================================ */}
-                {/* FEATURED PROJECTS */}
-                {/* ============================================ */}
-                {activeCategory === 'all' && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="mb-16"
-                    >
-                        <div className="flex items-center gap-2 mb-6">
-                            <Sparkles className="w-5 h-5 text-cyan-400" />
-                            <h3 className="text-xl font-bold text-white">Proyectos Destacados</h3>
-                        </div>
+                {/* ── FEATURED PROJECTS ── */}
+                <AnimatePresence>
+                    {activeCategory === 'all' && (
+                        <motion.div
+                            key="featured"
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -8 }}
+                            transition={{ duration: 0.4 }}
+                            className="mb-20"
+                        >
+                            <div className="flex items-center gap-4 mb-8">
+                                <div className="flex items-center gap-2">
+                                    <Star className="w-3.5 h-3.5 text-amber-400/70 fill-current" />
+                                    <span className="text-[10px] uppercase tracking-[0.25em] text-amber-400/70">
+                                        Destacados
+                                    </span>
+                                </div>
+                                <div className="flex-1 h-px bg-slate-800/60" />
+                            </div>
+                            <div className="grid md:grid-cols-2 gap-px bg-slate-800/30">
+                                {featuredProjects.slice(0, 4).map((project, index) => (
+                                    <ProjectCard key={project.id} project={project} index={index} />
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
-                        <div className="grid md:grid-cols-2 gap-6">
-                            {featuredProjects.slice(0, 4).map((project, index) => (
-                                <ProjectCard key={project.id} project={project} index={index} />
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
-
-                {/* ============================================ */}
-                {/* CATEGORY FILTERS */}
-                {/* ============================================ */}
+                {/* ── CATEGORY FILTERS ── */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-10"
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="flex flex-wrap items-center gap-0 mb-10 border border-slate-800/60"
                 >
-                    <div className="flex items-center gap-2 text-sm text-gray-400 mr-2">
-                        <Filter className="w-4 h-4" />
-                        <span>Filtrar:</span>
-                    </div>
-
-                    {categories.map((category) => {
-                        const isActive = activeCategory === category.id;
+                    {[
+                        { id: 'all', label: 'Todos', count: projects.length },
+                        ...categories.filter((c: { id: string }) => c.id !== 'all'),
+                    ].map((cat) => {
+                        const isActive = activeCategory === cat.id;
                         return (
-                            <motion.button
-                                key={category.id}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                onClick={() => setActiveCategory(category.id)}
-                                className={`relative flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${isActive
-                                    ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 shadow-lg shadow-cyan-500/10'
-                                    : 'bg-gray-800/30 text-gray-400 border border-gray-700/30 hover:text-white hover:bg-gray-800/50'
+                            <button
+                                key={cat.id}
+                                onClick={() => setActiveCategory(cat.id)}
+                                className={`relative flex items-center gap-2.5 px-5 py-3 text-xs font-medium uppercase tracking-[0.12em] transition-all border-r border-slate-800/60 last:border-r-0 ${isActive
+                                        ? 'text-white bg-slate-900/60'
+                                        : 'text-slate-500 hover:text-slate-300 hover:bg-slate-900/30'
                                     }`}
                             >
-                                <span>{category.label}</span>
-                                <span className={`text-xs px-1.5 py-0.5 rounded-full ${isActive ? 'bg-cyan-500/20 text-cyan-400' : 'bg-gray-700/50 text-gray-500'
-                                    }`}>
-                                    {category.count}
-                                </span>
-
                                 {isActive && (
-                                    <motion.div
-                                        layoutId="activeFilter"
-                                        className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10"
-                                        transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                                    <motion.span
+                                        layoutId="filterIndicator"
+                                        className="absolute top-0 left-0 right-0 h-px bg-amber-400/50"
+                                        transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
                                     />
                                 )}
-                            </motion.button>
+                                {cat.label}
+                                <span className={`text-[9px] px-1.5 py-0.5 border ${isActive
+                                        ? 'border-amber-400/30 text-amber-400/70'
+                                        : 'border-slate-700/60 text-slate-600'
+                                    }`}>
+                                    {cat.count}
+                                </span>
+                            </button>
                         );
                     })}
                 </motion.div>
 
-                {/* ============================================ */}
-                {/* PROJECTS GRID */}
-                {/* ============================================ */}
+                {/* ── PROJECTS GRID ── */}
                 <motion.div
                     key={activeCategory}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-800/30"
                 >
                     {(activeCategory === 'all' ? projects.slice(4) : filteredProjects).map((project, index) => (
                         <ProjectCard key={project.id} project={project} index={index} />
                     ))}
                 </motion.div>
 
-                {/* Empty State */}
+                {/* Empty state */}
                 {filteredProjects.length === 0 && (
-                    <div className="text-center py-20">
-                        <FolderKanban className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                        <h3 className="text-xl font-bold text-white mb-2">No hay proyectos en esta categoría</h3>
-                        <p className="text-gray-400">Explora otras categorías para ver más proyectos.</p>
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="flex flex-col items-center py-24 border border-slate-800/60"
+                    >
+                        <FolderKanban className="w-10 h-10 text-slate-700 mb-4" />
+                        <p className="text-sm text-slate-500 mb-1">Sin proyectos en esta categoría</p>
+                        <button
+                            onClick={() => setActiveCategory('all')}
+                            className="mt-4 text-xs uppercase tracking-[0.15em] text-amber-400/60 hover:text-amber-400/80 transition-colors"
+                        >
+                            Ver todos
+                        </button>
+                    </motion.div>
                 )}
 
-                {/* ============================================ */}
-                {/* CTA SECTION */}
-                {/* ============================================ */}
+                {/* ── CTA ── */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mt-20"
+                    transition={{ duration: 0.7, delay: 0.1 }}
+                    className="mt-24"
                 >
-                    <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-3xl blur-xl" />
+                    <div className="h-px bg-gradient-to-r from-transparent via-slate-700/40 to-transparent mb-16" />
 
-                        <div className="relative p-8 md:p-12 rounded-2xl border border-gray-700/30 bg-[#0a0a1a]/80 backdrop-blur-sm">
-                            <div className="grid md:grid-cols-2 gap-8 items-center">
-                                <div>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                                        ¿Tienes un Proyecto en Mente?
-                                    </h3>
-                                    <p className="text-gray-400 leading-relaxed mb-6">
-                                        Convierte tu visión en realidad. Nuestro equipo está listo para
-                                        ayudarte a construir la solución digital perfecta para tu negocio.
-                                    </p>
-                                    <div className="flex flex-col sm:flex-row gap-3">
-                                        <motion.button
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 transition-all flex items-center justify-center gap-2"
-                                        >
-                                            Iniciar Proyecto
-                                            <ArrowRight className="w-4 h-4" />
-                                        </motion.button>
-                                        <motion.button
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            className="px-6 py-3 rounded-xl border border-gray-700 text-gray-300 font-medium hover:border-cyan-500/30 hover:text-cyan-400 transition-all"
-                                        >
-                                            Ver Servicios
-                                        </motion.button>
-                                    </div>
-                                </div>
-
-                                {/* Quick Stats */}
-                                <div className="grid grid-cols-2 gap-4">
-                                    {[
-                                        { label: 'Tiempo promedio de entrega', value: '1-6 meses' },
-                                        { label: 'Tasa de satisfacción', value: '98%' },
-                                        { label: 'Soporte post-lanzamiento', value: '24/7' },
-                                        { label: 'Metodología', value: 'Ágil' },
-                                    ].map((item, index) => (
-                                        <div key={index} className="p-4 rounded-xl border border-gray-700/30 bg-gray-800/20">
-                                            <div className="text-sm text-white font-medium">{item.value}</div>
-                                            <div className="text-xs text-gray-500 mt-0.5">{item.label}</div>
-                                        </div>
-                                    ))}
-                                </div>
+                    <div className="grid md:grid-cols-2 gap-12 items-center">
+                        {/* Left: copy */}
+                        <div>
+                            <p className="text-[10px] uppercase tracking-[0.3em] text-amber-400/70 mb-5">
+                                — Siguiente paso
+                            </p>
+                            <h3
+                                className="text-3xl md:text-4xl font-light text-white leading-snug mb-5"
+                                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                            >
+                                ¿Tienes un proyecto<br />
+                                <em className="text-slate-400 not-italic">en mente?</em>
+                            </h3>
+                            <p className="text-slate-500 text-sm leading-relaxed mb-8 max-w-sm">
+                                Convierte tu visión en realidad. Nuestro equipo está listo para construir
+                                la solución digital perfecta para tu negocio.
+                            </p>
+                            <div className="flex flex-wrap gap-3">
+                                <motion.a
+                                    href="#contact"
+                                    whileHover={{ scale: 1.01 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                >
+                                    Iniciar proyecto
+                                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                                </motion.a>
+                                <motion.a
+                                    href="#services"
+                                    whileHover={{ scale: 1.01 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
+                                >
+                                    Ver servicios
+                                </motion.a>
                             </div>
+                        </div>
+
+                        {/* Right: quick stats grid */}
+                        <div className="grid grid-cols-2 gap-px bg-slate-800/40">
+                            {[
+                                { label: 'Tiempo de entrega', value: '1–6 meses' },
+                                { label: 'Satisfacción', value: '98%' },
+                                { label: 'Soporte post-lanzamiento', value: '24/7' },
+                                { label: 'Metodología', value: 'Ágil' },
+                            ].map((item, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 8 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.07 + 0.2 }}
+                                    className="bg-[#080810] p-6"
+                                >
+                                    <p
+                                        className="text-2xl font-light text-white mb-1 leading-none"
+                                        style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                                    >
+                                        {item.value}
+                                    </p>
+                                    <p className="text-[10px] uppercase tracking-[0.18em] text-slate-600">
+                                        {item.label}
+                                    </p>
+                                </motion.div>
+                            ))}
                         </div>
                     </div>
                 </motion.div>

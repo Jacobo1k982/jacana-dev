@@ -2,29 +2,26 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { UserPlus, LogIn, Compass, Code2, Zap, Globe, Shield } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { UserPlus, LogIn, Compass, Code2, Zap, Globe, Shield, ArrowRight, MoveDown } from 'lucide-react';
 import { useAuthStore, useIsAuthenticated, useUser, useToken } from '@/store/auth-store';
 import { LoginDialog, RegisterDialog, UserMenu } from '@/components/auth';
 
-// ============================================
-// MATRIX RAIN ANIMATION
-// ============================================
-
+// ─────────────────────────────────────────────
+// MATRIX RAIN — unchanged, kept as-is
+// ─────────────────────────────────────────────
 function MatrixRain() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
         let animationId: number;
         let width = window.innerWidth;
         let height = window.innerHeight;
-
         const chars = 'JACANA-DEV0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>{}[]|/\\@#$%^&*';
         const fontSize = 14;
         let columns: number;
@@ -69,9 +66,7 @@ function MatrixRain() {
                 ctx.fillText(char, x, y);
                 ctx.shadowBlur = 0;
 
-                if (y > height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
+                if (y > height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
 
@@ -99,442 +94,396 @@ function MatrixRain() {
     );
 }
 
-// ============================================
-// FLOATING PARTICLES
-// ============================================
-
-interface Particle {
-    id: number;
-    x: number;
-    y: number;
-    scale: number;
-    duration: number;
-    delay: number;
-}
-
-function FloatingParticles() {
-    const [particles, setParticles] = useState<Particle[]>([]);
-
-    useEffect(() => {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-
-        const generatedParticles: Particle[] = [...Array(20)].map((_, i) => ({
-            id: i,
-            x: Math.random() * width,
-            y: Math.random() * height,
-            scale: Math.random() * 0.5 + 0.5,
-            duration: Math.random() * 10 + 10,
-            delay: Math.random() * 5
-        }));
-
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setParticles(generatedParticles);
-    }, []);
-
-    if (particles.length === 0) return null;
-
+// ─────────────────────────────────────────────
+// SPLIT TEXT — letter-by-letter stagger reveal
+// ─────────────────────────────────────────────
+function SplitText({ text, delay = 0, className = '' }: { text: string; delay?: number; className?: string }) {
     return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {particles.map((particle) => (
-                <motion.div
-                    key={particle.id}
-                    className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
-                    initial={{
-                        x: particle.x,
-                        y: particle.y,
-                        scale: particle.scale,
-                        opacity: 0
-                    }}
-                    animate={{
-                        y: [null, -100],
-                        opacity: [0, 1, 0]
-                    }}
+        <span className={`inline-flex ${className}`} aria-label={text}>
+            {text.split('').map((char, i) => (
+                <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 48 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{
-                        duration: particle.duration,
-                        repeat: Infinity,
-                        ease: 'linear',
-                        delay: particle.delay
+                        duration: 0.65,
+                        delay: delay + i * 0.055,
+                        ease: [0.16, 1, 0.3, 1],
                     }}
-                />
+                    className="inline-block"
+                >
+                    {char}
+                </motion.span>
             ))}
-        </div>
+        </span>
     );
 }
 
-// ============================================
-// ELEGANT BUTTON COMPONENT
-// ============================================
-
-interface ElegantButtonProps {
-    children: React.ReactNode;
-    icon?: React.ReactNode;
-    variant?: 'primary' | 'secondary' | 'outline';
-    onClick?: () => void;
-    href?: string;
-    className?: string;
-}
-
-function ElegantButton({ children, icon, variant = 'outline', onClick, href, className = '' }: ElegantButtonProps) {
-    const variants = {
-        primary: 'bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 text-white border-0',
-        secondary: 'bg-white/[0.03] border-white/[0.1] text-white hover:bg-white/[0.05]',
-        outline: 'bg-transparent border-white/[0.15] text-gray-300 hover:text-white hover:border-cyan-500/40 hover:bg-cyan-500/5'
-    };
-
-    const baseClassName = `relative group flex items-center justify-center gap-2.5 px-6 py-3 min-w-[160px] text-sm font-semibold rounded-xl border transition-all duration-300 overflow-hidden ${variants[variant]} ${className}`;
-
-    const content = (
-        <>
-            {/* Shine effect */}
-            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none" />
-
-            {/* Glow on hover */}
-            <span className="absolute -inset-px bg-gradient-to-r from-cyan-500/0 via-cyan-500/20 to-blue-500/0 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-300 pointer-events-none" />
-
-            <span className="relative flex items-center gap-2.5 pointer-events-none">
-                {icon && <span className="relative">{icon}</span>}
-                <span className="relative">{children}</span>
-            </span>
-        </>
-    );
-
-    // Handle anchor links (like #explore) with smooth scroll
-    const handleAnchorClick = useCallback((e: React.MouseEvent) => {
-        e.preventDefault();
-        if (href?.startsWith('#')) {
-            const targetId = href.substring(1);
-            const element = document.getElementById(targetId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-        onClick?.();
-    }, [href, onClick]);
-
-    // For anchor links, use a button with smooth scroll
-    if (href?.startsWith('#')) {
-        return (
-            <motion.button
-                onClick={handleAnchorClick}
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className={`${baseClassName} cursor-pointer`}
-                type="button"
-            >
-                {content}
-            </motion.button>
-        );
-    }
-
-    // For regular links, use Next.js Link
-    if (href) {
-        return (
-            <motion.div
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-            >
-                <Link href={href} className={baseClassName}>
-                    {content}
-                </Link>
-            </motion.div>
-        );
-    }
-
-    // Default button
+// ─────────────────────────────────────────────
+// SCROLL CUE
+// ─────────────────────────────────────────────
+function ScrollCue() {
     return (
-        <motion.button
-            onClick={onClick}
-            whileHover={{ scale: 1.02, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className={`${baseClassName} cursor-pointer`}
-            type="button"
+        <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.8, duration: 0.6 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-            {content}
-        </motion.button>
+            <span className="text-[9px] uppercase tracking-[0.35em] text-slate-600">Scroll</span>
+            <motion.div
+                animate={{ y: [0, 6, 0] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+            >
+                <MoveDown className="w-3.5 h-3.5 text-amber-400/50" />
+            </motion.div>
+        </motion.div>
     );
 }
 
-// ============================================
-// HERO COMPONENT
-// ============================================
+// ─────────────────────────────────────────────
+// STAT PILL
+// ─────────────────────────────────────────────
+function StatPill({ value, label, delay }: { value: string; label: string; delay: number }) {
+    return (
+        <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col border-l border-slate-700/60 pl-4"
+        >
+            <span
+                className="text-2xl font-light text-white leading-none"
+                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+            >
+                {value}
+            </span>
+            <span className="text-[9px] uppercase tracking-[0.2em] text-slate-600 mt-0.5">{label}</span>
+        </motion.div>
+    );
+}
 
+// ─────────────────────────────────────────────
+// HERO
+// ─────────────────────────────────────────────
 export default function Hero() {
     const [isVisible, setIsVisible] = useState(false);
-    const [showLogin, setShowLogin] = useState(false);
+    const [showLogin, setShowLogin]   = useState(false);
     const [showRegister, setShowRegister] = useState(false);
+    const sectionRef = useRef<HTMLElement>(null);
 
     const isAuthenticated = useIsAuthenticated();
-    const user = useUser();
+    const user  = useUser();
     const token = useToken();
-    const logout = useAuthStore((state) => state.logout);
+    const logout = useAuthStore(s => s.logout);
+
+    // Parallax on matrix layer
+    const { scrollY } = useScroll();
+    const matrixY = useTransform(scrollY, [0, 600], [0, 120]);
+    const contentY = useTransform(scrollY, [0, 600], [0, -60]);
 
     useEffect(() => {
-        const timer = setTimeout(() => setIsVisible(true), 100);
-        return () => clearTimeout(timer);
+        const t = setTimeout(() => setIsVisible(true), 80);
+        return () => clearTimeout(t);
     }, []);
 
     const handleLogout = async () => {
         try {
             await fetch('/api/auth/logout', {
                 method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+                headers: { Authorization: `Bearer ${token}` },
             });
-        } catch (error) {
-            console.error('Logout error:', error);
-        }
+        } catch {}
         logout();
     };
 
+    const handleAnchor = useCallback((href: string) => (e: React.MouseEvent) => {
+        e.preventDefault();
+        const el = document.getElementById(href.slice(1));
+        el?.scrollIntoView({ behavior: 'smooth' });
+    }, []);
+
     return (
-        <section className="relative flex items-center justify-center overflow-hidden h-screen min-h-[700px]">
-            {/* Matrix Rain Background */}
-            <div className="absolute inset-0 w-full h-full z-0">
+        <section
+            ref={sectionRef}
+            className="relative flex items-center overflow-hidden h-screen min-h-[700px]"
+        >
+            {/* ── Matrix background with subtle parallax ── */}
+            <motion.div
+                className="absolute inset-0 z-0"
+                style={{ y: matrixY }}
+            >
                 <MatrixRain />
-            </div>
+            </motion.div>
 
-            {/* Floating Particles */}
-            <FloatingParticles />
+            {/* ── Vignette layers ── */}
+            <div className="absolute inset-0 z-[1] pointer-events-none"
+                style={{ background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, #06051d 100%)' }}
+            />
+            {/* Left fade for text legibility */}
+            <div className="absolute inset-0 z-[2] pointer-events-none"
+                style={{ background: 'linear-gradient(90deg, rgba(6,5,29,0.92) 0%, rgba(6,5,29,0.60) 40%, transparent 70%)' }}
+            />
+            {/* Bottom fade */}
+            <div className="absolute bottom-0 left-0 right-0 h-40 z-[2] pointer-events-none"
+                style={{ background: 'linear-gradient(to top, #06051d 0%, transparent 100%)' }}
+            />
 
-            {/* Ambient Orbs */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 0.15, scale: 1 }}
-                    transition={{ duration: 2, delay: 0.5 }}
-                    className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500 rounded-full blur-[150px]"
-                />
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 0.1, scale: 1 }}
-                    transition={{ duration: 2, delay: 0.8 }}
-                    className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-500 rounded-full blur-[150px]"
-                />
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 0.08, scale: 1 }}
-                    transition={{ duration: 2, delay: 1 }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-blue-500 rounded-full blur-[120px]"
-                />
-            </div>
-
-            {/* Grid Pattern Overlay */}
+            {/* ── Grain overlay ── */}
             <div
-                className="absolute inset-0 z-[1] pointer-events-none opacity-[0.03]"
+                className="absolute inset-0 z-[3] opacity-[0.03] pointer-events-none"
                 style={{
-                    backgroundImage: `
-                        linear-gradient(rgba(6, 182, 212, 0.3) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(6, 182, 212, 0.3) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '50px 50px'
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                    backgroundSize: '128px 128px',
                 }}
             />
 
-            {/* Fade out gradient at bottom */}
-            <div
-                className="absolute bottom-0 left-0 right-0 h-48 z-[2] pointer-events-none"
-                style={{
-                    background: 'linear-gradient(to top, #06051d 0%, transparent 100%)',
-                }}
-            />
+            {/* ── Main content ── */}
+            <motion.div
+                className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 pt-20"
+                style={{ y: contentY }}
+            >
+                <div className="flex flex-col items-start max-w-4xl">
 
-            {/* Content Container */}
-            <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 pt-30 text-center">
-
-                {/* JACANA Title */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                    className="flex flex-col items-center"
-                >
-                    <div className="relative">
-                        {/* Multi-layered glow effect */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: isVisible ? 0.4 : 0, scale: isVisible ? 1.2 : 0.8 }}
-                            transition={{ duration: 1.5, delay: 0.4 }}
-                            className="absolute inset-0 blur-[100px] bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-full"
-                        />
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: isVisible ? 0.6 : 0, scale: isVisible ? 1 : 0.8 }}
-                            transition={{ duration: 1, delay: 0.5 }}
-                            className="absolute inset-0 blur-3xl bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 rounded-full"
-                        />
-
-                        {/* Main Text */}
-                        <h1 className="relative text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold tracking-[0.12em]">
-                            <span className="relative inline-block">
-                                {/* Text gradient */}
-                                <span className="absolute inset-0 bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent blur-sm opacity-50" />
-                                <span className="relative bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-transparent">
-                                    JACANA
-                                </span>
-                            </span>
-                        </h1>
-
-                        {/* Decorative underline */}
-                        <motion.div
-                            initial={{ scaleX: 0, opacity: 0 }}
-                            animate={{ scaleX: isVisible ? 1 : 0, opacity: isVisible ? 1 : 0 }}
-                            transition={{ duration: 0.8, delay: 0.6 }}
-                            className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-full"
-                        >
-                            <div className="h-[3px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full" />
-                            <div className="absolute inset-0 h-[3px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full blur-sm" />
-                        </motion.div>
-                    </div>
-
-                    {/* Subtitle */}
+                    {/* Eyebrow */}
                     <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 10 }}
-                        transition={{ duration: 0.6, delay: 0.7 }}
-                        className="mt-8 flex items-center gap-4"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -20 }}
+                        transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="flex items-center gap-4 mb-8"
                     >
-                        <div className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-500/50" />
-                        <p className="text-sm md:text-base tracking-[0.5em] uppercase text-cyan-400/60 font-light">
-                            Developers
-                        </p>
-                        <div className="h-px w-12 bg-gradient-to-l from-transparent to-cyan-500/50" />
+                        <div className="w-8 h-px bg-amber-400/60" />
                     </motion.div>
-                </motion.div>
 
-                {/* Tagline */}
-                <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 10 }}
-                    transition={{ duration: 0.6, delay: 0.8 }}
-                    className="mt-6 text-base md:text-lg text-gray-400 text-center max-w-xl"
-                >
-                    Transformamos ideas en{' '}
-                    <span className="text-cyan-400">experiencias digitales</span>{' '}
-                    excepcionales
-                </motion.p>
-
-                {/* Buttons */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-                    transition={{ duration: 0.8, delay: 1 }}
-                    className="relative z-20 mt-12 flex flex-col sm:flex-row items-center gap-4 pointer-events-auto"
-                >
-                    <AnimatePresence mode="wait">
-                        {isAuthenticated && user ? (
-                            // Authenticated user view
-                            <motion.div
-                                key="authenticated"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                className="flex flex-col sm:flex-row items-center gap-4 pointer-events-auto"
+                    {/* Main title — massive, asymmetric */}
+                    {isVisible && (
+                        <div className="pt-6 pb-4" style={{ clipPath: 'inset(-40% -10% -10% -10%)' }}>
+                            <h1
+                                className="font-light text-white tracking-[-0.02em]"
+                                style={{
+                                    fontFamily: "'Cormorant Garamond', 'Garamond', Georgia, serif",
+                                    fontSize: 'clamp(5rem, 14vw, 13rem)',
+                                    lineHeight: 1,
+                                }}
                             >
-                                {/* Welcome message */}
-                                <div className="flex items-center gap-4 px-5 py-3 rounded-xl bg-white/[0.03] border border-white/[0.08]">
-                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-bold">
-                                        {(user.name || user.username || user.email)[0].toUpperCase()}
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-gray-500">Bienvenido</p>
-                                        <p className="text-white font-medium">
-                                            {user.name || user.username || user.email.split('@')[0]}
-                                        </p>
-                                    </div>
-                                </div>
+                                <SplitText text="JACANA" delay={0.3} />
+                            </h1>
+                        </div>
+                    )}
 
-                                <UserMenu onLogout={handleLogout} />
-
-                                <ElegantButton
-                                    icon={<Compass className="w-4 h-4" />}
-                                    href="#explore"
-                                    variant="primary"
-                                >
-                                    Explorar
-                                </ElegantButton>
-                            </motion.div>
-                        ) : (
-                            // Guest view
+                    {/* DEV — offset right, different weight */}
+                    {isVisible && (
+                        <div className="self-end -mt-4 md:-mt-6 lg:-mt-10 pr-4" style={{ clipPath: 'inset(-20% -10% -20% -10%)' }}>
                             <motion.div
-                                key="guest"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                className="flex flex-col sm:flex-row items-center gap-4 pointer-events-auto"
+                                initial={{ opacity: 0, x: 40 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.95, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                                className="flex items-end gap-4"
                             >
-                                <ElegantButton
-                                    icon={<Compass className="w-4 h-4" />}
-                                    href="#explore"
-                                    variant="outline"
+                                <div className="w-20 md:w-32 h-px bg-gradient-to-l from-amber-400/60 to-transparent mb-3 hidden sm:block" />
+                                <span
+                                    className="text-amber-400/90 italic"
+                                    style={{
+                                        fontFamily: "'Cormorant Garamond', Georgia, serif",
+                                        fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
+                                        fontWeight: 300,
+                                    }}
                                 >
-                                    Explorar
-                                </ElegantButton>
-
-                                <ElegantButton
-                                    icon={<LogIn className="w-4 h-4" />}
-                                    onClick={() => setShowLogin(true)}
-                                    variant="secondary"
-                                >
-                                    Iniciar Sesión
-                                </ElegantButton>
-
-                                <ElegantButton
-                                    icon={<UserPlus className="w-4 h-4" />}
-                                    onClick={() => setShowRegister(true)}
-                                    variant="primary"
-                                >
-                                    Registrarse
-                                </ElegantButton>
+                                    Developers
+                                </span>
                             </motion.div>
-                        )}
-                    </AnimatePresence>
-                </motion.div>
+                        </div>
+                    )}
 
-                {/* Tech Stack Pills */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-                    transition={{ duration: 0.6, delay: 1.2 }}
-                    className="mt-16 flex flex-wrap items-center justify-center gap-3"
-                >
+                    {/* Tagline */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 16 }}
+                        transition={{ delay: 1.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="mt-8 text-sm md:text-base text-slate-400 max-w-md leading-relaxed"
+                    >
+                        Transformamos ideas en{' '}
+                        <em className="text-white not-italic border-b border-amber-400/40">experiencias digitales</em>{' '}
+                        que permanecen.
+                    </motion.p>
+
+                    {/* Divider */}
+                    <motion.div
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: isVisible ? 1 : 0 }}
+                        transition={{ delay: 1.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="mt-10 w-full max-w-sm h-px bg-gradient-to-r from-slate-700/80 via-amber-400/20 to-transparent"
+                        style={{ transformOrigin: 'left' }}
+                    />
+
+                    {/* CTA row */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 16 }}
+                        transition={{ delay: 1.7, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="mt-10 flex flex-wrap items-center gap-4"
+                    >
+                        <AnimatePresence mode="wait">
+                            {isAuthenticated && user ? (
+                                <motion.div
+                                    key="auth"
+                                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                                    className="flex items-center gap-4"
+                                >
+                                    {/* Welcome chip */}
+                                    <div className="flex items-center gap-3 px-4 py-2.5 border border-slate-700/60 bg-slate-900/40">
+                                        <div className="w-7 h-7 flex items-center justify-center bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-medium">
+                                            {(user.name || user.username || user.email)[0].toUpperCase()}
+                                        </div>
+                                        <div>
+                                            <p className="text-[9px] uppercase tracking-[0.2em] text-slate-500">Bienvenido</p>
+                                            <p className="text-sm text-white font-medium leading-none">
+                                                {user.name || user.username || user.email.split('@')[0]}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <UserMenu onLogout={handleLogout} />
+
+                                    <a
+                                        href="#explore"
+                                        onClick={handleAnchor('#explore')}
+                                        className="group flex items-center gap-2.5 px-6 py-3 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                    >
+                                        Explorar
+                                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                                    </a>
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="guest"
+                                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                                    className="flex flex-wrap items-center gap-3"
+                                >
+                                    {/* Primary CTA */}
+                                    <motion.a
+                                        href="#explore"
+                                        onClick={handleAnchor('#explore')}
+                                        whileHover={{ scale: 1.01 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                    >
+                                        Explorar servicios
+                                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                                    </motion.a>
+
+                                    {/* Secondary: login */}
+                                    <motion.button
+                                        onClick={() => setShowLogin(true)}
+                                        whileHover={{ scale: 1.01 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
+                                    >
+                                        <LogIn className="w-3.5 h-3.5" />
+                                        Iniciar sesión
+                                    </motion.button>
+
+                                    {/* Ghost: register */}
+                                    <motion.button
+                                        onClick={() => setShowRegister(true)}
+                                        whileHover={{ scale: 1.01 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="flex items-center gap-2 px-6 py-3.5 text-slate-500 hover:text-amber-400/80 text-xs font-medium uppercase tracking-[0.15em] transition-colors"
+                                    >
+                                        <UserPlus className="w-3.5 h-3.5" />
+                                        Registrarse
+                                    </motion.button>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.div>
+
+                    {/* Stats row */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 12 }}
+                        transition={{ delay: 2, duration: 0.6 }}
+                        className="mt-14 flex items-center gap-8"
+                    >
+                        <StatPill value="10+" label="Proyectos" delay={2.1} />
+                        <StatPill value="98%" label="Satisfacción" delay={2.2} />
+                        <StatPill value="4+ años" label="Experiencia" delay={2.3} />
+                    </motion.div>
+
+                    {/* Tech stack — horizontal, editorial */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: isVisible ? 1 : 0 }}
+                        transition={{ delay: 2.5, duration: 0.6 }}
+                        className="mt-10 flex items-center gap-3 flex-wrap"
+                    >
+                        <span className="text-[9px] uppercase tracking-[0.3em] text-slate-700 mr-1">Stack</span>
+                        {[
+                            { icon: Code2, label: 'React' },
+                            { icon: Zap,   label: 'Next.js' },
+                            { icon: Globe, label: 'Node.js' },
+                            { icon: Shield,label: 'TypeScript' },
+                        ].map(({ icon: Icon, label }, i) => (
+                            <motion.div
+                                key={label}
+                                initial={{ opacity: 0, y: 6 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 2.5 + i * 0.07 }}
+                                className="flex items-center gap-1.5 px-3 py-1.5 border border-slate-800/60 hover:border-amber-400/30 text-slate-500 hover:text-slate-300 transition-all cursor-default"
+                            >
+                                <Icon className="w-3 h-3" />
+                                <span className="text-[10px] uppercase tracking-[0.12em]">{label}</span>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
+            </motion.div>
+
+            {/* ── Scroll cue ── */}
+            <ScrollCue />
+
+            {/* ── Right side: floating code badge (decorative) ── */}
+            <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : 40 }}
+                transition={{ delay: 2.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute right-8 top-1/2 -translate-y-1/2 z-10 hidden xl:block"
+            >
+                <div className="border border-slate-800/60 bg-[#06051d]/80 backdrop-blur-sm p-6 max-w-[220px]">
+                    <div className="h-px w-full bg-gradient-to-r from-amber-400/30 to-transparent mb-4" />
+                    <p className="text-[9px] uppercase tracking-[0.3em] text-amber-400/60 mb-3">— Especialidades</p>
                     {[
-                        { icon: Code2, label: 'React', color: 'cyan' },
-                        { icon: Zap, label: 'Next.js', color: 'blue' },
-                        { icon: Globe, label: 'Node.js', color: 'green' },
-                        { icon: Shield, label: 'TypeScript', color: 'purple' },
-                    ].map(({ icon: Icon, label, color }, idx) => (
+                        'Desarrollo Web',
+                        'Apps Móviles',
+                        'Cloud & DevOps',
+                        'Inteligencia Artificial',
+                        'Consultoría Técnica',
+                    ].map((s, i) => (
                         <motion.div
-                            key={label}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 1.3 + idx * 0.1 }}
-                            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] hover:border-cyan-500/30 transition-colors"
+                            key={s}
+                            initial={{ opacity: 0, x: 12 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 2.1 + i * 0.1 }}
+                            className="flex items-center gap-2 py-2 border-b border-slate-800/40 last:border-b-0 group cursor-default"
                         >
-                            <Icon className={`w-3.5 h-3.5 text-${color}-400`} />
-                            <span className="text-xs text-gray-400">{label}</span>
+                            <span className="w-1 h-1 rounded-full bg-amber-400/40 group-hover:bg-amber-400/80 transition-colors" />
+                            <span className="text-xs text-slate-500 group-hover:text-slate-300 transition-colors">{s}</span>
                         </motion.div>
                     ))}
-                </motion.div>
-            </div>
+                    <div className="h-px w-full bg-gradient-to-r from-transparent to-amber-400/20 mt-4" />
+                </div>
+            </motion.div>
 
-            {/* Auth Dialogs */}
+            {/* ── Auth Dialogs ── */}
             <LoginDialog
                 isOpen={showLogin}
                 onClose={() => setShowLogin(false)}
-                onSwitchToRegister={() => {
-                    setShowLogin(false);
-                    setShowRegister(true);
-                }}
+                onSwitchToRegister={() => { setShowLogin(false); setShowRegister(true); }}
             />
             <RegisterDialog
                 isOpen={showRegister}
                 onClose={() => setShowRegister(false)}
-                onSwitchToLogin={() => {
-                    setShowRegister(false);
-                    setShowLogin(true);
-                }}
+                onSwitchToLogin={() => { setShowRegister(false); setShowLogin(true); }}
             />
         </section>
     );
