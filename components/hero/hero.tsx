@@ -1,24 +1,19 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { UserPlus, LogIn, Compass, Code2, Zap, Globe, Shield, ArrowRight, MoveDown } from 'lucide-react';
-import { useAuthStore, useIsAuthenticated, useUser, useToken } from '@/store/auth-store';
-import { LoginDialog, RegisterDialog, UserMenu } from '@/components/auth';
+import { UserPlus, LogIn, Code2, Zap, Globe, Shield, ArrowRight, MoveDown } from 'lucide-react';
+import { UserMenu } from '@/components/auth';
+import { HeroDialogs } from './HeroDialogs';
 
-// ─────────────────────────────────────────────
-// MATRIX RAIN — unchanged, kept as-is
-// ─────────────────────────────────────────────
 function MatrixRain() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
-
         let animationId: number;
         let width = window.innerWidth;
         let height = window.innerHeight;
@@ -26,7 +21,6 @@ function MatrixRain() {
         const fontSize = 14;
         let columns: number;
         let drops: number[];
-
         const resize = () => {
             width = window.innerWidth;
             height = window.innerHeight;
@@ -35,18 +29,15 @@ function MatrixRain() {
             columns = Math.floor(width / fontSize);
             drops = Array(columns).fill(1);
         };
-
         const draw = () => {
             ctx.fillStyle = 'rgba(6, 5, 29, 0.05)';
             ctx.fillRect(0, 0, width, height);
             ctx.font = `${fontSize}px monospace`;
-
             for (let i = 0; i < drops.length; i++) {
                 const char = chars[Math.floor(Math.random() * chars.length)];
                 const brightness = Math.random();
                 const x = i * fontSize;
                 const y = drops[i] * fontSize;
-
                 if (brightness > 0.95) {
                     ctx.fillStyle = '#ffffff';
                     ctx.shadowColor = '#00ffff';
@@ -62,29 +53,23 @@ function MatrixRain() {
                     ctx.fillStyle = 'rgba(0, 150, 255, 0.5)';
                     ctx.shadowBlur = 0;
                 }
-
                 ctx.fillText(char, x, y);
                 ctx.shadowBlur = 0;
-
                 if (y > height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
-
             animationId = requestAnimationFrame(draw);
         };
-
         resize();
         window.addEventListener('resize', resize);
         ctx.fillStyle = '#06051d';
         ctx.fillRect(0, 0, width, height);
         draw();
-
         return () => {
             window.removeEventListener('resize', resize);
             cancelAnimationFrame(animationId);
         };
     }, []);
-
     return (
         <canvas
             ref={canvasRef}
@@ -94,9 +79,6 @@ function MatrixRain() {
     );
 }
 
-// ─────────────────────────────────────────────
-// SPLIT TEXT — letter-by-letter stagger reveal
-// ─────────────────────────────────────────────
 function SplitText({ text, delay = 0, className = '' }: { text: string; delay?: number; className?: string }) {
     return (
         <span className={`inline-flex ${className}`} aria-label={text}>
@@ -105,11 +87,7 @@ function SplitText({ text, delay = 0, className = '' }: { text: string; delay?: 
                     key={i}
                     initial={{ opacity: 0, y: 48 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                        duration: 0.65,
-                        delay: delay + i * 0.055,
-                        ease: [0.16, 1, 0.3, 1],
-                    }}
+                    transition={{ duration: 0.65, delay: delay + i * 0.055, ease: [0.16, 1, 0.3, 1] }}
                     className="inline-block"
                 >
                     {char}
@@ -119,9 +97,6 @@ function SplitText({ text, delay = 0, className = '' }: { text: string; delay?: 
     );
 }
 
-// ─────────────────────────────────────────────
-// SCROLL CUE
-// ─────────────────────────────────────────────
 function ScrollCue() {
     return (
         <motion.div
@@ -131,19 +106,13 @@ function ScrollCue() {
             className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
             <span className="text-[9px] uppercase tracking-[0.35em] text-slate-600">Scroll</span>
-            <motion.div
-                animate={{ y: [0, 6, 0] }}
-                transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-            >
+            <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}>
                 <MoveDown className="w-3.5 h-3.5 text-amber-400/50" />
             </motion.div>
         </motion.div>
     );
 }
 
-// ─────────────────────────────────────────────
-// STAT PILL
-// ─────────────────────────────────────────────
 function StatPill({ value, label, delay }: { value: string; label: string; delay: number }) {
     return (
         <motion.div
@@ -152,10 +121,7 @@ function StatPill({ value, label, delay }: { value: string; label: string; delay
             transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col border-l border-slate-700/60 pl-4"
         >
-            <span
-                className="text-2xl font-light text-white leading-none"
-                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-            >
+            <span className="text-2xl font-light text-white leading-none" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                 {value}
             </span>
             <span className="text-[9px] uppercase tracking-[0.2em] text-slate-600 mt-0.5">{label}</span>
@@ -163,21 +129,18 @@ function StatPill({ value, label, delay }: { value: string; label: string; delay
     );
 }
 
-// ─────────────────────────────────────────────
-// HERO
-// ─────────────────────────────────────────────
 export default function Hero() {
     const [isVisible, setIsVisible] = useState(false);
-    const [showLogin, setShowLogin]   = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
 
-    const isAuthenticated = useIsAuthenticated();
-    const user  = useUser();
-    const token = useToken();
-    const logout = useAuthStore(s => s.logout);
+    const { data: session, status } = useSession();
+    const isAuthenticated = status === 'authenticated';
+    const user = session?.user;
 
-    // Parallax on matrix layer
+    const handleLogout = () => signOut({ callbackUrl: '/' });
+
     const { scrollY } = useScroll();
     const matrixY = useTransform(scrollY, [0, 600], [0, 120]);
     const contentY = useTransform(scrollY, [0, 600], [0, -60]);
@@ -187,16 +150,6 @@ export default function Hero() {
         return () => clearTimeout(t);
     }, []);
 
-    const handleLogout = async () => {
-        try {
-            await fetch('/api/auth/logout', {
-                method: 'POST',
-                headers: { Authorization: `Bearer ${token}` },
-            });
-        } catch {}
-        logout();
-    };
-
     const handleAnchor = useCallback((href: string) => (e: React.MouseEvent) => {
         e.preventDefault();
         const el = document.getElementById(href.slice(1));
@@ -204,32 +157,15 @@ export default function Hero() {
     }, []);
 
     return (
-        <section
-            ref={sectionRef}
-            className="relative flex items-center overflow-hidden h-screen min-h-[700px]"
-        >
-            {/* ── Matrix background with subtle parallax ── */}
-            <motion.div
-                className="absolute inset-0 z-0"
-                style={{ y: matrixY }}
-            >
+        <section ref={sectionRef} className="relative flex items-center overflow-hidden h-screen min-h-[700px]">
+
+            <motion.div className="absolute inset-0 z-0" style={{ y: matrixY }}>
                 <MatrixRain />
             </motion.div>
 
-            {/* ── Vignette layers ── */}
-            <div className="absolute inset-0 z-[1] pointer-events-none"
-                style={{ background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, #06051d 100%)' }}
-            />
-            {/* Left fade for text legibility */}
-            <div className="absolute inset-0 z-[2] pointer-events-none"
-                style={{ background: 'linear-gradient(90deg, rgba(6,5,29,0.92) 0%, rgba(6,5,29,0.60) 40%, transparent 70%)' }}
-            />
-            {/* Bottom fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-40 z-[2] pointer-events-none"
-                style={{ background: 'linear-gradient(to top, #06051d 0%, transparent 100%)' }}
-            />
-
-            {/* ── Grain overlay ── */}
+            <div className="absolute inset-0 z-[1] pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, #06051d 100%)' }} />
+            <div className="absolute inset-0 z-[2] pointer-events-none" style={{ background: 'linear-gradient(90deg, rgba(6,5,29,0.92) 0%, rgba(6,5,29,0.60) 40%, transparent 70%)' }} />
+            <div className="absolute bottom-0 left-0 right-0 h-40 z-[2] pointer-events-none" style={{ background: 'linear-gradient(to top, #06051d 0%, transparent 100%)' }} />
             <div
                 className="absolute inset-0 z-[3] opacity-[0.03] pointer-events-none"
                 style={{
@@ -238,14 +174,9 @@ export default function Hero() {
                 }}
             />
 
-            {/* ── Main content ── */}
-            <motion.div
-                className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 pt-20"
-                style={{ y: contentY }}
-            >
+            <motion.div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 pt-20" style={{ y: contentY }}>
                 <div className="flex flex-col items-start max-w-4xl">
 
-                    {/* Eyebrow */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -20 }}
@@ -255,23 +186,17 @@ export default function Hero() {
                         <div className="w-8 h-px bg-amber-400/60" />
                     </motion.div>
 
-                    {/* Main title — massive, asymmetric */}
                     {isVisible && (
                         <div className="pt-6 pb-4" style={{ clipPath: 'inset(-40% -10% -10% -10%)' }}>
                             <h1
                                 className="font-light text-white tracking-[-0.02em]"
-                                style={{
-                                    fontFamily: "'Cormorant Garamond', 'Garamond', Georgia, serif",
-                                    fontSize: 'clamp(5rem, 14vw, 13rem)',
-                                    lineHeight: 1,
-                                }}
+                                style={{ fontFamily: "'Cormorant Garamond', 'Garamond', Georgia, serif", fontSize: 'clamp(5rem, 14vw, 13rem)', lineHeight: 1 }}
                             >
                                 <SplitText text="JACANA" delay={0.3} />
                             </h1>
                         </div>
                     )}
 
-                    {/* DEV — offset right, different weight */}
                     {isVisible && (
                         <div className="self-end -mt-4 md:-mt-6 lg:-mt-10 pr-4" style={{ clipPath: 'inset(-20% -10% -20% -10%)' }}>
                             <motion.div
@@ -283,11 +208,7 @@ export default function Hero() {
                                 <div className="w-20 md:w-32 h-px bg-gradient-to-l from-amber-400/60 to-transparent mb-3 hidden sm:block" />
                                 <span
                                     className="text-amber-400/90 italic"
-                                    style={{
-                                        fontFamily: "'Cormorant Garamond', Georgia, serif",
-                                        fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
-                                        fontWeight: 300,
-                                    }}
+                                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', fontWeight: 300 }}
                                 >
                                     Developers
                                 </span>
@@ -295,7 +216,6 @@ export default function Hero() {
                         </div>
                     )}
 
-                    {/* Tagline */}
                     <motion.p
                         initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 16 }}
@@ -307,7 +227,6 @@ export default function Hero() {
                         que permanecen.
                     </motion.p>
 
-                    {/* Divider */}
                     <motion.div
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: isVisible ? 1 : 0 }}
@@ -316,7 +235,6 @@ export default function Hero() {
                         style={{ transformOrigin: 'left' }}
                     />
 
-                    {/* CTA row */}
                     <motion.div
                         initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 16 }}
@@ -325,71 +243,35 @@ export default function Hero() {
                     >
                         <AnimatePresence mode="wait">
                             {isAuthenticated && user ? (
-                                <motion.div
-                                    key="auth"
-                                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                                    className="flex items-center gap-4"
-                                >
-                                    {/* Welcome chip */}
+                                <motion.div key="auth" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-4">
                                     <div className="flex items-center gap-3 px-4 py-2.5 border border-slate-700/60 bg-slate-900/40">
                                         <div className="w-7 h-7 flex items-center justify-center bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-medium">
-                                            {(user.name || user.username || user.email)[0].toUpperCase()}
+                                            {(user.name || user.email || '?')[0].toUpperCase()}
                                         </div>
                                         <div>
                                             <p className="text-[9px] uppercase tracking-[0.2em] text-slate-500">Bienvenido</p>
                                             <p className="text-sm text-white font-medium leading-none">
-                                                {user.name || user.username || user.email.split('@')[0]}
+                                                {user.name || user.email?.split('@')[0]}
                                             </p>
                                         </div>
                                     </div>
-
                                     <UserMenu onLogout={handleLogout} />
-
-                                    <a
-                                        href="#explore"
-                                        onClick={handleAnchor('#explore')}
-                                        className="group flex items-center gap-2.5 px-6 py-3 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
-                                    >
+                                    <a href="#explore" onClick={handleAnchor('#explore')} className="group flex items-center gap-2.5 px-6 py-3 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors">
                                         Explorar
                                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                                     </a>
                                 </motion.div>
                             ) : (
-                                <motion.div
-                                    key="guest"
-                                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                                    className="flex flex-wrap items-center gap-3"
-                                >
-                                    {/* Primary CTA */}
-                                    <motion.a
-                                        href="#explore"
-                                        onClick={handleAnchor('#explore')}
-                                        whileHover={{ scale: 1.01 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
-                                    >
+                                <motion.div key="guest" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-wrap items-center gap-3">
+                                    <motion.a href="#explore" onClick={handleAnchor('#explore')} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors">
                                         Explorar servicios
                                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                                     </motion.a>
-
-                                    {/* Secondary: login */}
-                                    <motion.button
-                                        onClick={() => setShowLogin(true)}
-                                        whileHover={{ scale: 1.01 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
-                                    >
+                                    <motion.button onClick={() => setShowLogin(true)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all">
                                         <LogIn className="w-3.5 h-3.5" />
                                         Iniciar sesión
                                     </motion.button>
-
-                                    {/* Ghost: register */}
-                                    <motion.button
-                                        onClick={() => setShowRegister(true)}
-                                        whileHover={{ scale: 1.01 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        className="flex items-center gap-2 px-6 py-3.5 text-slate-500 hover:text-amber-400/80 text-xs font-medium uppercase tracking-[0.15em] transition-colors"
-                                    >
+                                    <motion.button onClick={() => setShowRegister(true)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-3.5 text-slate-500 hover:text-amber-400/80 text-xs font-medium uppercase tracking-[0.15em] transition-colors">
                                         <UserPlus className="w-3.5 h-3.5" />
                                         Registrarse
                                     </motion.button>
@@ -398,19 +280,17 @@ export default function Hero() {
                         </AnimatePresence>
                     </motion.div>
 
-                    {/* Stats row */}
                     <motion.div
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 12 }}
                         transition={{ delay: 2, duration: 0.6 }}
                         className="mt-14 flex items-center gap-8"
                     >
-                        <StatPill value="10+" label="Proyectos" delay={2.1} />
+                        <StatPill value="15+" label="Proyectos" delay={2.1} />
                         <StatPill value="98%" label="Satisfacción" delay={2.2} />
-                        <StatPill value="4+ años" label="Experiencia" delay={2.3} />
+                        <StatPill value="2+ años" label="Experiencia" delay={2.3} />
                     </motion.div>
 
-                    {/* Tech stack — horizontal, editorial */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: isVisible ? 1 : 0 }}
@@ -420,29 +300,22 @@ export default function Hero() {
                         <span className="text-[9px] uppercase tracking-[0.3em] text-slate-700 mr-1">Stack</span>
                         {[
                             { icon: Code2, label: 'React' },
-                            { icon: Zap,   label: 'Next.js' },
+                            { icon: Zap, label: 'Next.js' },
                             { icon: Globe, label: 'Node.js' },
-                            { icon: Shield,label: 'TypeScript' },
+                            { icon: Shield, label: 'TypeScript' },
                         ].map(({ icon: Icon, label }, i) => (
-                            <motion.div
-                                key={label}
-                                initial={{ opacity: 0, y: 6 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 2.5 + i * 0.07 }}
-                                className="flex items-center gap-1.5 px-3 py-1.5 border border-slate-800/60 hover:border-amber-400/30 text-slate-500 hover:text-slate-300 transition-all cursor-default"
-                            >
+                            <motion.div key={label} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.5 + i * 0.07 }} className="flex items-center gap-1.5 px-3 py-1.5 border border-slate-800/60 hover:border-amber-400/30 text-slate-500 hover:text-slate-300 transition-all cursor-default">
                                 <Icon className="w-3 h-3" />
                                 <span className="text-[10px] uppercase tracking-[0.12em]">{label}</span>
                             </motion.div>
                         ))}
                     </motion.div>
+
                 </div>
             </motion.div>
 
-            {/* ── Scroll cue ── */}
             <ScrollCue />
 
-            {/* ── Right side: floating code badge (decorative) ── */}
             <motion.div
                 initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : 40 }}
@@ -452,20 +325,8 @@ export default function Hero() {
                 <div className="border border-slate-800/60 bg-[#06051d]/80 backdrop-blur-sm p-6 max-w-[220px]">
                     <div className="h-px w-full bg-gradient-to-r from-amber-400/30 to-transparent mb-4" />
                     <p className="text-[9px] uppercase tracking-[0.3em] text-amber-400/60 mb-3">— Especialidades</p>
-                    {[
-                        'Desarrollo Web',
-                        'Apps Móviles',
-                        'Cloud & DevOps',
-                        'Inteligencia Artificial',
-                        'Consultoría Técnica',
-                    ].map((s, i) => (
-                        <motion.div
-                            key={s}
-                            initial={{ opacity: 0, x: 12 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 2.1 + i * 0.1 }}
-                            className="flex items-center gap-2 py-2 border-b border-slate-800/40 last:border-b-0 group cursor-default"
-                        >
+                    {['Desarrollo Web', 'Apps Móviles', 'Cloud & DevOps', 'Inteligencia Artificial', 'Consultoría Técnica'].map((s, i) => (
+                        <motion.div key={s} initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.1 + i * 0.1 }} className="flex items-center gap-2 py-2 border-b border-slate-800/40 last:border-b-0 group cursor-default">
                             <span className="w-1 h-1 rounded-full bg-amber-400/40 group-hover:bg-amber-400/80 transition-colors" />
                             <span className="text-xs text-slate-500 group-hover:text-slate-300 transition-colors">{s}</span>
                         </motion.div>
@@ -474,17 +335,13 @@ export default function Hero() {
                 </div>
             </motion.div>
 
-            {/* ── Auth Dialogs ── */}
-            <LoginDialog
-                isOpen={showLogin}
-                onClose={() => setShowLogin(false)}
-                onSwitchToRegister={() => { setShowLogin(false); setShowRegister(true); }}
+            <HeroDialogs
+                showLogin={showLogin}
+                showRegister={showRegister}
+                setShowLogin={setShowLogin}
+                setShowRegister={setShowRegister}
             />
-            <RegisterDialog
-                isOpen={showRegister}
-                onClose={() => setShowRegister(false)}
-                onSwitchToLogin={() => { setShowRegister(false); setShowLogin(true); }}
-            />
+
         </section>
     );
 }
