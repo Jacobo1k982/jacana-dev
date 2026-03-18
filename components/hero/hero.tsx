@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { UserPlus, LogIn, Code2, Zap, Globe, Shield, ArrowRight, MoveDown } from 'lucide-react';
@@ -150,12 +151,6 @@ export default function Hero() {
         return () => clearTimeout(t);
     }, []);
 
-    const handleAnchor = useCallback((href: string) => (e: React.MouseEvent) => {
-        e.preventDefault();
-        const el = document.getElementById(href.slice(1));
-        el?.scrollIntoView({ behavior: 'smooth' });
-    }, []);
-
     return (
         <section ref={sectionRef} className="relative flex items-center overflow-hidden h-screen min-h-[700px]">
 
@@ -256,17 +251,25 @@ export default function Hero() {
                                         </div>
                                     </div>
                                     <UserMenu onLogout={handleLogout} />
-                                    <a href="#explore" onClick={handleAnchor('#explore')} className="group flex items-center gap-2.5 px-6 py-3 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors">
+                                    <Link
+                                        href="/servicios"
+                                        className="group flex items-center gap-2.5 px-6 py-3 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                    >
                                         Explorar
                                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                                    </a>
+                                    </Link>
                                 </motion.div>
                             ) : (
                                 <motion.div key="guest" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-wrap items-center gap-3">
-                                    <motion.a href="#explore" onClick={handleAnchor('#explore')} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors">
-                                        Explorar servicios
-                                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                                    </motion.a>
+                                    <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
+                                        <Link
+                                            href="/servicios"
+                                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                        >
+                                            Explorar servicios
+                                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                                        </Link>
+                                    </motion.div>
                                     <motion.button onClick={() => setShowLogin(true)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all">
                                         <LogIn className="w-3.5 h-3.5" />
                                         Iniciar sesión
