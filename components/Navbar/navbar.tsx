@@ -104,7 +104,7 @@ export default function Navbar() {
                         </motion.a>
 
                         <nav className="hidden lg:flex items-center gap-1">
-                            {navLinks.map((link, i) => {
+                            {navLinks.map((link) => {
                                 const hasSubmenu = link.submenu && link.submenu.length > 0;
                                 const isOpen = hoveredMenu === link.label;
                                 return (
@@ -167,6 +167,7 @@ export default function Navbar() {
                 </div>
             </motion.nav>
 
+            {/* Desktop mega menu */}
             <AnimatePresence>
                 {hoveredMenu && (
                     <motion.div
@@ -226,25 +227,41 @@ export default function Navbar() {
                 )}
             </AnimatePresence>
 
+            {/* Mobile menu */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <>
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsMenuOpen(false)} className="fixed inset-0 bg-[#080810]/95 backdrop-blur-xl z-[60] lg:hidden" />
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsMenuOpen(false)}
+                            className="fixed inset-0 bg-[#080810]/95 backdrop-blur-xl z-[60] lg:hidden"
+                        />
                         <motion.div
                             initial={{ x: '100%' }}
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            className="fixed top-0 right-0 bottom-0 w-full max-w-sm z-[70] lg:hidden flex flex-col bg-[#080810] border-l border-slate-800/60"
+                            // FIX: usar h-[100dvh] para cubrir exactamente el viewport en mobile
+                            // y min-h-0 para que el flex interno funcione correctamente con overflow
+                            className="fixed top-0 right-0 h-[100dvh] w-full max-w-sm z-[70] lg:hidden flex flex-col bg-[#080810] border-l border-slate-800/60"
                         >
-                            <div className="flex items-center justify-between px-6 pt-16 pb-6 border-b border-slate-800/60">
+                            {/* Header fijo */}
+                            <div className="flex-shrink-0 flex items-center justify-between px-6 pt-16 pb-6 border-b border-slate-800/60">
                                 <img src="/Logo-dev.png" alt="Jacana Dev" className="w-14 h-14 object-contain" />
-                                <button onClick={() => setIsMenuOpen(false)} className="w-9 h-9 flex items-center justify-center border border-slate-700/60 hover:border-amber-400/40 transition-colors">
+                                <button
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="w-9 h-9 flex items-center justify-center border border-slate-700/60 hover:border-amber-400/40 transition-colors"
+                                >
                                     <X className="w-4 h-4 text-slate-400" />
                                 </button>
                             </div>
 
-                            <div className="flex-1 overflow-y-auto py-4 px-6">
+                            {/* FIX: min-h-0 es crítico — sin él, flex-1 no respeta el límite del
+                                contenedor padre y el overflow-y-auto no activa el scroll interno.
+                                overscroll-contain evita que el scroll "se escape" al body. */}
+                            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain py-4 px-6">
                                 {navLinks.map((link) => {
                                     const Icon = link.icon;
                                     const hasSubmenu = Array.isArray(link.submenu) && link.submenu.length > 0;
@@ -252,7 +269,10 @@ export default function Navbar() {
                                     return (
                                         <div key={link.label} className="border-b border-slate-800/40 last:border-b-0">
                                             {hasSubmenu ? (
-                                                <button onClick={() => setOpenMobileSubmenu(isOpen ? null : link.label)} className="w-full flex items-center justify-between py-4 text-left">
+                                                <button
+                                                    onClick={() => setOpenMobileSubmenu(isOpen ? null : link.label)}
+                                                    className="w-full flex items-center justify-between py-4 text-left"
+                                                >
                                                     <div className="flex items-center gap-3">
                                                         <Icon className="w-4 h-4 text-slate-600" />
                                                         <span className="text-sm font-medium uppercase tracking-[0.1em] text-slate-300">{link.label}</span>
@@ -262,7 +282,11 @@ export default function Navbar() {
                                                     </motion.span>
                                                 </button>
                                             ) : (
-                                                <a href={link.href} onClick={() => setIsMenuOpen(false)} className="flex items-center justify-between py-4 group">
+                                                <a
+                                                    href={link.href}
+                                                    onClick={() => setIsMenuOpen(false)}
+                                                    className="flex items-center justify-between py-4 group"
+                                                >
                                                     <div className="flex items-center gap-3">
                                                         <Icon className="w-4 h-4 text-slate-600 group-hover:text-amber-400/80 transition-colors" />
                                                         <span className="text-sm font-medium uppercase tracking-[0.1em] text-slate-300 group-hover:text-white transition-colors">{link.label}</span>
@@ -270,17 +294,46 @@ export default function Navbar() {
                                                     <ChevronRight className="w-4 h-4 text-slate-700 group-hover:text-amber-400/60 transition-colors" />
                                                 </a>
                                             )}
-                                            <AnimatePresence>
+
+                                            <AnimatePresence initial={false}>
                                                 {hasSubmenu && isOpen && (
-                                                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }} className="overflow-hidden">
-                                                        <div className="pb-3 pl-7 border-l border-amber-400/20 ml-2">
+                                                    <motion.div
+                                                        key="submenu"
+                                                        initial={{ height: 0, opacity: 0 }}
+                                                        animate={{ height: 'auto', opacity: 1 }}
+                                                        exit={{ height: 0, opacity: 0 }}
+                                                        // FIX: ease más suave para que el contenedor
+                                                        // se expanda antes de que el scroll lo necesite
+                                                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                                        // FIX: overflow-hidden solo durante animación;
+                                                        // una vez expandido el contenido es totalmente visible
+                                                        className="overflow-hidden"
+                                                    >
+                                                        <div className="pb-4 pl-7 border-l border-amber-400/20 ml-2">
                                                             {link.submenu!.map((item, idx) => {
                                                                 const SubIcon = item.icon;
                                                                 const accentColor = getAccent(item.label).split(' ')[0];
                                                                 return (
-                                                                    <motion.a key={item.label} href={item.href} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.04 }} onClick={() => setIsMenuOpen(false)} className="group flex items-center gap-3 py-2.5 border-b border-slate-800/30 last:border-b-0">
-                                                                        <SubIcon className={`w-3.5 h-3.5 ${accentColor} opacity-60 group-hover:opacity-100 transition-opacity`} />
-                                                                        <span className="text-xs text-slate-500 group-hover:text-slate-300 transition-colors">{item.label}</span>
+                                                                    <motion.a
+                                                                        key={item.label}
+                                                                        href={item.href}
+                                                                        initial={{ opacity: 0, x: -8 }}
+                                                                        animate={{ opacity: 1, x: 0 }}
+                                                                        transition={{ delay: idx * 0.04 }}
+                                                                        onClick={() => setIsMenuOpen(false)}
+                                                                        className="group flex items-start gap-3 py-3 border-b border-slate-800/30 last:border-b-0"
+                                                                    >
+                                                                        <SubIcon className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${accentColor} opacity-60 group-hover:opacity-100 transition-opacity`} />
+                                                                        <div className="min-w-0">
+                                                                            <p className="text-xs font-medium text-slate-400 group-hover:text-slate-200 transition-colors leading-snug">
+                                                                                {item.label}
+                                                                            </p>
+                                                                            {item.description && (
+                                                                                <p className="text-[11px] text-slate-600 group-hover:text-slate-500 transition-colors mt-0.5 leading-relaxed">
+                                                                                    {item.description}
+                                                                                </p>
+                                                                            )}
+                                                                        </div>
                                                                     </motion.a>
                                                                 );
                                                             })}
@@ -293,13 +346,24 @@ export default function Navbar() {
                                 })}
                             </div>
 
-                            <div className="p-6 border-t border-slate-800/60">
+                            {/* Footer fijo */}
+                            {/* FIX: border más visible con tinte ámbar + fondo sutil para separar del scroll.
+                                pb-safe cubre el home indicator en iPhones (safe-area-inset-bottom). */}
+                            <div className="flex-shrink-0 px-6 pt-5 pb-6 border-t border-amber-400/20 bg-gradient-to-b from-amber-400/[0.04] to-transparent" style={{ paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom, 1.5rem))' }}>
                                 {!isAuthenticated ? (
                                     <div className="flex gap-3">
-                                        <button onClick={() => { setIsMenuOpen(false); setShowLogin(true); }} className="flex-1 py-3 text-xs font-medium uppercase tracking-[0.1em] text-slate-400 border border-slate-700/60 hover:border-amber-400/40 hover:text-white transition-all">
+                                        <button
+                                            onClick={() => { setIsMenuOpen(false); setShowLogin(true); }}
+                                            // FIX: border más brillante + texto más legible para distinguirlo del fondo oscuro
+                                            className="flex-1 py-3.5 text-xs font-medium uppercase tracking-[0.12em] text-slate-300 border border-slate-600/70 hover:border-amber-400/50 hover:text-white active:scale-[0.98] transition-all"
+                                        >
                                             Iniciar sesión
                                         </button>
-                                        <button onClick={() => { setIsMenuOpen(false); setShowRegister(true); }} className="flex-1 py-3 text-xs font-medium uppercase tracking-[0.1em] text-[#080810] bg-white hover:bg-amber-50 transition-colors">
+                                        <button
+                                            onClick={() => { setIsMenuOpen(false); setShowRegister(true); }}
+                                            // FIX: fondo blanco con sombra interior para que destaque sobre #080810
+                                            className="flex-1 py-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-[#080810] bg-white hover:bg-amber-50 active:scale-[0.98] transition-all shadow-[inset_0_0_0_1px_rgba(255,255,255,0.9)]"
+                                        >
                                             Registrarse
                                         </button>
                                     </div>
