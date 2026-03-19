@@ -5,13 +5,20 @@ import { NextResponse } from "next/server"
 export default auth((req) => {
     const isLoggedIn = !!req.auth
     const { pathname } = req.nextUrl
+    const role = (req.auth?.user as any)?.role
 
     const isPrivate = pathname.startsWith("/dashboard") ||
         pathname.startsWith("/profile") ||
         pathname.startsWith("/settings")
 
+    const isAdminRoute = pathname.startsWith("/admin")
+
     const isAuthRoute = pathname.startsWith("/login") ||
         pathname.startsWith("/register")
+
+    if (isAdminRoute && (!isLoggedIn || role !== 'ADMIN')) {
+        return NextResponse.redirect(new URL("/", req.url))
+    }
 
     if (isPrivate && !isLoggedIn) {
         return NextResponse.redirect(new URL("/login", req.url))
@@ -23,7 +30,5 @@ export default auth((req) => {
 })
 
 export const config = {
-    matcher: [
-        "/((?!api|_next/static|_next/image|favicon.ico).*)",
-    ],
+    matcher: ["/:path*"],
 }

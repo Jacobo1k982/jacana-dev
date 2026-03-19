@@ -12,34 +12,60 @@ model User {
   email         String    @unique
   username      String?   @unique
   name          String?
-  password      String? // ← nullable: usuarios OAuth no tienen contraseña
+  password      String?
   avatar        String?
-  image         String? // ← Auth.js escribe aquí la foto de Google/GitHub
+  image         String?
   bio           String?
+  website       String?
+  twitter       String?
+  github        String?
+  linkedin      String?
   role          Role      @default(USER)
   emailVerified DateTime?
   isActive      Boolean   @default(true)
+  notifyEmail   Boolean   @default(true)
+  notifyProduct Boolean   @default(true)
+  profilePublic Boolean   @default(true)
+  showEmail     Boolean   @default(false)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
   sessions Session[]
   accounts Account[]
+  projects Project[]
 
   @@index([email])
   @@index([username])
   @@map("users")
 }
 
+model Project {
+  id          String        @id @default(cuid())
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  status      ProjectStatus @default(ACTIVE)
+  techs       String[]
+  url         String?
+  image       String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([userId])
+  @@map("projects")
+}
+
 model Session {
   id           String    @id @default(cuid())
   userId       String
   user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  sessionToken String    @unique // ← Auth.js busca este nombre exacto
-  token        String?   @unique // ← tu campo original, opcional
+  sessionToken String    @unique
+  token        String?   @unique
   userAgent    String?
   ipAddress    String?
-  expires      DateTime // ← Auth.js busca este nombre exacto
-  expiresAt    DateTime? // ← tu campo original, opcional
+  expires      DateTime
+  expiresAt    DateTime?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
@@ -51,16 +77,16 @@ model Account {
   id                String    @id @default(cuid())
   userId            String
   user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  type              String // ← requerido por Auth.js ("oauth", "credentials")
+  type              String
   provider          String
-  providerAccountId String // ← Auth.js busca este nombre exacto
-  providerId        String? // ← tu campo original, opcional
+  providerAccountId String
+  providerId        String?
   access_token      String?
   refresh_token     String?
-  accessToken       String? // ← tu campo original, opcional
-  refreshToken      String? // ← tu campo original, opcional
-  expires_at        Int? // ← Auth.js usa Int (epoch seconds), no DateTime
-  expiresAt         DateTime? // ← tu campo original, opcional
+  accessToken       String?
+  refreshToken      String?
+  expires_at        Int?
+  expiresAt         DateTime?
   token_type        String?
   scope             String?
   id_token          String?
@@ -97,4 +123,10 @@ enum Role {
   USER
   ADMIN
   MODERATOR
+}
+
+enum ProjectStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
 }

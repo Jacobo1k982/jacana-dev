@@ -36,7 +36,7 @@ export function LoginDialog({ isOpen, onClose, onSwitchToRegister }: LoginDialog
             onClose();
             setEmail('');
             setPassword('');
-            window.location.href = '/';
+            window.location.href = '/dashboard';
         } catch {
             setError('Error al iniciar sesion');
         } finally {
@@ -46,7 +46,7 @@ export function LoginDialog({ isOpen, onClose, onSwitchToRegister }: LoginDialog
 
     const handleOAuth = async (provider: 'google' | 'github') => {
         setIsLoading(true);
-        await signIn(provider, { callbackUrl: '/' });
+        await signIn(provider, { callbackUrl: '/dashboard' });
     };
 
     if (!isOpen) return null;
