@@ -178,7 +178,6 @@ export default function Hero() {
                         transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                         className="flex items-center gap-4 mb-8"
                     >
-                        <div className="w-8 h-px bg-amber-400/60" />
                     </motion.div>
 
                     {isVisible && (

@@ -1,4 +1,3 @@
-// proxy.ts
 import { auth } from "@/auth"
 import { NextResponse } from "next/server"
 
@@ -30,5 +29,14 @@ export default auth((req) => {
 })
 
 export const config = {
-    matcher: ["/:path*"],
+    matcher: [
+        /*
+         * Aplica el middleware a todas las rutas EXCEPTO:
+         * - /api/auth/* → rutas internas de NextAuth (callbacks, session, csrf, etc.)
+         * - /_next/      → assets estáticos de Next.js
+         * - /favicon.*  → favicon
+         * - archivos con extensión (imágenes, fuentes, etc.)
+         */
+        "/((?!api/auth|_next/static|_next/image|favicon\\.ico|.*\\.[a-z]{2,4}$).*)",
+    ],
 }
