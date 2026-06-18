@@ -169,15 +169,26 @@ export default function Hero() {
                 }}
             />
 
-            <motion.div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 pt-20" style={{ y: contentY }}>
+            <motion.div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 pt-36 sm:pt-32 md:pt-28" style={{ y: contentY }}>
                 <div className="flex flex-col items-start max-w-4xl">
 
+                    {/* ── BADGE ── */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -20 }}
                         transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                         className="flex items-center gap-4 mb-8"
                     >
+                        <div className="flex items-center gap-3 px-4 py-2 border border-slate-800/80 bg-slate-900/40 backdrop-blur-sm">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80 animate-pulse" />
+                            <span className="text-[10px] uppercase tracking-[0.35em] text-slate-400">
+                                — Estudio Fullstack
+                            </span>
+                            <span className="w-px h-3 bg-slate-700/80" />
+                            <span className="text-[10px] uppercase tracking-[0.35em] text-amber-400/60">
+                                Costa Rica
+                            </span>
+                        </div>
                     </motion.div>
 
                     {isVisible && (
