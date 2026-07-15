@@ -29,7 +29,40 @@ interface TechnologyCardProps {
     technology: Technology;
     color: string;
     index: number;
+    isTopPick?: boolean;
 }
+
+// ─────────────────────────────────────────────
+// DOCS LINKS — documentación oficial real, no genérica
+// ─────────────────────────────────────────────
+
+const docsMap: Record<string, string> = {
+    react: 'https://react.dev',
+    vue: 'https://vuejs.org',
+    nextjs: 'https://nextjs.org/docs',
+    tailwind: 'https://tailwindcss.com/docs',
+    typescript: 'https://www.typescriptlang.org/docs',
+    nodejs: 'https://nodejs.org/docs',
+    python: 'https://docs.python.org/3/',
+    go: 'https://go.dev/doc/',
+    rust: 'https://doc.rust-lang.org/book/',
+    aws: 'https://docs.aws.amazon.com',
+    azure: 'https://learn.microsoft.com/azure',
+    gcp: 'https://cloud.google.com/docs',
+    vercel: 'https://vercel.com/docs',
+    docker: 'https://docs.docker.com',
+    kubernetes: 'https://kubernetes.io/docs/home/',
+    'github-actions': 'https://docs.github.com/actions',
+    terraform: 'https://developer.hashicorp.com/terraform/docs',
+    postgresql: 'https://www.postgresql.org/docs/',
+    mongodb: 'https://www.mongodb.com/docs/',
+    redis: 'https://redis.io/docs/',
+    supabase: 'https://supabase.com/docs',
+    pytorch: 'https://pytorch.org/docs/',
+    tensorflow: 'https://www.tensorflow.org/learn',
+    openai: 'https://platform.openai.com/docs',
+    langchain: 'https://python.langchain.com/docs/',
+};
 
 // ─────────────────────────────────────────────
 // ACCENT MAP
@@ -54,9 +87,10 @@ const statMeta: Record<string, { icon: React.ElementType; label: string }> = {
 // COMPONENT
 // ─────────────────────────────────────────────
 
-export default function TechnologyCard({ technology, color, index }: TechnologyCardProps) {
+export default function TechnologyCard({ technology, color, index, isTopPick }: TechnologyCardProps) {
     const [isExpanded, setIsExpanded] = useState(false);
     const accent = accentMap[color] ?? accentMap.cyan;
+    const docsHref = docsMap[technology.id] ?? '#';
 
     return (
         <motion.article
@@ -83,10 +117,15 @@ export default function TechnologyCard({ technology, color, index }: TechnologyC
                             </span>
                         </div>
                         <div>
-                            <h3 className="text-base font-light text-white leading-tight"
+                            <h3 className="text-base font-light text-white leading-tight flex items-center gap-2"
                                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                             >
                                 {technology.name}
+                                {isTopPick && (
+                                    <span className="text-[8px] font-sans not-italic uppercase tracking-[0.15em] text-amber-400/80 border border-amber-400/30 px-1.5 py-0.5">
+                                        Más usado
+                                    </span>
+                                )}
                             </h3>
                             <div className="flex items-center gap-1.5 mt-0.5">
                                 <span className={`text-[9px] uppercase tracking-[0.2em] ${accent.text}`}>
@@ -210,12 +249,14 @@ export default function TechnologyCard({ technology, color, index }: TechnologyC
                             </ul>
 
                             <motion.a
-                                href="#"
+                                href={docsHref}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 whileHover={{ scale: 1.01 }}
                                 whileTap={{ scale: 0.98 }}
                                 className="mt-5 w-full flex items-center justify-center gap-2 py-3 border border-slate-700/60 hover:border-amber-400/40 text-slate-500 hover:text-slate-300 text-xs font-medium uppercase tracking-[0.12em] transition-all"
                             >
-                                Ver documentación
+                                Ver documentación oficial
                                 <ExternalLink className="w-3 h-3" />
                             </motion.a>
                         </div>

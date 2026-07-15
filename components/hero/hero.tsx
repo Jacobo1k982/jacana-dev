@@ -98,6 +98,31 @@ function SplitText({ text, delay = 0, className = '' }: { text: string; delay?: 
     );
 }
 
+// ── SORPRESA: palabra rotativa dentro del párrafo, enfocada en resultados de negocio ──
+function RotatingWord({ words, interval = 2200 }: { words: string[]; interval?: number }) {
+    const [index, setIndex] = useState(0);
+    useEffect(() => {
+        const id = setInterval(() => setIndex((i) => (i + 1) % words.length), interval);
+        return () => clearInterval(id);
+    }, [words.length, interval]);
+    return (
+        <span className="relative inline-block align-baseline" style={{ minWidth: '7ch' }}>
+            <AnimatePresence mode="wait">
+                <motion.em
+                    key={words[index]}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="text-white not-italic border-b border-amber-400/40 inline-block"
+                >
+                    {words[index]}
+                </motion.em>
+            </AnimatePresence>
+        </span>
+    );
+}
+
 function ScrollCue() {
     return (
         <motion.div
@@ -106,7 +131,7 @@ function ScrollCue() {
             transition={{ delay: 2.8, duration: 0.6 }}
             className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-            <span className="text-[9px] uppercase tracking-[0.35em] text-slate-600">Scroll</span>
+            <span className="text-[9px] uppercase tracking-[0.35em] text-slate-600">Descubre más</span>
             <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}>
                 <MoveDown className="w-3.5 h-3.5 text-amber-400/50" />
             </motion.div>
@@ -182,7 +207,7 @@ export default function Hero() {
                         <div className="flex items-center gap-3 px-4 py-2 border border-slate-800/80 bg-slate-900/40 backdrop-blur-sm">
                             <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80 animate-pulse" />
                             <span className="text-[10px] uppercase tracking-[0.35em] text-slate-400">
-                                — Estudio Fullstack
+                                — Aceptando nuevos proyectos
                             </span>
                             <span className="w-px h-3 bg-slate-700/80" />
                             <span className="text-[10px] uppercase tracking-[0.35em] text-amber-400/60">
@@ -227,9 +252,9 @@ export default function Hero() {
                         transition={{ delay: 1.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                         className="mt-8 text-sm md:text-base text-slate-400 max-w-md leading-relaxed"
                     >
-                        Transformamos ideas en{' '}
-                        <em className="text-white not-italic border-b border-amber-400/40">experiencias digitales</em>{' '}
-                        que permanecen.
+                        Convertimos tu idea en un producto que genera{' '}
+                        <RotatingWord words={['ingresos', 'clientes', 'resultados', 'ventas']} />{' '}
+                        desde el primer día.
                     </motion.p>
 
                     <motion.div
@@ -254,39 +279,43 @@ export default function Hero() {
                                             {(user.name || user.email || '?')[0].toUpperCase()}
                                         </div>
                                         <div>
-                                            <p className="text-[9px] uppercase tracking-[0.2em] text-slate-500">Bienvenido</p>
+                                            <p className="text-[9px] uppercase tracking-[0.2em] text-slate-500">Bienvenido de vuelta</p>
                                             <p className="text-sm text-white font-medium leading-none">
                                                 {user.name || user.email?.split('@')[0]}
                                             </p>
                                         </div>
                                     </div>
                                     <UserMenu onLogout={handleLogout} />
+                                    {/* 1. Acción principal de negocio */}
                                     <Link
                                         href="/servicios"
                                         className="group flex items-center gap-2.5 px-6 py-3 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
                                     >
-                                        Explorar
+                                        Cotiza tu proyecto
                                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                                     </Link>
                                 </motion.div>
                             ) : (
                                 <motion.div key="guest" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-wrap items-center gap-3">
+                                    {/* 1. Acción principal: la que mueve la aguja del negocio */}
                                     <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
                                         <Link
                                             href="/servicios"
                                             className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
                                         >
-                                            Explorar servicios
+                                            Cotiza tu proyecto
                                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                                         </Link>
                                     </motion.div>
+                                    {/* 2. Acción secundaria: usuarios que ya confían en nosotros */}
                                     <motion.button onClick={() => setShowLogin(true)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all">
                                         <LogIn className="w-3.5 h-3.5" />
                                         Iniciar sesión
                                     </motion.button>
+                                    {/* 3. Acción terciaria: crear cuenta nueva */}
                                     <motion.button onClick={() => setShowRegister(true)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-3.5 text-slate-500 hover:text-amber-400/80 text-xs font-medium uppercase tracking-[0.15em] transition-colors">
                                         <UserPlus className="w-3.5 h-3.5" />
-                                        Registrarse
+                                        Crear cuenta gratis
                                     </motion.button>
                                 </motion.div>
                             )}
@@ -299,9 +328,9 @@ export default function Hero() {
                         transition={{ delay: 2, duration: 0.6 }}
                         className="mt-14 flex items-center gap-8"
                     >
-                        <StatPill value="15+" label="Proyectos" delay={2.1} />
-                        <StatPill value="98%" label="Satisfacción" delay={2.2} />
-                        <StatPill value="2+ años" label="Experiencia" delay={2.3} />
+                        <StatPill value="15+" label="Proyectos entregados" delay={2.1} />
+                        <StatPill value="98%" label="Clientes que repiten" delay={2.2} />
+                        <StatPill value="2+ años" label="Construyendo software" delay={2.3} />
                     </motion.div>
 
                     <motion.div
@@ -337,8 +366,8 @@ export default function Hero() {
             >
                 <div className="border border-slate-800/60 bg-[#06051d]/80 backdrop-blur-sm p-6 max-w-[220px]">
                     <div className="h-px w-full bg-gradient-to-r from-amber-400/30 to-transparent mb-4" />
-                    <p className="text-[9px] uppercase tracking-[0.3em] text-amber-400/60 mb-3">— Especialidades</p>
-                    {['Desarrollo Web', 'Apps Móviles', 'Cloud & DevOps', 'Inteligencia Artificial', 'Consultoría Técnica'].map((s, i) => (
+                    <p className="text-[9px] uppercase tracking-[0.3em] text-amber-400/60 mb-3">— Lo que construimos para ti</p>
+                    {['Desarrollo Web a medida', 'Apps Móviles nativas', 'Cloud & DevOps', 'IA aplicada al negocio', 'Consultoría Técnica'].map((s, i) => (
                         <motion.div key={s} initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.1 + i * 0.1 }} className="flex items-center gap-2 py-2 border-b border-slate-800/40 last:border-b-0 group cursor-default">
                             <span className="w-1 h-1 rounded-full bg-amber-400/40 group-hover:bg-amber-400/80 transition-colors" />
                             <span className="text-xs text-slate-500 group-hover:text-slate-300 transition-colors">{s}</span>

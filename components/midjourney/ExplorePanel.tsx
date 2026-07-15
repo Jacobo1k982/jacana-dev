@@ -79,14 +79,15 @@ export default function ExplorePanel({ isOpen, onClose }: ExplorePanelProps) {
                         {/* ── HEADER ── */}
                         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800/60 shrink-0">
                             <div>
-                                <p className="text-[9px] uppercase tracking-[0.3em] text-amber-400/60 mb-0.5">
-                                    — Portafolio
+                                <p className="text-[9px] uppercase tracking-[0.3em] text-amber-400/60 mb-0.5 flex items-center gap-2">
+                                    <span className="w-1 h-1 rounded-full bg-amber-400/80 animate-pulse" />
+                                    Portafolio · {projects.length} proyectos y creciendo
                                 </p>
                                 <h2
                                     className="text-xl font-light text-white leading-none"
                                     style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                                 >
-                                    Explorar proyectos
+                                    Cómo construimos software que funciona
                                 </h2>
                             </div>
                             <button
@@ -195,21 +196,21 @@ export default function ExplorePanel({ isOpen, onClose }: ExplorePanelProps) {
                                                         )}
                                                     </div>
 
-                                                    {/* Actions */}
+                                                    {/* Actions — demo primero: es la prueba de que funciona */}
                                                     <div className="flex items-center gap-2">
-                                                        <a
-                                                            href={project.github}
-                                                            className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-slate-700/60 hover:border-slate-600 text-slate-500 hover:text-slate-300 text-xs font-medium uppercase tracking-[0.1em] transition-all"
-                                                        >
-                                                            <Github className="w-3 h-3" />
-                                                            <span>Código</span>
-                                                        </a>
                                                         <a
                                                             href={project.demo}
                                                             className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-white text-[#080810] hover:bg-amber-50 text-xs font-medium uppercase tracking-[0.1em] transition-colors"
                                                         >
                                                             <ExternalLink className="w-3 h-3" />
-                                                            <span>Demo</span>
+                                                            <span>Ver demo</span>
+                                                        </a>
+                                                        <a
+                                                            href={project.github}
+                                                            className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-slate-700/60 hover:border-slate-600 text-slate-500 hover:text-slate-300 text-xs font-medium uppercase tracking-[0.1em] transition-all"
+                                                        >
+                                                            <Github className="w-3 h-3" />
+                                                            <span>Ver código</span>
                                                         </a>
                                                     </div>
                                                 </div>

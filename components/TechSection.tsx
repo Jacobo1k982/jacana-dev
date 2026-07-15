@@ -87,7 +87,7 @@ export default function TechSection() {
                             <em className="text-slate-400 not-italic">dominamos</em>
                         </h2>
                         <p className="text-slate-500 text-sm max-w-xs leading-relaxed md:text-right">
-                            Herramientas modernas para construir soluciones de alto rendimiento y escalabilidad.
+                            El mismo stack que usan las empresas líderes — elegido por rendimiento, no por moda.
                         </p>
                     </div>
                     <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-amber-400/20 to-transparent" />
@@ -163,14 +163,22 @@ export default function TechSection() {
                                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-800/30"
                             >
-                                {category.technologies.map((tech, index) => (
-                                    <TechnologyCard
-                                        key={tech.id}
-                                        technology={tech}
-                                        color={category.color}
-                                        index={index}
-                                    />
-                                ))}
+                                {(() => {
+                                    // Dato real, no inventado: el más popular de la categoría, según stats del propio JSON
+                                    const topPickId = category.technologies.reduce(
+                                        (top, t) => (t.stats.popularity > top.stats.popularity ? t : top),
+                                        category.technologies[0]
+                                    )?.id;
+                                    return category.technologies.map((tech, index) => (
+                                        <TechnologyCard
+                                            key={tech.id}
+                                            technology={tech}
+                                            color={category.color}
+                                            index={index}
+                                            isTopPick={tech.id === topPickId}
+                                        />
+                                    ));
+                                })()}
                             </motion.div>
                         );
                     })}
@@ -186,10 +194,10 @@ export default function TechSection() {
                 >
                     <div>
                         <p className="text-[10px] uppercase tracking-[0.25em] text-amber-400/60 mb-1">
-                            — ¿Necesitas asesoría?
+                            — ¿No sabes qué stack necesitas?
                         </p>
                         <p className="text-sm text-slate-500">
-                            Hablemos sobre cuál stack es el adecuado para tu proyecto.
+                            Te ayudamos a elegirlo sin comprometer velocidad ni presupuesto.
                         </p>
                     </div>
                     <div className="flex flex-wrap gap-3">

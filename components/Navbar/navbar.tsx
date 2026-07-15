@@ -9,7 +9,7 @@ import {
     Terminal, CloudCog, GitBranch, FileText, Mail, ChevronRight,
     ChevronDown, Sparkles, Zap, ArrowRight, ExternalLink, Star,
     TrendingUp, Shield, Cpu, Globe, Rocket, Settings, PenTool, Code,
-    Hexagon, Plus, LogIn, UserPlus
+    Hexagon, Plus, LogIn
 } from 'lucide-react';
 import navLinksData from '@/data/navLinks.json';
 import { LoginDialog, RegisterDialog, UserMenu } from '@/components/auth';
@@ -49,7 +49,8 @@ const getAccent = (label: string) =>
 // ─── Flat className constants — evitan hydration mismatch por \r\n en template literals ──
 const cx = {
     btnLogin: 'flex items-center gap-1.5 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.13em] text-slate-400 hover:text-white border border-transparent hover:border-white/10 rounded-sm transition-all duration-200',
-    btnRegister: 'flex items-center gap-1.5 px-5 py-2 bg-white text-[#06060f] text-[11px] font-semibold uppercase tracking-[0.13em] hover:bg-amber-50 transition-colors duration-200',
+    // CTA de negocio — la acción que realmente mueve la aguja (antes: "Registrarse")
+    btnPrimary: 'flex items-center gap-1.5 px-5 py-2 bg-white text-[#06060f] text-[11px] font-semibold uppercase tracking-[0.13em] hover:bg-amber-50 transition-colors duration-200',
     btnHamburger: 'lg:hidden w-10 h-10 flex items-center justify-center border border-white/10 hover:border-amber-400/30 transition-colors duration-200',
 };
 
@@ -178,15 +179,15 @@ export default function Navbar() {
                                         <LogIn className="w-3 h-3" />
                                         Iniciar sesión
                                     </motion.button>
-                                    <motion.button
-                                        onClick={() => setShowRegister(true)}
+                                    <motion.a
+                                        href="/servicios"
                                         whileHover={{ scale: 1.01 }}
                                         whileTap={{ scale: 0.97 }}
-                                        className={cx.btnRegister}
+                                        className={cx.btnPrimary}
                                     >
-                                        Registrarse
+                                        Cotiza tu proyecto
                                         <ArrowRight className="w-3 h-3" />
-                                    </motion.button>
+                                    </motion.a>
                                 </>
                             )}
                         </div>
@@ -247,7 +248,7 @@ export default function Navbar() {
                                                     {link.description ?? 'Nuestros servicios'}
                                                 </h3>
                                                 <p className="text-[12px] text-slate-500 leading-relaxed">
-                                                    Soluciones de alto rendimiento adaptadas a tu negocio.
+                                                    Resultados medibles, entregados a tiempo — sin sorpresas en el camino.
                                                 </p>
                                             </div>
                                             <motion.a
@@ -256,7 +257,7 @@ export default function Navbar() {
                                                 whileTap={{ scale: 0.98 }}
                                                 className="flex items-center justify-center gap-2 py-3 bg-white text-[#06060f] text-[11px] font-semibold uppercase tracking-[0.13em] hover:bg-amber-50 transition-colors"
                                             >
-                                                Ver todos
+                                                Ver todos los servicios
                                                 <ArrowRight className="w-3 h-3" />
                                             </motion.a>
                                         </div>
@@ -447,29 +448,30 @@ export default function Navbar() {
                                         className="p-5 flex flex-col gap-3 bg-[#06060c]"
                                         style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom, 1.25rem))' }}
                                     >
-                                        {/* Section label */}
+                                        {/* Section label — enfocado en negocio, no en la cuenta */}
                                         <p className="text-[9px] uppercase tracking-[0.3em] text-slate-600 text-center">
-                                            Accede a tu cuenta
+                                            ¿Tienes un proyecto en mente?
                                         </p>
 
-                                        {/* Iniciar sesión — ghost outlined */}
+                                        {/* Cotiza tu proyecto — CTA principal, filled */}
+                                        <motion.a
+                                            href="/servicios"
+                                            onClick={() => setIsMenuOpen(false)}
+                                            whileTap={{ scale: 0.97 }}
+                                            className="w-full flex items-center justify-center gap-2 py-3.5 bg-white hover:bg-amber-50 active:bg-amber-100 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#08080f] transition-colors duration-200"
+                                        >
+                                            Cotiza tu proyecto
+                                            <ArrowRight className="w-3.5 h-3.5" />
+                                        </motion.a>
+
+                                        {/* Iniciar sesión — ghost outlined, para clientes existentes */}
                                         <motion.button
                                             onClick={() => { setIsMenuOpen(false); setShowLogin(true); }}
                                             whileTap={{ scale: 0.97 }}
                                             className="w-full flex items-center justify-center gap-2 py-3.5 border border-slate-700 hover:border-slate-500 text-[11px] font-medium uppercase tracking-[0.14em] text-slate-300 hover:text-white transition-all duration-200 rounded-sm"
                                         >
                                             <LogIn className="w-3.5 h-3.5 opacity-60" />
-                                            Iniciar sesión
-                                        </motion.button>
-
-                                        {/* Registrarse — filled */}
-                                        <motion.button
-                                            onClick={() => { setIsMenuOpen(false); setShowRegister(true); }}
-                                            whileTap={{ scale: 0.97 }}
-                                            className="w-full flex items-center justify-center gap-2 py-3.5 bg-white hover:bg-amber-50 active:bg-amber-100 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#08080f] transition-colors duration-200"
-                                        >
-                                            <UserPlus className="w-3.5 h-3.5" />
-                                            Registrarse
+                                            ¿Ya eres cliente? Inicia sesión
                                         </motion.button>
                                     </div>
                                 ) : (

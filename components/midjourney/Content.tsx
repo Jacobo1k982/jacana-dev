@@ -7,15 +7,19 @@ import { ExternalLink } from 'lucide-react';
 // DATA
 // ─────────────────────────────────────────────
 
+// NOTA: estas imágenes (/public/gallery) parecen ser assets de muestra heredados de una
+// plantilla de Midjourney (eye/pen/face/heart/brain...). Recomendado reemplazarlas por
+// capturas reales de proyectos de Jacana Dev antes de publicar — ver /app/projects para el
+// portafolio real ya existente en el proyecto.
 const projects = [
-    { src: '/gallery/eye.png', alt: 'Ojo', title: 'Modelos de Imagen y Video', subtitle: 'Software' },
-    { src: '/gallery/pen.png', alt: 'Pluma', title: 'Por Anunciar', subtitle: 'Software' },
-    { src: '/gallery/people.png', alt: 'Personas', title: 'Por Anunciar', subtitle: 'Software' },
-    { src: '/gallery/face.png', alt: 'Rostro', title: 'Por Anunciar', subtitle: 'Software' },
-    { src: '/gallery/img5.png', alt: 'Corazón', title: 'Por Anunciar', subtitle: 'Hardware' },
-    { src: '/gallery/img3.png', alt: 'Cerebro', title: 'Por Anunciar', subtitle: 'Hardware' },
-    { src: '/gallery/img1.png', alt: 'Mano', title: 'Por Anunciar', subtitle: 'Hardware' },
-    { src: '/gallery/img2.png', alt: 'Labios', title: 'Por Anunciar', subtitle: 'Hardware' },
+    { src: '/gallery/eye.png', alt: 'Vista previa de proyecto', title: 'Próximamente', subtitle: 'Inteligencia Artificial' },
+    { src: '/gallery/pen.png', alt: 'Vista previa de proyecto', title: 'Próximamente', subtitle: 'Desarrollo Web' },
+    { src: '/gallery/people.png', alt: 'Vista previa de proyecto', title: 'Próximamente', subtitle: 'Apps Móviles' },
+    { src: '/gallery/face.png', alt: 'Vista previa de proyecto', title: 'Próximamente', subtitle: 'Cloud & DevOps' },
+    { src: '/gallery/img5.png', alt: 'Vista previa de proyecto', title: 'Próximamente', subtitle: 'Desarrollo Web' },
+    { src: '/gallery/img3.png', alt: 'Vista previa de proyecto', title: 'Próximamente', subtitle: 'Inteligencia Artificial' },
+    { src: '/gallery/img1.png', alt: 'Vista previa de proyecto', title: 'Próximamente', subtitle: 'Apps Móviles' },
+    { src: '/gallery/img2.png', alt: 'Vista previa de proyecto', title: 'Próximamente', subtitle: 'Cloud & DevOps' },
 ];
 
 // ─────────────────────────────────────────────
@@ -58,22 +62,22 @@ export default function Content() {
                         className="text-3xl md:text-4xl font-light text-white leading-snug mb-6"
                         style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                     >
-                        Un laboratorio<br />
-                        <em className="text-slate-400 not-italic">financiado por la comunidad</em>
+                        Un estudio<br />
+                        <em className="text-slate-400 not-italic">fullstack costarricense</em>
                     </h2>
                     <div className="space-y-4">
                         <Prose>
-                            Somos un{' '}
+                            Somos{' '}
                             <a
-                                href="#"
+                                href="/About"
                                 className="text-white border-b border-amber-400/40 hover:border-amber-400/70 transition-colors"
                             >
-                                laboratorio de investigación financiado por la comunidad
-                            </a>{' '}
-                            de 60 personas conocido por construir los modelos de IA más hermosos del mundo.
+                                Jacana Dev
+                            </a>
+                            , un equipo de 5 especialistas en San Pedro, Costa Rica, que combina ingeniería, diseño y estrategia de producto para construir software que impulsa negocios reales.
                         </Prose>
                         <Prose>
-                            Creemos que todos estamos en midjourney: que tenemos un rico pasado detrás y un futuro inimaginable por delante — y la pregunta que más queremos ayudar a responder es: ¿en qué queremos convertirnos?
+                            Medimos el éxito de cada proyecto en resultados de negocio, no solo en líneas de código: más ventas, más usuarios, más eficiencia para tu operación.
                         </Prose>
                     </div>
                 </section>
@@ -85,15 +89,15 @@ export default function Content() {
                         className="text-3xl md:text-4xl font-light text-white leading-snug mb-6"
                         style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                     >
-                        Trabajo por<br />
-                        <em className="text-slate-400 not-italic">revelar</em>
+                        Trabajo que<br />
+                        <em className="text-slate-400 not-italic">habla por sí solo</em>
                     </h2>
                     <div className="space-y-4 mb-10">
                         <Prose>
-                            En los próximos meses, presentaremos una amplia gama de proyectos ambiciosos bajo los temas de imaginación, coordinación, reflexión, belleza y florecimiento humano.
+                            Cada proyecto arranca con la misma pregunta: ¿qué necesita tu negocio para crecer? De ahí construimos soluciones a medida en desarrollo web, apps móviles, cloud e inteligencia artificial.
                         </Prose>
                         <Prose>
-                            Esperamos que nuestro trabajo ayude a contar historias de un futuro humano en el que todos quieran ser parte, y te convenza de que no estamos al final del tiempo, ni al principio, sino que todos estamos en midjourney en una vasta y gran aventura.
+                            Estamos preparando nuestro portafolio completo. Mientras tanto, aquí tienes una muestra de las áreas en las que trabajamos — o escríbenos directamente para hablar de tu proyecto.
                         </Prose>
                     </div>
 
@@ -132,6 +136,14 @@ export default function Content() {
                             </motion.div>
                         ))}
                     </div>
+
+                    <a
+                        href="/projects"
+                        className="group inline-flex items-center gap-2.5 mt-8 px-6 py-3 border border-slate-700/60 hover:border-amber-400/40 text-slate-300 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
+                    >
+                        Ver portafolio completo
+                        <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    </a>
                 </section>
 
                 {/* ── CARRERAS ── */}
@@ -141,22 +153,22 @@ export default function Content() {
                         className="text-3xl md:text-4xl font-light text-white leading-snug mb-6"
                         style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                     >
-                        Siempre<br />
-                        <em className="text-slate-400 not-italic">contratando</em>
+                        Estamos<br />
+                        <em className="text-slate-400 not-italic">creciendo</em>
                     </h2>
                     <div className="space-y-4 mb-8">
                         <Prose>
-                            Somos un equipo ágil, autofinanciado y distribuido, y siempre estamos contratando.
+                            Somos un equipo pequeño, ágil y remoto — y siempre buscamos sumar talento que quiera construir software para clientes reales, no solo proyectos de práctica.
                         </Prose>
                         <Prose>
-                            Ayúdanos a construir y explorar nueva infraestructura para amplificar el espíritu humano.
+                            Si React, Node.js, Cloud o IA son tu terreno, cuéntanos qué sabes hacer.
                         </Prose>
                     </div>
                     <a
-                        href="/careers"
+                        href="mailto:jgutierrez@jacana-dev.com?subject=Quiero%20unirme%20al%20equipo%20de%20Jacana%20Dev"
                         className="group inline-flex items-center gap-2.5 px-6 py-3 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
                     >
-                        Más información
+                        Escríbenos
                         <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                     </a>
                 </section>
@@ -174,19 +186,19 @@ export default function Content() {
                     <div className="space-y-0 border-l border-slate-800/60 pl-6">
                         {[
                             {
-                                label: 'Producto & soporte',
+                                label: 'Nuevos proyectos',
                                 links: [
-                                    { text: 'Discord', href: 'https://discord.gg/midjourney' },
-                                    { text: 'Página de ayuda', href: 'https://help.midjourney.com' },
+                                    { text: 'jgutierrez@jacana-dev.com', href: 'mailto:jgutierrez@jacana-dev.com' },
+                                    { text: 'Formulario de contacto', href: '/Contact' },
                                 ],
                             },
                             {
-                                label: 'Facturación',
-                                links: [{ text: 'billing@midjourney.com', href: 'mailto:billing@midjourney.com' }],
+                                label: 'Teléfono',
+                                links: [{ text: '+506 6454 1700', href: 'tel:+50664541700' }],
                             },
                             {
-                                label: 'Prensa',
-                                links: [{ text: 'press@midjourney.com', href: 'mailto:press@midjourney.com' }],
+                                label: 'Ubicación',
+                                links: [{ text: 'San Pedro, Montes de Oca, Costa Rica', href: '/Contact' }],
                             },
                         ].map((row) => (
                             <div
@@ -213,10 +225,11 @@ export default function Content() {
                 </section>
 
                 {/* ── FOOTER ── */}
+                {/* TODO: apuntar a páginas legales propias de Jacana Dev en cuanto existan (/terminos, /privacidad) */}
                 <div className="pt-8 border-t border-slate-800/60 flex flex-wrap gap-8">
                     {[
-                        { text: 'Términos de Servicio', href: 'https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service' },
-                        { text: 'Política de Privacidad', href: 'https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy' },
+                        { text: 'Términos de Servicio', href: '#' },
+                        { text: 'Política de Privacidad', href: '#' },
                     ].map((link) => (
                         <a
                             key={link.href}
