@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    FolderKanban, TrendingUp, Users, Globe, Award,
+    FolderKanban, TrendingUp, Users, Award,
     ArrowRight, Star
 } from 'lucide-react';
 import ProjectCard from './ProjectCard';
@@ -21,10 +21,8 @@ export default function ProjectsSection() {
 
     const statsRow = [
         { label: 'Proyectos', value: stats.totalProjects, icon: FolderKanban },
-        { label: 'Clientes', value: stats.clientsServed, icon: Users },
-        { label: 'Países', value: stats.countriesReached, icon: Globe },
-        { label: 'Equipo', value: stats.teamSize, icon: Users },
         { label: 'Experiencia', value: stats.yearsExperience, icon: TrendingUp },
+        { label: 'Fundador', value: stats.teamSize, icon: Users },
         { label: 'Satisfacción', value: stats.satisfactionRate, icon: Award },
     ];
 
@@ -78,7 +76,7 @@ export default function ProjectsSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.1 }}
-                    className="grid grid-cols-3 md:grid-cols-6 gap-px bg-slate-800/40 mb-20"
+                    className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-800/40 mb-20"
                 >
                     {statsRow.map((stat, i) => (
                         <motion.div
@@ -227,7 +225,7 @@ export default function ProjectsSection() {
                                 <em className="text-slate-400 not-italic">en mente?</em>
                             </h3>
                             <p className="text-slate-500 text-sm leading-relaxed mb-8 max-w-sm">
-                                Convierte tu visión en realidad. Nuestro equipo está listo para construir
+                                Convierte tu visión en realidad. Estoy listo para construir
                                 la solución digital perfecta para tu negocio.
                             </p>
                             <div className="flex flex-wrap gap-3">

@@ -205,10 +205,10 @@ export default function AboutSection() {
                     transition={{ duration: 0.6 }}
                     className="mb-24"
                 >
-                    <SectionLabel label="Equipo" />
+                    <SectionLabel label="Quién está detrás" />
                     <SectionHeader
-                        title={<>Nuestro<br /><em className="text-slate-400 not-italic">equipo</em></>}
-                        subtitle="Profesionales apasionados que hacen posible cada proyecto."
+                        title={<>Trabajas<br /><em className="text-slate-400 not-italic">directo conmigo</em></>}
+                        subtitle="Sin equipos grandes ni intermediarios — cada proyecto pasa por mis manos, de inicio a fin."
                     />
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-800/30">
                         {team.map((member, index) => (

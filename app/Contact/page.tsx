@@ -43,8 +43,8 @@ const faqs = [
         answer: 'Sí, ofrecemos planes de mantenimiento que incluyen actualizaciones, mejoras y soporte técnico continuo.',
     },
     {
-        question: '¿Trabajan con clientes internacionales?',
-        answer: 'Absolutamente. Trabajamos con clientes de todo el mundo, con comunicación en español e inglés.',
+        question: '¿Trabajas con clientes internacionales?',
+        answer: 'Por ahora trabajo principalmente con clientes en Costa Rica, pero estoy listo para recibir proyectos internacionales — la comunicación remota en español e inglés no es ningún problema.',
     },
     {
         question: '¿Cómo es el proceso de desarrollo?',
@@ -55,7 +55,7 @@ const faqs = [
 const stats = [
     { value: '10+', label: 'Proyectos' },
     { value: '98%', label: 'Satisfacción' },
-    { value: '4+', label: 'Años' },
+    { value: '2+', label: 'Años' },
     { value: '24/7', label: 'Soporte' },
 ];
 

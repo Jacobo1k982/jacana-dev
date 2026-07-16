@@ -78,17 +78,17 @@
         },
         {
             "id": "team",
-            "value": 5,
+            "value": 1,
             "suffix": "",
-            "label": "Expertos en el Equipo",
-            "description": "Talentos especializados"
+            "label": "Fundador",
+            "description": "Full-stack, de punta a punta"
         }
     ],
     "team": [
         {
             "id": "jacobo-gutierrez",
             "name": "Jacobo Gutiérrez",
-            "role": "CEO & Founder",
+            "role": "Founder & Fullstack Developer",
             "specialty": "Arquitectura de Software",
             "bio": "Apasionado por crear soluciones tecnológicas que transformen negocios. +2 años de experiencia en desarrollo fullstack y liderazgo técnico.",
             "avatar": "/team/juan-carlos.jpg",
@@ -105,102 +105,6 @@
                 "System Design"
             ],
             "color": "cyan"
-        },
-        {
-            "id": "maria-garcia",
-            "name": "María García",
-            "role": "CTO",
-            "specialty": "Cloud Architecture & DevOps",
-            "bio": "Especialista en infraestructura cloud y automatización. Certificada en AWS, Azure y GCP. Experta en Kubernetes y CI/CD.",
-            "avatar": "/team/maria-garcia.jpg",
-            "socials": {
-                "linkedin": "https://linkedin.com/in/mariagarcia",
-                "github": "https://github.com/mariagarcia"
-            },
-            "skills": [
-                "AWS",
-                "Kubernetes",
-                "Terraform",
-                "Python"
-            ],
-            "color": "purple"
-        },
-        {
-            "id": "carlos-mendez",
-            "name": "Carlos Méndez",
-            "role": "Lead Frontend Developer",
-            "specialty": "React & Next.js Expert",
-            "bio": "Desarrollador frontend con pasión por crear interfaces excepcionales. Especialista en React, Next.js y animaciones web.",
-            "avatar": "/team/carlos-mendez.jpg",
-            "socials": {
-                "linkedin": "https://linkedin.com/in/carlosmendez",
-                "github": "https://github.com/carlosmendez",
-                "twitter": "https://twitter.com/carlosmendez"
-            },
-            "skills": [
-                "React",
-                "Next.js",
-                "TypeScript",
-                "Tailwind"
-            ],
-            "color": "blue"
-        },
-        {
-            "id": "ana-rodriguez",
-            "name": "Ana Rodríguez",
-            "role": "Lead Backend Developer",
-            "specialty": "APIs & Microservices",
-            "bio": "Arquitecta de backend especializada en sistemas distribuidos y APIs escalables. Experta en Node.js, Python y bases de datos.",
-            "avatar": "/team/ana-rodriguez.jpg",
-            "socials": {
-                "linkedin": "https://linkedin.com/in/anarodriguez",
-                "github": "https://github.com/anarodriguez"
-            },
-            "skills": [
-                "Node.js",
-                "Python",
-                "PostgreSQL",
-                "GraphQL"
-            ],
-            "color": "green"
-        },
-        {
-            "id": "luis-perez",
-            "name": "Luis Pérez",
-            "role": "Lead UI/UX Designer",
-            "specialty": "Product Design & User Experience",
-            "bio": "Diseñador de producto con enfoque en experiencias digitales memorables. Especialista en design systems y prototipado.",
-            "avatar": "/team/luis-perez.jpg",
-            "socials": {
-                "linkedin": "https://linkedin.com/in/luisperez",
-                "dribbble": "https://dribbble.com/luisperez"
-            },
-            "skills": [
-                "Figma",
-                "Design Systems",
-                "Prototyping",
-                "Research"
-            ],
-            "color": "pink"
-        },
-        {
-            "id": "sofia-hernandez",
-            "name": "Sofía Hernández",
-            "role": "AI/ML Engineer",
-            "specialty": "Machine Learning & LLMs",
-            "bio": "Ingeniera de IA especializada en modelos de lenguaje y machine learning. PhD en Ciencias de la Computación.",
-            "avatar": "/team/sofia-hernandez.jpg",
-            "socials": {
-                "linkedin": "https://linkedin.com/in/sofiahernandez",
-                "github": "https://github.com/sofiahernandez"
-            },
-            "skills": [
-                "PyTorch",
-                "TensorFlow",
-                "OpenAI",
-                "LangChain"
-            ],
-            "color": "orange"
         }
     ],
     "timeline": [
@@ -211,23 +115,23 @@
         },
         {
             "year": 2024,
-            "title": "Primer Equipo",
-            "description": "Incorporamos los primeros miembros especializados y establecemos metodologías ágiles."
+            "title": "Metodología Ágil",
+            "description": "Establecemos metodologías ágiles para entregar proyectos de forma consistente."
         },
         {
             "year": 2024,
-            "title": "Expansión Internacional",
-            "description": "Comenzamos a servir clientes en Estados Unidos, Canadá y Europa."
+            "title": "Alcance Remoto",
+            "description": "100% remoto y listo para atender clientes en cualquier país, con comunicación en español e inglés."
         },
         {
             "year": 2024,
             "title": "Especialización en IA",
-            "description": "Creamos el departamento de IA/ML para ofrecer soluciones de vanguardia."
+            "description": "Sumamos soluciones de IA/ML de vanguardia a la oferta de servicios."
         },
         {
             "year": 2024,
-            "title": "Crecimiento Exponencial",
-            "description": "Alcanzamos más de 10 proyectos entregados y expandimos el equipo a 5 especialistas."
+            "title": "Crecimiento Constante",
+            "description": "Alcanzamos más de 10 proyectos entregados, todos construidos en solitario."
         }
     ],
     "process": [

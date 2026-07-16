@@ -3,58 +3,24 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    ExternalLink, Users, Calendar, Clock,
-    Award, Quote, ChevronRight, Star, Building2, Plus, Minus
+    ExternalLink, ChevronRight, Star, Tag, Plus, Minus
 } from 'lucide-react';
 
 // ─────────────────────────────────────────────
 // TYPES
 // ─────────────────────────────────────────────
 
-interface ProjectMetrics {
-    [key: string]: string | undefined;
-}
-
-interface ProjectClient {
-    name: string;
-    industry: string;
-    logo: string;
-    website: string;
-}
-
-interface ProjectTimeline {
-    duration: string;
-    start: string;
-    end: string;
-}
-
-interface ProjectTeam {
-    size: number;
-    roles: string[];
-}
-
-interface ProjectTestimonial {
-    quote: string;
-    author: string;
-    role: string;
-    avatar: string;
-}
-
 interface Project {
     id: string;
     title: string;
     slug: string;
     category: string;
-    client: ProjectClient;
+    type: string;
     shortDescription: string;
     fullDescription: string;
     technologies: string[];
     features: string[];
-    metrics: ProjectMetrics;
-    timeline: ProjectTimeline;
-    team: ProjectTeam;
-    testimonial: ProjectTestimonial;
-    awards?: string[];
+    link?: string;
     featured: boolean;
     color: string;
 }
@@ -80,17 +46,9 @@ const accentMap: Record<string, { text: string; border: string; bg: string }> = 
 const categoryLabels: Record<string, string> = {
     web: 'Web App',
     mobile: 'Móvil',
-    ai: 'IA & ML',
+    pos: 'Sistema POS',
     ecommerce: 'E-commerce',
 };
-
-// Converts camelCase key → readable label
-function formatMetricKey(key: string): string {
-    return key
-        .replace(/([A-Z])/g, ' $1')
-        .replace(/^./, s => s.toUpperCase())
-        .trim();
-}
 
 // ─────────────────────────────────────────────
 // COMPONENT
@@ -99,7 +57,6 @@ function formatMetricKey(key: string): string {
 export default function ProjectCard({ project, index }: ProjectCardProps) {
     const [showDetails, setShowDetails] = useState(false);
     const accent = accentMap[project.color] ?? accentMap.cyan;
-    const metrics = Object.entries(project.metrics).filter(([, v]) => v).slice(0, 3);
 
     return (
         <motion.article
@@ -114,7 +71,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
             {/* ── HEADER ── */}
             <div className="px-6 pt-6 pb-5 border-b border-slate-800/60">
-                {/* Row: category + duration + featured */}
+                {/* Row: category + type + featured */}
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                         <span className={`text-[9px] uppercase tracking-[0.25em] font-medium ${accent.text}`}>
@@ -130,10 +87,6 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                             </>
                         )}
                     </div>
-                    <div className="flex items-center gap-1.5 text-[10px] text-slate-600">
-                        <Clock className="w-3 h-3" />
-                        {project.timeline.duration}
-                    </div>
                 </div>
 
                 {/* Title */}
@@ -144,35 +97,16 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                     {project.title}
                 </h3>
 
-                {/* Client */}
+                {/* Type tag — honesto: producto propio / freelance / personal, sin inventar cliente */}
                 <div className="flex items-center gap-2 mb-4">
-                    <Building2 className={`w-3.5 h-3.5 ${accent.text} shrink-0`} />
-                    <span className="text-xs text-slate-400">{project.client.name}</span>
-                    <span className="text-slate-700 text-xs">·</span>
-                    <span className="text-xs text-slate-600">{project.client.industry}</span>
+                    <Tag className={`w-3.5 h-3.5 ${accent.text} shrink-0`} />
+                    <span className="text-xs text-slate-400">{project.type}</span>
                 </div>
 
                 {/* Description */}
                 <p className="text-sm text-slate-500 leading-relaxed line-clamp-2">
                     {project.shortDescription}
                 </p>
-            </div>
-
-            {/* ── METRICS ── */}
-            <div className="grid grid-cols-3 divide-x divide-slate-800/60 border-b border-slate-800/60">
-                {metrics.map(([key, value]) => (
-                    <div key={key} className="px-4 py-4 text-center">
-                        <p
-                            className={`text-xl font-light ${accent.text} leading-none mb-1`}
-                            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                        >
-                            {value}
-                        </p>
-                        <p className="text-[9px] uppercase tracking-[0.18em] text-slate-600 leading-tight">
-                            {formatMetricKey(key)}
-                        </p>
-                    </div>
-                ))}
             </div>
 
             {/* ── TECHNOLOGIES ── */}
@@ -191,40 +125,6 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                     </span>
                 )}
             </div>
-
-            {/* ── TESTIMONIAL ── */}
-            {project.testimonial && (
-                <div className="px-6 py-4 border-b border-slate-800/60">
-                    <div className="flex items-start gap-3">
-                        <Quote className={`w-3.5 h-3.5 ${accent.text} shrink-0 mt-0.5 opacity-60`} />
-                        <div>
-                            <p className="text-xs text-slate-500 italic leading-relaxed line-clamp-2 mb-2">
-                                "{project.testimonial.quote}"
-                            </p>
-                            <div className="flex items-center gap-2">
-                                <div className={`w-5 h-5 flex items-center justify-center border ${accent.border} ${accent.text} text-[8px] font-medium`}>
-                                    {project.testimonial.author.split(' ').map(n => n[0]).join('').slice(0, 2)}
-                                </div>
-                                <span className="text-[10px] text-slate-500">
-                                    {project.testimonial.author}
-                                    <span className="text-slate-700 mx-1">·</span>
-                                    {project.testimonial.role.split(',')[0]}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* ── AWARDS ── */}
-            {project.awards && project.awards.length > 0 && (
-                <div className="px-6 py-3 border-b border-slate-800/60 flex items-center gap-2">
-                    <Award className={`w-3.5 h-3.5 ${accent.text} shrink-0`} />
-                    <span className="text-[10px] uppercase tracking-[0.15em] text-slate-600">
-                        {project.awards[0]}
-                    </span>
-                </div>
-            )}
 
             {/* ── ACTIONS ── */}
             <div className="px-6 py-4 flex items-center gap-3 mt-auto">
@@ -246,17 +146,19 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                     </motion.span>
                 </motion.button>
 
-                <motion.a
-                    href={project.client.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-10 h-10 flex items-center justify-center border border-slate-700/60 hover:border-amber-400/40 text-slate-600 hover:text-slate-300 transition-all"
-                    title="Ver proyecto"
-                >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                </motion.a>
+                {project.link && (
+                    <motion.a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-10 h-10 flex items-center justify-center border border-slate-700/60 hover:border-amber-400/40 text-slate-600 hover:text-slate-300 transition-all"
+                        title="Ver proyecto en vivo"
+                    >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                    </motion.a>
+                )}
             </div>
 
             {/* ── EXPANDABLE DETAILS ── */}
@@ -295,27 +197,17 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                                     </ul>
                                 </div>
 
-                                {/* Team + Timeline */}
-                                <div className="grid grid-cols-2 gap-px bg-slate-800/40">
-                                    <div className="bg-[#080810] pr-6 py-4">
-                                        <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-2 flex items-center gap-1.5">
-                                            <Users className="w-3 h-3" /> Equipo
-                                        </p>
-                                        <p className="text-sm text-slate-300 mb-1">{project.team.size} personas</p>
-                                        <p className="text-[11px] text-slate-600 leading-relaxed">
-                                            {project.team.roles.join(' · ')}
-                                        </p>
-                                    </div>
-                                    <div className="bg-[#080810] pl-6 py-4">
-                                        <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-2 flex items-center gap-1.5">
-                                            <Calendar className="w-3 h-3" /> Timeline
-                                        </p>
-                                        <p className="text-sm text-slate-300 mb-1">{project.timeline.duration}</p>
-                                        <p className="text-[11px] text-slate-600">
-                                            {project.timeline.start} – {project.timeline.end}
-                                        </p>
-                                    </div>
-                                </div>
+                                {project.link && (
+                                    <a
+                                        href={project.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`inline-flex items-center gap-1.5 text-xs ${accent.text} hover:opacity-70 transition-opacity`}
+                                    >
+                                        Ver en vivo
+                                        <ChevronRight className="w-3 h-3" />
+                                    </a>
+                                )}
                             </div>
                         </div>
                     </motion.div>
