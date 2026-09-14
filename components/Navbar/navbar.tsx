@@ -180,7 +180,7 @@ export default function Navbar() {
                                         Iniciar sesión
                                     </motion.button>
                                     <motion.a
-                                        href="/servicios"
+                                        href="/Contact"
                                         whileHover={{ scale: 1.01 }}
                                         whileTap={{ scale: 0.97 }}
                                         className={cx.btnPrimary}
@@ -455,7 +455,7 @@ export default function Navbar() {
 
                                         {/* Cotiza tu proyecto — CTA principal, filled */}
                                         <motion.a
-                                            href="/servicios"
+                                            href="/Contact"
                                             onClick={() => setIsMenuOpen(false)}
                                             whileTap={{ scale: 0.97 }}
                                             className="w-full flex items-center justify-center gap-2 py-3.5 bg-white hover:bg-amber-50 active:bg-amber-100 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#08080f] transition-colors duration-200"
