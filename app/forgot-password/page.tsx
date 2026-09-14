@@ -38,10 +38,10 @@ export default function ForgotPasswordPage() {
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full max-w-sm bg-[#080810] border border-slate-800/80 shadow-2xl"
             >
-                <div className="h-px bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
+                <div className="h-px bg-gradient-to-r from-transparent via-lime-400/40 to-transparent" />
 
                 <div className="px-8 pt-8 pb-6 border-b border-slate-800/60">
-                    <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/60 mb-3">— Jacana Dev</p>
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-lime-400/60 mb-3">— Jacana Dev</p>
                     <h2 className="text-3xl font-light text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                         Recuperar<br />
                         <em className="text-slate-400 not-italic">contraseña</em>
@@ -57,7 +57,7 @@ export default function ForgotPasswordPage() {
                         >
                             <CheckCircle className="w-10 h-10 text-emerald-400/80" />
                             <p className="text-sm text-slate-300">Revisa tu correo — si el email existe recibirás las instrucciones.</p>
-                            <a href="/login" className="text-[10px] uppercase tracking-[0.2em] text-amber-400/60 hover:text-amber-400 transition-colors">
+                            <a href="/login" className="text-[10px] uppercase tracking-[0.2em] text-lime-400/60 hover:text-lime-400 transition-colors">
                                 Volver al login
                             </a>
                         </motion.div>
@@ -76,7 +76,7 @@ export default function ForgotPasswordPage() {
 
                             <div className="space-y-2">
                                 <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                                    <Mail className="w-3 h-3 text-amber-400/60" />
+                                    <Mail className="w-3 h-3 text-lime-400/60" />
                                     Email
                                 </label>
                                 <input
@@ -85,7 +85,7 @@ export default function ForgotPasswordPage() {
                                     onChange={e => setEmail(e.target.value)}
                                     placeholder="tu@email.com"
                                     required
-                                    className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors"
+                                    className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors"
                                 />
                             </div>
 
@@ -94,7 +94,7 @@ export default function ForgotPasswordPage() {
                                 disabled={isLoading}
                                 whileHover={{ scale: 1.01 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {isLoading ? (
                                     <><Loader2 className="w-3.5 h-3.5 animate-spin" />Enviando…</>
@@ -104,7 +104,7 @@ export default function ForgotPasswordPage() {
                             </motion.button>
 
                             <p className="text-center text-xs text-slate-600">
-                                <a href="/login" className="text-slate-400 hover:text-amber-400/80 transition-colors underline underline-offset-4 decoration-slate-700">
+                                <a href="/login" className="text-slate-400 hover:text-lime-400/80 transition-colors underline underline-offset-4 decoration-slate-700">
                                     Volver al login
                                 </a>
                             </p>
@@ -112,7 +112,7 @@ export default function ForgotPasswordPage() {
                     )}
                 </div>
 
-                <div className="h-px bg-gradient-to-r from-transparent via-amber-400/15 to-transparent" />
+                <div className="h-px bg-gradient-to-r from-transparent via-lime-400/15 to-transparent" />
             </motion.div>
         </div>
     )

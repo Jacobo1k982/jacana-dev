@@ -29,7 +29,7 @@ const SERVICES = [
         ],
         timeRange: '4 – 12 semanas',
         priceRange: '$800 – $8,000',
-        accent: '#f59e0b',
+        accent: '#84cc16',
         tag: 'Más demandado',
     },
     {
@@ -330,7 +330,7 @@ export default function ServicesSection() {
             {/* Ambient glow */}
             <div
                 className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
-                style={{ background: 'radial-gradient(ellipse, rgba(245,158,11,0.04) 0%, transparent 70%)' }}
+                style={{ background: 'radial-gradient(ellipse, rgba(132,204,22,0.04) 0%, transparent 70%)' }}
             />
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8">
@@ -343,8 +343,8 @@ export default function ServicesSection() {
                         transition={{ duration: 0.5 }}
                         className="flex items-center gap-4 mb-6"
                     >
-                        <div className="w-8 h-px bg-amber-400/60" />
-                        <span className="text-[9px] uppercase tracking-[0.35em] text-amber-400/60">
+                        <div className="w-8 h-px bg-lime-400/60" />
+                        <span className="text-[9px] uppercase tracking-[0.35em] text-lime-400/60">
                             Servicios
                         </span>
                     </motion.div>
@@ -363,7 +363,7 @@ export default function ServicesSection() {
                         >
                             Qué podemos
                             <br />
-                            <em className="text-amber-400/90 not-italic">construir juntos</em>
+                            <em className="text-lime-400/90 not-italic">construir juntos</em>
                         </motion.h2>
 
                         <motion.p
@@ -393,7 +393,7 @@ export default function ServicesSection() {
                                 key={label}
                                 className="flex items-center gap-3 px-5 py-3.5 border-r border-slate-800/60 last:border-r-0 flex-1 min-w-[160px]"
                             >
-                                <Icon className="w-3.5 h-3.5 text-amber-400/50 flex-shrink-0" />
+                                <Icon className="w-3.5 h-3.5 text-lime-400/50 flex-shrink-0" />
                                 <div>
                                     <p className="text-[8px] uppercase tracking-[0.2em] text-slate-700">{label}</p>
                                     <p className="text-xs text-slate-400 mt-0.5">{value}</p>
@@ -433,7 +433,7 @@ export default function ServicesSection() {
                     </div>
                     <a
                         href="#contact"
-                        className="group flex items-center gap-2.5 px-8 py-4 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors flex-shrink-0"
+                        className="group flex items-center gap-2.5 px-8 py-4 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors flex-shrink-0"
                     >
                         Hablemos
                         <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

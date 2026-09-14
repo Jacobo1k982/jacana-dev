@@ -80,7 +80,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                         {project.featured && (
                             <>
                                 <span className="text-slate-700">·</span>
-                                <span className="flex items-center gap-1 text-[9px] uppercase tracking-[0.2em] text-amber-400/70">
+                                <span className="flex items-center gap-1 text-[9px] uppercase tracking-[0.2em] text-lime-400/70">
                                     <Star className="w-2.5 h-2.5 fill-current" />
                                     Destacado
                                 </span>
@@ -153,7 +153,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.98 }}
-                        className="w-10 h-10 flex items-center justify-center border border-slate-700/60 hover:border-amber-400/40 text-slate-600 hover:text-slate-300 transition-all"
+                        className="w-10 h-10 flex items-center justify-center border border-slate-700/60 hover:border-lime-400/40 text-slate-600 hover:text-slate-300 transition-all"
                         title="Ver proyecto en vivo"
                     >
                         <ExternalLink className="w-3.5 h-3.5" />

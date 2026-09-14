@@ -40,7 +40,7 @@ export default function ProjectsSection() {
             {/* Ambient left */}
             <div className="absolute top-1/4 left-0 w-[500px] h-[500px] rounded-full bg-indigo-900/10 blur-[140px] pointer-events-none" />
             {/* Ambient right */}
-            <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full bg-amber-900/8 blur-[140px] pointer-events-none" />
+            <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full bg-lime-900/8 blur-[140px] pointer-events-none" />
 
             <div className="relative max-w-7xl mx-auto px-6 md:px-8">
 
@@ -52,7 +52,7 @@ export default function ProjectsSection() {
                     transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     className="mb-16"
                 >
-                    <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/70 mb-5">
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-lime-400/70 mb-5">
                         — Portafolio
                     </p>
                     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -67,7 +67,7 @@ export default function ProjectsSection() {
                             Cada proyecto es una historia de éxito construida con precisión técnica y visión estratégica.
                         </p>
                     </div>
-                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-amber-400/20 to-transparent" />
+                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-lime-400/20 to-transparent" />
                 </motion.div>
 
                 {/* ── STATS BAR ── */}
@@ -113,8 +113,8 @@ export default function ProjectsSection() {
                         >
                             <div className="flex items-center gap-4 mb-8">
                                 <div className="flex items-center gap-2">
-                                    <Star className="w-3.5 h-3.5 text-amber-400/70 fill-current" />
-                                    <span className="text-[10px] uppercase tracking-[0.25em] text-amber-400/70">
+                                    <Star className="w-3.5 h-3.5 text-lime-400/70 fill-current" />
+                                    <span className="text-[10px] uppercase tracking-[0.25em] text-lime-400/70">
                                         Destacados
                                     </span>
                                 </div>
@@ -154,13 +154,13 @@ export default function ProjectsSection() {
                                 {isActive && (
                                     <motion.span
                                         layoutId="filterIndicator"
-                                        className="absolute top-0 left-0 right-0 h-px bg-amber-400/50"
+                                        className="absolute top-0 left-0 right-0 h-px bg-lime-400/50"
                                         transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
                                     />
                                 )}
                                 {cat.label}
                                 <span className={`text-[9px] px-1.5 py-0.5 border ${isActive
-                                        ? 'border-amber-400/30 text-amber-400/70'
+                                        ? 'border-lime-400/30 text-lime-400/70'
                                         : 'border-slate-700/60 text-slate-600'
                                     }`}>
                                     {cat.count}
@@ -194,7 +194,7 @@ export default function ProjectsSection() {
                         <p className="text-sm text-slate-500 mb-1">Sin proyectos en esta categoría</p>
                         <button
                             onClick={() => setActiveCategory('all')}
-                            className="mt-4 text-xs uppercase tracking-[0.15em] text-amber-400/60 hover:text-amber-400/80 transition-colors"
+                            className="mt-4 text-xs uppercase tracking-[0.15em] text-lime-400/60 hover:text-lime-400/80 transition-colors"
                         >
                             Ver todos
                         </button>
@@ -214,7 +214,7 @@ export default function ProjectsSection() {
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         {/* Left: copy */}
                         <div>
-                            <p className="text-[10px] uppercase tracking-[0.3em] text-amber-400/70 mb-5">
+                            <p className="text-[10px] uppercase tracking-[0.3em] text-lime-400/70 mb-5">
                                 — Siguiente paso
                             </p>
                             <h3
@@ -233,7 +233,7 @@ export default function ProjectsSection() {
                                     href="#contact"
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                    className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                 >
                                     Iniciar proyecto
                                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -242,7 +242,7 @@ export default function ProjectsSection() {
                                     href="#services"
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
+                                    className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-lime-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
                                 >
                                     Ver servicios
                                 </motion.a>

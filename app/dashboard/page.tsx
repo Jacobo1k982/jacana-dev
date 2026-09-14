@@ -20,7 +20,7 @@ export default async function DashboardPage() {
     return (
         <div className="space-y-8">
             <div>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-amber-400/60 mb-2">Panel de control</p>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-lime-400/60 mb-2">Panel de control</p>
                 <h1 className="text-3xl font-light text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                     Bienvenido, {user?.name?.split(' ')[0] ?? 'Usuario'}
                 </h1>
@@ -32,7 +32,7 @@ export default async function DashboardPage() {
                     <div key={label} className="bg-[#080810] border border-slate-800/60 p-6">
                         <div className="flex items-center justify-between mb-4">
                             <span className="text-[9px] uppercase tracking-[0.25em] text-slate-600">{label}</span>
-                            <Icon className="w-4 h-4 text-amber-400/40" />
+                            <Icon className="w-4 h-4 text-lime-400/40" />
                         </div>
                         <p className="text-2xl font-light text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             {value}
@@ -43,7 +43,7 @@ export default async function DashboardPage() {
 
             <div className="grid md:grid-cols-2 gap-4">
                 <div className="bg-[#080810] border border-slate-800/60 p-6">
-                    <div className="h-px bg-gradient-to-r from-amber-400/20 to-transparent mb-6" />
+                    <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                     <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Accesos rapidos</p>
                     <div className="space-y-2">
                         {[
@@ -53,14 +53,14 @@ export default async function DashboardPage() {
                         ].map(({ label, href }) => (
                             <a key={label} href={href} className="flex items-center justify-between py-2.5 border-b border-slate-800/40 last:border-b-0 text-xs uppercase tracking-[0.1em] text-slate-400 hover:text-white transition-colors group">
                                 {label}
-                                <span className="text-slate-700 group-hover:text-amber-400/60 transition-colors">+</span>
+                                <span className="text-slate-700 group-hover:text-lime-400/60 transition-colors">+</span>
                             </a>
                         ))}
                     </div>
                 </div>
 
                 <div className="bg-[#080810] border border-slate-800/60 p-6">
-                    <div className="h-px bg-gradient-to-r from-amber-400/20 to-transparent mb-6" />
+                    <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                     <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Informacion de cuenta</p>
                     <div className="space-y-3">
                         {[

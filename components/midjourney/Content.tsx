@@ -30,8 +30,8 @@ function SectionLabel({ id, label }: { id: string; label: string }) {
     return (
         <div className="flex items-center gap-4 mb-8">
             <div id={id} className="absolute -mt-24" />
-            <div className="w-6 h-px bg-amber-400/60" />
-            <span className="text-[10px] uppercase tracking-[0.35em] text-amber-400/70">
+            <div className="w-6 h-px bg-lime-400/60" />
+            <span className="text-[10px] uppercase tracking-[0.35em] text-lime-400/70">
                 {label}
             </span>
         </div>
@@ -70,7 +70,7 @@ export default function Content() {
                             Somos{' '}
                             <a
                                 href="/About"
-                                className="text-white border-b border-amber-400/40 hover:border-amber-400/70 transition-colors"
+                                className="text-white border-b border-lime-400/40 hover:border-lime-400/70 transition-colors"
                             >
                                 Jacana Dev
                             </a>
@@ -127,19 +127,19 @@ export default function Content() {
                                     >
                                         {project.title}
                                     </span>
-                                    <span className="text-[9px] uppercase tracking-[0.25em] text-amber-400/70">
+                                    <span className="text-[9px] uppercase tracking-[0.25em] text-lime-400/70">
                                         {project.subtitle}
                                     </span>
                                 </div>
-                                {/* Bottom amber line on hover */}
-                                <div className="absolute bottom-0 left-0 right-0 h-px bg-amber-400/40 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                                {/* Bottom lime line on hover */}
+                                <div className="absolute bottom-0 left-0 right-0 h-px bg-lime-400/40 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                             </motion.div>
                         ))}
                     </div>
 
                     <a
                         href="/projects"
-                        className="group inline-flex items-center gap-2.5 mt-8 px-6 py-3 border border-slate-700/60 hover:border-amber-400/40 text-slate-300 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
+                        className="group inline-flex items-center gap-2.5 mt-8 px-6 py-3 border border-slate-700/60 hover:border-lime-400/40 text-slate-300 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
                     >
                         Ver portafolio completo
                         <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -166,7 +166,7 @@ export default function Content() {
                     </div>
                     <a
                         href="mailto:jgutierrez@jacana-dev.com?subject=Quiero%20unirme%20al%20equipo%20de%20Jacana%20Dev"
-                        className="group inline-flex items-center gap-2.5 px-6 py-3 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                        className="group inline-flex items-center gap-2.5 px-6 py-3 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                     >
                         Escríbenos
                         <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -213,7 +213,7 @@ export default function Content() {
                                         <a
                                             key={link.href}
                                             href={link.href}
-                                            className="text-sm text-slate-400 border-b border-amber-400/0 hover:border-amber-400/40 hover:text-white transition-all"
+                                            className="text-sm text-slate-400 border-b border-lime-400/0 hover:border-lime-400/40 hover:text-white transition-all"
                                         >
                                             {link.text}
                                         </a>

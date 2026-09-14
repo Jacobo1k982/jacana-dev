@@ -122,7 +122,7 @@ export default function TechnologyCard({ technology, color, index, isTopPick }: 
                             >
                                 {technology.name}
                                 {isTopPick && (
-                                    <span className="text-[8px] font-sans not-italic uppercase tracking-[0.15em] text-amber-400/80 border border-amber-400/30 px-1.5 py-0.5">
+                                    <span className="text-[8px] font-sans not-italic uppercase tracking-[0.15em] text-lime-400/80 border border-lime-400/30 px-1.5 py-0.5">
                                         Más usado
                                     </span>
                                 )}
@@ -233,7 +233,7 @@ export default function TechnologyCard({ technology, color, index, isTopPick }: 
                             <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-3">
                                 Características
                             </p>
-                            <ul className="space-y-0 border-l border-amber-400/20 pl-4 ml-1">
+                            <ul className="space-y-0 border-l border-lime-400/20 pl-4 ml-1">
                                 {technology.features.map((feature, i) => (
                                     <motion.li
                                         key={i}
@@ -254,7 +254,7 @@ export default function TechnologyCard({ technology, color, index, isTopPick }: 
                                 rel="noopener noreferrer"
                                 whileHover={{ scale: 1.01 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="mt-5 w-full flex items-center justify-center gap-2 py-3 border border-slate-700/60 hover:border-amber-400/40 text-slate-500 hover:text-slate-300 text-xs font-medium uppercase tracking-[0.12em] transition-all"
+                                className="mt-5 w-full flex items-center justify-center gap-2 py-3 border border-slate-700/60 hover:border-lime-400/40 text-slate-500 hover:text-slate-300 text-xs font-medium uppercase tracking-[0.12em] transition-all"
                             >
                                 Ver documentación oficial
                                 <ExternalLink className="w-3 h-3" />

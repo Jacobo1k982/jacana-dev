@@ -79,7 +79,7 @@ export function ServiceDetailDialog({ serviceId, onClose }: ServiceDetailDialogP
                     <div className="relative px-8 pt-8 pb-6 border-b border-slate-800/60 shrink-0">
                         <button
                             onClick={onClose}
-                            className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center border border-slate-700/60 hover:border-amber-400/40 text-slate-600 hover:text-slate-300 transition-all"
+                            className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center border border-slate-700/60 hover:border-lime-400/40 text-slate-600 hover:text-slate-300 transition-all"
                         >
                             <X className="w-3.5 h-3.5" />
                         </button>
@@ -90,15 +90,15 @@ export function ServiceDetailDialog({ serviceId, onClose }: ServiceDetailDialogP
                             </div>
                             <div>
                                 <div className="flex items-center gap-3 mb-1">
-                                    <p className="text-[9px] uppercase tracking-[0.3em] text-amber-400/60">
+                                    <p className="text-[9px] uppercase tracking-[0.3em] text-lime-400/60">
                                         {service.category}
                                     </p>
                                     {service.popular && (
                                         <>
                                             <span className="text-slate-700">·</span>
                                             <div className="flex items-center gap-1">
-                                                <Star className="w-2.5 h-2.5 text-amber-400/70 fill-current" />
-                                                <span className="text-[9px] uppercase tracking-[0.2em] text-amber-400/70">Popular</span>
+                                                <Star className="w-2.5 h-2.5 text-lime-400/70 fill-current" />
+                                                <span className="text-[9px] uppercase tracking-[0.2em] text-lime-400/70">Popular</span>
                                             </div>
                                         </>
                                     )}
@@ -241,8 +241,8 @@ export function ServiceDetailDialog({ serviceId, onClose }: ServiceDetailDialogP
 
                             {/* Testimonial */}
                             {service.testimonials && service.testimonials.length > 0 && (
-                                <div className="border-l-2 border-amber-400/30 pl-6">
-                                    <Quote className="w-4 h-4 text-amber-400/40 mb-3" />
+                                <div className="border-l-2 border-lime-400/30 pl-6">
+                                    <Quote className="w-4 h-4 text-lime-400/40 mb-3" />
                                     <p className="text-sm text-slate-400 italic leading-relaxed mb-4">
                                         "{service.testimonials[0].quote}"
                                     </p>
@@ -267,7 +267,7 @@ export function ServiceDetailDialog({ serviceId, onClose }: ServiceDetailDialogP
                                 <motion.button
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="flex-1 flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                    className="flex-1 flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                 >
                                     Solicitar servicio
                                     <ArrowRight className="w-3.5 h-3.5" />
@@ -275,7 +275,7 @@ export function ServiceDetailDialog({ serviceId, onClose }: ServiceDetailDialogP
                                 <motion.button
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="flex-1 flex items-center justify-center gap-2.5 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
+                                    className="flex-1 flex items-center justify-center gap-2.5 py-3.5 border border-slate-700/60 hover:border-lime-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
                                 >
                                     Ver ejemplos
                                     <ChevronRight className="w-3.5 h-3.5" />

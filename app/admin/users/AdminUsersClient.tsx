@@ -19,7 +19,7 @@ interface User {
 }
 
 const roleColors: Record<Role, string> = {
-    ADMIN: 'text-amber-400 border-amber-400/30',
+    ADMIN: 'text-lime-400 border-lime-400/30',
     MODERATOR: 'text-indigo-400 border-indigo-400/30',
     USER: 'text-slate-500 border-slate-700/60',
 }
@@ -50,11 +50,11 @@ export default function AdminUsersClient({ initialUsers }: { initialUsers: User[
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Buscar por nombre, email o username..."
-                className="w-full px-4 py-3 bg-[#080810] border border-slate-800/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors"
+                className="w-full px-4 py-3 bg-[#080810] border border-slate-800/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors"
             />
 
             <div className="bg-[#080810] border border-slate-800/60 overflow-hidden">
-                <div className="h-px bg-gradient-to-r from-amber-400/20 to-transparent" />
+                <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent" />
                 <div className="overflow-x-auto">
                     <table className="w-full">
                         <thead>

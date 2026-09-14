@@ -65,7 +65,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
         <form onSubmit={handleSubmit} className="space-y-6">
 
             <div className="bg-[#080810] border border-slate-800/60 p-6 md:p-8">
-                <div className="h-px bg-gradient-to-r from-amber-400/20 to-transparent mb-6" />
+                <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                 <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-6">Informacion basica</p>
 
                 <div className="flex items-center gap-6 mb-8">
@@ -78,7 +78,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                     <div>
                         <p className="text-white font-medium">{displayName}</p>
                         <p className="text-xs text-slate-500 mt-0.5">{user.email}</p>
-                        <span className="inline-block mt-2 text-[9px] uppercase tracking-[0.2em] text-amber-400/60 border border-amber-400/20 px-2 py-0.5">
+                        <span className="inline-block mt-2 text-[9px] uppercase tracking-[0.2em] text-lime-400/60 border border-lime-400/20 px-2 py-0.5">
                             {user.role ?? 'USER'}
                         </span>
                     </div>
@@ -87,7 +87,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                 <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                         <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                            <User className="w-3 h-3 text-amber-400/60" />
+                            <User className="w-3 h-3 text-lime-400/60" />
                             Nombre
                         </label>
                         <input
@@ -95,13 +95,13 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                             value={name}
                             onChange={e => setName(e.target.value)}
                             placeholder="Tu nombre completo"
-                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors"
+                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors"
                         />
                     </div>
 
                     <div className="space-y-2">
                         <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                            <AtSign className="w-3 h-3 text-amber-400/60" />
+                            <AtSign className="w-3 h-3 text-lime-400/60" />
                             Username
                         </label>
                         <input
@@ -109,13 +109,13 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                             value={username}
                             onChange={e => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ''))}
                             placeholder="tu_username"
-                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors"
+                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors"
                         />
                     </div>
 
                     <div className="space-y-2 md:col-span-2">
                         <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                            <Mail className="w-3 h-3 text-amber-400/60" />
+                            <Mail className="w-3 h-3 text-lime-400/60" />
                             Email
                         </label>
                         <input
@@ -136,20 +136,20 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                             onChange={e => setBio(e.target.value)}
                             placeholder="Cuentanos algo sobre ti..."
                             rows={3}
-                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors resize-none"
+                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors resize-none"
                         />
                     </div>
                 </div>
             </div>
 
             <div className="bg-[#080810] border border-slate-800/60 p-6 md:p-8">
-                <div className="h-px bg-gradient-to-r from-amber-400/20 to-transparent mb-6" />
+                <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                 <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-6">Redes sociales</p>
 
                 <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                         <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                            <Globe className="w-3 h-3 text-amber-400/60" />
+                            <Globe className="w-3 h-3 text-lime-400/60" />
                             Sitio web
                         </label>
                         <input
@@ -157,13 +157,13 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                             value={website}
                             onChange={e => setWebsite(e.target.value)}
                             placeholder="https://tu-sitio.com"
-                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors"
+                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors"
                         />
                     </div>
 
                     <div className="space-y-2">
                         <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                            <Twitter className="w-3 h-3 text-amber-400/60" />
+                            <Twitter className="w-3 h-3 text-lime-400/60" />
                             Twitter / X
                         </label>
                         <input
@@ -171,13 +171,13 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                             value={twitter}
                             onChange={e => setTwitter(e.target.value)}
                             placeholder="@tu_usuario"
-                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors"
+                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors"
                         />
                     </div>
 
                     <div className="space-y-2">
                         <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                            <Github className="w-3 h-3 text-amber-400/60" />
+                            <Github className="w-3 h-3 text-lime-400/60" />
                             GitHub
                         </label>
                         <input
@@ -185,13 +185,13 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                             value={github}
                             onChange={e => setGithub(e.target.value)}
                             placeholder="tu_usuario"
-                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors"
+                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors"
                         />
                     </div>
 
                     <div className="space-y-2">
                         <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                            <Linkedin className="w-3 h-3 text-amber-400/60" />
+                            <Linkedin className="w-3 h-3 text-lime-400/60" />
                             LinkedIn
                         </label>
                         <input
@@ -199,7 +199,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                             value={linkedin}
                             onChange={e => setLinkedin(e.target.value)}
                             placeholder="tu_usuario"
-                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors"
+                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors"
                         />
                     </div>
                 </div>
@@ -225,7 +225,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                     disabled={isLoading}
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex items-center gap-2.5 px-8 py-3 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-2.5 px-8 py-3 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     {isLoading ? (
                         <><Loader2 className="w-3.5 h-3.5 animate-spin" />Guardando...</>

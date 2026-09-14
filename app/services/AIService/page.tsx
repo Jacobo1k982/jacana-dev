@@ -202,7 +202,7 @@ function TabContent({ activeTab }: { activeTab: string }) {
                         transition={{ delay: i * 0.07 }}
                         className="px-6 py-5 border-b border-slate-800/60 last:border-b-0"
                     >
-                        <div className="border-l-2 border-amber-400/30 pl-4">
+                        <div className="border-l-2 border-lime-400/30 pl-4">
                             <p className="text-xs text-slate-400 italic leading-relaxed mb-3">"{t.text}"</p>
                             <div className="flex items-center gap-2">
                                 <div className="w-6 h-6 flex items-center justify-center border border-rose-400/30 text-[8px] text-rose-400/80">
@@ -278,7 +278,7 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                         <div className="relative px-8 pt-8 pb-6 border-b border-slate-800/60 shrink-0">
                             <button
                                 onClick={onClose}
-                                className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center border border-slate-700/60 hover:border-amber-400/40 text-slate-600 hover:text-slate-300 transition-all"
+                                className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center border border-slate-700/60 hover:border-lime-400/40 text-slate-600 hover:text-slate-300 transition-all"
                             >
                                 <X className="w-3.5 h-3.5" />
                             </button>
@@ -288,7 +288,7 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                     <Brain className="w-5 h-5 text-rose-400/80" />
                                 </div>
                                 <div>
-                                    <p className="text-[9px] uppercase tracking-[0.3em] text-amber-400/60 mb-1">
+                                    <p className="text-[9px] uppercase tracking-[0.3em] text-lime-400/60 mb-1">
                                         — Servicio
                                     </p>
                                     <h2
@@ -403,7 +403,7 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                     <motion.button
                                         whileHover={{ scale: 1.01 }}
                                         whileTap={{ scale: 0.98 }}
-                                        className="flex-1 flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                        className="flex-1 flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                     >
                                         <Rocket className="w-3.5 h-3.5" />
                                         Implementar IA
@@ -413,7 +413,7 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                         <motion.button
                                             whileHover={{ scale: 1.01 }}
                                             whileTap={{ scale: 0.98 }}
-                                            className="flex items-center justify-center gap-2.5 px-6 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all w-full"
+                                            className="flex items-center justify-center gap-2.5 px-6 py-3.5 border border-slate-700/60 hover:border-lime-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all w-full"
                                         >
                                             <ExternalLink className="w-3.5 h-3.5" />
                                             Ver demos
@@ -467,7 +467,7 @@ function MainCard({ onClick }: { onClick: () => void }) {
                             <Brain className="w-5 h-5 text-rose-400/80" />
                         </div>
                         <div>
-                            <p className="text-[9px] uppercase tracking-[0.3em] text-amber-400/60 mb-0.5">
+                            <p className="text-[9px] uppercase tracking-[0.3em] text-lime-400/60 mb-0.5">
                                 Servicio
                             </p>
                             <h3

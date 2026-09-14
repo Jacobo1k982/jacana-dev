@@ -168,7 +168,7 @@ function VideoPlayer({ videoUrl, isPlaying, onPlayPause }: {
                 {/* Centre play */}
                 <button
                     onClick={onPlayPause}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center border border-white/20 bg-[#080810]/60 backdrop-blur-sm hover:border-amber-400/40 transition-colors"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center border border-white/20 bg-[#080810]/60 backdrop-blur-sm hover:border-lime-400/40 transition-colors"
                 >
                     {isPlaying
                         ? <Pause className="w-4 h-4 text-white" />
@@ -182,7 +182,7 @@ function VideoPlayer({ videoUrl, isPlaying, onPlayPause }: {
                         onClick={handleSeek}
                         className="relative h-px bg-slate-700/60 cursor-pointer mb-3 hover:h-[3px] transition-all"
                     >
-                        <div className="absolute h-full bg-amber-400/60" style={{ width: `${progress}%` }} />
+                        <div className="absolute h-full bg-lime-400/60" style={{ width: `${progress}%` }} />
                     </div>
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -284,7 +284,7 @@ function PreviewContent({ demo, isPlaying }: { demo: Demo; isPlaying: boolean })
                     <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600 mb-1">Prompt</p>
                     <p className="text-xs text-slate-400 italic">"{demo.preview.prompt}"</p>
                 </div>
-                <div className="relative h-36 bg-gradient-to-br from-rose-900/20 via-violet-900/20 to-amber-900/20 border border-slate-800/60 flex items-center justify-center">
+                <div className="relative h-36 bg-gradient-to-br from-rose-900/20 via-violet-900/20 to-lime-900/20 border border-slate-800/60 flex items-center justify-center">
                     <motion.span animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 3, repeat: Infinity }} className="text-4xl">🌸🏯🌃</motion.span>
                     <div className="absolute bottom-2 right-2 text-[8px] uppercase tracking-[0.2em] text-slate-700">Generado con IA</div>
                 </div>
@@ -396,7 +396,7 @@ function DemoPreviewModal({ demo, isOpen, onClose }: { demo: Demo | null; isOpen
                         {/* Header */}
                         <div className="relative px-8 pt-8 pb-6 border-b border-slate-800/60 shrink-0">
                             <button onClick={onClose}
-                                className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center border border-slate-700/60 hover:border-amber-400/40 text-slate-600 hover:text-slate-300 transition-all"
+                                className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center border border-slate-700/60 hover:border-lime-400/40 text-slate-600 hover:text-slate-300 transition-all"
                             >
                                 <X className="w-3.5 h-3.5" />
                             </button>
@@ -406,7 +406,7 @@ function DemoPreviewModal({ demo, isOpen, onClose }: { demo: Demo | null; isOpen
                                     <demo.icon className="w-5 h-5 text-rose-400/80" />
                                 </div>
                                 <div>
-                                    <p className="text-[9px] uppercase tracking-[0.3em] text-amber-400/60 mb-1">
+                                    <p className="text-[9px] uppercase tracking-[0.3em] text-lime-400/60 mb-1">
                                         — {demo.category} · {demo.duration}
                                     </p>
                                     <h2 className="text-2xl md:text-3xl font-light text-white"
@@ -423,7 +423,7 @@ function DemoPreviewModal({ demo, isOpen, onClose }: { demo: Demo | null; isOpen
                                 <div className="flex items-center gap-1.5 text-xs text-slate-600">
                                     <Eye className="w-3 h-3" /> {demo.views} vistas
                                 </div>
-                                <div className="flex items-center gap-1.5 text-xs text-amber-400/70">
+                                <div className="flex items-center gap-1.5 text-xs text-lime-400/70">
                                     <Star className="w-3 h-3 fill-current" /> {demo.rating}
                                 </div>
                                 <div className="flex items-center gap-1.5 text-xs text-rose-400/60">
@@ -498,19 +498,19 @@ function DemoPreviewModal({ demo, isOpen, onClose }: { demo: Demo | null; isOpen
                                 {/* CTAs */}
                                 <div className="flex flex-wrap gap-3 pt-4 border-t border-slate-800/60">
                                     <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
-                                        className="flex-1 min-w-[180px] flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                        className="flex-1 min-w-[180px] flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                     >
                                         <Zap className="w-3.5 h-3.5" />
                                         Implementar similar
                                         <ArrowRight className="w-3.5 h-3.5" />
                                     </motion.button>
                                     <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
-                                        className="flex items-center gap-2 px-5 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-500 hover:text-slate-300 text-xs font-medium uppercase tracking-[0.1em] transition-all"
+                                        className="flex items-center gap-2 px-5 py-3.5 border border-slate-700/60 hover:border-lime-400/40 text-slate-500 hover:text-slate-300 text-xs font-medium uppercase tracking-[0.1em] transition-all"
                                     >
                                         <Share2 className="w-3.5 h-3.5" /> Compartir
                                     </motion.button>
                                     <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
-                                        className="flex items-center gap-2 px-5 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-500 hover:text-slate-300 text-xs font-medium uppercase tracking-[0.1em] transition-all"
+                                        className="flex items-center gap-2 px-5 py-3.5 border border-slate-700/60 hover:border-lime-400/40 text-slate-500 hover:text-slate-300 text-xs font-medium uppercase tracking-[0.1em] transition-all"
                                     >
                                         <Bookmark className="w-3.5 h-3.5" /> Guardar
                                     </motion.button>
@@ -602,7 +602,7 @@ function DemoCard({ demo, index, onClick }: { demo: Demo; index: number; onClick
                         <span className="flex items-center gap-1 text-[10px] text-slate-700">
                             <Eye className="w-3 h-3" /> {demo.views}
                         </span>
-                        <span className="flex items-center gap-1 text-[10px] text-amber-400/60">
+                        <span className="flex items-center gap-1 text-[10px] text-lime-400/60">
                             <Star className="w-3 h-3 fill-current" /> {demo.rating}
                         </span>
                     </div>
@@ -641,7 +641,7 @@ function LandingScreen({ onEnter }: { onEnter: () => void }) {
                 </div>
 
                 {/* Eyebrow */}
-                <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/70 mb-5">
+                <p className="text-[10px] uppercase tracking-[0.35em] text-lime-400/70 mb-5">
                     — Galería de demos de IA
                 </p>
 
@@ -663,7 +663,7 @@ function LandingScreen({ onEnter }: { onEnter: () => void }) {
                     onClick={onEnter}
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
-                    className="group flex items-center gap-3 px-8 py-4 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors mb-16"
+                    className="group flex items-center gap-3 px-8 py-4 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors mb-16"
                 >
                     <Play className="w-3.5 h-3.5 fill-current" />
                     Ver {demosData.length} demos
@@ -693,7 +693,7 @@ function LandingScreen({ onEnter }: { onEnter: () => void }) {
                 >
                     <span className="text-[9px] uppercase tracking-[0.35em] text-slate-700">Explorar</span>
                     <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.6, repeat: Infinity }}>
-                        <MoveDown className="w-3.5 h-3.5 text-amber-400/40" />
+                        <MoveDown className="w-3.5 h-3.5 text-lime-400/40" />
                     </motion.div>
                 </motion.div>
             </motion.div>
@@ -741,7 +741,7 @@ export default function DemosGallery() {
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     className="mb-14"
                 >
-                    <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/70 mb-5">— Galería de demos</p>
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-lime-400/70 mb-5">— Galería de demos</p>
                     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                         <h2
                             className="text-4xl md:text-5xl font-light text-white leading-[1.05] tracking-tight"
@@ -754,7 +754,7 @@ export default function DemosGallery() {
                             Explora demos interactivas con videos reales del potencial de la IA.
                         </p>
                     </div>
-                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-amber-400/20 to-transparent" />
+                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-lime-400/20 to-transparent" />
                 </motion.div>
 
                 {/* Controls */}
@@ -772,7 +772,7 @@ export default function DemosGallery() {
                             placeholder="Buscar demos…"
                             value={searchQuery}
                             onChange={e => setSearchQuery(e.target.value)}
-                            className="w-full pl-10 pr-4 py-3 bg-transparent border border-slate-800/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/40 focus:outline-none transition-colors hover:border-slate-700/80"
+                            className="w-full pl-10 pr-4 py-3 bg-transparent border border-slate-800/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/40 focus:outline-none transition-colors hover:border-slate-700/80"
                         />
                     </div>
 
@@ -819,7 +819,7 @@ export default function DemosGallery() {
                         <Search className="w-8 h-8 text-slate-700 mb-3" />
                         <p className="text-sm text-slate-500 mb-1">Sin resultados</p>
                         <button onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
-                            className="mt-3 text-xs uppercase tracking-[0.15em] text-amber-400/60 hover:text-amber-400/80 transition-colors"
+                            className="mt-3 text-xs uppercase tracking-[0.15em] text-lime-400/60 hover:text-lime-400/80 transition-colors"
                         >
                             Limpiar filtros
                         </button>

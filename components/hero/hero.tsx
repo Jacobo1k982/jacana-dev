@@ -114,7 +114,7 @@ function RotatingWord({ words, interval = 2200 }: { words: string[]; interval?: 
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-white not-italic border-b border-amber-400/40 inline-block"
+                    className="text-white not-italic border-b border-lime-400/40 inline-block"
                 >
                     {words[index]}
                 </motion.em>
@@ -133,7 +133,7 @@ function ScrollCue() {
         >
             <span className="text-[9px] uppercase tracking-[0.35em] text-slate-600">Descubre más</span>
             <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}>
-                <MoveDown className="w-3.5 h-3.5 text-amber-400/50" />
+                <MoveDown className="w-3.5 h-3.5 text-lime-400/50" />
             </motion.div>
         </motion.div>
     );
@@ -205,12 +205,12 @@ export default function Hero() {
                         className="flex items-center gap-4 mb-8"
                     >
                         <div className="flex items-center gap-3 px-4 py-2 border border-slate-800/80 bg-slate-900/40 backdrop-blur-sm">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80 animate-pulse" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-lime-400/80 animate-pulse" />
                             <span className="text-[10px] uppercase tracking-[0.35em] text-slate-400">
                                 — Aceptando nuevos proyectos
                             </span>
                             <span className="w-px h-3 bg-slate-700/80" />
-                            <span className="text-[10px] uppercase tracking-[0.35em] text-amber-400/60">
+                            <span className="text-[10px] uppercase tracking-[0.35em] text-lime-400/60">
                                 Costa Rica
                             </span>
                         </div>
@@ -235,9 +235,9 @@ export default function Hero() {
                                 transition={{ delay: 0.95, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                                 className="flex items-end gap-4"
                             >
-                                <div className="w-20 md:w-32 h-px bg-gradient-to-l from-amber-400/60 to-transparent mb-3 hidden sm:block" />
+                                <div className="w-20 md:w-32 h-px bg-gradient-to-l from-lime-400/60 to-transparent mb-3 hidden sm:block" />
                                 <span
-                                    className="text-amber-400/90 italic"
+                                    className="text-lime-400/90 italic"
                                     style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', fontWeight: 300 }}
                                 >
                                     Developers
@@ -261,7 +261,7 @@ export default function Hero() {
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: isVisible ? 1 : 0 }}
                         transition={{ delay: 1.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                        className="mt-10 w-full max-w-sm h-px bg-gradient-to-r from-slate-700/80 via-amber-400/20 to-transparent"
+                        className="mt-10 w-full max-w-sm h-px bg-gradient-to-r from-slate-700/80 via-lime-400/20 to-transparent"
                         style={{ transformOrigin: 'left' }}
                     />
 
@@ -275,7 +275,7 @@ export default function Hero() {
                             {isAuthenticated && user ? (
                                 <motion.div key="auth" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-4">
                                     <div className="flex items-center gap-3 px-4 py-2.5 border border-slate-700/60 bg-slate-900/40">
-                                        <div className="w-7 h-7 flex items-center justify-center bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-medium">
+                                        <div className="w-7 h-7 flex items-center justify-center bg-lime-400/10 border border-lime-400/30 text-lime-400 text-xs font-medium">
                                             {(user.name || user.email || '?')[0].toUpperCase()}
                                         </div>
                                         <div>
@@ -289,7 +289,7 @@ export default function Hero() {
                                     {/* 1. Acción principal de negocio */}
                                     <Link
                                         href="/servicios"
-                                        className="group flex items-center gap-2.5 px-6 py-3 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                        className="group flex items-center gap-2.5 px-6 py-3 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                     >
                                         Cotiza tu proyecto
                                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -301,19 +301,19 @@ export default function Hero() {
                                     <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
                                         <Link
                                             href="/servicios"
-                                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                         >
                                             Cotiza tu proyecto
                                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                                         </Link>
                                     </motion.div>
                                     {/* 2. Acción secundaria: usuarios que ya confían en nosotros */}
-                                    <motion.button onClick={() => setShowLogin(true)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all">
+                                    <motion.button onClick={() => setShowLogin(true)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-lime-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all">
                                         <LogIn className="w-3.5 h-3.5" />
                                         Iniciar sesión
                                     </motion.button>
                                     {/* 3. Acción terciaria: crear cuenta nueva */}
-                                    <motion.button onClick={() => setShowRegister(true)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-3.5 text-slate-500 hover:text-amber-400/80 text-xs font-medium uppercase tracking-[0.15em] transition-colors">
+                                    <motion.button onClick={() => setShowRegister(true)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-3.5 text-slate-500 hover:text-lime-400/80 text-xs font-medium uppercase tracking-[0.15em] transition-colors">
                                         <UserPlus className="w-3.5 h-3.5" />
                                         Crear cuenta gratis
                                     </motion.button>
@@ -346,7 +346,7 @@ export default function Hero() {
                             { icon: Globe, label: 'Node.js' },
                             { icon: Shield, label: 'TypeScript' },
                         ].map(({ icon: Icon, label }, i) => (
-                            <motion.div key={label} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.5 + i * 0.07 }} className="flex items-center gap-1.5 px-3 py-1.5 border border-slate-800/60 hover:border-amber-400/30 text-slate-500 hover:text-slate-300 transition-all cursor-default">
+                            <motion.div key={label} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.5 + i * 0.07 }} className="flex items-center gap-1.5 px-3 py-1.5 border border-slate-800/60 hover:border-lime-400/30 text-slate-500 hover:text-slate-300 transition-all cursor-default">
                                 <Icon className="w-3 h-3" />
                                 <span className="text-[10px] uppercase tracking-[0.12em]">{label}</span>
                             </motion.div>
@@ -365,15 +365,15 @@ export default function Hero() {
                 className="absolute right-8 top-1/2 -translate-y-1/2 z-10 hidden xl:block"
             >
                 <div className="border border-slate-800/60 bg-[#06051d]/80 backdrop-blur-sm p-6 max-w-[220px]">
-                    <div className="h-px w-full bg-gradient-to-r from-amber-400/30 to-transparent mb-4" />
-                    <p className="text-[9px] uppercase tracking-[0.3em] text-amber-400/60 mb-3">— Lo que construimos para ti</p>
+                    <div className="h-px w-full bg-gradient-to-r from-lime-400/30 to-transparent mb-4" />
+                    <p className="text-[9px] uppercase tracking-[0.3em] text-lime-400/60 mb-3">— Lo que construimos para ti</p>
                     {['Desarrollo Web a medida', 'Apps Móviles nativas', 'Cloud & DevOps', 'IA aplicada al negocio', 'Consultoría Técnica'].map((s, i) => (
                         <motion.div key={s} initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.1 + i * 0.1 }} className="flex items-center gap-2 py-2 border-b border-slate-800/40 last:border-b-0 group cursor-default">
-                            <span className="w-1 h-1 rounded-full bg-amber-400/40 group-hover:bg-amber-400/80 transition-colors" />
+                            <span className="w-1 h-1 rounded-full bg-lime-400/40 group-hover:bg-lime-400/80 transition-colors" />
                             <span className="text-xs text-slate-500 group-hover:text-slate-300 transition-colors">{s}</span>
                         </motion.div>
                     ))}
-                    <div className="h-px w-full bg-gradient-to-r from-transparent to-amber-400/20 mt-4" />
+                    <div className="h-px w-full bg-gradient-to-r from-transparent to-lime-400/20 mt-4" />
                 </div>
             </motion.div>
 

@@ -40,7 +40,7 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
         let color = 'bg-red-500/70';
         let textColor = 'text-red-400';
         if (percentage >= 80) { label = 'Muy fuerte'; color = 'bg-emerald-500/70'; textColor = 'text-emerald-400'; }
-        else if (percentage >= 60) { label = 'Fuerte'; color = 'bg-amber-400/70'; textColor = 'text-amber-400'; }
+        else if (percentage >= 60) { label = 'Fuerte'; color = 'bg-lime-400/70'; textColor = 'text-lime-400'; }
         else if (percentage >= 40) { label = 'Media'; color = 'bg-orange-500/70'; textColor = 'text-orange-400'; }
         return { requirements, metCount, percentage, color, textColor, label };
     }, [password]);
@@ -117,7 +117,7 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                         className="relative w-full max-w-sm bg-[#080810] border border-slate-800/80 shadow-2xl shadow-black/60 my-8"
                     >
-                        <div className="h-px bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
+                        <div className="h-px bg-gradient-to-r from-transparent via-lime-400/40 to-transparent" />
                         <div
                             className="absolute inset-0 opacity-[0.025] pointer-events-none"
                             style={{
@@ -128,11 +128,11 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                         <div className="relative px-8 pt-8 pb-6 border-b border-slate-800/60">
                             <button
                                 onClick={onClose}
-                                className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center border border-slate-700/60 hover:border-amber-400/40 text-slate-600 hover:text-slate-300 transition-all"
+                                className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center border border-slate-700/60 hover:border-lime-400/40 text-slate-600 hover:text-slate-300 transition-all"
                             >
                                 <X className="w-3.5 h-3.5" />
                             </button>
-                            <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/60 mb-3">
+                            <p className="text-[10px] uppercase tracking-[0.35em] text-lime-400/60 mb-3">
                                 — Únete a Jacana Dev
                             </p>
                             <h2
@@ -160,7 +160,7 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                                        <User className="w-3 h-3 text-amber-400/60" />
+                                        <User className="w-3 h-3 text-lime-400/60" />
                                         Nombre
                                     </label>
                                     <input
@@ -168,12 +168,12 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                                         value={name}
                                         onChange={e => setName(e.target.value)}
                                         placeholder="Tu nombre"
-                                        className="w-full px-0 py-2.5 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors hover:border-slate-500/80"
+                                        className="w-full px-0 py-2.5 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors hover:border-slate-500/80"
                                     />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                                        <AtSign className="w-3 h-3 text-amber-400/60" />
+                                        <AtSign className="w-3 h-3 text-lime-400/60" />
                                         Username
                                     </label>
                                     <input
@@ -181,7 +181,7 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                                         value={username}
                                         onChange={e => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ''))}
                                         placeholder="usuario"
-                                        className="w-full px-0 py-2.5 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors hover:border-slate-500/80"
+                                        className="w-full px-0 py-2.5 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors hover:border-slate-500/80"
                                     />
                                     {fieldErrors.username && (
                                         <p className="text-[11px] text-red-400/80">{fieldErrors.username[0]}</p>
@@ -190,8 +190,8 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                             </div>
                             <div className="space-y-2">
                                 <label className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                                    <Mail className="w-3 h-3 text-amber-400/60" />
-                                    Email <span className="text-amber-400/60">*</span>
+                                    <Mail className="w-3 h-3 text-lime-400/60" />
+                                    Email <span className="text-lime-400/60">*</span>
                                 </label>
                                 <input
                                     type="email"
@@ -199,7 +199,7 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                                     onChange={e => setEmail(e.target.value)}
                                     placeholder="tu@email.com"
                                     required
-                                    className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors hover:border-slate-500/80"
+                                    className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors hover:border-slate-500/80"
                                 />
                                 {fieldErrors.email && (
                                     <p className="text-[11px] text-red-400/80">{fieldErrors.email[0]}</p>
@@ -207,8 +207,8 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                             </div>
                             <div className="space-y-2">
                                 <label className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                                    <Lock className="w-3 h-3 text-amber-400/60" />
-                                    Contraseña <span className="text-amber-400/60">*</span>
+                                    <Lock className="w-3 h-3 text-lime-400/60" />
+                                    Contraseña <span className="text-lime-400/60">*</span>
                                 </label>
                                 <div className="relative">
                                     <input
@@ -217,7 +217,7 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                                         onChange={e => setPassword(e.target.value)}
                                         placeholder="••••••••"
                                         required
-                                        className="w-full px-0 py-3 pr-8 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors hover:border-slate-500/80"
+                                        className="w-full px-0 py-3 pr-8 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors hover:border-slate-500/80"
                                     />
                                     <button
                                         type="button"
@@ -251,8 +251,8 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                                             <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
                                                 {passwordStrength.requirements.slice(0, 4).map((req, i) => (
                                                     <div key={i} className="flex items-center gap-2">
-                                                        <span className={`w-3 h-3 flex items-center justify-center border transition-all ${req.met ? 'border-amber-400/60 bg-amber-400/10' : 'border-slate-700/60'}`}>
-                                                            {req.met && <Check className="w-2 h-2 text-amber-400/80" />}
+                                                        <span className={`w-3 h-3 flex items-center justify-center border transition-all ${req.met ? 'border-lime-400/60 bg-lime-400/10' : 'border-slate-700/60'}`}>
+                                                            {req.met && <Check className="w-2 h-2 text-lime-400/80" />}
                                                         </span>
                                                         <span className={`text-[10px] transition-colors ${req.met ? 'text-slate-400' : 'text-slate-700'}`}>
                                                             {req.text}
@@ -266,8 +266,8 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                             </div>
                             <div className="space-y-2">
                                 <label className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                                    <Lock className="w-3 h-3 text-amber-400/60" />
-                                    Confirmar contraseña <span className="text-amber-400/60">*</span>
+                                    <Lock className="w-3 h-3 text-lime-400/60" />
+                                    Confirmar contraseña <span className="text-lime-400/60">*</span>
                                 </label>
                                 <div className="relative">
                                     <input
@@ -276,7 +276,7 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                                         onChange={e => setConfirmPassword(e.target.value)}
                                         placeholder="••••••••"
                                         required
-                                        className={`w-full px-0 py-3 pr-8 bg-transparent border-b text-white text-sm placeholder-slate-700 focus:outline-none transition-colors ${passwordsMismatch ? 'border-red-500/50' : passwordsMatch ? 'border-emerald-500/40' : 'border-slate-700/60 hover:border-slate-500/80 focus:border-amber-400/60'}`}
+                                        className={`w-full px-0 py-3 pr-8 bg-transparent border-b text-white text-sm placeholder-slate-700 focus:outline-none transition-colors ${passwordsMismatch ? 'border-red-500/50' : passwordsMatch ? 'border-emerald-500/40' : 'border-slate-700/60 hover:border-slate-500/80 focus:border-lime-400/60'}`}
                                     />
                                     <AnimatePresence>
                                         {passwordsMatch && (
@@ -307,7 +307,7 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                                     disabled={isLoading}
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isLoading ? (
                                         <><Loader2 className="w-3.5 h-3.5 animate-spin" />Creando cuenta…</>
@@ -321,13 +321,13 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                                 <button
                                     type="button"
                                     onClick={onSwitchToLogin}
-                                    className="text-slate-400 hover:text-amber-400/80 transition-colors underline underline-offset-4 decoration-slate-700 hover:decoration-amber-400/40"
+                                    className="text-slate-400 hover:text-lime-400/80 transition-colors underline underline-offset-4 decoration-slate-700 hover:decoration-lime-400/40"
                                 >
                                     Inicia sesión
                                 </button>
                             </p>
                         </form>
-                        <div className="h-px bg-gradient-to-r from-transparent via-amber-400/15 to-transparent" />
+                        <div className="h-px bg-gradient-to-r from-transparent via-lime-400/15 to-transparent" />
                     </motion.div>
                 </div>
             )}

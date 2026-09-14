@@ -26,7 +26,7 @@ export default function DashboardNav({ user }: DashboardNavProps) {
     const displayName = user.name ?? user.email?.split('@')[0] ?? 'Usuario'
 
     const roleConfig: Record<string, { icon: typeof Crown; color: string; label: string }> = {
-        ADMIN: { icon: Crown, color: 'text-amber-400', label: 'Admin' },
+        ADMIN: { icon: Crown, color: 'text-lime-400', label: 'Admin' },
         MODERATOR: { icon: Shield, color: 'text-indigo-400', label: 'Moderador' },
         USER: { icon: User, color: 'text-slate-500', label: 'Usuario' },
     }
@@ -57,7 +57,7 @@ export default function DashboardNav({ user }: DashboardNavProps) {
                     </div>
 
                     <div className="relative">
-                        <motion.button onClick={() => setMenuOpen(!menuOpen)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className={`flex items-center gap-2.5 px-3 py-2 border transition-colors ${menuOpen ? 'border-amber-400/40 bg-slate-900/60' : 'border-slate-700/60 hover:border-slate-600/80'}`}>
+                        <motion.button onClick={() => setMenuOpen(!menuOpen)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className={`flex items-center gap-2.5 px-3 py-2 border transition-colors ${menuOpen ? 'border-lime-400/40 bg-slate-900/60' : 'border-slate-700/60 hover:border-slate-600/80'}`}>
                             <div className="w-6 h-6 flex items-center justify-center border border-slate-700/60 bg-slate-900/60 text-[10px] font-medium text-slate-300 overflow-hidden">
                                 {user.image ? <img src={user.image} alt={displayName} className="w-full h-full object-cover" /> : initials}
                             </div>
@@ -72,7 +72,7 @@ export default function DashboardNav({ user }: DashboardNavProps) {
                                 <>
                                     <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
                                     <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }} className="absolute right-0 top-full mt-1 w-56 bg-[#080810] border border-slate-800/80 shadow-2xl shadow-black/50 z-50">
-                                        <div className="h-px bg-gradient-to-r from-transparent via-amber-400/30 to-transparent" />
+                                        <div className="h-px bg-gradient-to-r from-transparent via-lime-400/30 to-transparent" />
 
                                         <div className="px-5 py-4 border-b border-slate-800/60">
                                             <div className="flex items-center gap-3 mb-2">
@@ -106,7 +106,7 @@ export default function DashboardNav({ user }: DashboardNavProps) {
                                             </button>
                                         </div>
 
-                                        <div className="h-px bg-gradient-to-r from-transparent via-amber-400/15 to-transparent" />
+                                        <div className="h-px bg-gradient-to-r from-transparent via-lime-400/15 to-transparent" />
                                     </motion.div>
                                 </>
                             )}

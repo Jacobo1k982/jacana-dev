@@ -25,8 +25,8 @@ const processIcons: Record<string, React.ComponentType<{ className?: string }>> 
 function SectionLabel({ label }: { label: string }) {
     return (
         <div className="flex items-center gap-4 mb-8">
-            <div className="w-6 h-px bg-amber-400/60" />
-            <span className="text-[10px] uppercase tracking-[0.35em] text-amber-400/70">{label}</span>
+            <div className="w-6 h-px bg-lime-400/60" />
+            <span className="text-[10px] uppercase tracking-[0.35em] text-lime-400/70">{label}</span>
         </div>
     );
 }
@@ -68,7 +68,7 @@ export default function AboutSection() {
                 }}
             />
             <div className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full bg-indigo-900/10 blur-[140px] pointer-events-none" />
-            <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] rounded-full bg-amber-900/8 blur-[140px] pointer-events-none" />
+            <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] rounded-full bg-lime-900/8 blur-[140px] pointer-events-none" />
 
             <div className="relative max-w-7xl mx-auto px-6 md:px-8">
 
@@ -80,7 +80,7 @@ export default function AboutSection() {
                     transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     className="mb-20"
                 >
-                    <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/70 mb-5">
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-lime-400/70 mb-5">
                         — Sobre nosotros
                     </p>
                     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -97,17 +97,17 @@ export default function AboutSection() {
                             </p>
                             <div className="flex items-center md:justify-end gap-5">
                                 <div className="flex items-center gap-1.5 text-xs text-slate-600">
-                                    <MapPin className="w-3 h-3 text-amber-400/50" />
+                                    <MapPin className="w-3 h-3 text-lime-400/50" />
                                     {company.location}
                                 </div>
                                 <div className="flex items-center gap-1.5 text-xs text-slate-600">
-                                    <Clock className="w-3 h-3 text-amber-400/50" />
+                                    <Clock className="w-3 h-3 text-lime-400/50" />
                                     {company.timezone}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-amber-400/20 to-transparent" />
+                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-lime-400/20 to-transparent" />
                 </motion.div>
 
                 {/* ── STATS ── */}
@@ -140,8 +140,8 @@ export default function AboutSection() {
                             className="group bg-[#080810] px-8 py-8 hover:bg-slate-900/40 transition-colors"
                         >
                             <div className="flex items-center gap-3 mb-5">
-                                <div className="w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-amber-400/40 transition-colors">
-                                    <Target className="w-3.5 h-3.5 text-slate-600 group-hover:text-amber-400/70 transition-colors" />
+                                <div className="w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-lime-400/40 transition-colors">
+                                    <Target className="w-3.5 h-3.5 text-slate-600 group-hover:text-lime-400/70 transition-colors" />
                                 </div>
                                 <p className="text-[10px] uppercase tracking-[0.25em] text-slate-600">Misión</p>
                             </div>
@@ -162,8 +162,8 @@ export default function AboutSection() {
                             className="group bg-[#080810] px-8 py-8 hover:bg-slate-900/40 transition-colors"
                         >
                             <div className="flex items-center gap-3 mb-5">
-                                <div className="w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-amber-400/40 transition-colors">
-                                    <Eye className="w-3.5 h-3.5 text-slate-600 group-hover:text-amber-400/70 transition-colors" />
+                                <div className="w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-lime-400/40 transition-colors">
+                                    <Eye className="w-3.5 h-3.5 text-slate-600 group-hover:text-lime-400/70 transition-colors" />
                                 </div>
                                 <p className="text-[10px] uppercase tracking-[0.25em] text-slate-600">Visión</p>
                             </div>
@@ -251,8 +251,8 @@ export default function AboutSection() {
                                         {String(step.step).padStart(2, '0')}
                                     </span>
 
-                                    <div className="w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-amber-400/40 transition-colors mb-3">
-                                        <Icon className="w-3.5 h-3.5 text-slate-600 group-hover:text-amber-400/70 transition-colors" />
+                                    <div className="w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-lime-400/40 transition-colors mb-3">
+                                        <Icon className="w-3.5 h-3.5 text-slate-600 group-hover:text-lime-400/70 transition-colors" />
                                     </div>
 
                                     <h4 className="text-xs font-medium uppercase tracking-[0.1em] text-white mb-2">
@@ -261,7 +261,7 @@ export default function AboutSection() {
                                     <p className="text-[11px] text-slate-600 leading-relaxed mb-2">
                                         {step.description}
                                     </p>
-                                    <span className="text-[9px] uppercase tracking-[0.2em] text-amber-400/50">
+                                    <span className="text-[9px] uppercase tracking-[0.2em] text-lime-400/50">
                                         {step.duration}
                                     </span>
                                 </motion.div>
@@ -295,13 +295,13 @@ export default function AboutSection() {
                                 className="group relative flex gap-8 pb-8 last:pb-0 pl-8"
                             >
                                 {/* Year dot */}
-                                <div className="absolute -left-[9px] top-0 w-[18px] h-[18px] flex items-center justify-center border border-slate-700/60 bg-[#080810] group-hover:border-amber-400/40 transition-colors">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-amber-400/60 transition-colors" />
+                                <div className="absolute -left-[9px] top-0 w-[18px] h-[18px] flex items-center justify-center border border-slate-700/60 bg-[#080810] group-hover:border-lime-400/40 transition-colors">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-lime-400/60 transition-colors" />
                                 </div>
 
                                 <div className="flex-1">
                                     <p
-                                        className="text-2xl font-light text-amber-400/70 leading-none mb-2"
+                                        className="text-2xl font-light text-lime-400/70 leading-none mb-2"
                                         style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                                     >
                                         {item.year}
@@ -325,7 +325,7 @@ export default function AboutSection() {
 
                     <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
                         <div>
-                            <p className="text-[10px] uppercase tracking-[0.3em] text-amber-400/70 mb-4">
+                            <p className="text-[10px] uppercase tracking-[0.3em] text-lime-400/70 mb-4">
                                 — Siguiente paso
                             </p>
                             <h3
@@ -341,7 +341,7 @@ export default function AboutSection() {
                                 href="#contact"
                                 whileHover={{ scale: 1.01 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                             >
                                 Contactar ahora
                                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -350,7 +350,7 @@ export default function AboutSection() {
                                 href="#projects"
                                 whileHover={{ scale: 1.01 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
+                                className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-lime-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
                             >
                                 Ver proyectos
                             </motion.a>

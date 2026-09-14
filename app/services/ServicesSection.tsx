@@ -25,7 +25,7 @@ export default function ServicesSection() {
                 }}
             />
             <div className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full bg-indigo-900/10 blur-[140px] pointer-events-none" />
-            <div className="absolute bottom-1/4 left-0  w-[400px] h-[400px] rounded-full bg-amber-900/8  blur-[140px] pointer-events-none" />
+            <div className="absolute bottom-1/4 left-0  w-[400px] h-[400px] rounded-full bg-lime-900/8  blur-[140px] pointer-events-none" />
 
             <div className="relative max-w-7xl mx-auto px-6 md:px-8">
 
@@ -37,7 +37,7 @@ export default function ServicesSection() {
                     transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     className="mb-20"
                 >
-                    <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/70 mb-5">
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-lime-400/70 mb-5">
                         — Nuestros servicios
                     </p>
                     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -53,7 +53,7 @@ export default function ServicesSection() {
                             Cada servicio puede contratarse de forma independiente.
                         </p>
                     </div>
-                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-amber-400/20 to-transparent" />
+                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-lime-400/20 to-transparent" />
                 </motion.div>
 
                 {/* ── GRID ── */}
@@ -86,7 +86,7 @@ export default function ServicesSection() {
                             href="#contact"
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.98 }}
-                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors shrink-0"
+                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors shrink-0"
                         >
                             Contactar ahora
                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

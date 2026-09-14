@@ -67,13 +67,13 @@ export function LoginDialog({ isOpen, onClose, onSwitchToRegister }: LoginDialog
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="relative w-full max-w-sm bg-[#080810] border border-slate-800/80 shadow-2xl shadow-black/60"
             >
-                <div className="h-px bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
+                <div className="h-px bg-gradient-to-r from-transparent via-lime-400/40 to-transparent" />
 
                 <div className="relative px-8 pt-8 pb-6 border-b border-slate-800/60">
-                    <button onClick={onClose} className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center border border-slate-700/60 hover:border-amber-400/40 text-slate-600 hover:text-slate-300 transition-all">
+                    <button onClick={onClose} className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center border border-slate-700/60 hover:border-lime-400/40 text-slate-600 hover:text-slate-300 transition-all">
                         <X className="w-3.5 h-3.5" />
                     </button>
-                    <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/60 mb-3">Bienvenido de vuelta</p>
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-lime-400/60 mb-3">Bienvenido de vuelta</p>
                     <h2 className="text-3xl font-light text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                         Iniciar sesion
                     </h2>
@@ -89,7 +89,7 @@ export function LoginDialog({ isOpen, onClose, onSwitchToRegister }: LoginDialog
 
                     <div className="space-y-2">
                         <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                            <Mail className="w-3 h-3 text-amber-400/60" />
+                            <Mail className="w-3 h-3 text-lime-400/60" />
                             Email
                         </label>
                         <input
@@ -97,13 +97,13 @@ export function LoginDialog({ isOpen, onClose, onSwitchToRegister }: LoginDialog
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                             placeholder="tu@email.com"
-                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors hover:border-slate-500/80"
+                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors hover:border-slate-500/80"
                         />
                     </div>
 
                     <div className="space-y-2">
                         <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                            <Lock className="w-3 h-3 text-amber-400/60" />
+                            <Lock className="w-3 h-3 text-lime-400/60" />
                             Contrasena
                         </label>
                         <div className="relative">
@@ -112,7 +112,7 @@ export function LoginDialog({ isOpen, onClose, onSwitchToRegister }: LoginDialog
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
                                 placeholder="••••••••"
-                                className="w-full px-0 py-3 pr-8 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors hover:border-slate-500/80"
+                                className="w-full px-0 py-3 pr-8 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors hover:border-slate-500/80"
                             />
                             <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-600 hover:text-slate-400 transition-colors">
                                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -122,16 +122,16 @@ export function LoginDialog({ isOpen, onClose, onSwitchToRegister }: LoginDialog
 
                     <div className="flex items-center justify-between pt-1">
                         <label className="flex items-center gap-2.5 cursor-pointer group">
-                            <div onClick={() => setRememberMe(!rememberMe)} className={`w-4 h-4 border flex items-center justify-center transition-all cursor-pointer ${rememberMe ? 'border-amber-400/60 bg-amber-400/10' : 'border-slate-700/60 group-hover:border-slate-500/80'}`}>
-                                {rememberMe && <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-2 h-2 bg-amber-400/80" />}
+                            <div onClick={() => setRememberMe(!rememberMe)} className={`w-4 h-4 border flex items-center justify-center transition-all cursor-pointer ${rememberMe ? 'border-lime-400/60 bg-lime-400/10' : 'border-slate-700/60 group-hover:border-slate-500/80'}`}>
+                                {rememberMe && <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-2 h-2 bg-lime-400/80" />}
                             </div>
                             <span className="text-xs text-slate-500 group-hover:text-slate-400 transition-colors">Recordarme</span>
                         </label>
-                        <a href="/forgot-password" className="text-[10px] uppercase tracking-[0.15em] text-slate-600 hover:text-amber-400/70 transition-colors">Olvidaste tu contrasena?</a>
+                        <a href="/forgot-password" className="text-[10px] uppercase tracking-[0.15em] text-slate-600 hover:text-lime-400/70 transition-colors">Olvidaste tu contrasena?</a>
                     </div>
 
                     <div className="pt-2 space-y-3">
-                        <motion.button type="submit" disabled={isLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        <motion.button type="submit" disabled={isLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                             {isLoading ? (
                                 <><Loader2 className="w-3.5 h-3.5 animate-spin" />Iniciando sesion...</>
                             ) : (
@@ -166,13 +166,13 @@ export function LoginDialog({ isOpen, onClose, onSwitchToRegister }: LoginDialog
 
                     <p className="text-center text-xs text-slate-600 pt-1">
                         No tienes una cuenta?{' '}
-                        <button type="button" onClick={onSwitchToRegister} className="text-slate-400 hover:text-amber-400/80 transition-colors underline underline-offset-4 decoration-slate-700 hover:decoration-amber-400/40">
+                        <button type="button" onClick={onSwitchToRegister} className="text-slate-400 hover:text-lime-400/80 transition-colors underline underline-offset-4 decoration-slate-700 hover:decoration-lime-400/40">
                             Registrate
                         </button>
                     </p>
                 </form>
 
-                <div className="h-px bg-gradient-to-r from-transparent via-amber-400/15 to-transparent" />
+                <div className="h-px bg-gradient-to-r from-transparent via-lime-400/15 to-transparent" />
             </motion.div>
         </div>
     );

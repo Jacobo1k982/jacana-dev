@@ -24,7 +24,7 @@ export default async function AdminPage() {
     return (
         <div className="space-y-8">
             <div>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-amber-400/60 mb-2">Panel de control</p>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-lime-400/60 mb-2">Panel de control</p>
                 <h1 className="text-3xl font-light text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                     Administracion
                 </h1>
@@ -36,7 +36,7 @@ export default async function AdminPage() {
                     <div key={label} className="bg-[#080810] border border-slate-800/60 p-6">
                         <div className="flex items-center justify-between mb-4">
                             <span className="text-[9px] uppercase tracking-[0.25em] text-slate-600">{label}</span>
-                            <Icon className="w-4 h-4 text-amber-400/40" />
+                            <Icon className="w-4 h-4 text-lime-400/40" />
                         </div>
                         <p className="text-3xl font-light text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                             {value}
@@ -46,24 +46,24 @@ export default async function AdminPage() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
-                <a href="/admin/users" className="group bg-[#080810] border border-slate-800/60 p-6 hover:border-amber-400/20 transition-colors">
-                    <div className="h-px bg-gradient-to-r from-amber-400/20 to-transparent mb-6" />
+                <a href="/admin/users" className="group bg-[#080810] border border-slate-800/60 p-6 hover:border-lime-400/20 transition-colors">
+                    <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-2">Usuarios</p>
                             <p className="text-sm text-slate-300 group-hover:text-white transition-colors">Gestionar todos los usuarios del sistema</p>
                         </div>
-                        <Users className="w-8 h-8 text-slate-700 group-hover:text-amber-400/40 transition-colors" />
+                        <Users className="w-8 h-8 text-slate-700 group-hover:text-lime-400/40 transition-colors" />
                     </div>
                 </a>
-                <a href="/admin/projects" className="group bg-[#080810] border border-slate-800/60 p-6 hover:border-amber-400/20 transition-colors">
-                    <div className="h-px bg-gradient-to-r from-amber-400/20 to-transparent mb-6" />
+                <a href="/admin/projects" className="group bg-[#080810] border border-slate-800/60 p-6 hover:border-lime-400/20 transition-colors">
+                    <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-2">Proyectos</p>
                             <p className="text-sm text-slate-300 group-hover:text-white transition-colors">Ver y gestionar todos los proyectos</p>
                         </div>
-                        <FolderKanban className="w-8 h-8 text-slate-700 group-hover:text-amber-400/40 transition-colors" />
+                        <FolderKanban className="w-8 h-8 text-slate-700 group-hover:text-lime-400/40 transition-colors" />
                     </div>
                 </a>
             </div>

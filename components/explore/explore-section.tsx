@@ -33,7 +33,7 @@ const accentMap: Record<string, { text: string; border: string }> = {
     orange: { text: 'text-orange-400', border: 'border-orange-400/30' },
     green: { text: 'text-emerald-400', border: 'border-emerald-400/30' },
     pink: { text: 'text-rose-400', border: 'border-rose-400/30' },
-    yellow: { text: 'text-amber-400', border: 'border-amber-400/30' },
+    yellow: { text: 'text-lime-400', border: 'border-lime-400/30' },
 };
 
 const getAccent = (color: string) => accentMap[color] ?? accentMap.cyan;
@@ -101,8 +101,8 @@ function ServiceCard({ item, index, onViewDetails }: {
                     </div>
                     {item.popular && (
                         <div className="flex items-center gap-1 shrink-0">
-                            <Star className="w-2.5 h-2.5 text-amber-400/70 fill-current" />
-                            <span className="text-[9px] uppercase tracking-[0.2em] text-amber-400/70">Popular</span>
+                            <Star className="w-2.5 h-2.5 text-lime-400/70 fill-current" />
+                            <span className="text-[9px] uppercase tracking-[0.2em] text-lime-400/70">Popular</span>
                         </div>
                     )}
                 </div>
@@ -224,7 +224,7 @@ function ProjectCard({ item, index, onViewDetails }: {
             </div>
 
             {/* Arrow */}
-            <ArrowRight className="w-4 h-4 text-slate-700 group-hover:text-amber-400/60 group-hover:translate-x-0.5 transition-all shrink-0 mt-1" />
+            <ArrowRight className="w-4 h-4 text-slate-700 group-hover:text-lime-400/60 group-hover:translate-x-0.5 transition-all shrink-0 mt-1" />
         </motion.div>
     );
 }
@@ -269,7 +269,7 @@ export default function ExploreSection() {
                 }}
             />
             <div className="absolute top-1/4 left-0 w-[500px] h-[500px] rounded-full bg-indigo-900/10 blur-[140px] pointer-events-none" />
-            <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full bg-amber-900/8 blur-[140px] pointer-events-none" />
+            <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full bg-lime-900/8 blur-[140px] pointer-events-none" />
 
             <div className="relative max-w-7xl mx-auto px-6 md:px-8">
 
@@ -281,7 +281,7 @@ export default function ExploreSection() {
                     transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     className="mb-16"
                 >
-                    <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/70 mb-5">
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-lime-400/70 mb-5">
                         — Descubre lo que ofrecemos
                     </p>
                     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -296,7 +296,7 @@ export default function ExploreSection() {
                             Soluciones de desarrollo y ejemplos de trabajo real que demuestran nuestra experiencia.
                         </p>
                     </div>
-                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-amber-400/20 to-transparent" />
+                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-lime-400/20 to-transparent" />
                 </motion.div>
 
                 {/* ── CONTROLS ── */}
@@ -316,7 +316,7 @@ export default function ExploreSection() {
                             onChange={e => setSearchQuery(e.target.value)}
                             placeholder="Buscar servicios, tecnologías, proyectos…"
                             className="w-full pl-10 pr-4 py-3 bg-transparent border border-slate-800/60 text-white text-sm placeholder-slate-700
-                                focus:border-amber-400/40 focus:outline-none transition-colors hover:border-slate-700/80"
+                                focus:border-lime-400/40 focus:outline-none transition-colors hover:border-slate-700/80"
                         />
                     </div>
 
@@ -337,7 +337,7 @@ export default function ExploreSection() {
                                     {isActive && (
                                         <motion.span
                                             layoutId="exploreTabIndicator"
-                                            className="absolute top-0 left-0 right-0 h-px bg-amber-400/50"
+                                            className="absolute top-0 left-0 right-0 h-px bg-lime-400/50"
                                             transition={{ type: 'spring', bounce: 0.15, duration: 0.4 }}
                                         />
                                     )}
@@ -384,7 +384,7 @@ export default function ExploreSection() {
                                 <p className="text-sm text-slate-500 mb-1">Sin resultados</p>
                                 <button
                                     onClick={() => { setSearchQuery(''); setActiveCategory('all'); }}
-                                    className="mt-3 text-xs uppercase tracking-[0.15em] text-amber-400/60 hover:text-amber-400/80 transition-colors"
+                                    className="mt-3 text-xs uppercase tracking-[0.15em] text-lime-400/60 hover:text-lime-400/80 transition-colors"
                                 >
                                     Limpiar filtros
                                 </button>
@@ -425,7 +425,7 @@ export default function ExploreSection() {
                                 transition={{ delay: i * 0.07 }}
                                 className="bg-[#080810] px-6 py-6 flex items-center gap-4"
                             >
-                                <Icon className="w-4 h-4 text-amber-400/50 shrink-0" />
+                                <Icon className="w-4 h-4 text-lime-400/50 shrink-0" />
                                 <div>
                                     <p
                                         className="text-2xl font-light text-white leading-none mb-1"
@@ -457,7 +457,7 @@ export default function ExploreSection() {
                         href="#contact"
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.98 }}
-                        className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors shrink-0"
+                        className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors shrink-0"
                     >
                         Contáctanos
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

@@ -48,7 +48,7 @@ const SERVICES: Service[] = [
         ],
         timeRange: '4 – 12 semanas',
         priceRange: '$800 – $8,000',
-        accent: '#f59e0b',
+        accent: '#84cc16',
         tag: 'Más demandado',
     },
     {
@@ -140,8 +140,30 @@ const SERVICES: Service[] = [
         tag: null,
     },
     {
-        id: 'consulting',
+        id: 'database',
         index: '06',
+        icon: Database,
+        title: 'Bases de Datos',
+        subtitle: 'Schema Design · Scaling · Performance',
+        description:
+            'Diseñamos el cerebro de datos de tu aplicación: desde esquemas relacionales hasta soluciones NoSQL distribuidas, con arquitecturas que rinden al máximo incluso bajo alta carga.',
+        stack: ['PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Elasticsearch', 'Prisma ORM'],
+        features: [
+            'Modelado de esquemas relacionales y NoSQL',
+            'Optimización de queries e índices estratégicos',
+            'Replicación master-slave, multi-master y sharding',
+            'Migraciones de datos sin downtime',
+            'Backups automatizados y disaster recovery',
+            'Data warehousing, ETL y Business Intelligence',
+        ],
+        timeRange: '2 – 8 semanas',
+        priceRange: '$500 – $6,000',
+        accent: '#60a5fa',
+        tag: null,
+    },
+    {
+        id: 'consulting',
+        index: '07',
         icon: Shield,
         title: 'Consultoría Técnica',
         subtitle: 'Architecture · Code Review · CTO-as-a-Service',
@@ -371,7 +393,7 @@ export default function ServiciosPage() {
             {/* ── Ambient glows ── */}
             <div
                 className="fixed top-0 left-1/4 w-[600px] h-[500px] pointer-events-none z-0"
-                style={{ background: 'radial-gradient(ellipse, rgba(245,158,11,0.05) 0%, transparent 70%)' }}
+                style={{ background: 'radial-gradient(ellipse, rgba(132,204,22,0.05) 0%, transparent 70%)' }}
             />
             <div
                 className="fixed bottom-0 right-1/4 w-[500px] h-[400px] pointer-events-none z-0"
@@ -410,7 +432,7 @@ export default function ServiciosPage() {
                         >
                             <Link
                                 href="/"
-                                className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-slate-600 hover:text-amber-400/70 transition-colors"
+                                className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-slate-600 hover:text-lime-400/70 transition-colors"
                             >
                                 <ArrowLeft className="w-3 h-3" />
                                 Volver al inicio
@@ -426,8 +448,8 @@ export default function ServiciosPage() {
                                     transition={{ duration: 0.5 }}
                                     className="flex items-center gap-3 mb-6"
                                 >
-                                    <div className="w-6 h-px bg-amber-400/60" />
-                                    <span className="text-[9px] uppercase tracking-[0.38em] text-amber-400/60">
+                                    <div className="w-6 h-px bg-lime-400/60" />
+                                    <span className="text-[9px] uppercase tracking-[0.38em] text-lime-400/60">
                                         Nuestros servicios
                                     </span>
                                 </motion.div>
@@ -444,7 +466,7 @@ export default function ServiciosPage() {
                                 >
                                     Lo que
                                     <br />
-                                    <em className="text-amber-400/90 not-italic">construimos</em>
+                                    <em className="text-lime-400/90 not-italic">construimos</em>
                                     <br />
                                     para ti
                                 </motion.h1>
@@ -453,7 +475,7 @@ export default function ServiciosPage() {
                                     initial={{ scaleX: 0 }}
                                     animate={heading.inView ? { scaleX: 1 } : {}}
                                     transition={{ delay: 0.5, duration: 0.6 }}
-                                    className="mt-8 w-48 h-px bg-gradient-to-r from-amber-400/40 to-transparent"
+                                    className="mt-8 w-48 h-px bg-gradient-to-r from-lime-400/40 to-transparent"
                                     style={{ transformOrigin: 'left' }}
                                 />
                             </div>
@@ -489,7 +511,7 @@ export default function ServiciosPage() {
                                             transition={{ delay: 0.5 + i * 0.07 }}
                                             className="flex items-start gap-2.5 p-3.5 border border-slate-800/70 bg-slate-900/20 hover:border-slate-700/60 transition-colors"
                                         >
-                                            <Icon className="w-3.5 h-3.5 text-amber-400/50 mt-0.5 flex-shrink-0" />
+                                            <Icon className="w-3.5 h-3.5 text-lime-400/50 mt-0.5 flex-shrink-0" />
                                             <div>
                                                 <p className="text-xs text-slate-300 font-medium leading-none mb-0.5">{label}</p>
                                                 <p className="text-[10px] text-slate-600">{sub}</p>
@@ -508,7 +530,7 @@ export default function ServiciosPage() {
                             className="mt-16 flex border border-slate-800/60 divide-x divide-slate-800/60"
                         >
                             {[
-                                { value: '6', label: 'Áreas de servicio' },
+                                { value: '7', label: 'Áreas de servicio' },
                                 { value: '15+', label: 'Proyectos entregados' },
                                 { value: '98%', label: 'Clientes satisfechos' },
                                 { value: '2+', label: 'Años de experiencia' },
@@ -543,7 +565,7 @@ export default function ServiciosPage() {
                         >
                             <div className="w-6 h-px bg-slate-700" />
                             <span className="text-[9px] uppercase tracking-[0.35em] text-slate-700">
-                                — 6 servicios disponibles
+                                — 7 servicios disponibles
                             </span>
                         </motion.div>
 
@@ -589,7 +611,7 @@ export default function ServiciosPage() {
                                     className="bg-[#06051d] p-8 md:p-10 group hover:bg-slate-900/30 transition-colors"
                                 >
                                     <span
-                                        className="block text-3xl font-light text-amber-400/30 mb-5 group-hover:text-amber-400/50 transition-colors"
+                                        className="block text-3xl font-light text-lime-400/30 mb-5 group-hover:text-lime-400/50 transition-colors"
                                         style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                                     >
                                         {num}
@@ -622,11 +644,11 @@ export default function ServiciosPage() {
                             {/* Decorative glow inside CTA */}
                             <div
                                 className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 pointer-events-none"
-                                style={{ background: 'radial-gradient(ellipse, rgba(245,158,11,0.07) 0%, transparent 70%)' }}
+                                style={{ background: 'radial-gradient(ellipse, rgba(132,204,22,0.07) 0%, transparent 70%)' }}
                             />
                             <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
                                 <div>
-                                    <p className="text-[9px] uppercase tracking-[0.35em] text-amber-400/60 mb-3">
+                                    <p className="text-[9px] uppercase tracking-[0.35em] text-lime-400/60 mb-3">
                                         — Hablemos de tu proyecto
                                     </p>
                                     <h2
@@ -638,7 +660,7 @@ export default function ServiciosPage() {
                                     >
                                         ¿Tienes una idea
                                         <br />
-                                        <em className="text-amber-400/90 not-italic">que quieres construir?</em>
+                                        <em className="text-lime-400/90 not-italic">que quieres construir?</em>
                                     </h2>
                                     <p className="mt-4 text-sm text-slate-500 max-w-sm leading-relaxed">
                                         La primera consulta es gratuita. Cuéntanos qué necesitas y te respondemos en menos de 24 horas.
@@ -648,14 +670,14 @@ export default function ServiciosPage() {
                                 <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
                                     <Link
                                         href="/Contact"
-                                        className="group inline-flex items-center gap-2.5 px-8 py-4 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                                        className="group inline-flex items-center gap-2.5 px-8 py-4 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                     >
                                         Iniciar proyecto
                                         <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                                     </Link>
                                     <Link
                                         href="/"
-                                        className="inline-flex items-center gap-2 px-6 py-4 border border-slate-700/60 hover:border-amber-400/30 text-slate-500 hover:text-slate-300 text-xs font-medium uppercase tracking-[0.15em] transition-all"
+                                        className="inline-flex items-center gap-2 px-6 py-4 border border-slate-700/60 hover:border-lime-400/30 text-slate-500 hover:text-slate-300 text-xs font-medium uppercase tracking-[0.15em] transition-all"
                                     >
                                         <ArrowLeft className="w-3.5 h-3.5" />
                                         Ver portafolio

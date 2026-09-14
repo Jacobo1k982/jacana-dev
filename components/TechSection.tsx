@@ -63,7 +63,7 @@ export default function TechSection() {
                 }}
             />
             <div className="absolute top-1/3 left-0 w-[500px] h-[500px] rounded-full bg-indigo-900/10 blur-[140px] pointer-events-none" />
-            <div className="absolute bottom-1/3 right-0 w-[400px] h-[400px] rounded-full bg-amber-900/8 blur-[140px] pointer-events-none" />
+            <div className="absolute bottom-1/3 right-0 w-[400px] h-[400px] rounded-full bg-lime-900/8 blur-[140px] pointer-events-none" />
 
             <div className="relative max-w-7xl mx-auto px-6 md:px-8">
 
@@ -75,7 +75,7 @@ export default function TechSection() {
                     transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     className="mb-16"
                 >
-                    <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/70 mb-5">
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-lime-400/70 mb-5">
                         — Stack Tecnológico
                     </p>
                     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -90,7 +90,7 @@ export default function TechSection() {
                             El mismo stack que usan las empresas líderes — elegido por rendimiento, no por moda.
                         </p>
                     </div>
-                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-amber-400/20 to-transparent" />
+                    <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-lime-400/20 to-transparent" />
                 </motion.div>
 
                 {/* ── CATEGORY TABS — horizontal bar ── */}
@@ -142,7 +142,7 @@ export default function TechSection() {
                             transition={{ duration: 0.25 }}
                             className="mb-8 flex items-center gap-4"
                         >
-                            <div className={`w-1 h-4 shrink-0 ${accentMap[active[1].color]?.bar ?? 'bg-amber-400/60'}`} />
+                            <div className={`w-1 h-4 shrink-0 ${accentMap[active[1].color]?.bar ?? 'bg-lime-400/60'}`} />
                             <p className="text-sm text-slate-500 leading-relaxed">
                                 {active[1].description}
                             </p>
@@ -193,7 +193,7 @@ export default function TechSection() {
                     className="mt-16 pt-12 border-t border-slate-800/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
                 >
                     <div>
-                        <p className="text-[10px] uppercase tracking-[0.25em] text-amber-400/60 mb-1">
+                        <p className="text-[10px] uppercase tracking-[0.25em] text-lime-400/60 mb-1">
                             — ¿No sabes qué stack necesitas?
                         </p>
                         <p className="text-sm text-slate-500">
@@ -205,7 +205,7 @@ export default function TechSection() {
                             href="#contact"
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.98 }}
-                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors"
+                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                         >
                             Consulta técnica
                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -214,7 +214,7 @@ export default function TechSection() {
                             href="#projects"
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.98 }}
-                            className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-amber-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
+                            className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-lime-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
                         >
                             Ver proyectos
                         </motion.a>

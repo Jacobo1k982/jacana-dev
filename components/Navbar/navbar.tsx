@@ -38,9 +38,9 @@ const categoryAccent: Record<string, string> = {
     'Cloud & DevOps': 'text-orange-400 border-orange-400/30 bg-orange-400/5',
     'Bases de Datos': 'text-emerald-400 border-emerald-400/30 bg-emerald-400/5',
     'Inteligencia Artificial': 'text-rose-400 border-rose-400/30 bg-rose-400/5',
-    'APIs & Integraciones': 'text-amber-400 border-amber-400/30 bg-amber-400/5',
+    'APIs & Integraciones': 'text-lime-400 border-lime-400/30 bg-lime-400/5',
     'Consultoría Técnica': 'text-teal-400 border-teal-400/30 bg-teal-400/5',
-    default: 'text-amber-400 border-amber-400/30 bg-amber-400/5',
+    default: 'text-lime-400 border-lime-400/30 bg-lime-400/5',
 };
 
 const getAccent = (label: string) =>
@@ -50,8 +50,8 @@ const getAccent = (label: string) =>
 const cx = {
     btnLogin: 'flex items-center gap-1.5 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.13em] text-slate-400 hover:text-white border border-transparent hover:border-white/10 rounded-sm transition-all duration-200',
     // CTA de negocio — la acción que realmente mueve la aguja (antes: "Registrarse")
-    btnPrimary: 'flex items-center gap-1.5 px-5 py-2 bg-white text-[#06060f] text-[11px] font-semibold uppercase tracking-[0.13em] hover:bg-amber-50 transition-colors duration-200',
-    btnHamburger: 'lg:hidden w-10 h-10 flex items-center justify-center border border-white/10 hover:border-amber-400/30 transition-colors duration-200',
+    btnPrimary: 'flex items-center gap-1.5 px-5 py-2 bg-white text-[#06060f] text-[11px] font-semibold uppercase tracking-[0.13em] hover:bg-lime-50 transition-colors duration-200',
+    btnHamburger: 'lg:hidden w-10 h-10 flex items-center justify-center border border-white/10 hover:border-lime-400/30 transition-colors duration-200',
 };
 
 // ─── Scroll progress bar ─────────────────────────────────────────────────────
@@ -68,7 +68,7 @@ function ScrollProgress() {
     return (
         <div className="absolute bottom-0 left-0 right-0 h-px bg-white/5">
             <motion.div
-                className="h-full bg-gradient-to-r from-amber-400/80 to-amber-300/60"
+                className="h-full bg-gradient-to-r from-lime-400/80 to-lime-300/60"
                 style={{ scaleX: progress / 100, transformOrigin: 'left' }}
             />
         </div>
@@ -152,7 +152,7 @@ export default function Navbar() {
                                                 </motion.span>
                                             )}
                                             <motion.span
-                                                className="absolute bottom-0 left-3.5 right-3.5 h-px bg-amber-400/70"
+                                                className="absolute bottom-0 left-3.5 right-3.5 h-px bg-lime-400/70"
                                                 initial={false}
                                                 animate={{ scaleX: isOpen ? 1 : 0, opacity: isOpen ? 1 : 0 }}
                                                 style={{ transformOrigin: 'left' }}
@@ -202,7 +202,7 @@ export default function Navbar() {
                             <AnimatePresence mode="wait">
                                 {isMenuOpen ? (
                                     <motion.div key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                                        <X className="w-[18px] h-[18px] text-amber-400" />
+                                        <X className="w-[18px] h-[18px] text-lime-400" />
                                     </motion.div>
                                 ) : (
                                     <motion.div key="m" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
@@ -232,13 +232,13 @@ export default function Navbar() {
                         {navLinks.filter(l => l.label === hoveredMenu && l.submenu?.length).map(link => (
                             <div key={link.label} className="max-w-7xl mx-auto px-5 md:px-8 pt-1">
                                 <div className="bg-[#07070e]/98 backdrop-blur-2xl border border-white/[0.07] shadow-2xl shadow-black/50">
-                                    <div className="h-px bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
+                                    <div className="h-px bg-gradient-to-r from-transparent via-lime-400/40 to-transparent" />
                                     <div className="grid grid-cols-4 divide-x divide-white/[0.05]">
 
                                         {/* Left info panel */}
                                         <div className="p-7 flex flex-col justify-between gap-6">
                                             <div>
-                                                <p className="text-[9px] uppercase tracking-[0.35em] text-amber-400/60 mb-3">
+                                                <p className="text-[9px] uppercase tracking-[0.35em] text-lime-400/60 mb-3">
                                                     — {link.label}
                                                 </p>
                                                 <h3
@@ -255,7 +255,7 @@ export default function Navbar() {
                                                 href={link.href}
                                                 whileHover={{ scale: 1.01 }}
                                                 whileTap={{ scale: 0.98 }}
-                                                className="flex items-center justify-center gap-2 py-3 bg-white text-[#06060f] text-[11px] font-semibold uppercase tracking-[0.13em] hover:bg-amber-50 transition-colors"
+                                                className="flex items-center justify-center gap-2 py-3 bg-white text-[#06060f] text-[11px] font-semibold uppercase tracking-[0.13em] hover:bg-lime-50 transition-colors"
                                             >
                                                 Ver todos los servicios
                                                 <ArrowRight className="w-3 h-3" />
@@ -295,7 +295,7 @@ export default function Navbar() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="h-px bg-gradient-to-r from-transparent via-amber-400/10 to-transparent" />
+                                    <div className="h-px bg-gradient-to-r from-transparent via-lime-400/10 to-transparent" />
                                 </div>
                             </div>
                         ))}
@@ -333,7 +333,7 @@ export default function Navbar() {
                                 <img src="/Logo-dev.png" alt="Jacana Dev" className="w-9 h-9 object-contain" />
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="w-9 h-9 flex items-center justify-center border border-white/10 hover:border-amber-400/30 text-slate-500 hover:text-white transition-all"
+                                    className="w-9 h-9 flex items-center justify-center border border-white/10 hover:border-lime-400/30 text-slate-500 hover:text-white transition-all"
                                 >
                                     <X className="w-4 h-4" />
                                 </button>
@@ -361,7 +361,7 @@ export default function Navbar() {
                                                             className={`w-full flex items-center justify-between px-3 py-3.5 rounded-sm transition-colors duration-150 ${isOpen ? 'bg-white/[0.04] text-white' : 'text-slate-400 hover:text-white hover:bg-white/[0.03]'}`}
                                                         >
                                                             <div className="flex items-center gap-3">
-                                                                <Icon className={`w-4 h-4 transition-colors ${isOpen ? 'text-amber-400' : 'text-slate-600'}`} />
+                                                                <Icon className={`w-4 h-4 transition-colors ${isOpen ? 'text-lime-400' : 'text-slate-600'}`} />
                                                                 <span className="text-[11px] font-medium uppercase tracking-[0.12em]">
                                                                     {link.label}
                                                                 </span>
@@ -370,7 +370,7 @@ export default function Navbar() {
                                                                 animate={{ rotate: isOpen ? 45 : 0 }}
                                                                 transition={{ duration: 0.2 }}
                                                             >
-                                                                <Plus className={`w-3.5 h-3.5 transition-colors ${isOpen ? 'text-amber-400' : 'text-slate-600'}`} />
+                                                                <Plus className={`w-3.5 h-3.5 transition-colors ${isOpen ? 'text-lime-400' : 'text-slate-600'}`} />
                                                             </motion.span>
                                                         </button>
 
@@ -384,7 +384,7 @@ export default function Navbar() {
                                                                     transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                                                                     className="overflow-hidden"
                                                                 >
-                                                                    <div className="ml-3 mt-1 mb-2 pl-4 pb-1 border-l border-amber-400/20">
+                                                                    <div className="ml-3 mt-1 mb-2 pl-4 pb-1 border-l border-lime-400/20">
                                                                         {link.submenu!.map((item, idx) => {
                                                                             const SubIcon = item.icon;
                                                                             const [iconColor] = getAccent(item.label);
@@ -424,12 +424,12 @@ export default function Navbar() {
                                                         className="flex items-center justify-between px-3 py-3.5 rounded-sm text-slate-400 hover:text-white hover:bg-white/[0.03] transition-colors duration-150 group"
                                                     >
                                                         <div className="flex items-center gap-3">
-                                                            <Icon className="w-4 h-4 text-slate-600 group-hover:text-amber-400/80 transition-colors" />
+                                                            <Icon className="w-4 h-4 text-slate-600 group-hover:text-lime-400/80 transition-colors" />
                                                             <span className="text-[11px] font-medium uppercase tracking-[0.12em]">
                                                                 {link.label}
                                                             </span>
                                                         </div>
-                                                        <ChevronRight className="w-3.5 h-3.5 text-slate-700 group-hover:text-amber-400/60 transition-colors" />
+                                                        <ChevronRight className="w-3.5 h-3.5 text-slate-700 group-hover:text-lime-400/60 transition-colors" />
                                                     </a>
                                                 )}
                                             </motion.div>
@@ -458,7 +458,7 @@ export default function Navbar() {
                                             href="/Contact"
                                             onClick={() => setIsMenuOpen(false)}
                                             whileTap={{ scale: 0.97 }}
-                                            className="w-full flex items-center justify-center gap-2 py-3.5 bg-white hover:bg-amber-50 active:bg-amber-100 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#08080f] transition-colors duration-200"
+                                            className="w-full flex items-center justify-center gap-2 py-3.5 bg-white hover:bg-lime-50 active:bg-lime-100 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#08080f] transition-colors duration-200"
                                         >
                                             Cotiza tu proyecto
                                             <ArrowRight className="w-3.5 h-3.5" />

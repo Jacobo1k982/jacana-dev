@@ -71,7 +71,7 @@ export default function StatsCounter({ stats }: StatsCounterProps) {
                     className="group bg-[#080810] px-6 py-8 md:px-8 md:py-10 text-center hover:bg-slate-900/40 transition-colors relative overflow-hidden"
                 >
                     {/* Hover top line */}
-                    <div className="absolute top-0 left-0 right-0 h-px bg-amber-400/40 scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
+                    <div className="absolute top-0 left-0 right-0 h-px bg-lime-400/40 scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
 
                     {/* Value */}
                     <div

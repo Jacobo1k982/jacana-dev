@@ -43,7 +43,7 @@ function ResetPasswordForm() {
             <div className="flex flex-col items-center gap-4 text-center py-4 px-8">
                 <AlertCircle className="w-10 h-10 text-red-400/80" />
                 <p className="text-sm text-slate-300">Link inválido o expirado.</p>
-                <a href="/forgot-password" className="text-[10px] uppercase tracking-[0.2em] text-amber-400/60 hover:text-amber-400 transition-colors">
+                <a href="/forgot-password" className="text-[10px] uppercase tracking-[0.2em] text-lime-400/60 hover:text-lime-400 transition-colors">
                     Solicitar nuevo link
                 </a>
             </div>
@@ -60,7 +60,7 @@ function ResetPasswordForm() {
                 >
                     <CheckCircle className="w-10 h-10 text-emerald-400/80" />
                     <p className="text-sm text-slate-300">¡Contraseña actualizada! Ya puedes iniciar sesión.</p>
-                    <a href="/login" className="text-[10px] uppercase tracking-[0.2em] text-amber-400/60 hover:text-amber-400 transition-colors">
+                    <a href="/login" className="text-[10px] uppercase tracking-[0.2em] text-lime-400/60 hover:text-lime-400 transition-colors">
                         Ir al login
                     </a>
                 </motion.div>
@@ -75,7 +75,7 @@ function ResetPasswordForm() {
 
                     <div className="space-y-2">
                         <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                            <Lock className="w-3 h-3 text-amber-400/60" />
+                            <Lock className="w-3 h-3 text-lime-400/60" />
                             Nueva contraseña
                         </label>
                         <div className="relative">
@@ -85,7 +85,7 @@ function ResetPasswordForm() {
                                 onChange={e => setPassword(e.target.value)}
                                 placeholder="••••••••"
                                 required
-                                className="w-full px-0 py-3 pr-8 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors"
+                                className="w-full px-0 py-3 pr-8 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors"
                             />
                             <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-600 hover:text-slate-400 transition-colors">
                                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -95,7 +95,7 @@ function ResetPasswordForm() {
 
                     <div className="space-y-2">
                         <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500">
-                            <Lock className="w-3 h-3 text-amber-400/60" />
+                            <Lock className="w-3 h-3 text-lime-400/60" />
                             Confirmar contraseña
                         </label>
                         <input
@@ -104,7 +104,7 @@ function ResetPasswordForm() {
                             onChange={e => setConfirm(e.target.value)}
                             placeholder="••••••••"
                             required
-                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors"
+                            className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors"
                         />
                     </div>
 
@@ -113,7 +113,7 @@ function ResetPasswordForm() {
                         disabled={isLoading}
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.98 }}
-                        className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-amber-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {isLoading ? (
                             <><Loader2 className="w-3.5 h-3.5 animate-spin" />Actualizando…</>
@@ -136,9 +136,9 @@ export default function ResetPasswordPage() {
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full max-w-sm bg-[#080810] border border-slate-800/80 shadow-2xl"
             >
-                <div className="h-px bg-gradient-to-r from-transparent via-amber-400/40 to-transparent" />
+                <div className="h-px bg-gradient-to-r from-transparent via-lime-400/40 to-transparent" />
                 <div className="px-8 pt-8 pb-6 border-b border-slate-800/60">
-                    <p className="text-[10px] uppercase tracking-[0.35em] text-amber-400/60 mb-3">— Jacana Dev</p>
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-lime-400/60 mb-3">— Jacana Dev</p>
                     <h2 className="text-3xl font-light text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                         Nueva<br />
                         <em className="text-slate-400 not-italic">contraseña</em>
@@ -147,7 +147,7 @@ export default function ResetPasswordPage() {
                 <Suspense fallback={<div className="px-8 py-7 text-slate-500 text-sm">Cargando...</div>}>
                     <ResetPasswordForm />
                 </Suspense>
-                <div className="h-px bg-gradient-to-r from-transparent via-amber-400/15 to-transparent" />
+                <div className="h-px bg-gradient-to-r from-transparent via-lime-400/15 to-transparent" />
             </motion.div>
         </div>
     )

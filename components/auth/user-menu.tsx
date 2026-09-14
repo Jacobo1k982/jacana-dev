@@ -21,7 +21,7 @@ export function UserMenu({ onLogout }: UserMenuProps) {
         : (user.email ?? '??').slice(0, 2).toUpperCase();
 
     const roleConfig = {
-        ADMIN: { icon: Crown, color: 'text-amber-400', borderColor: 'border-amber-400/30', label: 'Admin' },
+        ADMIN: { icon: Crown, color: 'text-lime-400', borderColor: 'border-lime-400/30', label: 'Admin' },
         MODERATOR: { icon: Shield, color: 'text-indigo-400', borderColor: 'border-indigo-400/30', label: 'Moderador' },
         USER: { icon: User, color: 'text-slate-500', borderColor: 'border-slate-700/60', label: null },
     };
@@ -36,7 +36,7 @@ export function UserMenu({ onLogout }: UserMenuProps) {
                 onClick={() => setIsOpen(!isOpen)}
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
-                className={`flex items-center gap-2.5 px-3 py-2 border transition-colors ${isOpen ? 'border-amber-400/40 bg-slate-900/60' : 'border-slate-700/60 hover:border-slate-600/80'}`}
+                className={`flex items-center gap-2.5 px-3 py-2 border transition-colors ${isOpen ? 'border-lime-400/40 bg-slate-900/60' : 'border-slate-700/60 hover:border-slate-600/80'}`}
             >
                 <div className="w-6 h-6 flex items-center justify-center border border-slate-700/60 bg-slate-900/60 text-[10px] font-medium text-slate-300 overflow-hidden shrink-0">
                     {user.image
@@ -63,7 +63,7 @@ export function UserMenu({ onLogout }: UserMenuProps) {
                             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                             className="absolute right-0 top-full mt-1 w-52 bg-[#080810] border border-slate-800/80 shadow-2xl shadow-black/50 z-50"
                         >
-                            <div className="h-px bg-gradient-to-r from-transparent via-amber-400/30 to-transparent" />
+                            <div className="h-px bg-gradient-to-r from-transparent via-lime-400/30 to-transparent" />
 
                             <div className="px-5 py-4 border-b border-slate-800/60">
                                 <div className="flex items-center gap-3 mb-3">
@@ -120,7 +120,7 @@ export function UserMenu({ onLogout }: UserMenuProps) {
                                 </button>
                             </div>
 
-                            <div className="h-px bg-gradient-to-r from-transparent via-amber-400/15 to-transparent" />
+                            <div className="h-px bg-gradient-to-r from-transparent via-lime-400/15 to-transparent" />
                         </motion.div>
                     </>
                 )}

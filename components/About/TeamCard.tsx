@@ -131,7 +131,7 @@ export default function TeamCard({ member, index }: TeamCardProps) {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 whileHover={{ y: -2 }}
-                                className="w-8 h-8 flex items-center justify-center border border-slate-800/60 hover:border-amber-400/40 text-slate-600 hover:text-slate-300 transition-all"
+                                className="w-8 h-8 flex items-center justify-center border border-slate-800/60 hover:border-lime-400/40 text-slate-600 hover:text-slate-300 transition-all"
                             >
                                 <Icon className="w-3.5 h-3.5" />
                             </motion.a>

@@ -20,7 +20,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
         <button
             type="button"
             onClick={() => onChange(!checked)}
-            className={`relative w-10 h-5 transition-colors ${checked ? 'bg-amber-400/60' : 'bg-slate-700/60'}`}
+            className={`relative w-10 h-5 transition-colors ${checked ? 'bg-lime-400/60' : 'bg-slate-700/60'}`}
         >
             <span className={`absolute top-0.5 w-4 h-4 bg-white transition-transform ${checked ? 'translate-x-5' : 'translate-x-0.5'}`} />
         </button>
@@ -108,9 +108,9 @@ export default function SettingsClient({ user }: SettingsClientProps) {
 
             {user.password && (
                 <div className="bg-[#080810] border border-slate-800/60 p-6 md:p-8">
-                    <div className="h-px bg-gradient-to-r from-amber-400/20 to-transparent mb-6" />
+                    <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                     <div className="flex items-center gap-3 mb-6">
-                        <Lock className="w-4 h-4 text-amber-400/60" />
+                        <Lock className="w-4 h-4 text-lime-400/60" />
                         <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600">Cambiar contrasena</p>
                     </div>
 
@@ -120,7 +120,7 @@ export default function SettingsClient({ user }: SettingsClientProps) {
                         <div className="space-y-2">
                             <label className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Contrasena actual</label>
                             <div className="relative">
-                                <input type={showCurrent ? 'text' : 'password'} value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} required className="w-full px-0 py-3 pr-8 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors" />
+                                <input type={showCurrent ? 'text' : 'password'} value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} required className="w-full px-0 py-3 pr-8 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors" />
                                 <button type="button" onClick={() => setShowCurrent(!showCurrent)} className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-600 hover:text-slate-400 transition-colors">
                                     {showCurrent ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                 </button>
@@ -131,7 +131,7 @@ export default function SettingsClient({ user }: SettingsClientProps) {
                             <div className="space-y-2">
                                 <label className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Nueva contrasena</label>
                                 <div className="relative">
-                                    <input type={showNew ? 'text' : 'password'} value={newPassword} onChange={e => setNewPassword(e.target.value)} required className="w-full px-0 py-3 pr-8 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors" />
+                                    <input type={showNew ? 'text' : 'password'} value={newPassword} onChange={e => setNewPassword(e.target.value)} required className="w-full px-0 py-3 pr-8 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors" />
                                     <button type="button" onClick={() => setShowNew(!showNew)} className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-600 hover:text-slate-400 transition-colors">
                                         {showNew ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                     </button>
@@ -140,12 +140,12 @@ export default function SettingsClient({ user }: SettingsClientProps) {
 
                             <div className="space-y-2">
                                 <label className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Confirmar contrasena</label>
-                                <input type={showNew ? 'text' : 'password'} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-amber-400/60 focus:outline-none transition-colors" />
+                                <input type={showNew ? 'text' : 'password'} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors" />
                             </div>
                         </div>
 
                         <div className="flex justify-end">
-                            <motion.button type="submit" disabled={passwordLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.12em] hover:bg-amber-50 transition-colors disabled:opacity-50">
+                            <motion.button type="submit" disabled={passwordLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors disabled:opacity-50">
                                 {passwordLoading ? <><Loader2 className="w-3.5 h-3.5 animate-spin" />Guardando...</> : 'Actualizar contrasena'}
                             </motion.button>
                         </div>
@@ -154,9 +154,9 @@ export default function SettingsClient({ user }: SettingsClientProps) {
             )}
 
             <div className="bg-[#080810] border border-slate-800/60 p-6 md:p-8">
-                <div className="h-px bg-gradient-to-r from-amber-400/20 to-transparent mb-6" />
+                <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                 <div className="flex items-center gap-3 mb-6">
-                    <Bell className="w-4 h-4 text-amber-400/60" />
+                    <Bell className="w-4 h-4 text-lime-400/60" />
                     <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600">Notificaciones</p>
                 </div>
 
@@ -177,7 +177,7 @@ export default function SettingsClient({ user }: SettingsClientProps) {
                     ))}
 
                     <div className="flex justify-end">
-                        <motion.button type="submit" disabled={notifLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.12em] hover:bg-amber-50 transition-colors disabled:opacity-50">
+                        <motion.button type="submit" disabled={notifLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors disabled:opacity-50">
                             {notifLoading ? <><Loader2 className="w-3.5 h-3.5 animate-spin" />Guardando...</> : 'Guardar'}
                         </motion.button>
                     </div>
@@ -185,9 +185,9 @@ export default function SettingsClient({ user }: SettingsClientProps) {
             </div>
 
             <div className="bg-[#080810] border border-slate-800/60 p-6 md:p-8">
-                <div className="h-px bg-gradient-to-r from-amber-400/20 to-transparent mb-6" />
+                <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                 <div className="flex items-center gap-3 mb-6">
-                    <Shield className="w-4 h-4 text-amber-400/60" />
+                    <Shield className="w-4 h-4 text-lime-400/60" />
                     <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600">Privacidad</p>
                 </div>
 
@@ -208,7 +208,7 @@ export default function SettingsClient({ user }: SettingsClientProps) {
                     ))}
 
                     <div className="flex justify-end">
-                        <motion.button type="submit" disabled={privacyLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.12em] hover:bg-amber-50 transition-colors disabled:opacity-50">
+                        <motion.button type="submit" disabled={privacyLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors disabled:opacity-50">
                             {privacyLoading ? <><Loader2 className="w-3.5 h-3.5 animate-spin" />Guardando...</> : 'Guardar'}
                         </motion.button>
                     </div>

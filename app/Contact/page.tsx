@@ -66,6 +66,7 @@ const MESSAGE_MAX = 600;
 type FormData = {
     name: string; email: string; company: string; phone: string;
     service: string; budget: string; message: string;
+    website: string; // honeypot anti-spam — debe quedar siempre vacío
 };
 
 type FieldErrors = Partial<Record<keyof FormData, string>>;
@@ -90,8 +91,8 @@ const InputField = ({
     return (
         <div className="group space-y-2">
             <label htmlFor={id} className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-slate-400">
-                <Icon className="w-3.5 h-3.5 text-amber-400/80" />
-                {label}{required && <span className="text-amber-400/60">*</span>}
+                <Icon className="w-3.5 h-3.5 text-lime-400/80" />
+                {label}{required && <span className="text-lime-400/60">*</span>}
             </label>
             <input
                 id={id}
@@ -101,7 +102,7 @@ const InputField = ({
                 aria-describedby={error ? errorId : undefined}
                 className={`w-full px-0 py-3.5 rounded-none bg-transparent border-b text-white placeholder-slate-600 text-sm
                     focus:outline-none transition-colors duration-300
-                    ${error ? 'border-red-500/70 focus:border-red-400' : 'border-slate-700/60 hover:border-slate-500/80 focus:border-amber-400/60'}`}
+                    ${error ? 'border-red-500/70 focus:border-red-400' : 'border-slate-700/60 hover:border-slate-500/80 focus:border-lime-400/60'}`}
             />
             {error ? (
                 <p id={errorId} role="alert" className="text-[11px] text-red-400/90">{error}</p>
@@ -121,14 +122,14 @@ const SelectField = ({
     return (
         <div className="space-y-2">
             <label htmlFor={id} className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-slate-400">
-                <Icon className="w-3.5 h-3.5 text-amber-400/80" />
+                <Icon className="w-3.5 h-3.5 text-lime-400/80" />
                 {label}
             </label>
             <select
                 id={id}
                 {...props}
                 className="w-full px-0 py-3.5 rounded-none bg-transparent border-b border-slate-700/60 text-sm text-white
-                    focus:border-amber-400/60 focus:outline-none transition-colors duration-300
+                    focus:border-lime-400/60 focus:outline-none transition-colors duration-300
                     hover:border-slate-500/80 appearance-none cursor-pointer"
             >
                 <option value="" className="bg-[#0d0d1a] text-slate-500">{placeholder}</option>
@@ -142,11 +143,12 @@ const SelectField = ({
 
 export default function Contact() {
     const [formData, setFormData] = useState<FormData>({
-        name: '', email: '', company: '', phone: '', service: '', budget: '', message: '',
+        name: '', email: '', company: '', phone: '', service: '', budget: '', message: '', website: '',
     });
     const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [openFaq, setOpenFaq] = useState<number | null>(null);
 
     const errors = validate(formData);
@@ -162,6 +164,7 @@ export default function Contact() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setTouched({ name: true, email: true, message: true });
+        setErrorMessage(null);
 
         if (Object.keys(errors).length > 0) {
             setSubmitStatus('error');
@@ -171,12 +174,24 @@ export default function Contact() {
         setIsSubmitting(true);
         setSubmitStatus('idle');
         try {
-            // TODO: conectar a un endpoint real (p. ej. /api/contact) que envíe el correo.
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+            const data = await res.json().catch(() => ({}));
+
+            if (!res.ok) {
+                setErrorMessage(data?.error || 'No se pudo enviar el mensaje. Intenta de nuevo.');
+                setSubmitStatus('error');
+                return;
+            }
+
             setSubmitStatus('success');
-            setFormData({ name: '', email: '', company: '', phone: '', service: '', budget: '', message: '' });
+            setFormData({ name: '', email: '', company: '', phone: '', service: '', budget: '', message: '', website: '' });
             setTouched({});
         } catch {
+            setErrorMessage('No pudimos conectar con el servidor. Revisa tu conexión e intenta de nuevo.');
             setSubmitStatus('error');
         } finally {
             setIsSubmitting(false);
@@ -197,7 +212,7 @@ export default function Contact() {
                     }}
                 />
                 <div className="absolute top-1/4 left-0 w-[500px] h-[500px] rounded-full bg-indigo-900/10 blur-[120px] pointer-events-none" />
-                <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full bg-amber-900/8 blur-[120px] pointer-events-none" />
+                <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full bg-lime-900/8 blur-[120px] pointer-events-none" />
 
                 <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8">
 
@@ -209,7 +224,7 @@ export default function Contact() {
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="mb-16 md:mb-20"
                     >
-                        <p className="text-xs font-medium uppercase tracking-[0.3em] text-amber-400/70 mb-5">
+                        <p className="text-xs font-medium uppercase tracking-[0.3em] text-lime-400/70 mb-5">
                             — Contacto
                         </p>
                         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -224,7 +239,7 @@ export default function Contact() {
                                 Cuéntanos sobre tu idea y construyamos algo memorable juntos.
                             </p>
                         </div>
-                        <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-amber-400/20 to-transparent" />
+                        <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-lime-400/20 to-transparent" />
                     </motion.div>
 
                     {/* Main Grid */}
@@ -244,8 +259,8 @@ export default function Contact() {
                                     const content = (
                                         <>
                                             <div className="flex items-center gap-4 min-w-0">
-                                                <span className="shrink-0 w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-amber-400/40 transition-colors">
-                                                    <Icon className="w-3.5 h-3.5 text-slate-500 group-hover:text-amber-400/80 transition-colors" />
+                                                <span className="shrink-0 w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-lime-400/40 transition-colors">
+                                                    <Icon className="w-3.5 h-3.5 text-slate-500 group-hover:text-lime-400/80 transition-colors" />
                                                 </span>
                                                 <div className="min-w-0">
                                                     <p className="text-[10px] uppercase tracking-[0.2em] text-slate-600 mb-0.5">{item.title}</p>
@@ -253,7 +268,7 @@ export default function Contact() {
                                                 </div>
                                             </div>
                                             {item.link && (
-                                                <ArrowRight className="shrink-0 w-4 h-4 text-slate-700 group-hover:text-amber-400/60 group-hover:translate-x-1 transition-all" />
+                                                <ArrowRight className="shrink-0 w-4 h-4 text-slate-700 group-hover:text-lime-400/60 group-hover:translate-x-1 transition-all" />
                                             )}
                                         </>
                                     );
@@ -344,6 +359,17 @@ export default function Contact() {
                             className="md:col-span-2 lg:col-span-3"
                         >
                             <form onSubmit={handleSubmit} noValidate className="space-y-8">
+                                {/* Honeypot anti-spam — oculto para personas, visible para bots */}
+                                <input
+                                    type="text"
+                                    name="website"
+                                    value={formData.website}
+                                    onChange={handleChange}
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                    aria-hidden="true"
+                                    className="absolute left-[-9999px] top-auto w-px h-px overflow-hidden"
+                                />
                                 <div className="grid sm:grid-cols-2 gap-8">
                                     <InputField
                                         label="Nombre completo" icon={User} type="text" name="name" autoComplete="name"
@@ -372,8 +398,8 @@ export default function Contact() {
                                 <div className="space-y-2">
                                     <div className="flex items-center justify-between gap-4">
                                         <label htmlFor="contact-message" className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.15em] text-slate-400">
-                                            <MessageSquare className="w-3.5 h-3.5 text-amber-400/80" />
-                                            Mensaje <span className="text-amber-400/60">*</span>
+                                            <MessageSquare className="w-3.5 h-3.5 text-lime-400/80" />
+                                            Mensaje <span className="text-lime-400/60">*</span>
                                         </label>
                                         <span className={`text-[11px] tabular-nums ${formData.message.length > MESSAGE_MAX ? 'text-red-400/90' : 'text-slate-600'}`}>
                                             {formData.message.length}/{MESSAGE_MAX}
@@ -393,7 +419,7 @@ export default function Contact() {
                                         aria-describedby={touched.message && errors.message ? 'contact-message-error' : undefined}
                                         className={`w-full px-0 py-3.5 rounded-none bg-transparent text-white placeholder-slate-600 text-sm border-b
                                             focus:outline-none transition-colors duration-300 resize-none
-                                            ${touched.message && errors.message ? 'border-red-500/70 focus:border-red-400' : 'border-slate-700/60 hover:border-slate-500/80 focus:border-amber-400/60'}`}
+                                            ${touched.message && errors.message ? 'border-red-500/70 focus:border-red-400' : 'border-slate-700/60 hover:border-slate-500/80 focus:border-lime-400/60'}`}
                                     />
                                     {touched.message && errors.message && (
                                         <p id="contact-message-error" role="alert" className="text-[11px] text-red-400/90">{errors.message}</p>
@@ -402,7 +428,7 @@ export default function Contact() {
 
                                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
                                     <p className="text-[11px] text-slate-600">
-                                        Los campos con <span className="text-amber-400/60">*</span> son requeridos.
+                                        Los campos con <span className="text-lime-400/60">*</span> son requeridos.
                                     </p>
                                     <motion.button
                                         type="submit"
@@ -411,7 +437,7 @@ export default function Contact() {
                                         whileTap={{ scale: 0.98 }}
                                         className="group w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#080810]
                                             text-sm font-medium uppercase tracking-[0.15em]
-                                            hover:bg-amber-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                            hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {isSubmitting ? (
                                             <><div className="w-4 h-4 border-2 border-slate-400 border-t-slate-800 rounded-full animate-spin" />Enviando…</>
@@ -426,6 +452,7 @@ export default function Contact() {
                                 <div role="status" aria-live="polite" className="sr-only">
                                     {isSubmitting && 'Enviando mensaje'}
                                     {submitStatus === 'success' && 'Mensaje enviado correctamente'}
+                                    {submitStatus === 'error' && (errorMessage || 'Revisa los campos marcados antes de enviar el formulario')}
                                 </div>
 
                                 <AnimatePresence>
@@ -445,7 +472,7 @@ export default function Contact() {
                                             className="flex items-center gap-3 p-4 border-l-2 border-red-500/60 bg-red-500/5"
                                         >
                                             <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
-                                            <p className="text-sm text-red-400/80">Revisa los campos marcados antes de enviar el formulario.</p>
+                                            <p className="text-sm text-red-400/80">{errorMessage || 'Revisa los campos marcados antes de enviar el formulario.'}</p>
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
@@ -464,7 +491,7 @@ export default function Contact() {
                         <div className="h-px bg-gradient-to-r from-transparent via-slate-700/40 to-transparent mb-16" />
                         <div className="grid md:grid-cols-3 gap-12">
                             <div>
-                                <p className="text-[10px] uppercase tracking-[0.3em] text-amber-400/70 mb-4">— FAQ</p>
+                                <p className="text-[10px] uppercase tracking-[0.3em] text-lime-400/70 mb-4">— FAQ</p>
                                 <h3
                                     className="text-3xl md:text-4xl font-light text-white leading-snug"
                                     style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
@@ -496,10 +523,10 @@ export default function Contact() {
                                                 <span className="text-sm text-slate-300 group-hover:text-white transition-colors leading-relaxed">
                                                     {faq.question}
                                                 </span>
-                                                <span className="shrink-0 w-7 h-7 flex items-center justify-center border border-slate-700/60 group-hover:border-amber-400/40 transition-colors">
+                                                <span className="shrink-0 w-7 h-7 flex items-center justify-center border border-slate-700/60 group-hover:border-lime-400/40 transition-colors">
                                                     {isOpen
-                                                        ? <Minus className="w-3 h-3 text-amber-400/80" />
-                                                        : <Plus className="w-3 h-3 text-slate-500 group-hover:text-amber-400/80 transition-colors" />
+                                                        ? <Minus className="w-3 h-3 text-lime-400/80" />
+                                                        : <Plus className="w-3 h-3 text-slate-500 group-hover:text-lime-400/80 transition-colors" />
                                                     }
                                                 </span>
                                             </button>
