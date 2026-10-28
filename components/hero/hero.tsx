@@ -1,5 +1,6 @@
 'use client';
 
+import { SITE_STATS } from '@/lib/site-stats';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
@@ -358,9 +359,9 @@ export default function Hero() {
                         transition={{ delay: 2, duration: 0.6 }}
                         className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-5"
                     >
-                        <StatPill value="15+" label="Proyectos entregados" delay={2.1} />
-                        <StatPill value="98%" label="Clientes que repiten" delay={2.2} />
-                        <StatPill value="2+ años" label="Construyendo software" delay={2.3} />
+                        <StatPill value={String(SITE_STATS.projects)} label="Proyectos desarrollados" delay={2.1} />
+                        <StatPill value={String(SITE_STATS.ownProducts)} label="Productos propios" delay={2.2} />
+                        <StatPill value={`${SITE_STATS.years} años`} label="Construyendo software" delay={2.3} />
                     </motion.div>
 
                     <motion.div

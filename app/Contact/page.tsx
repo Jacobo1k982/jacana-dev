@@ -1,5 +1,6 @@
 'use client';
 
+import { SITE_STATS } from '@/lib/site-stats';
 import { useId, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -54,9 +55,9 @@ const faqs = [
 ];
 
 const stats = [
-    { value: '10+', label: 'Proyectos' },
-    { value: '98%', label: 'Satisfacción' },
-    { value: '2+', label: 'Años' },
+    { value: String(SITE_STATS.projects), label: 'Proyectos' },
+    { value: String(SITE_STATS.ownProducts), label: 'Productos propios' },
+    { value: SITE_STATS.years, label: 'Años' },
     { value: '24/7', label: 'Soporte' },
 ];
 

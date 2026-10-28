@@ -1,5 +1,6 @@
 'use client';
 
+import { SITE_STATS } from '@/lib/site-stats';
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
@@ -556,9 +557,9 @@ export default function ServiciosPage() {
                         >
                             {[
                                 { value: '7', label: 'Áreas de servicio' },
-                                { value: '15+', label: 'Proyectos entregados' },
-                                { value: '98%', label: 'Clientes satisfechos' },
-                                { value: '2+', label: 'Años de experiencia' },
+                                { value: String(SITE_STATS.projects), label: 'Proyectos desarrollados' },
+                                { value: String(SITE_STATS.ownProducts), label: 'Productos propios' },
+                                { value: SITE_STATS.years, label: 'Años de experiencia' },
                             ].map(({ value, label }) => (
                                 <div key={label} className="flex-1 px-6 py-4 text-center min-w-[100px]">
                                     <p

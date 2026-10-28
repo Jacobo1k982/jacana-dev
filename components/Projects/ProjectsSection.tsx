@@ -1,5 +1,6 @@
 'use client';
 
+import { SITE_STATS } from '@/lib/site-stats';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -20,10 +21,10 @@ export default function ProjectsSection() {
     const featuredProjects = projects.filter(p => p.featured);
 
     const statsRow = [
-        { label: 'Proyectos', value: stats.totalProjects, icon: FolderKanban },
-        { label: 'Experiencia', value: stats.yearsExperience, icon: TrendingUp },
+        { label: 'Proyectos', value: String(SITE_STATS.projects), icon: FolderKanban },
+        { label: 'Experiencia', value: SITE_STATS.years, icon: TrendingUp },
         { label: 'Fundador', value: stats.teamSize, icon: Users },
-        { label: 'Satisfacción', value: stats.satisfactionRate, icon: Award },
+        { label: 'Productos propios', value: String(SITE_STATS.ownProducts), icon: Award },
     ];
 
     return (
@@ -253,7 +254,7 @@ export default function ProjectsSection() {
                         <div className="grid grid-cols-2 gap-px bg-slate-800/40">
                             {[
                                 { label: 'Tiempo de entrega', value: '1–6 meses' },
-                                { label: 'Satisfacción', value: '98%' },
+                                { label: 'Productos propios', value: String(SITE_STATS.ownProducts) },
                                 { label: 'Soporte post-lanzamiento', value: '24/7' },
                                 { label: 'Metodología', value: 'Ágil' },
                             ].map((item, i) => (
