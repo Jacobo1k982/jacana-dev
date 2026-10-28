@@ -15,7 +15,8 @@ function MatrixRain() {
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
-        let animationId: number;
+        let animationId = 0;
+        let inView = true;
         let width = window.innerWidth;
         let height = window.innerHeight;
         const chars = 'JACANA-DEV0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>{}[]|/\\@#$%^&*';
@@ -41,17 +42,17 @@ function MatrixRain() {
                 const y = drops[i] * fontSize;
                 if (brightness > 0.95) {
                     ctx.fillStyle = '#ffffff';
-                    ctx.shadowColor = '#00ffff';
+                    ctx.shadowColor = '#a3e635';
                     ctx.shadowBlur = 20;
                 } else if (brightness > 0.7) {
-                    ctx.fillStyle = '#00ffff';
-                    ctx.shadowColor = '#00ffff';
+                    ctx.fillStyle = '#a3e635';
+                    ctx.shadowColor = '#a3e635';
                     ctx.shadowBlur = 10;
                 } else if (brightness > 0.4) {
-                    ctx.fillStyle = '#00ccff';
+                    ctx.fillStyle = '#84cc16';
                     ctx.shadowBlur = 5;
                 } else {
-                    ctx.fillStyle = 'rgba(0, 150, 255, 0.5)';
+                    ctx.fillStyle = 'rgba(132, 204, 22, 0.45)';
                     ctx.shadowBlur = 0;
                 }
                 ctx.fillText(char, x, y);
@@ -59,15 +60,34 @@ function MatrixRain() {
                 if (y > height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
-            animationId = requestAnimationFrame(draw);
+            if (inView && !document.hidden) animationId = requestAnimationFrame(draw);
         };
         resize();
         window.addEventListener('resize', resize);
         ctx.fillStyle = '#06051d';
         ctx.fillRect(0, 0, width, height);
+
+        // Respeta "reducir movimiento": dibuja un solo cuadro estático
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion) {
+            inView = false; // evita que draw() agende más cuadros
+            for (let k = 0; k < 40; k++) draw();
+            return () => window.removeEventListener('resize', resize);
+        }
+
+        // Pausa la animación cuando el hero no se ve o la pestaña está oculta
+        const start = () => {
+            cancelAnimationFrame(animationId);
+            if (inView && !document.hidden) animationId = requestAnimationFrame(draw);
+        };
+        const observer = new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; start(); });
+        observer.observe(canvas);
+        document.addEventListener('visibilitychange', start);
         draw();
         return () => {
             window.removeEventListener('resize', resize);
+            document.removeEventListener('visibilitychange', start);
+            observer.disconnect();
             cancelAnimationFrame(animationId);
         };
     }, []);
@@ -177,7 +197,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative flex items-center overflow-hidden h-screen min-h-[700px]">
+        <section ref={sectionRef} className="relative flex items-center overflow-hidden min-h-[100svh] md:h-screen md:min-h-[700px] pb-24 md:pb-0">
 
             <motion.div className="absolute inset-0 z-0" style={{ y: matrixY }}>
                 <MatrixRain />
@@ -288,7 +308,7 @@ export default function Hero() {
                                     <UserMenu onLogout={handleLogout} />
                                     {/* 1. Acción principal de negocio */}
                                     <Link
-                                        href="/servicios"
+                                        href="/Contact"
                                         className="group flex items-center gap-2.5 px-6 py-3 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                     >
                                         Cotiza tu proyecto
@@ -300,7 +320,7 @@ export default function Hero() {
                                     {/* 1. Acción principal: la que mueve la aguja del negocio */}
                                     <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
                                         <Link
-                                            href="/servicios"
+                                            href="/Contact"
                                             className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                         >
                                             Cotiza tu proyecto
@@ -326,7 +346,7 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 12 }}
                         transition={{ delay: 2, duration: 0.6 }}
-                        className="mt-14 flex items-center gap-8"
+                        className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-5"
                     >
                         <StatPill value="15+" label="Proyectos entregados" delay={2.1} />
                         <StatPill value="98%" label="Clientes que repiten" delay={2.2} />
