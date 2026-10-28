@@ -9,6 +9,7 @@ import TeamCard from './TeamCard';
 import ValueCard from './ValueCard';
 import StatsCounter from './StatsCounter';
 import aboutData from '@/data/about.json';
+import { SITE_STATS } from '@/lib/site-stats';
 
 // ─────────────────────────────────────────────
 // CONSTANTS
@@ -54,7 +55,13 @@ function SectionHeader({ title, subtitle, center = false }: { title: React.React
 // ─────────────────────────────────────────────
 
 export default function AboutSection() {
-    const { company, values, stats, team, timeline, process } = aboutData;
+    const { company, values, stats: aboutStats, team, timeline, process } = aboutData;
+    // Las cifras de proyectos y productos salen del portafolio (única fuente de verdad)
+    const stats = aboutStats.map((s) =>
+        s.id === 'projects' ? { ...s, value: SITE_STATS.projects }
+        : s.id === 'products' ? { ...s, value: SITE_STATS.ownProducts }
+        : s
+    );
 
     return (
         <section className="relative py-24 md:py-36 bg-[#080810] overflow-hidden">
@@ -88,7 +95,7 @@ export default function AboutSection() {
                             className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.05] tracking-tight"
                             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                         >
-                            El equipo detrás de<br />
+                            La persona detrás de<br />
                             <em className="text-slate-400 not-italic">{company.name}</em>
                         </h2>
                         <div className="space-y-3 md:text-right">

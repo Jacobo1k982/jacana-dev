@@ -1,7 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Linkedin, Github, Twitter, Dribbble, Facebook } from 'lucide-react';
+import SocialIcon from '@/components/SocialIcon';
+import { SOCIALS } from '@/lib/socials';
 
 // ─────────────────────────────────────────────
 // TYPES
@@ -41,14 +43,6 @@ const accentMap: Record<string, { text: string; border: string }> = {
     green: { text: 'text-emerald-400', border: 'border-emerald-400/30' },
     pink: { text: 'text-rose-400', border: 'border-rose-400/30' },
     orange: { text: 'text-orange-400', border: 'border-orange-400/30' },
-};
-
-const socialIcons = {
-    linkedin: Linkedin,
-    github: Github,
-    twitter: Twitter,
-    dribbble: Dribbble,
-    facebook: Facebook,
 };
 
 // ─────────────────────────────────────────────
@@ -121,31 +115,28 @@ export default function TeamCard({ member, index }: TeamCardProps) {
             {/* ── SOCIALS + CTA ── */}
             <div className="px-6 py-4 flex items-center justify-between mt-auto">
                 <div className="flex items-center gap-2">
-                    {Object.entries(member.socials).map(([platform, url]) => {
-                        const Icon = socialIcons[platform as keyof typeof socialIcons];
-                        if (!Icon || !url) return null;
-                        return (
-                            <motion.a
-                                key={platform}
-                                href={url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                whileHover={{ y: -2 }}
-                                className="w-8 h-8 flex items-center justify-center border border-slate-800/60 hover:border-lime-400/40 text-slate-600 hover:text-slate-300 transition-all"
-                            >
-                                <Icon className="w-3.5 h-3.5" />
-                            </motion.a>
-                        );
-                    })}
+                    {SOCIALS.map((s) => (
+                        <motion.a
+                            key={s.key}
+                            href={s.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${s.label}: ${s.handle}`}
+                            title={`${s.label} · ${s.handle}`}
+                            whileHover={{ y: -2 }}
+                            className="w-8 h-8 flex items-center justify-center border border-slate-800/60 hover:border-lime-400/40 text-slate-600 hover:text-slate-300 transition-all"
+                        >
+                            <SocialIcon name={s.key} className="w-3.5 h-3.5" />
+                        </motion.a>
+                    ))}
                 </div>
 
-                <motion.button
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
+                <Link
+                    href="/Contact"
                     className={`text-xs font-medium uppercase tracking-[0.1em] ${accent.text} hover:opacity-70 transition-opacity`}
                 >
-                    Ver perfil →
-                </motion.button>
+                    Hablemos →
+                </Link>
             </div>
         </motion.article>
     );

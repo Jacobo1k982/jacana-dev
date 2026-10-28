@@ -3,7 +3,7 @@
         "name": "Jacana Dev",
         "tagline": "Fullstack Studio",
         "founded": 2024,
-        "description": "Somos un equipo apasionado de desarrolladores, diseñadores y estrategas tecnológicos comprometidos con crear soluciones digitales excepcionales. Combinamos creatividad, innovación técnica y metodologías ágiles para transformar ideas en productos digitales de alto impacto.",
+        "description": "Jacana Dev es un estudio de desarrollo fullstack fundado en 2024 en Costa Rica. Combinamos criterio técnico, diseño cuidado y metodologías ágiles para transformar ideas en productos digitales de alto impacto, con un único interlocutor de principio a fin.",
         "mission": "Impulsar la transformación digital de empresas y emprendedores a través de soluciones tecnológicas innovadoras, escalables y centradas en el usuario.",
         "vision": "Ser el socio tecnológico de referencia para empresas que buscan excelencia digital, reconocidos por nuestra calidad técnica, creatividad y compromiso con el éxito de nuestros clientes.",
         "location": "San Pedro, Montes de Oca, Costa Rica",
@@ -57,17 +57,17 @@
     "stats": [
         {
             "id": "projects",
-            "value": 10,
-            "suffix": "+",
-            "label": "Proyectos Completados",
-            "description": "Soluciones entregadas exitosamente"
+            "value": 11,
+            "suffix": "",
+            "label": "Proyectos Desarrollados",
+            "description": "Web, móvil y sistemas de punto de venta"
         },
         {
-            "id": "clients",
-            "value": 10,
-            "suffix": "+",
-            "label": "Clientes Satisfechos",
-            "description": "Empresas y emprendedores"
+            "id": "products",
+            "value": 6,
+            "suffix": "",
+            "label": "Productos Propios",
+            "description": "Software que diseñamos y operamos"
         },
         {
             "id": "years",
@@ -92,17 +92,13 @@
             "specialty": "Arquitectura de Software",
             "bio": "Apasionado por crear soluciones tecnológicas que transformen negocios. +2 años de experiencia en desarrollo fullstack y liderazgo técnico.",
             "avatar": "/team/juan-carlos.jpg",
-            "socials": {
-                "linkedin": "https://linkedin.com/in/",
-                "github": "https://github.com/",
-                "twitter": "https://twitter.com/",
-                "facebook": "https://facebook.com/"
-            },
+            "socials": {},
             "skills": [
                 "React",
-                "Node.js",
-                "AWS",
-                "System Design"
+                "Next.js",
+                "NestJS",
+                "PostgreSQL",
+                "Docker"
             ],
             "color": "cyan"
         }
@@ -159,14 +155,14 @@
         {
             "step": 4,
             "title": "QA & Testing",
-            "description": "Validamos calidad con tests automatizados y manuales.",
+            "description": "Revisamos y probamos cada entrega antes de publicarla.",
             "icon": "CheckCircle",
             "duration": "Continuo"
         },
         {
             "step": 5,
             "title": "Deployment",
-            "description": "Desplegamos en producción con zero-downtime.",
+            "description": "Desplegamos en producción con CI/CD automatizado (GitHub Actions y Docker).",
             "icon": "Rocket",
             "duration": "1-2 días"
         },
