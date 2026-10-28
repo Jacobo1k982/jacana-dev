@@ -214,7 +214,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative border border-slate-800/70 bg-[#131923]/70 backdrop-blur-sm overflow-hidden flex flex-col"
+            className="group relative border border-slate-800/70 bg-[#131923]/70 backdrop-blur-sm overflow-hidden flex flex-col cursor-pointer transition-colors hover:border-slate-600/80 focus-within:border-lime-400/50"
         >
             {/* Accent line top */}
             <motion.div
@@ -271,7 +271,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
                                     fontSize: 'clamp(1.25rem, 2.5vw, 1.6rem)',
                                 }}
                             >
-                                <Link href={service.href} className="hover:text-white/80 transition-colors">
+                                <Link href={service.href} className="hover:text-white transition-colors after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
                                     {service.title}
                                 </Link>
                             </h3>
@@ -336,7 +336,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
                 <div className="mt-auto">
                     <button
                         onClick={() => setOpen(!open)}
-                        className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-600 hover:text-slate-400 transition-colors"
+                        className="relative z-10 flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-slate-500 hover:text-slate-300 transition-colors"
                     >
                         <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.28 }}>
                             <ChevronDown className="w-3.5 h-3.5" />
@@ -376,7 +376,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
 
                     <Link
                         href={service.href}
-                        className="mt-5 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] transition-opacity hover:opacity-80"
+                        className="relative z-10 mt-5 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] transition-opacity hover:opacity-80"
                         style={{ color: service.accent }}
                     >
                         Ver servicio completo

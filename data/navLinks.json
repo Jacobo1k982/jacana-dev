@@ -7,7 +7,7 @@
     },
     {
         "label": "Servicios",
-        "href": "#services",
+        "href": "/servicios",
         "icon": "Layers",
         "description": "Nuestros servicios de desarrollo",
         "submenu": [
