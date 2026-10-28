@@ -676,7 +676,7 @@ export default function ServiciosPage() {
                                         <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                                     </Link>
                                     <Link
-                                        href="/"
+                                        href="/projects"
                                         className="inline-flex items-center gap-2 px-6 py-4 border border-slate-700/60 hover:border-lime-400/30 text-slate-500 hover:text-slate-300 text-xs font-medium uppercase tracking-[0.15em] transition-all"
                                     >
                                         <ArrowLeft className="w-3.5 h-3.5" />
