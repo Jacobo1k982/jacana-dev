@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, DM_Mono, Zen_Dots, Syncopate } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
+import Footer from '@/components/Footer/Footer';
 import { SessionProvider } from 'next-auth/react';
 import { auth } from '@/auth';
 
@@ -113,6 +114,7 @@ export default async function RootLayout({
       <body className={`${cormorant.variable} ${dmMono.variable} ${zenDots.variable} ${syncopate.variable} antialiased bg-background text-foreground min-h-screen`}>
         <SessionProvider session={session}>
           {children}
+          <Footer />
           <Toaster />
         </SessionProvider>
       </body>
