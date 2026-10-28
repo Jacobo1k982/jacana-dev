@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import NextImage from 'next/image';
 import { useSession, signOut } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -122,9 +123,12 @@ export default function Navbar() {
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
                         >
-                            <img
+                            <NextImage
                                 src="/Logo-dev.png"
                                 alt="Jacana Dev"
+                                width={40}
+                                height={40}
+                                priority
                                 className="w-10 h-10 md:w-9 md:h-9 object-contain"
                             />
                         </motion.a>
@@ -330,7 +334,7 @@ export default function Navbar() {
 
                             {/* ── Header ── */}
                             <div className="flex-shrink-0 flex items-center justify-between px-5 h-16 border-b border-white/[0.06]">
-                                <img src="/Logo-dev.png" alt="Jacana Dev" className="w-9 h-9 object-contain" />
+                                <NextImage src="/Logo-dev.png" alt="Jacana Dev" width={36} height={36} className="w-9 h-9 object-contain" />
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
                                     className="w-9 h-9 flex items-center justify-center border border-white/10 hover:border-lime-400/30 text-slate-500 hover:text-white transition-all"

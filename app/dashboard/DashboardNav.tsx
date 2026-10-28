@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import NextImage from 'next/image'
 import { signOut } from 'next-auth/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LayoutDashboard, User, FolderKanban, Settings, LogOut, ChevronDown, Crown, Shield } from 'lucide-react'
@@ -41,7 +42,7 @@ export default function DashboardNav({ user }: DashboardNavProps) {
 
                     <div className="flex items-center gap-8">
                         <a href="/" className="flex items-center gap-2 shrink-0">
-                            <img src="/Logo-dev.png" alt="Jacana Dev" className="w-8 h-8 object-contain" />
+                            <NextImage src="/Logo-dev.png" alt="Jacana Dev" width={32} height={32} priority className="w-8 h-8 object-contain" />
                             <div className="h-4 w-px bg-slate-700/60" />
                             <span className="text-[10px] uppercase tracking-[0.25em] text-slate-500">Dashboard</span>
                         </a>

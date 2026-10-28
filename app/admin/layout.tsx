@@ -1,6 +1,7 @@
 // app/admin/layout.tsx
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
+import NextImage from "next/image"
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
     const session = await auth()
@@ -13,7 +14,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-8">
                             <a href="/" className="flex items-center gap-2 shrink-0">
-                                <img src="/Logo-dev.png" alt="Jacana Dev" className="w-8 h-8 object-contain" />
+                                <NextImage src="/Logo-dev.png" alt="Jacana Dev" width={32} height={32} priority className="w-8 h-8 object-contain" />
                                 <div className="h-4 w-px bg-slate-700/60" />
                                 <span className="text-[10px] uppercase tracking-[0.25em] text-lime-400/60">Admin</span>
                             </a>
