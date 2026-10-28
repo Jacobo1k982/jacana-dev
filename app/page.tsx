@@ -9,7 +9,8 @@ import type { Metadata } from 'next';
 // ─────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: 'Inicio',
+  // absolute: evita el sufijo de la plantilla; la pestaña del navegador muestra solo este título
+  title: { absolute: 'Jacana Developers | Desarrollo de Software a la Medida' },
   description: 'Estudio de desarrollo fullstack especializado en experiencias digitales de alto rendimiento. Web, móvil, cloud, IA y consultoría técnica.',
   alternates: { canonical: '/' },
 };
