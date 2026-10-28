@@ -1,5 +1,6 @@
 'use client';
 
+import { SITE_STATS } from '@/lib/site-stats';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -17,7 +18,6 @@ const serviceData = {
     title: 'Desarrollo Backend',
     subtitle: 'Arquitecturas Robustas & APIs Escalables',
     description: 'Construimos el corazón de tu aplicación. Diseñamos arquitecturas backend sólidas, seguras y de alto rendimiento que escalan con tu negocio.',
-    stats: { projects: 38, satisfaction: 97, uptime: 99.9 },
     features: [
         { icon: ArrowRightLeft, title: 'APIs REST & GraphQL', desc: 'Interfaces robustas y documentadas', detail: 'Diseñamos APIs siguiendo mejores prácticas de la industria, con documentación automática, versionado y rate limiting inteligente.' },
         { icon: Network, title: 'Microservicios', desc: 'Arquitectura distribuida y escalable', detail: 'Descomponemos monolitos en servicios independientes con comunicación eficiente via message brokers y service mesh.' },
@@ -46,23 +46,12 @@ const serviceData = {
         { step: '03', title: 'Desarrollo', desc: 'APIs, autenticación y lógica de negocio' },
         { step: '04', title: 'DevOps', desc: 'CI/CD, monitoreo y escalado automático' },
     ],
-    testimonials: [
-        { name: 'Roberto Méndez', role: 'CTO @ FinTech Corp', text: 'Nuestra API pasó de soportar 1K a 100K requests/segundo sin modificar una línea de código. Impresionante.' },
-        { name: 'Ana Torres', role: 'Lead Developer @ SaaS', text: 'La arquitectura de microservicios redujo nuestros costos de infraestructura en un 60%. ROI excepcional.' },
-    ],
-    funFacts: [
-        { number: '<50ms', label: 'Latencia promedio' },
-        { number: '100K+', label: 'Requests/segundo' },
-        { number: '99.99%', label: 'Uptime SLA' },
-        { number: '0', label: 'Vulnerabilidades' },
-    ],
 };
 
 const tabs = [
     { id: 'features', label: 'Características', icon: Cpu },
     { id: 'technologies', label: 'Tecnologías', icon: Terminal },
     { id: 'process', label: 'Proceso', icon: Settings },
-    { id: 'testimonials', label: 'Testimonios', icon: Users },
 ];
 
 // ─────────────────────────────────────────────
@@ -157,28 +146,6 @@ function TabContent({ activeTab }: { activeTab: string }) {
                 ))}
             </div>
         ),
-        testimonials: (
-            <div className="space-y-0 border border-slate-800/60">
-                {serviceData.testimonials.map((t, i) => (
-                    <motion.div key={t.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
-                        className="px-6 py-5 border-b border-slate-800/60 last:border-b-0"
-                    >
-                        <div className="border-l-2 border-lime-400/30 pl-4">
-                            <p className="text-xs text-slate-400 italic leading-relaxed mb-3">"{t.text}"</p>
-                            <div className="flex items-center gap-2">
-                                <div className="w-6 h-6 flex items-center justify-center border border-emerald-400/30 text-[8px] text-emerald-400/80">
-                                    {t.name.split(' ').map(n => n[0]).join('')}
-                                </div>
-                                <div>
-                                    <p className="text-[10px] text-white font-medium leading-none">{t.name}</p>
-                                    <p className="text-[9px] text-slate-600 mt-0.5">{t.role}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
-        ),
     };
 
     return (
@@ -245,9 +212,9 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                 {/* Stats */}
                                 <div className="grid grid-cols-3 gap-px bg-slate-800/40">
                                     {[
-                                        { label: 'Proyectos', value: `${serviceData.stats.projects}+` },
-                                        { label: 'Satisfacción', value: `${serviceData.stats.satisfaction}%` },
-                                        { label: 'Uptime', value: `${serviceData.stats.uptime}%` },
+                                        { label: 'Proyectos', value: `${SITE_STATS.projects}` },
+                                        { label: 'Productos propios', value: `${SITE_STATS.ownProducts}` },
+                                        { label: 'Años', value: `${SITE_STATS.years}` },
                                     ].map(s => (
                                         <div key={s.label} className="bg-[#080810] px-3 py-4 text-center">
                                             <p className="text-2xl font-light text-emerald-400/80 leading-none mb-1"
@@ -256,21 +223,6 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                             <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600">{s.label}</p>
                                         </div>
                                     ))}
-                                </div>
-
-                                {/* Fun facts */}
-                                <div>
-                                    <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Métricas clave</p>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-800/30">
-                                        {serviceData.funFacts.map(f => (
-                                            <div key={f.label} className="bg-[#080810] px-4 py-4 text-center">
-                                                <p className="text-xl font-light text-white leading-none mb-1"
-                                                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                                                >{f.number}</p>
-                                                <p className="text-[9px] uppercase tracking-[0.15em] text-slate-600">{f.label}</p>
-                                            </div>
-                                        ))}
-                                    </div>
                                 </div>
 
                                 {/* Benefits */}
@@ -388,9 +340,9 @@ function MainCard({ onClick }: { onClick: () => void }) {
 
                 <div className="grid grid-cols-3 gap-px bg-slate-800/40">
                     {[
-                        { value: `${serviceData.stats.projects}+`, label: 'Proyectos' },
-                        { value: `${serviceData.stats.satisfaction}%`, label: 'Satisfacción' },
-                        { value: `${serviceData.stats.uptime}%`, label: 'Uptime' },
+                        { value: `${SITE_STATS.projects}`, label: 'Proyectos' },
+                        { value: `${SITE_STATS.ownProducts}`, label: 'Productos propios' },
+                        { value: `${SITE_STATS.years}`, label: 'Años' },
                     ].map(s => (
                         <div key={s.label} className="bg-[#080810] px-3 py-4 text-center group-hover:bg-slate-900/40 transition-colors">
                             <p className="text-2xl font-light text-emerald-400/80 leading-none mb-1"

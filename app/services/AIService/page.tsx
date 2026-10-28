@@ -1,5 +1,6 @@
 'use client';
 
+import { SITE_STATS } from '@/lib/site-stats';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -21,7 +22,6 @@ const serviceData = {
     subtitle: 'Soluciones de IA que Transforman Negocios',
     description: 'Implementamos inteligencia artificial que genera valor real. Desde chatbots hasta sistemas de visión por computadora, creamos soluciones de IA que automatizan, predicen y optimizan.',
     icon: Brain,
-    stats: { projects: 18, satisfaction: 100, models: 50 },
     features: [
         { icon: Bot, title: 'Chatbots & Asistentes', desc: 'LLMs, GPT, Claude, Llama', detail: 'Desarrollamos asistentes inteligentes con memoria contextual, integración con bases de conocimiento y respuestas personalizadas usando RAG y fine-tuning.' },
         { icon: Eye, title: 'Computer Vision', desc: 'Reconocimiento de imágenes y video', detail: 'Sistemas de detección de objetos, clasificación de imágenes, OCR y análisis de video en tiempo real con modelos como YOLO, ResNet y Vision Transformers.' },
@@ -49,16 +49,6 @@ const serviceData = {
         { step: '02', title: 'Prototipado', desc: 'POC rápido con modelos pre-entrenados' },
         { step: '03', title: 'Desarrollo', desc: 'Fine-tuning, integración y optimización' },
         { step: '04', title: 'Despliegue', desc: 'MLOps, monitoreo y escalado' },
-    ],
-    funFacts: [
-        { number: '<100ms', label: 'Latencia de respuesta' },
-        { number: '99.7%', label: 'Precisión en NLP' },
-        { number: '50+', label: 'Modelos desplegados' },
-        { number: '24/7', label: 'Disponibilidad' },
-    ],
-    testimonials: [
-        { name: 'Patricia Luna', role: 'CEO @ HealthTech AI', text: 'El chatbot médico que desarrollaron redujo las consultas básicas en un 70%. La precisión del diagnóstico asistido es impresionante.' },
-        { name: 'Miguel Sandoval', role: 'Director de Innovación @ Retail', text: 'El sistema de recomendaciones aumentó nuestras ventas un 35%. La IA entiende mejor a nuestros clientes que nosotros.' },
     ],
 };
 
@@ -124,7 +114,6 @@ const tabs = [
     { id: 'features', label: 'Características', icon: Sparkles },
     { id: 'technologies', label: 'Tecnologías', icon: Cpu },
     { id: 'process', label: 'Proceso', icon: Wand2 },
-    { id: 'testimonials', label: 'Testimonios', icon: Users },
 ];
 
 function TabContent({ activeTab }: { activeTab: string }) {
@@ -192,32 +181,6 @@ function TabContent({ activeTab }: { activeTab: string }) {
             </div>
         ),
 
-        testimonials: (
-            <div className="space-y-0 border border-slate-800/60">
-                {serviceData.testimonials.map((t, i) => (
-                    <motion.div
-                        key={t.name}
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.07 }}
-                        className="px-6 py-5 border-b border-slate-800/60 last:border-b-0"
-                    >
-                        <div className="border-l-2 border-lime-400/30 pl-4">
-                            <p className="text-xs text-slate-400 italic leading-relaxed mb-3">"{t.text}"</p>
-                            <div className="flex items-center gap-2">
-                                <div className="w-6 h-6 flex items-center justify-center border border-rose-400/30 text-[8px] text-rose-400/80">
-                                    {t.name.split(' ').map(n => n[0]).join('')}
-                                </div>
-                                <div>
-                                    <p className="text-[10px] text-white font-medium leading-none">{t.name}</p>
-                                    <p className="text-[9px] text-slate-600 mt-0.5">{t.role}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
-        ),
     };
 
     return (
@@ -314,9 +277,9 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                 {/* Stats */}
                                 <div className="grid grid-cols-3 gap-px bg-slate-800/40">
                                     {[
-                                        { label: 'Proyectos', value: `${serviceData.stats.projects}+`, icon: Database },
-                                        { label: 'Satisfacción', value: `${serviceData.stats.satisfaction}%`, icon: TrendingUp },
-                                        { label: 'Modelos', value: `${serviceData.stats.models}+`, icon: Cpu },
+                                        { label: 'Proyectos', value: `${SITE_STATS.projects}`, icon: Database },
+                                        { label: 'Productos propios', value: `${SITE_STATS.ownProducts}`, icon: TrendingUp },
+                                        { label: 'Años', value: `${SITE_STATS.years}`, icon: Cpu },
                                     ].map(s => (
                                         <div key={s.label} className="bg-[#080810] px-4 py-5 text-center">
                                             <p
@@ -328,24 +291,6 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                             <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600">{s.label}</p>
                                         </div>
                                     ))}
-                                </div>
-
-                                {/* Fun facts */}
-                                <div>
-                                    <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Métricas clave</p>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-800/30">
-                                        {serviceData.funFacts.map(f => (
-                                            <div key={f.label} className="bg-[#080810] px-4 py-4 text-center">
-                                                <p
-                                                    className="text-xl font-light text-white leading-none mb-1"
-                                                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                                                >
-                                                    {f.number}
-                                                </p>
-                                                <p className="text-[9px] uppercase tracking-[0.15em] text-slate-600">{f.label}</p>
-                                            </div>
-                                        ))}
-                                    </div>
                                 </div>
 
                                 {/* Benefits */}
@@ -508,9 +453,9 @@ function MainCard({ onClick }: { onClick: () => void }) {
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-px bg-slate-800/40">
                     {[
-                        { value: `${serviceData.stats.models}+`, label: 'Modelos' },
-                        { value: `${serviceData.stats.satisfaction}%`, label: 'Satisfacción' },
-                        { value: `${serviceData.stats.projects}+`, label: 'Proyectos' },
+                        { value: `${SITE_STATS.projects}`, label: 'Proyectos' },
+                        { value: `${SITE_STATS.ownProducts}`, label: 'Productos propios' },
+                        { value: `${SITE_STATS.years}`, label: 'Años' },
                     ].map(s => (
                         <div key={s.label} className="bg-[#080810] px-3 py-4 text-center group-hover:bg-slate-900/40 transition-colors">
                             <p

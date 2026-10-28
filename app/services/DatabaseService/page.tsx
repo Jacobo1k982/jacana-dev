@@ -1,5 +1,6 @@
 'use client';
 
+import { SITE_STATS } from '@/lib/site-stats';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -18,7 +19,6 @@ const serviceData = {
     title: 'Bases de Datos',
     subtitle: 'Arquitecturas de Datos Optimizadas & Escalables',
     description: 'Diseñamos el cerebro de datos de tu aplicación. Desde esquemas relacionales hasta soluciones NoSQL distribuidas, creamos arquitecturas de datos que rinden al máximo.',
-    stats: { projects: 42, satisfaction: 98, queries: '10M+' },
     features: [
         { icon: Layers, title: 'Diseño de Esquemas', desc: 'Modelado relacional y NoSQL optimizado', detail: 'Creamos arquitecturas de datos normalizadas y desnormalizadas según las necesidades. Implementamos patrones como Table Inheritance, Adjacency List, y Materialized Paths para estructuras jerárquicas.' },
         { icon: Zap, title: 'Optimización de Queries', desc: 'Análisis profundo con EXPLAIN y optimización de índices', detail: 'Perfilamos cada consulta crítica, identificamos cuellos de botella y creamos índices estratégicos. Implementamos partitioning, covering indexes y query rewriting para máxima eficiencia.' },
@@ -48,24 +48,12 @@ const serviceData = {
         { step: '04', title: 'Optimización', desc: 'Profileamos queries y ajustamos configuraciones' },
         { step: '05', title: 'Monitoreo', desc: 'Dashboards, alertas y mantenimiento continuo' },
     ],
-    testimonials: [
-        { name: 'Carlos Mendoza', role: 'CTO @ DataFlow Inc.', text: 'Reducieron los tiempos de query de 3 segundos a 50ms. Increíble transformación en nuestra infraestructura.' },
-        { name: 'Ana García', role: 'Lead Engineer @ FintechApp', text: 'Migraron 5TB de datos sin un solo minuto de downtime. Profesionales excepcionales y metodología impecable.' },
-        { name: 'Roberto Silva', role: 'Data Architect @ BigData', text: 'La arquitectura de sharding que diseñaron escala perfectamente con nuestro crecimiento exponencial.' },
-    ],
-    funFacts: [
-        { number: '50M+', label: 'Queries/día' },
-        { number: '99.99%', label: 'Uptime' },
-        { number: '<10ms', label: 'Latencia' },
-        { number: '100x', label: 'Más rápido' },
-    ],
 };
 
 const tabs = [
     { id: 'features', label: 'Características', icon: Layers },
     { id: 'technologies', label: 'Tecnologías', icon: Code2 },
     { id: 'process', label: 'Proceso', icon: GitBranch },
-    { id: 'testimonials', label: 'Testimonios', icon: Users },
 ];
 
 // ─────────────────────────────────────────────
@@ -156,28 +144,6 @@ function TabContent({ activeTab }: { activeTab: string }) {
                 ))}
             </div>
         ),
-        testimonials: (
-            <div className="space-y-0 border border-slate-800/60">
-                {serviceData.testimonials.map((t, i) => (
-                    <motion.div key={t.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
-                        className="px-6 py-5 border-b border-slate-800/60 last:border-b-0"
-                    >
-                        <div className="border-l-2 border-lime-400/30 pl-4">
-                            <p className="text-xs text-slate-400 italic leading-relaxed mb-3">"{t.text}"</p>
-                            <div className="flex items-center gap-2">
-                                <div className="w-6 h-6 flex items-center justify-center border border-lime-400/30 text-[8px] text-lime-400/80">
-                                    {t.name.split(' ').map(n => n[0]).join('')}
-                                </div>
-                                <div>
-                                    <p className="text-[10px] text-white font-medium leading-none">{t.name}</p>
-                                    <p className="text-[9px] text-slate-600 mt-0.5">{t.role}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
-        ),
     };
     return (
         <AnimatePresence mode="wait">
@@ -242,9 +208,9 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                 {/* Stats */}
                                 <div className="grid grid-cols-3 gap-px bg-slate-800/40">
                                     {[
-                                        { label: 'Proyectos', value: `${serviceData.stats.projects}+` },
-                                        { label: 'Satisfacción', value: `${serviceData.stats.satisfaction}%` },
-                                        { label: 'Queries/día', value: serviceData.stats.queries },
+                                        { label: 'Proyectos', value: `${SITE_STATS.projects}` },
+                                        { label: 'Productos propios', value: `${SITE_STATS.ownProducts}` },
+                                        { label: 'Años', value: `${SITE_STATS.years}` },
                                     ].map(s => (
                                         <div key={s.label} className="bg-[#080810] px-3 py-4 text-center">
                                             <p className="text-2xl font-light text-lime-400/80 leading-none mb-1"
@@ -253,21 +219,6 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                             <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600">{s.label}</p>
                                         </div>
                                     ))}
-                                </div>
-
-                                {/* Fun facts */}
-                                <div>
-                                    <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Métricas clave</p>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-800/30">
-                                        {serviceData.funFacts.map(f => (
-                                            <div key={f.label} className="bg-[#080810] px-4 py-4 text-center">
-                                                <p className="text-xl font-light text-white leading-none mb-1"
-                                                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                                                >{f.number}</p>
-                                                <p className="text-[9px] uppercase tracking-[0.15em] text-slate-600">{f.label}</p>
-                                            </div>
-                                        ))}
-                                    </div>
                                 </div>
 
                                 {/* Benefits */}
@@ -385,9 +336,9 @@ function MainCard({ onClick }: { onClick: () => void }) {
 
                 <div className="grid grid-cols-3 gap-px bg-slate-800/40">
                     {[
-                        { value: `${serviceData.stats.projects}+`, label: 'Proyectos' },
-                        { value: `${serviceData.stats.satisfaction}%`, label: 'Satisfacción' },
-                        { value: serviceData.stats.queries, label: 'Queries/día' },
+                        { value: `${SITE_STATS.projects}`, label: 'Proyectos' },
+                        { value: `${SITE_STATS.ownProducts}`, label: 'Productos propios' },
+                        { value: `${SITE_STATS.years}`, label: 'Años' },
                     ].map(s => (
                         <div key={s.label} className="bg-[#080810] px-3 py-4 text-center group-hover:bg-slate-900/40 transition-colors">
                             <p className="text-2xl font-light text-lime-400/80 leading-none mb-1"

@@ -1,5 +1,6 @@
 'use client';
 
+import { SITE_STATS } from '@/lib/site-stats';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -17,7 +18,6 @@ const serviceData = {
     title: 'Cloud & DevOps',
     subtitle: 'Infraestructura Escalable & Despliegues Automatizados',
     description: 'Transformamos tu infraestructura en una máquina bien aceitada. Diseñamos arquitecturas cloud que escalan automáticamente y pipelines CI/CD que llevan tu código a producción en minutos.',
-    stats: { projects: 28, satisfaction: 99, uptime: 99.99 },
     features: [
         { icon: Server, title: 'Infrastructure as Code', desc: 'Terraform, CloudFormation, Pulumi', detail: 'Automatizamos toda la infraestructura como código. Versionamos, revisamos y desplegamos cambios con los mismos procesos que el código de aplicación.' },
         { icon: GitBranch, title: 'CI/CD Pipelines', desc: 'GitHub Actions, GitLab CI, Jenkins', detail: 'Implementamos pipelines que reducen el tiempo de release de días a minutos, con tests automáticos y despliegues zero-downtime.' },
@@ -47,24 +47,12 @@ const serviceData = {
         { step: '04', title: 'CI/CD', desc: 'Pipelines de despliegue automatizado' },
         { step: '05', title: 'Monitoreo', desc: 'Observabilidad y alertas configuradas' },
     ],
-    testimonials: [
-        { name: 'Roberto Chen', role: 'CTO @ ScaleUp', text: 'Reducieron nuestros costos cloud en 40% mientras mejorábamos la disponibilidad a 99.99%. Increíble trabajo.' },
-        { name: 'Sofia Martinez', role: 'DevOps Lead @ FinTech', text: 'El pipeline CI/CD que implementaron reduce nuestro tiempo de release de 2 días a 15 minutos.' },
-        { name: 'Diego Lopez', role: 'SRE @ E-commerce', text: 'La arquitectura multi-región sobrevivió un outage completo de una región sin que los usuarios notaran.' },
-    ],
-    funFacts: [
-        { number: '99.99%', label: 'Uptime SLA' },
-        { number: '15min', label: 'Deploy time' },
-        { number: '40%', label: 'Cost reduction' },
-        { number: '100+', label: 'Clusters K8s' },
-    ],
 };
 
 const tabs = [
     { id: 'features', label: 'Características', icon: Sparkles },
     { id: 'technologies', label: 'Plataformas', icon: Server },
     { id: 'process', label: 'Proceso', icon: Rocket },
-    { id: 'testimonials', label: 'Testimonios', icon: Users },
 ];
 
 // ─────────────────────────────────────────────
@@ -155,28 +143,6 @@ function TabContent({ activeTab }: { activeTab: string }) {
                 ))}
             </div>
         ),
-        testimonials: (
-            <div className="space-y-0 border border-slate-800/60">
-                {serviceData.testimonials.map((t, i) => (
-                    <motion.div key={t.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
-                        className="px-6 py-5 border-b border-slate-800/60 last:border-b-0"
-                    >
-                        <div className="border-l-2 border-lime-400/30 pl-4">
-                            <p className="text-xs text-slate-400 italic leading-relaxed mb-3">"{t.text}"</p>
-                            <div className="flex items-center gap-2">
-                                <div className="w-6 h-6 flex items-center justify-center border border-sky-400/30 text-[8px] text-sky-400/80">
-                                    {t.name.split(' ').map(n => n[0]).join('')}
-                                </div>
-                                <div>
-                                    <p className="text-[10px] text-white font-medium leading-none">{t.name}</p>
-                                    <p className="text-[9px] text-slate-600 mt-0.5">{t.role}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
-        ),
     };
 
     return (
@@ -243,9 +209,9 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                 {/* Stats */}
                                 <div className="grid grid-cols-3 gap-px bg-slate-800/40">
                                     {[
-                                        { label: 'Proyectos', value: `${serviceData.stats.projects}+` },
-                                        { label: 'Satisfacción', value: `${serviceData.stats.satisfaction}%` },
-                                        { label: 'Uptime', value: `${serviceData.stats.uptime}%` },
+                                        { label: 'Proyectos', value: `${SITE_STATS.projects}` },
+                                        { label: 'Productos propios', value: `${SITE_STATS.ownProducts}` },
+                                        { label: 'Años', value: `${SITE_STATS.years}` },
                                     ].map(s => (
                                         <div key={s.label} className="bg-[#080810] px-3 py-4 text-center">
                                             <p className="text-2xl font-light text-sky-400/80 leading-none mb-1"
@@ -254,21 +220,6 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                             <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600">{s.label}</p>
                                         </div>
                                     ))}
-                                </div>
-
-                                {/* Fun facts */}
-                                <div>
-                                    <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Métricas clave</p>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-800/30">
-                                        {serviceData.funFacts.map(f => (
-                                            <div key={f.label} className="bg-[#080810] px-4 py-4 text-center">
-                                                <p className="text-xl font-light text-white leading-none mb-1"
-                                                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                                                >{f.number}</p>
-                                                <p className="text-[9px] uppercase tracking-[0.15em] text-slate-600">{f.label}</p>
-                                            </div>
-                                        ))}
-                                    </div>
                                 </div>
 
                                 {/* Benefits */}
@@ -386,9 +337,9 @@ function MainCard({ onClick }: { onClick: () => void }) {
 
                 <div className="grid grid-cols-3 gap-px bg-slate-800/40">
                     {[
-                        { value: `${serviceData.stats.projects}+`, label: 'Proyectos' },
-                        { value: `${serviceData.stats.satisfaction}%`, label: 'Satisfacción' },
-                        { value: `${serviceData.stats.uptime}%`, label: 'Uptime' },
+                        { value: `${SITE_STATS.projects}`, label: 'Proyectos' },
+                        { value: `${SITE_STATS.ownProducts}`, label: 'Productos propios' },
+                        { value: `${SITE_STATS.years}`, label: 'Años' },
                     ].map(s => (
                         <div key={s.label} className="bg-[#080810] px-3 py-4 text-center group-hover:bg-slate-900/40 transition-colors">
                             <p className="text-2xl font-light text-sky-400/80 leading-none mb-1"

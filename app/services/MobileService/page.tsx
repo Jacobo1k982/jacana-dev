@@ -1,5 +1,6 @@
 'use client';
 
+import { SITE_STATS } from '@/lib/site-stats';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -17,7 +18,6 @@ const serviceData = {
     title: 'Aplicaciones Móviles',
     subtitle: 'Apps Nativas & Multiplataforma de Alto Rendimiento',
     description: 'Creamos aplicaciones móviles que los usuarios aman. Desde conceptos innovadores hasta productos pulidos, desarrollamos experiencias móviles que destacan en las tiendas de aplicaciones.',
-    stats: { projects: 32, satisfaction: 96, downloads: '2M+' },
     features: [
         { icon: Smartphone, title: 'Apps Nativas', desc: 'Swift para iOS, Kotlin para Android', detail: 'Desarrollamos aplicaciones nativas que aprovechan al máximo las capacidades de cada plataforma, garantizando rendimiento óptimo y experiencia de usuario excepcional.' },
         { icon: Cpu, title: 'Cross-platform', desc: 'React Native y Flutter', detail: 'Una sola base de código para iOS y Android. Reducción de costos y tiempo de desarrollo manteniendo la calidad nativa.' },
@@ -46,23 +46,12 @@ const serviceData = {
         { step: '03', title: 'Desarrollo', desc: 'Sprints ágiles con entregas continuas' },
         { step: '04', title: 'Launch', desc: 'Publicación en App Store y Google Play' },
     ],
-    testimonials: [
-        { name: 'Ana Martínez', role: 'CEO @ HealthTech', text: 'Nuestra app de salud alcanzó 100K descargas en el primer mes. La calidad del código es impecable.' },
-        { name: 'Roberto Sánchez', role: 'Founder @ FinApp', text: 'El equipo entendió perfectamente nuestra visión. La app tiene un rating de 4.9 en ambas stores.' },
-    ],
-    funFacts: [
-        { number: '60fps', label: 'Animaciones fluidas' },
-        { number: '<3s', label: 'Tiempo de inicio' },
-        { number: '4.8★', label: 'Rating promedio' },
-        { number: '2M+', label: 'Descargas totales' },
-    ],
 };
 
 const tabs = [
     { id: 'features', label: 'Características', icon: Sparkles },
     { id: 'technologies', label: 'Tecnologías', icon: Code2 },
     { id: 'process', label: 'Proceso', icon: Rocket },
-    { id: 'testimonials', label: 'Testimonios', icon: Users },
 ];
 
 // ─────────────────────────────────────────────
@@ -153,28 +142,6 @@ function TabContent({ activeTab }: { activeTab: string }) {
                 ))}
             </div>
         ),
-        testimonials: (
-            <div className="space-y-0 border border-slate-800/60">
-                {serviceData.testimonials.map((t, i) => (
-                    <motion.div key={t.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
-                        className="px-6 py-5 border-b border-slate-800/60 last:border-b-0"
-                    >
-                        <div className="border-l-2 border-lime-400/30 pl-4">
-                            <p className="text-xs text-slate-400 italic leading-relaxed mb-3">"{t.text}"</p>
-                            <div className="flex items-center gap-2">
-                                <div className="w-6 h-6 flex items-center justify-center border border-fuchsia-400/30 text-[8px] text-fuchsia-400/80">
-                                    {t.name.split(' ').map(n => n[0]).join('')}
-                                </div>
-                                <div>
-                                    <p className="text-[10px] text-white font-medium leading-none">{t.name}</p>
-                                    <p className="text-[9px] text-slate-600 mt-0.5">{t.role}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
-        ),
     };
     return (
         <AnimatePresence mode="wait">
@@ -239,9 +206,9 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                 {/* Stats */}
                                 <div className="grid grid-cols-3 gap-px bg-slate-800/40">
                                     {[
-                                        { label: 'Apps', value: `${serviceData.stats.projects}+` },
-                                        { label: 'Satisfacción', value: `${serviceData.stats.satisfaction}%` },
-                                        { label: 'Downloads', value: serviceData.stats.downloads },
+                                        { label: 'Proyectos', value: `${SITE_STATS.projects}` },
+                                        { label: 'Productos propios', value: `${SITE_STATS.ownProducts}` },
+                                        { label: 'Años', value: `${SITE_STATS.years}` },
                                     ].map(s => (
                                         <div key={s.label} className="bg-[#080810] px-3 py-4 text-center">
                                             <p className="text-2xl font-light text-fuchsia-400/80 leading-none mb-1"
@@ -250,21 +217,6 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                             <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600">{s.label}</p>
                                         </div>
                                     ))}
-                                </div>
-
-                                {/* Fun facts */}
-                                <div>
-                                    <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Métricas clave</p>
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-800/30">
-                                        {serviceData.funFacts.map(f => (
-                                            <div key={f.label} className="bg-[#080810] px-4 py-4 text-center">
-                                                <p className="text-xl font-light text-white leading-none mb-1"
-                                                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                                                >{f.number}</p>
-                                                <p className="text-[9px] uppercase tracking-[0.15em] text-slate-600">{f.label}</p>
-                                            </div>
-                                        ))}
-                                    </div>
                                 </div>
 
                                 {/* Benefits */}
@@ -382,9 +334,9 @@ function MainCard({ onClick }: { onClick: () => void }) {
 
                 <div className="grid grid-cols-3 gap-px bg-slate-800/40">
                     {[
-                        { value: `${serviceData.stats.projects}+`, label: 'Apps' },
-                        { value: `${serviceData.stats.satisfaction}%`, label: 'Satisfacción' },
-                        { value: serviceData.stats.downloads, label: 'Downloads' },
+                        { value: `${SITE_STATS.projects}`, label: 'Proyectos' },
+                        { value: `${SITE_STATS.ownProducts}`, label: 'Productos propios' },
+                        { value: `${SITE_STATS.years}`, label: 'Años' },
                     ].map(s => (
                         <div key={s.label} className="bg-[#080810] px-3 py-4 text-center group-hover:bg-slate-900/40 transition-colors">
                             <p className="text-2xl font-light text-fuchsia-400/80 leading-none mb-1"
