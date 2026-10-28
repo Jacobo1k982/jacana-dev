@@ -1,6 +1,7 @@
 // app/api/contact/route.ts
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { MAIL_FROM } from '@/lib/email';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MESSAGE_MAX = 600;
@@ -59,8 +60,9 @@ export async function POST(req: Request) {
     ];
 
     try {
-        await resend.emails.send({
-            from: 'Jacana Dev <onboarding@resend.dev>',
+        // Resend NO lanza excepción ante un rechazo: devuelve { error }
+        const { error } = await resend.emails.send({
+            from: MAIL_FROM,
             to: CONTACT_TO,
             replyTo: email,
             subject: `Nuevo contacto: ${name}${service ? ` — ${service}` : ''}`,
@@ -80,6 +82,7 @@ export async function POST(req: Request) {
                 </div>
             `,
         });
+        if (error) throw new Error(`${error.name ?? 'resend'}: ${error.message}`);
     } catch (err) {
         console.error('[api/contact] Error enviando email con Resend:', err);
         return NextResponse.json({ error: 'No se pudo enviar el mensaje. Intenta de nuevo en unos minutos.' }, { status: 502 });
