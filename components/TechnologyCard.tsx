@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Zap, Users, BookOpen, Plus } from 'lucide-react';
+import type { TechEvidence } from '@/lib/tech-evidence';
 
 // ─────────────────────────────────────────────
 // TYPES
@@ -30,6 +31,8 @@ interface TechnologyCardProps {
     color: string;
     index: number;
     isTopPick?: boolean;
+    /** Proyectos reales donde se usó esta tecnología */
+    evidence?: TechEvidence;
 }
 
 // ─────────────────────────────────────────────
@@ -87,7 +90,7 @@ const statMeta: Record<string, { icon: React.ElementType; label: string }> = {
 // COMPONENT
 // ─────────────────────────────────────────────
 
-export default function TechnologyCard({ technology, color, index, isTopPick }: TechnologyCardProps) {
+export default function TechnologyCard({ technology, color, index, isTopPick, evidence }: TechnologyCardProps) {
     const [isExpanded, setIsExpanded] = useState(false);
     const accent = accentMap[color] ?? accentMap.cyan;
     const docsHref = docsMap[technology.id] ?? '#';
@@ -163,6 +166,17 @@ export default function TechnologyCard({ technology, color, index, isTopPick }: 
                 <p className="text-xs text-slate-500 leading-relaxed mt-3">
                     {technology.description}
                 </p>
+
+                {/* Evidencia: proyectos reales donde la usamos */}
+                {evidence && evidence.count > 0 && (
+                    <p className="mt-3 text-[10px] leading-relaxed text-slate-500">
+                        <span className="uppercase tracking-[0.12em] text-lime-400/80">
+                            Usada en {evidence.count} {evidence.count === 1 ? 'proyecto' : 'proyectos'}
+                        </span>
+                        {' · '}
+                        {evidence.titles.join(', ')}
+                    </p>
+                )}
             </div>
 
             {/* ── STATS ── */}

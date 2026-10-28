@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import TechnologyCard from '@/components/TechnologyCard';
 import technologiesData from '@/data/technologies.json';
+import { getTechEvidence } from '@/lib/tech-evidence';
 
 // ─────────────────────────────────────────────
 // CONSTANTS
@@ -83,11 +84,11 @@ export default function TechSection() {
                             className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.05] tracking-tight"
                             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                         >
-                            Tecnologías que<br />
-                            <em className="text-slate-400 not-italic">dominamos</em>
+                            Tecnologías con las que<br />
+                            <em className="text-slate-400 not-italic">construimos</em>
                         </h2>
                         <p className="text-slate-500 text-sm max-w-xs leading-relaxed md:text-right">
-                            El mismo stack que usan las empresas líderes — elegido por rendimiento, no por moda.
+                            Elegido por rendimiento, no por moda. Cada tecnología indica en qué proyectos reales la hemos usado.
                         </p>
                     </div>
                     <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-lime-400/20 to-transparent" />
@@ -164,18 +165,20 @@ export default function TechSection() {
                                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-800/30"
                             >
                                 {(() => {
-                                    // Dato real, no inventado: el más popular de la categoría, según stats del propio JSON
-                                    const topPickId = category.technologies.reduce(
-                                        (top, t) => (t.stats.popularity > top.stats.popularity ? t : top),
-                                        category.technologies[0]
-                                    )?.id;
-                                    return category.technologies.map((tech, index) => (
+                                    // Dato real: las tecnologías respaldadas por proyectos van primero,
+                                    // y "Más usado" es la que más aparece en nuestro portafolio.
+                                    const ranked = category.technologies
+                                        .map((tech) => ({ tech, evidence: getTechEvidence(tech.name) }))
+                                        .sort((a, b) => b.evidence.count - a.evidence.count);
+                                    const topPickId = ranked[0]?.evidence.count > 0 ? ranked[0].tech.id : undefined;
+                                    return ranked.map(({ tech, evidence }, index) => (
                                         <TechnologyCard
                                             key={tech.id}
                                             technology={tech}
                                             color={category.color}
                                             index={index}
                                             isTopPick={tech.id === topPickId}
+                                            evidence={evidence}
                                         />
                                     ));
                                 })()}
