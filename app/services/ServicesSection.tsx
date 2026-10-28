@@ -83,7 +83,7 @@ export default function ServicesSection() {
                             ¿No encuentras lo que buscas? Podemos crear soluciones personalizadas para tu negocio.
                         </p>
                         <motion.a
-                            href="#contact"
+                            href="/Contact"
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.98 }}
                             className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors shrink-0"

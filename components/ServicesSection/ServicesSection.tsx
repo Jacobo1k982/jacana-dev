@@ -432,7 +432,7 @@ export default function ServicesSection() {
                         </p>
                     </div>
                     <a
-                        href="#contact"
+                        href="/Contact"
                         className="group flex items-center gap-2.5 px-8 py-4 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors flex-shrink-0"
                     >
                         Hablemos

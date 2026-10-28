@@ -231,7 +231,7 @@ export default function ProjectsSection() {
                             </p>
                             <div className="flex flex-wrap gap-3">
                                 <motion.a
-                                    href="#contact"
+                                    href="/Contact"
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
                                     className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
@@ -240,7 +240,7 @@ export default function ProjectsSection() {
                                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                                 </motion.a>
                                 <motion.a
-                                    href="#services"
+                                    href="/servicios"
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
                                     className="flex items-center gap-2 px-6 py-3.5 border border-slate-700/60 hover:border-lime-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
