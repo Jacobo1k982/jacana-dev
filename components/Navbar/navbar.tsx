@@ -51,7 +51,7 @@ const getAccent = (label: string) =>
 const cx = {
     btnLogin: 'flex items-center gap-1.5 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.13em] text-slate-400 hover:text-white border border-transparent hover:border-white/10 rounded-sm transition-all duration-200',
     // CTA de negocio — la acción que realmente mueve la aguja (antes: "Registrarse")
-    btnPrimary: 'flex items-center gap-1.5 px-5 py-2 bg-white text-[#06060f] text-[11px] font-semibold uppercase tracking-[0.13em] hover:bg-lime-50 transition-colors duration-200',
+    btnPrimary: 'flex items-center gap-1.5 px-5 py-2 bg-white text-[#090d13] text-[11px] font-semibold uppercase tracking-[0.13em] hover:bg-lime-50 transition-colors duration-200',
     btnHamburger: 'lg:hidden w-10 h-10 flex items-center justify-center border border-white/10 hover:border-lime-400/30 transition-colors duration-200',
 };
 
@@ -110,7 +110,7 @@ export default function Navbar() {
                 initial={{ y: -80, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-[#06060f]/96 backdrop-blur-2xl border-b border-white/[0.06] shadow-xl shadow-black/40' : 'bg-transparent'}`}
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-[#090d13]/96 backdrop-blur-2xl border-b border-white/[0.06] shadow-xl shadow-black/40' : 'bg-transparent'}`}
             >
                 <ScrollProgress />
                 <div className="max-w-7xl mx-auto px-5 md:px-8">
@@ -235,7 +235,7 @@ export default function Navbar() {
                     >
                         {navLinks.filter(l => l.label === hoveredMenu && l.submenu?.length).map(link => (
                             <div key={link.label} className="max-w-7xl mx-auto px-5 md:px-8 pt-1">
-                                <div className="bg-[#07070e]/98 backdrop-blur-2xl border border-white/[0.07] shadow-2xl shadow-black/50">
+                                <div className="bg-[#0d1117]/98 backdrop-blur-2xl border border-white/[0.07] shadow-2xl shadow-black/50">
                                     <div className="h-px bg-gradient-to-r from-transparent via-lime-400/40 to-transparent" />
                                     <div className="grid grid-cols-4 divide-x divide-white/[0.05]">
 
@@ -259,7 +259,7 @@ export default function Navbar() {
                                                 href={link.href}
                                                 whileHover={{ scale: 1.01 }}
                                                 whileTap={{ scale: 0.98 }}
-                                                className="flex items-center justify-center gap-2 py-3 bg-white text-[#06060f] text-[11px] font-semibold uppercase tracking-[0.13em] hover:bg-lime-50 transition-colors"
+                                                className="flex items-center justify-center gap-2 py-3 bg-white text-[#090d13] text-[11px] font-semibold uppercase tracking-[0.13em] hover:bg-lime-50 transition-colors"
                                             >
                                                 Ver todos los servicios
                                                 <ArrowRight className="w-3 h-3" />
@@ -279,7 +279,7 @@ export default function Navbar() {
                                                             initial={{ opacity: 0, y: 6 }}
                                                             animate={{ opacity: 1, y: 0 }}
                                                             transition={{ delay: idx * 0.025 }}
-                                                            className="group bg-[#07070e] p-5 hover:bg-slate-900/70 transition-colors duration-150 flex items-start gap-3.5"
+                                                            className="group bg-[#0d1117] p-5 hover:bg-slate-900/70 transition-colors duration-150 flex items-start gap-3.5"
                                                         >
                                                             <span className={`mt-0.5 w-8 h-8 shrink-0 flex items-center justify-center border ${borderColor} ${bgColor}
                                                                 group-hover:brightness-125 transition-all`}>
@@ -329,7 +329,7 @@ export default function Navbar() {
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-                            className="fixed top-0 right-0 h-[100dvh] w-full max-w-[340px] z-[70] lg:hidden flex flex-col bg-[#08080f] border-l border-white/[0.07]"
+                            className="fixed top-0 right-0 h-[100dvh] w-full max-w-[340px] z-[70] lg:hidden flex flex-col bg-[#090d13] border-l border-white/[0.07]"
                         >
 
                             {/* ── Header ── */}
@@ -449,7 +449,7 @@ export default function Navbar() {
 
                                 {!isAuthenticated ? (
                                     <div
-                                        className="p-5 flex flex-col gap-3 bg-[#06060c]"
+                                        className="p-5 flex flex-col gap-3 bg-[#090d13]"
                                         style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom, 1.25rem))' }}
                                     >
                                         {/* Section label — enfocado en negocio, no en la cuenta */}
@@ -462,7 +462,7 @@ export default function Navbar() {
                                             href="/Contact"
                                             onClick={() => setIsMenuOpen(false)}
                                             whileTap={{ scale: 0.97 }}
-                                            className="w-full flex items-center justify-center gap-2 py-3.5 bg-white hover:bg-lime-50 active:bg-lime-100 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#08080f] transition-colors duration-200"
+                                            className="w-full flex items-center justify-center gap-2 py-3.5 bg-white hover:bg-lime-50 active:bg-lime-100 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#090d13] transition-colors duration-200"
                                         >
                                             Cotiza tu proyecto
                                             <ArrowRight className="w-3.5 h-3.5" />
@@ -480,7 +480,7 @@ export default function Navbar() {
                                     </div>
                                 ) : (
                                     <div
-                                        className="p-5 bg-[#06060c]"
+                                        className="p-5 bg-[#090d13]"
                                         style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom, 1.25rem))' }}
                                     >
                                         <UserMenu onLogout={handleLogout} />

@@ -30,7 +30,7 @@ const SERVICES = [
         ],
         timeRange: '4 – 12 semanas',
         priceRange: '$800 – $8,000',
-        accent: '#84cc16',
+        accent: '#b0d000',
         tag: 'Más demandado',
     },
     {
@@ -52,7 +52,7 @@ const SERVICES = [
         ],
         timeRange: '6 – 16 semanas',
         priceRange: '$2,000 – $15,000',
-        accent: '#06b6d4',
+        accent: '#86bfd4',
         tag: null,
     },
     {
@@ -74,7 +74,7 @@ const SERVICES = [
         ],
         timeRange: '2 – 6 semanas',
         priceRange: '$500 – $4,000',
-        accent: '#a78bfa',
+        accent: '#a9a4d9',
         tag: null,
     },
     {
@@ -96,7 +96,7 @@ const SERVICES = [
         ],
         timeRange: '3 – 10 semanas',
         priceRange: '$1,500 – $12,000',
-        accent: '#34d399',
+        accent: '#56d364',
         tag: 'Tendencia 2025',
     },
     {
@@ -118,7 +118,7 @@ const SERVICES = [
         ],
         timeRange: '2 – 8 semanas',
         priceRange: '$600 – $5,000',
-        accent: '#f97316',
+        accent: '#e5a45c',
         tag: null,
     },
     {
@@ -140,7 +140,7 @@ const SERVICES = [
         ],
         timeRange: 'Flexible',
         priceRange: '$80 – $150 / hora',
-        accent: '#fb7185',
+        accent: '#f2877c',
         tag: null,
     },
 ];
@@ -157,7 +157,7 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.65, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative border border-slate-800/60 bg-[#06051d]/60 backdrop-blur-sm overflow-hidden"
+            className="group relative border border-slate-800/60 bg-[#090d13]/60 backdrop-blur-sm overflow-hidden"
             style={{ '--accent': service.accent } as React.CSSProperties}
         >
             {/* Top accent line */}
@@ -307,10 +307,10 @@ export default function ServicesSection() {
     return (
         <section
             id="explore"
-            className="relative bg-[#06051d] py-28 md:py-36 overflow-hidden"
+            className="relative bg-[#090d13] py-28 md:py-36 overflow-hidden"
             style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
         >
-            <SectionBackdrop variant="grid" accent="#a3e635" secondary="#6366f1" />
+            <SectionBackdrop variant="grid" accent="#b0d000" secondary="#5f7fa8" />
             {/* Noise texture overlay */}
             <div
                 className="absolute inset-0 opacity-[0.025] pointer-events-none"
@@ -332,7 +332,7 @@ export default function ServicesSection() {
             {/* Ambient glow */}
             <div
                 className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
-                style={{ background: 'radial-gradient(ellipse, rgba(132,204,22,0.04) 0%, transparent 70%)' }}
+                style={{ background: 'radial-gradient(ellipse, rgba(176, 208, 0,0.04) 0%, transparent 70%)' }}
             />
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8">
@@ -408,7 +408,7 @@ export default function ServicesSection() {
                 {/* ── Cards grid ── */}
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-slate-800/30">
                     {SERVICES.map((service, i) => (
-                        <div key={service.id} className="bg-[#06051d]">
+                        <div key={service.id} className="bg-[#090d13]">
                             <ServiceCard service={service} index={i} />
                         </div>
                     ))}
@@ -420,7 +420,7 @@ export default function ServicesSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 border border-slate-800/60 bg-[#06051d]/80 p-8"
+                    className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 border border-slate-800/60 bg-[#090d13]/80 p-8"
                 >
                     <div>
                         <p
@@ -435,7 +435,7 @@ export default function ServicesSection() {
                     </div>
                     <a
                         href="/Contact"
-                        className="group flex items-center gap-2.5 px-8 py-4 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors flex-shrink-0"
+                        className="group flex items-center gap-2.5 px-8 py-4 bg-white text-[#090d13] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors flex-shrink-0"
                     >
                         Hablemos
                         <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

@@ -33,7 +33,7 @@ function MatrixRain() {
             drops = Array(columns).fill(1);
         };
         const draw = () => {
-            ctx.fillStyle = 'rgba(6, 5, 29, 0.05)';
+            ctx.fillStyle = 'rgba(9, 13, 19, 0.05)';
             ctx.fillRect(0, 0, width, height);
             ctx.font = `${fontSize}px monospace`;
             for (let i = 0; i < drops.length; i++) {
@@ -43,17 +43,17 @@ function MatrixRain() {
                 const y = drops[i] * fontSize;
                 if (brightness > 0.95) {
                     ctx.fillStyle = '#ffffff';
-                    ctx.shadowColor = '#a3e635';
+                    ctx.shadowColor = '#b0d000';
                     ctx.shadowBlur = 20;
                 } else if (brightness > 0.7) {
-                    ctx.fillStyle = '#a3e635';
-                    ctx.shadowColor = '#a3e635';
+                    ctx.fillStyle = '#b0d000';
+                    ctx.shadowColor = '#b0d000';
                     ctx.shadowBlur = 10;
                 } else if (brightness > 0.4) {
-                    ctx.fillStyle = '#84cc16';
+                    ctx.fillStyle = '#b0d000';
                     ctx.shadowBlur = 5;
                 } else {
-                    ctx.fillStyle = 'rgba(132, 204, 22, 0.45)';
+                    ctx.fillStyle = 'rgba(176, 208, 0, 0.45)';
                     ctx.shadowBlur = 0;
                 }
                 ctx.fillText(char, x, y);
@@ -65,7 +65,7 @@ function MatrixRain() {
         };
         resize();
         window.addEventListener('resize', resize);
-        ctx.fillStyle = '#06051d';
+        ctx.fillStyle = '#090d13';
         ctx.fillRect(0, 0, width, height);
 
         // Respeta "reducir movimiento": dibuja un solo cuadro estático
@@ -96,7 +96,7 @@ function MatrixRain() {
         <canvas
             ref={canvasRef}
             className="absolute inset-0 w-full h-full pointer-events-none"
-            style={{ background: '#06051d' }}
+            style={{ background: '#090d13' }}
         />
     );
 }
@@ -204,9 +204,9 @@ export default function Hero() {
                 <MatrixRain />
             </motion.div>
 
-            <div className="absolute inset-0 z-[1] pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, #06051d 100%)' }} />
-            <div className="absolute inset-0 z-[2] pointer-events-none" style={{ background: 'linear-gradient(90deg, rgba(6,5,29,0.92) 0%, rgba(6,5,29,0.60) 40%, transparent 70%)' }} />
-            <div className="absolute bottom-0 left-0 right-0 h-40 z-[2] pointer-events-none" style={{ background: 'linear-gradient(to top, #06051d 0%, transparent 100%)' }} />
+            <div className="absolute inset-0 z-[1] pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, #090d13 100%)' }} />
+            <div className="absolute inset-0 z-[2] pointer-events-none" style={{ background: 'linear-gradient(90deg, rgba(9, 13, 19,0.92) 0%, rgba(9, 13, 19,0.60) 40%, transparent 70%)' }} />
+            <div className="absolute bottom-0 left-0 right-0 h-40 z-[2] pointer-events-none" style={{ background: 'linear-gradient(to top, #090d13 0%, transparent 100%)' }} />
             <div
                 className="absolute inset-0 z-[3] opacity-[0.03] pointer-events-none"
                 style={{
@@ -301,7 +301,7 @@ export default function Hero() {
                                     {/* 1. Acción principal de negocio */}
                                     <Link
                                         href="/Contact"
-                                        className="group flex items-center gap-2.5 px-6 py-3 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
+                                        className="group flex items-center gap-2.5 px-6 py-3 bg-white text-[#090d13] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                     >
                                         Cotiza tu proyecto
                                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -313,7 +313,7 @@ export default function Hero() {
                                     <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
                                         <Link
                                             href="/Contact"
-                                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
+                                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#090d13] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                         >
                                             Cotiza tu proyecto
                                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -376,7 +376,7 @@ export default function Hero() {
                 transition={{ delay: 2.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="absolute right-8 top-1/2 -translate-y-1/2 z-10 hidden xl:block"
             >
-                <div className="border border-slate-800/60 bg-[#06051d]/80 backdrop-blur-sm p-6 max-w-[220px]">
+                <div className="border border-slate-800/60 bg-[#090d13]/80 backdrop-blur-sm p-6 max-w-[220px]">
                     <div className="h-px w-full bg-gradient-to-r from-lime-400/30 to-transparent mb-4" />
                     <p className="text-[9px] uppercase tracking-[0.3em] text-lime-400/60 mb-3">— Lo que construimos para ti</p>
                     {['Desarrollo Web a medida', 'Apps Móviles nativas', 'Cloud & DevOps', 'IA aplicada al negocio', 'Consultoría Técnica'].map((s, i) => (

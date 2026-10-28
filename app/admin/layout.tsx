@@ -8,8 +8,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     if ((session?.user as any)?.role !== 'ADMIN') redirect('/')
 
     return (
-        <div className="min-h-screen bg-[#06051d]">
-            <nav className="border-b border-slate-800/60 bg-[#080810]/95 backdrop-blur-xl sticky top-0 z-40">
+        <div className="min-h-screen bg-[#090d13]">
+            <nav className="border-b border-slate-800/60 bg-[#131923]/95 backdrop-blur-xl sticky top-0 z-40">
                 <div className="max-w-7xl mx-auto px-6 md:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center gap-8">

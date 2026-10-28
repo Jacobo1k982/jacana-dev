@@ -65,9 +65,9 @@ export default function AboutSection() {
     );
 
     return (
-        <section className="relative py-24 md:py-36 bg-[#080810] overflow-hidden">
+        <section className="relative py-24 md:py-36 bg-[#0d1117] overflow-hidden">
 
-            <SectionBackdrop variant="spotlight" accent="#a3e635" secondary="#0ea5e9" />
+            <SectionBackdrop variant="spotlight" accent="#b0d000" secondary="#5f7fa8" />
             {/* Grain */}
             <div
                 className="absolute inset-0 opacity-[0.025] pointer-events-none"
@@ -146,7 +146,7 @@ export default function AboutSection() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5 }}
-                            className="group bg-[#080810] px-8 py-8 hover:bg-slate-900/40 transition-colors"
+                            className="group bg-[#131923] px-8 py-8 hover:bg-slate-900/40 transition-colors"
                         >
                             <div className="flex items-center gap-3 mb-5">
                                 <div className="w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-lime-400/40 transition-colors">
@@ -168,7 +168,7 @@ export default function AboutSection() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5 }}
-                            className="group bg-[#080810] px-8 py-8 hover:bg-slate-900/40 transition-colors"
+                            className="group bg-[#131923] px-8 py-8 hover:bg-slate-900/40 transition-colors"
                         >
                             <div className="flex items-center gap-3 mb-5">
                                 <div className="w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-lime-400/40 transition-colors">
@@ -250,7 +250,7 @@ export default function AboutSection() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                                    className="group bg-[#080810] px-5 py-6 hover:bg-slate-900/40 transition-colors flex flex-col items-center text-center"
+                                    className="group bg-[#131923] px-5 py-6 hover:bg-slate-900/40 transition-colors flex flex-col items-center text-center"
                                 >
                                     {/* Step number */}
                                     <span
@@ -304,7 +304,7 @@ export default function AboutSection() {
                                 className="group relative flex gap-8 pb-8 last:pb-0 pl-8"
                             >
                                 {/* Year dot */}
-                                <div className="absolute -left-[9px] top-0 w-[18px] h-[18px] flex items-center justify-center border border-slate-700/60 bg-[#080810] group-hover:border-lime-400/40 transition-colors">
+                                <div className="absolute -left-[9px] top-0 w-[18px] h-[18px] flex items-center justify-center border border-slate-700/60 bg-[#131923] group-hover:border-lime-400/40 transition-colors">
                                     <div className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-lime-400/60 transition-colors" />
                                 </div>
 
@@ -350,7 +350,7 @@ export default function AboutSection() {
                                 href="/Contact"
                                 whileHover={{ scale: 1.01 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
+                                className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                             >
                                 Contactar ahora
                                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

@@ -29,9 +29,9 @@ export default function ProjectsSection() {
     ];
 
     return (
-        <section className="relative py-24 md:py-36 bg-[#080810] overflow-hidden">
+        <section className="relative py-24 md:py-36 bg-[#0d1117] overflow-hidden">
 
-            <SectionBackdrop variant="dots" accent="#a3e635" secondary="#6366f1" />
+            <SectionBackdrop variant="dots" accent="#b0d000" secondary="#5f7fa8" />
             {/* Grain */}
             <div
                 className="absolute inset-0 opacity-[0.025] pointer-events-none"
@@ -88,7 +88,7 @@ export default function ProjectsSection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.05 + 0.15 }}
-                            className="bg-[#080810] px-4 py-5 text-center"
+                            className="bg-[#131923] px-4 py-5 text-center"
                         >
                             <p
                                 className="text-2xl font-light text-white leading-none mb-1"
@@ -236,7 +236,7 @@ export default function ProjectsSection() {
                                     href="/Contact"
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
+                                    className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                 >
                                     Iniciar proyecto
                                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -266,7 +266,7 @@ export default function ProjectsSection() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.07 + 0.2 }}
-                                    className="bg-[#080810] p-6"
+                                    className="bg-[#131923] p-6"
                                 >
                                     <p
                                         className="text-2xl font-light text-white mb-1 leading-none"

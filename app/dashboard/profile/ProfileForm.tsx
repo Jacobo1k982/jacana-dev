@@ -64,7 +64,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
 
-            <div className="bg-[#080810] border border-slate-800/60 p-6 md:p-8">
+            <div className="bg-[#131923] border border-slate-800/60 p-6 md:p-8">
                 <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                 <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-6">Informacion basica</p>
 
@@ -142,7 +142,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                 </div>
             </div>
 
-            <div className="bg-[#080810] border border-slate-800/60 p-6 md:p-8">
+            <div className="bg-[#131923] border border-slate-800/60 p-6 md:p-8">
                 <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                 <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-6">Redes sociales</p>
 
@@ -225,7 +225,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                     disabled={isLoading}
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex items-center gap-2.5 px-8 py-3 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-2.5 px-8 py-3 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     {isLoading ? (
                         <><Loader2 className="w-3.5 h-3.5 animate-spin" />Guardando...</>

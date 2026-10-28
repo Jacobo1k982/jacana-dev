@@ -107,7 +107,7 @@ export default function SettingsClient({ user }: SettingsClientProps) {
         <div className="space-y-6">
 
             {user.password && (
-                <div className="bg-[#080810] border border-slate-800/60 p-6 md:p-8">
+                <div className="bg-[#131923] border border-slate-800/60 p-6 md:p-8">
                     <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                     <div className="flex items-center gap-3 mb-6">
                         <Lock className="w-4 h-4 text-lime-400/60" />
@@ -145,7 +145,7 @@ export default function SettingsClient({ user }: SettingsClientProps) {
                         </div>
 
                         <div className="flex justify-end">
-                            <motion.button type="submit" disabled={passwordLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors disabled:opacity-50">
+                            <motion.button type="submit" disabled={passwordLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors disabled:opacity-50">
                                 {passwordLoading ? <><Loader2 className="w-3.5 h-3.5 animate-spin" />Guardando...</> : 'Actualizar contrasena'}
                             </motion.button>
                         </div>
@@ -153,7 +153,7 @@ export default function SettingsClient({ user }: SettingsClientProps) {
                 </div>
             )}
 
-            <div className="bg-[#080810] border border-slate-800/60 p-6 md:p-8">
+            <div className="bg-[#131923] border border-slate-800/60 p-6 md:p-8">
                 <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                 <div className="flex items-center gap-3 mb-6">
                     <Bell className="w-4 h-4 text-lime-400/60" />
@@ -177,14 +177,14 @@ export default function SettingsClient({ user }: SettingsClientProps) {
                     ))}
 
                     <div className="flex justify-end">
-                        <motion.button type="submit" disabled={notifLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors disabled:opacity-50">
+                        <motion.button type="submit" disabled={notifLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors disabled:opacity-50">
                             {notifLoading ? <><Loader2 className="w-3.5 h-3.5 animate-spin" />Guardando...</> : 'Guardar'}
                         </motion.button>
                     </div>
                 </form>
             </div>
 
-            <div className="bg-[#080810] border border-slate-800/60 p-6 md:p-8">
+            <div className="bg-[#131923] border border-slate-800/60 p-6 md:p-8">
                 <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                 <div className="flex items-center gap-3 mb-6">
                     <Shield className="w-4 h-4 text-lime-400/60" />
@@ -208,7 +208,7 @@ export default function SettingsClient({ user }: SettingsClientProps) {
                     ))}
 
                     <div className="flex justify-end">
-                        <motion.button type="submit" disabled={privacyLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors disabled:opacity-50">
+                        <motion.button type="submit" disabled={privacyLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors disabled:opacity-50">
                             {privacyLoading ? <><Loader2 className="w-3.5 h-3.5 animate-spin" />Guardando...</> : 'Guardar'}
                         </motion.button>
                     </div>

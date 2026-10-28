@@ -113,7 +113,7 @@ function ResetPasswordForm() {
                         disabled={isLoading}
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.98 }}
-                        className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {isLoading ? (
                             <><Loader2 className="w-3.5 h-3.5 animate-spin" />Actualizando…</>
@@ -129,12 +129,12 @@ function ResetPasswordForm() {
 
 export default function ResetPasswordPage() {
     return (
-        <div className="min-h-screen bg-[#06051d] flex items-center justify-center p-4">
+        <div className="min-h-screen bg-[#090d13] flex items-center justify-center p-4">
             <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full max-w-sm bg-[#080810] border border-slate-800/80 shadow-2xl"
+                className="w-full max-w-sm bg-[#131923] border border-slate-800/80 shadow-2xl"
             >
                 <div className="h-px bg-gradient-to-r from-transparent via-lime-400/40 to-transparent" />
                 <div className="px-8 pt-8 pb-6 border-b border-slate-800/60">

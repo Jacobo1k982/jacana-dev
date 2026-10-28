@@ -38,8 +38,8 @@ const fadeUp = {
 
 export default function DaxCloudShowcase() {
     return (
-        <section id="daxcloud" className="relative py-24 md:py-32 bg-[#06051d] overflow-hidden border-t border-slate-800/40">
-            <SectionBackdrop variant="beam" accent="#FF6B5E" secondary="#4f46e5" />
+        <section id="daxcloud" className="relative py-24 md:py-32 bg-[#090d13] overflow-hidden border-t border-slate-800/40">
+            <SectionBackdrop variant="beam" accent="#FF6B5E" secondary="#5f7fa8" />
             <div
                 className="absolute top-1/4 right-0 w-[520px] h-[520px] rounded-full blur-[150px] pointer-events-none opacity-[0.07]"
                 style={{ background: CORAL }}
@@ -83,7 +83,7 @@ export default function DaxCloudShowcase() {
 
                         <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-px bg-slate-800/40 border border-slate-800/60">
                             {CAPABILITIES.map(({ icon: Icon, title, body }) => (
-                                <li key={title} className="bg-[#080810] p-5 group">
+                                <li key={title} className="bg-[#131923] p-5 group">
                                     <div className="flex items-center gap-3 mb-2">
                                         <Icon className="w-4 h-4 text-lime-400/70 group-hover:text-lime-400 transition-colors" aria-hidden="true" />
                                         <h3 className="text-sm text-white font-medium">{title}</h3>
@@ -98,7 +98,7 @@ export default function DaxCloudShowcase() {
                                 href="https://daxcloud.shop"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
+                                className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#090d13] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                             >
                                 Visitar DaxCloud
                                 <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -118,7 +118,7 @@ export default function DaxCloudShowcase() {
                     <motion.div
                         {...fadeUp}
                         transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                        className="border border-slate-800/70 bg-[#080810]/80 backdrop-blur-sm"
+                        className="border border-slate-800/70 bg-[#131923]/80 backdrop-blur-sm"
                     >
                         <div className="h-px bg-gradient-to-r from-transparent via-lime-400/40 to-transparent" />
                         <div className="p-6 md:p-8">

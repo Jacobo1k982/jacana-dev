@@ -56,7 +56,7 @@ export default function ValueCard({ value, index }: ValueCardProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative bg-[#080810] border border-slate-800/70 hover:border-slate-700/80 transition-colors duration-300 overflow-hidden flex flex-col"
+            className="group relative bg-[#131923] border border-slate-800/70 hover:border-slate-700/80 transition-colors duration-300 overflow-hidden flex flex-col"
         >
             {/* Top accent line on hover */}
             <div className={`absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${accent.bar}`} />

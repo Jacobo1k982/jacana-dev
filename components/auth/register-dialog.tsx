@@ -108,14 +108,14 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-[#06051d]/80 backdrop-blur-md"
+                        className="fixed inset-0 bg-[#090d13]/80 backdrop-blur-md"
                     />
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 16 }}
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative w-full max-w-sm bg-[#080810] border border-slate-800/80 shadow-2xl shadow-black/60 my-8"
+                        className="relative w-full max-w-sm bg-[#131923] border border-slate-800/80 shadow-2xl shadow-black/60 my-8"
                     >
                         <div className="h-px bg-gradient-to-r from-transparent via-lime-400/40 to-transparent" />
                         <div
@@ -307,7 +307,7 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                                     disabled={isLoading}
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isLoading ? (
                                         <><Loader2 className="w-3.5 h-3.5 animate-spin" />Creando cuenta…</>

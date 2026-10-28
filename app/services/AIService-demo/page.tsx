@@ -38,9 +38,9 @@ const demosData = [
         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
         preview: {
             type: 'vision', objects: [
-                { label: 'Persona', confidence: 98, color: '#22c55e' },
-                { label: 'Automóvil', confidence: 95, color: '#3b82f6' },
-                { label: 'Señal de tránsito', confidence: 92, color: '#f59e0b' },
+                { label: 'Persona', confidence: 98, color: '#56d364' },
+                { label: 'Automóvil', confidence: 95, color: '#8fb8e0' },
+                { label: 'Señal de tránsito', confidence: 92, color: '#e5a45c' },
             ]
         },
     },
@@ -164,11 +164,11 @@ function VideoPlayer({ videoUrl, isPlaying, onPlayPause }: {
             />
 
             {/* Controls — appear on hover */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#080810]/90 via-transparent to-transparent opacity-0 group-hover/player:opacity-100 transition-opacity">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#131923]/90 via-transparent to-transparent opacity-0 group-hover/player:opacity-100 transition-opacity">
                 {/* Centre play */}
                 <button
                     onClick={onPlayPause}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center border border-white/20 bg-[#080810]/60 backdrop-blur-sm hover:border-lime-400/40 transition-colors"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center border border-white/20 bg-[#131923]/60 backdrop-blur-sm hover:border-lime-400/40 transition-colors"
                 >
                     {isPlaying
                         ? <Pause className="w-4 h-4 text-white" />
@@ -219,7 +219,7 @@ function PreviewContent({ demo, isPlaying }: { demo: Demo; isPlaying: boolean })
 
     switch (demo.preview.type) {
         case 'chat': return (
-            <div className="space-y-2.5 p-4 bg-[#080810] border border-slate-800/60">
+            <div className="space-y-2.5 p-4 bg-[#131923] border border-slate-800/60">
                 {demo.preview.messages?.slice(0, msgCount).map((m, i) => (
                     <motion.div key={i} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
                         className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
@@ -250,7 +250,7 @@ function PreviewContent({ demo, isPlaying }: { demo: Demo; isPlaying: boolean })
                 </div>
                 <div className="grid grid-cols-3 gap-px bg-slate-800/40">
                     {demo.preview.objects?.map((o, i) => (
-                        <div key={i} className="bg-[#080810] px-3 py-3 text-center">
+                        <div key={i} className="bg-[#131923] px-3 py-3 text-center">
                             <p className="text-sm font-light text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>{o.confidence}%</p>
                             <p className="text-[9px] uppercase tracking-[0.15em] text-slate-600">{o.label}</p>
                         </div>
@@ -260,7 +260,7 @@ function PreviewContent({ demo, isPlaying }: { demo: Demo; isPlaying: boolean })
         );
 
         case 'voice': return (
-            <div className="space-y-3 p-4 bg-[#080810] border border-slate-800/60">
+            <div className="space-y-3 p-4 bg-[#131923] border border-slate-800/60">
                 <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600 mb-2">Transcripción</p>
                 <p className="text-xs text-slate-400 italic leading-relaxed">"{demo.preview.transcript}"</p>
                 <div className="flex items-center gap-0.5 h-8 my-3">
@@ -280,7 +280,7 @@ function PreviewContent({ demo, isPlaying }: { demo: Demo; isPlaying: boolean })
 
         case 'image': return (
             <div className="space-y-3">
-                <div className="px-3 py-2 bg-[#080810] border border-slate-800/60">
+                <div className="px-3 py-2 bg-[#131923] border border-slate-800/60">
                     <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600 mb-1">Prompt</p>
                     <p className="text-xs text-slate-400 italic">"{demo.preview.prompt}"</p>
                 </div>
@@ -316,7 +316,7 @@ function PreviewContent({ demo, isPlaying }: { demo: Demo; isPlaying: boolean })
                         { label: 'Neutral', value: demo.preview.stats?.neutral, emoji: '😐' },
                         { label: 'Negativo', value: demo.preview.stats?.negative, emoji: '😔' },
                     ].map(s => (
-                        <div key={s.label} className="bg-[#080810] px-3 py-4 text-center">
+                        <div key={s.label} className="bg-[#131923] px-3 py-4 text-center">
                             <p className="text-base mb-1">{s.emoji}</p>
                             <p className="text-xl font-light text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>{s.value}%</p>
                             <p className="text-[9px] uppercase tracking-[0.15em] text-slate-600">{s.label}</p>
@@ -375,14 +375,14 @@ function DemoPreviewModal({ demo, isOpen, onClose }: { demo: Demo | null; isOpen
                     <motion.div
                         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-[#06051d]/85 backdrop-blur-md z-50"
+                        className="fixed inset-0 bg-[#090d13]/85 backdrop-blur-md z-50"
                     />
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 16 }}
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        className="fixed inset-4 md:inset-8 lg:inset-12 z-50 bg-[#080810] border border-slate-800/80 shadow-2xl shadow-black/60 overflow-hidden flex flex-col"
+                        className="fixed inset-4 md:inset-8 lg:inset-12 z-50 bg-[#131923] border border-slate-800/80 shadow-2xl shadow-black/60 overflow-hidden flex flex-col"
                         onClick={e => e.stopPropagation()}
                     >
                         {/* Top rose accent */}
@@ -498,7 +498,7 @@ function DemoPreviewModal({ demo, isOpen, onClose }: { demo: Demo | null; isOpen
                                 {/* CTAs */}
                                 <div className="flex flex-wrap gap-3 pt-4 border-t border-slate-800/60">
                                     <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
-                                        className="flex-1 min-w-[180px] flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
+                                        className="flex-1 min-w-[180px] flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                     >
                                         <Zap className="w-3.5 h-3.5" />
                                         Implementar similar
@@ -538,7 +538,7 @@ function DemoCard({ demo, index, onClick }: { demo: Demo; index: number; onClick
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
             onClick={onClick}
-            className="group relative bg-[#080810] border border-slate-800/70 hover:border-slate-700/80 transition-colors duration-300 cursor-pointer overflow-hidden flex flex-col"
+            className="group relative bg-[#131923] border border-slate-800/70 hover:border-slate-700/80 transition-colors duration-300 cursor-pointer overflow-hidden flex flex-col"
         >
             {/* Top accent */}
             <div className="absolute top-0 left-0 right-0 h-px bg-rose-400/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -552,17 +552,17 @@ function DemoCard({ demo, index, onClick }: { demo: Demo; index: number; onClick
                     onMouseEnter={e => e.currentTarget.play()}
                     onMouseLeave={e => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#080810] via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#131923] via-transparent to-transparent" />
 
                 {/* Play overlay */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="w-10 h-10 flex items-center justify-center border border-white/20 bg-[#080810]/60 backdrop-blur-sm">
+                    <div className="w-10 h-10 flex items-center justify-center border border-white/20 bg-[#131923]/60 backdrop-blur-sm">
                         <Play className="w-4 h-4 text-white fill-white" />
                     </div>
                 </div>
 
                 {/* Duration */}
-                <div className="absolute bottom-2 right-2 flex items-center gap-1 px-2 py-1 bg-[#080810]/80 text-[9px] uppercase tracking-[0.2em] text-slate-600">
+                <div className="absolute bottom-2 right-2 flex items-center gap-1 px-2 py-1 bg-[#131923]/80 text-[9px] uppercase tracking-[0.2em] text-slate-600">
                     <Film className="w-2.5 h-2.5" /> {demo.duration}
                 </div>
             </div>
@@ -621,7 +621,7 @@ function DemoCard({ demo, index, onClick }: { demo: Demo; index: number; onClick
 
 function LandingScreen({ onEnter }: { onEnter: () => void }) {
     return (
-        <div className="min-h-screen bg-[#080810] flex flex-col items-center justify-center relative overflow-hidden">
+        <div className="min-h-screen bg-[#0d1117] flex flex-col items-center justify-center relative overflow-hidden">
             {/* Grain */}
             <div className="absolute inset-0 opacity-[0.025] pointer-events-none"
                 style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`, backgroundSize: '128px 128px' }}
@@ -663,7 +663,7 @@ function LandingScreen({ onEnter }: { onEnter: () => void }) {
                     onClick={onEnter}
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
-                    className="group flex items-center gap-3 px-8 py-4 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors mb-16"
+                    className="group flex items-center gap-3 px-8 py-4 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors mb-16"
                 >
                     <Play className="w-3.5 h-3.5 fill-current" />
                     Ver {demosData.length} demos
@@ -677,7 +677,7 @@ function LandingScreen({ onEnter }: { onEnter: () => void }) {
                         { value: '100K+', label: 'Vistas' },
                         { value: '4.9', label: 'Rating' },
                     ].map(s => (
-                        <div key={s.label} className="bg-[#080810] px-4 py-4 text-center">
+                        <div key={s.label} className="bg-[#131923] px-4 py-4 text-center">
                             <p className="text-xl font-light text-white leading-none mb-1"
                                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                             >{s.value}</p>
@@ -720,7 +720,7 @@ export default function DemosGallery() {
     if (showLanding) return <LandingScreen onEnter={() => setShowLanding(false)} />;
 
     return (
-        <div className="min-h-screen bg-[#080810]">
+        <div className="min-h-screen bg-[#0d1117]">
             {/* Ambient */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-0 left-1/3 w-[600px] h-[600px] rounded-full bg-rose-900/8 blur-[140px]" />

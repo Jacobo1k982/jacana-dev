@@ -51,7 +51,7 @@ const SERVICES: Service[] = [
         ],
         timeRange: '4 – 12 semanas',
         priceRange: '$800 – $8,000',
-        accent: '#84cc16',
+        accent: '#b0d000',
         tag: 'Más demandado',
     },
     {
@@ -74,7 +74,7 @@ const SERVICES: Service[] = [
         ],
         timeRange: '6 – 16 semanas',
         priceRange: '$2,000 – $15,000',
-        accent: '#06b6d4',
+        accent: '#86bfd4',
         tag: null,
     },
     {
@@ -97,7 +97,7 @@ const SERVICES: Service[] = [
         ],
         timeRange: '2 – 6 semanas',
         priceRange: '$500 – $4,000',
-        accent: '#a78bfa',
+        accent: '#a9a4d9',
         tag: null,
     },
     {
@@ -120,7 +120,7 @@ const SERVICES: Service[] = [
         ],
         timeRange: '3 – 10 semanas',
         priceRange: '$1,500 – $12,000',
-        accent: '#34d399',
+        accent: '#56d364',
         tag: 'Tendencia 2025',
     },
     {
@@ -143,7 +143,7 @@ const SERVICES: Service[] = [
         ],
         timeRange: '2 – 8 semanas',
         priceRange: '$600 – $5,000',
-        accent: '#f97316',
+        accent: '#e5a45c',
         tag: null,
     },
     {
@@ -166,7 +166,7 @@ const SERVICES: Service[] = [
         ],
         timeRange: '2 – 8 semanas',
         priceRange: '$500 – $6,000',
-        accent: '#60a5fa',
+        accent: '#8fb8e0',
         tag: null,
     },
     {
@@ -189,7 +189,7 @@ const SERVICES: Service[] = [
         ],
         timeRange: 'Flexible',
         priceRange: '$80 – $150 / hora',
-        accent: '#fb7185',
+        accent: '#f2877c',
         tag: null,
     },
 ];
@@ -214,7 +214,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative border border-slate-800/70 bg-[#070620]/70 backdrop-blur-sm overflow-hidden flex flex-col"
+            className="group relative border border-slate-800/70 bg-[#131923]/70 backdrop-blur-sm overflow-hidden flex flex-col"
         >
             {/* Accent line top */}
             <motion.div
@@ -397,7 +397,7 @@ export default function ServiciosPage() {
 
     return (
         <main
-            className="min-h-screen bg-[#06051d] text-white"
+            className="min-h-screen bg-[#090d13] text-white"
             style={{ fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif" }}
         >
             {/* ── Noise + grid overlays ── */}
@@ -419,11 +419,11 @@ export default function ServiciosPage() {
             {/* ── Ambient glows ── */}
             <div
                 className="fixed top-0 left-1/4 w-[600px] h-[500px] pointer-events-none z-0"
-                style={{ background: 'radial-gradient(ellipse, rgba(132,204,22,0.05) 0%, transparent 70%)' }}
+                style={{ background: 'radial-gradient(ellipse, rgba(176, 208, 0,0.05) 0%, transparent 70%)' }}
             />
             <div
                 className="fixed bottom-0 right-1/4 w-[500px] h-[400px] pointer-events-none z-0"
-                style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.04) 0%, transparent 70%)' }}
+                style={{ background: 'radial-gradient(ellipse, rgba(134, 191, 212,0.04) 0%, transparent 70%)' }}
             />
 
             <div className="relative z-10">
@@ -598,7 +598,7 @@ export default function ServiciosPage() {
                         {/* Grid — gap-px con fondo para crear efecto de líneas */}
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-slate-800/40">
                             {SERVICES.map((service, i) => (
-                                <div key={service.id} className="bg-[#06051d]">
+                                <div key={service.id} className="bg-[#090d13]">
                                     <ServiceCard service={service} index={i} />
                                 </div>
                             ))}
@@ -634,7 +634,7 @@ export default function ServiciosPage() {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={promise.inView ? { opacity: 1, y: 0 } : {}}
                                     transition={{ delay: i * 0.1, duration: 0.55 }}
-                                    className="bg-[#06051d] p-8 md:p-10 group hover:bg-slate-900/30 transition-colors"
+                                    className="bg-[#090d13] p-8 md:p-10 group hover:bg-slate-900/30 transition-colors"
                                 >
                                     <span
                                         className="block text-3xl font-light text-lime-400/30 mb-5 group-hover:text-lime-400/50 transition-colors"
@@ -665,12 +665,12 @@ export default function ServiciosPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.65 }}
-                            className="relative border border-slate-800/60 bg-[#070620]/60 p-10 md:p-16 overflow-hidden"
+                            className="relative border border-slate-800/60 bg-[#131923]/60 p-10 md:p-16 overflow-hidden"
                         >
                             {/* Decorative glow inside CTA */}
                             <div
                                 className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-40 pointer-events-none"
-                                style={{ background: 'radial-gradient(ellipse, rgba(132,204,22,0.07) 0%, transparent 70%)' }}
+                                style={{ background: 'radial-gradient(ellipse, rgba(176, 208, 0,0.07) 0%, transparent 70%)' }}
                             />
                             <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
                                 <div>
@@ -696,7 +696,7 @@ export default function ServiciosPage() {
                                 <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
                                     <Link
                                         href="/Contact"
-                                        className="group inline-flex items-center gap-2.5 px-8 py-4 bg-white text-[#06051d] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
+                                        className="group inline-flex items-center gap-2.5 px-8 py-4 bg-white text-[#090d13] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                     >
                                         Iniciar proyecto
                                         <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

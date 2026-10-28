@@ -37,7 +37,7 @@ export default function Footer() {
     if (HIDDEN_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + '/'))) return null;
 
     return (
-        <footer className="relative bg-[#04030f] border-t border-slate-800/60">
+        <footer className="relative bg-[#010409] border-t border-slate-800/60">
             <div className="h-px bg-gradient-to-r from-transparent via-lime-400/30 to-transparent" />
 
             <div className="max-w-7xl mx-auto px-6 md:px-8 pt-16 pb-10">

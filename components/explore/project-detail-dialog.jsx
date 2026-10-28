@@ -55,7 +55,7 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#06051d]/85 backdrop-blur-md"
+                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#090d13]/85 backdrop-blur-md"
                 onClick={onClose}
             >
                 <motion.div
@@ -63,7 +63,7 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 16 }}
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative w-full max-w-4xl max-h-[90vh] bg-[#080810] border border-slate-800/80 shadow-2xl shadow-black/60 overflow-hidden flex flex-col"
+                    className="relative w-full max-w-4xl max-h-[90vh] bg-[#131923] border border-slate-800/80 shadow-2xl shadow-black/60 overflow-hidden flex flex-col"
                     onClick={e => e.stopPropagation()}
                 >
                     {/* Top accent */}
@@ -136,7 +136,7 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
                             {/* Stats */}
                             <div className="grid grid-cols-3 md:grid-cols-6 gap-px bg-slate-800/40">
                                 {Object.entries(project.stats).slice(0, 6).map(([key, value]) => (
-                                    <div key={key} className="bg-[#080810] px-3 py-4 text-center">
+                                    <div key={key} className="bg-[#131923] px-3 py-4 text-center">
                                         <p
                                             className={`text-xl font-light ${accent.text} leading-none mb-1`}
                                             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
@@ -160,7 +160,7 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
                                             initial={{ opacity: 0, x: -12 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: i * 0.04 }}
-                                            className="bg-[#080810] flex items-center gap-3 px-4 py-3"
+                                            className="bg-[#131923] flex items-center gap-3 px-4 py-3"
                                         >
                                             <TrendingUp className={`w-3.5 h-3.5 ${accent.text} shrink-0 opacity-70`} />
                                             <span className="text-xs text-slate-400">{highlight}</span>
@@ -179,7 +179,7 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
                                             initial={{ opacity: 0, y: 8 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: i * 0.04 }}
-                                            className="bg-[#080810] px-5 py-4"
+                                            className="bg-[#131923] px-5 py-4"
                                         >
                                             <div className="flex items-start gap-3">
                                                 <div className={`w-1 h-4 shrink-0 mt-0.5 ${accent.bar}`} />
@@ -214,7 +214,7 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
                                 <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Arquitectura del sistema</p>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-800/30">
                                     {Object.entries(project.architecture).map(([key, value], i) => (
-                                        <div key={key} className="bg-[#080810] px-4 py-4">
+                                        <div key={key} className="bg-[#131923] px-4 py-4">
                                             <div className="flex items-center gap-2 mb-2">
                                                 <Layers className={`w-3 h-3 ${accent.text} opacity-70`} />
                                                 <span className="text-[10px] uppercase tracking-[0.15em] text-slate-500 capitalize">{key}</span>
@@ -253,7 +253,7 @@ export function ProjectDetailDialog({ projectId, onClose }: ProjectDetailDialogP
                                 <motion.button
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="flex-1 flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
+                                    className="flex-1 flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                 >
                                     Ver sitio en vivo
                                     <ExternalLink className="w-3.5 h-3.5" />

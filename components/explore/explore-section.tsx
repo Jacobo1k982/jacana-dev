@@ -75,7 +75,7 @@ function ServiceCard({ item, index, onViewDetails }: {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative flex flex-col bg-[#080810] border border-slate-800/70 hover:border-slate-700/80 transition-colors duration-300 overflow-hidden"
+            className="group relative flex flex-col bg-[#131923] border border-slate-800/70 hover:border-slate-700/80 transition-colors duration-300 overflow-hidden"
         >
             {/* Top accent on hover */}
             <div className={`absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${accent.border.replace('border-', 'bg-').replace('/30', '/60')}`} />
@@ -185,7 +185,7 @@ function ProjectCard({ item, index, onViewDetails }: {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.04, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             onClick={onViewDetails}
-            className="group flex items-start gap-4 px-5 py-4 bg-[#080810] border border-slate-800/70 hover:border-slate-700/80 transition-colors cursor-pointer"
+            className="group flex items-start gap-4 px-5 py-4 bg-[#131923] border border-slate-800/70 hover:border-slate-700/80 transition-colors cursor-pointer"
         >
             {/* Icon */}
             <div className={`w-10 h-10 flex items-center justify-center border ${accent.border} shrink-0 mt-0.5`}>
@@ -258,7 +258,7 @@ export default function ExploreSection() {
     };
 
     return (
-        <section id="explore" className="relative py-24 md:py-36 bg-[#080810] overflow-hidden">
+        <section id="explore" className="relative py-24 md:py-36 bg-[#0d1117] overflow-hidden">
 
             {/* Grain */}
             <div
@@ -379,7 +379,7 @@ export default function ExploreSection() {
                         }
                     >
                         {filteredItems.length === 0 ? (
-                            <div className="col-span-full flex flex-col items-center py-24 bg-[#080810]">
+                            <div className="col-span-full flex flex-col items-center py-24 bg-[#131923]">
                                 <Search className="w-8 h-8 text-slate-700 mb-3" />
                                 <p className="text-sm text-slate-500 mb-1">Sin resultados</p>
                                 <button
@@ -423,7 +423,7 @@ export default function ExploreSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.07 }}
-                                className="bg-[#080810] px-6 py-6 flex items-center gap-4"
+                                className="bg-[#131923] px-6 py-6 flex items-center gap-4"
                             >
                                 <Icon className="w-4 h-4 text-lime-400/50 shrink-0" />
                                 <div>
@@ -457,7 +457,7 @@ export default function ExploreSection() {
                         href="#contact"
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.98 }}
-                        className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors shrink-0"
+                        className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors shrink-0"
                     >
                         Contáctanos
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

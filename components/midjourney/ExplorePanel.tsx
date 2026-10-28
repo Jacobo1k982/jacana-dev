@@ -62,7 +62,7 @@ export default function ExplorePanel({ isOpen, onClose }: ExplorePanelProps) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-[#06051d]/90 backdrop-blur-md z-50"
+                        className="fixed inset-0 bg-[#090d13]/90 backdrop-blur-md z-50"
                     />
 
                     {/* Panel */}
@@ -71,7 +71,7 @@ export default function ExplorePanel({ isOpen, onClose }: ExplorePanelProps) {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: '100%' }}
                         transition={{ type: 'spring', damping: 30, stiffness: 280 }}
-                        className="fixed inset-0 md:inset-8 lg:inset-12 bg-[#080810] border-0 md:border md:border-slate-800/70 z-50 overflow-hidden flex flex-col shadow-2xl shadow-black/60"
+                        className="fixed inset-0 md:inset-8 lg:inset-12 bg-[#131923] border-0 md:border md:border-slate-800/70 z-50 overflow-hidden flex flex-col shadow-2xl shadow-black/60"
                     >
                         {/* Top accent */}
                         <div className="h-px bg-gradient-to-r from-transparent via-lime-400/40 to-transparent shrink-0" />
@@ -146,7 +146,7 @@ export default function ExplorePanel({ isOpen, onClose }: ExplorePanelProps) {
                                                 initial={{ opacity: 0, y: 12 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 transition={{ delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                                                className="group relative bg-[#080810] overflow-hidden flex flex-col hover:bg-slate-900/40 transition-colors"
+                                                className="group relative bg-[#131923] overflow-hidden flex flex-col hover:bg-slate-900/40 transition-colors"
                                             >
                                                 {/* Image */}
                                                 <div className="aspect-video relative overflow-hidden shrink-0">
@@ -157,10 +157,10 @@ export default function ExplorePanel({ isOpen, onClose }: ExplorePanelProps) {
                                                         loading="lazy"
                                                         decoding="async"
                                                     />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-[#080810] via-transparent to-transparent" />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-[#131923] via-transparent to-transparent" />
 
                                                     {/* Category chip */}
-                                                    <div className="absolute top-2 left-2 flex items-center gap-1.5 px-2 py-1 bg-[#080810]/80 backdrop-blur-sm border border-slate-800/60">
+                                                    <div className="absolute top-2 left-2 flex items-center gap-1.5 px-2 py-1 bg-[#131923]/80 backdrop-blur-sm border border-slate-800/60">
                                                         <CatIcon className="w-3 h-3 text-lime-400/70" />
                                                         <span className="text-[9px] uppercase tracking-[0.2em] text-slate-500 hidden sm:inline">
                                                             {catIcon?.label}
@@ -200,7 +200,7 @@ export default function ExplorePanel({ isOpen, onClose }: ExplorePanelProps) {
                                                     <div className="flex items-center gap-2">
                                                         <a
                                                             href={project.demo}
-                                                            className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-white text-[#080810] hover:bg-lime-50 text-xs font-medium uppercase tracking-[0.1em] transition-colors"
+                                                            className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-white text-[#131923] hover:bg-lime-50 text-xs font-medium uppercase tracking-[0.1em] transition-colors"
                                                         >
                                                             <ExternalLink className="w-3 h-3" />
                                                             <span>Ver demo</span>

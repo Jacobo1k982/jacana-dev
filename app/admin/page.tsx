@@ -33,7 +33,7 @@ export default async function AdminPage() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {stats.map(({ label, value, icon: Icon }) => (
-                    <div key={label} className="bg-[#080810] border border-slate-800/60 p-6">
+                    <div key={label} className="bg-[#131923] border border-slate-800/60 p-6">
                         <div className="flex items-center justify-between mb-4">
                             <span className="text-[9px] uppercase tracking-[0.25em] text-slate-600">{label}</span>
                             <Icon className="w-4 h-4 text-lime-400/40" />
@@ -46,7 +46,7 @@ export default async function AdminPage() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
-                <a href="/admin/users" className="group bg-[#080810] border border-slate-800/60 p-6 hover:border-lime-400/20 transition-colors">
+                <a href="/admin/users" className="group bg-[#131923] border border-slate-800/60 p-6 hover:border-lime-400/20 transition-colors">
                     <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                     <div className="flex items-center justify-between">
                         <div>
@@ -56,7 +56,7 @@ export default async function AdminPage() {
                         <Users className="w-8 h-8 text-slate-700 group-hover:text-lime-400/40 transition-colors" />
                     </div>
                 </a>
-                <a href="/admin/projects" className="group bg-[#080810] border border-slate-800/60 p-6 hover:border-lime-400/20 transition-colors">
+                <a href="/admin/projects" className="group bg-[#131923] border border-slate-800/60 p-6 hover:border-lime-400/20 transition-colors">
                     <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                     <div className="flex items-center justify-between">
                         <div>

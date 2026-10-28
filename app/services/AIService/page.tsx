@@ -140,7 +140,7 @@ function TabContent({ activeTab }: { activeTab: string }) {
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.05 }}
-                        className="bg-[#080810] px-5 py-4"
+                        className="bg-[#131923] px-5 py-4"
                     >
                         <div className="flex items-center justify-between mb-2">
                             <span className="text-xs text-slate-400">{tech.name}</span>
@@ -169,7 +169,7 @@ function TabContent({ activeTab }: { activeTab: string }) {
                         transition={{ delay: i * 0.07 }}
                         className="group relative flex gap-5 pb-6 last:pb-0 pl-6"
                     >
-                        <div className="absolute -left-[9px] top-0 w-[18px] h-[18px] flex items-center justify-center border border-slate-700/60 bg-[#080810] group-hover:border-rose-400/40 transition-colors">
+                        <div className="absolute -left-[9px] top-0 w-[18px] h-[18px] flex items-center justify-center border border-slate-700/60 bg-[#131923] group-hover:border-rose-400/40 transition-colors">
                             <span className="text-[9px] font-medium text-slate-600 group-hover:text-rose-400/70 transition-colors">
                                 {step.step}
                             </span>
@@ -216,14 +216,14 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-[#06051d]/85 backdrop-blur-md z-50"
+                        className="fixed inset-0 bg-[#090d13]/85 backdrop-blur-md z-50"
                     />
                     <motion.div
                         initial={{ opacity: 0, y: 24 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 16 }}
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        className="fixed inset-0 md:inset-6 lg:inset-10 z-50 bg-[#080810] border border-slate-800/80 shadow-2xl shadow-black/60 overflow-hidden flex flex-col"
+                        className="fixed inset-0 md:inset-6 lg:inset-10 z-50 bg-[#131923] border border-slate-800/80 shadow-2xl shadow-black/60 overflow-hidden flex flex-col"
                         onClick={e => e.stopPropagation()}
                     >
                         {/* Top accent */}
@@ -283,7 +283,7 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                         { label: 'Productos propios', value: `${SITE_STATS.ownProducts}`, icon: TrendingUp },
                                         { label: 'Años', value: `${SITE_STATS.years}`, icon: Cpu },
                                     ].map(s => (
-                                        <div key={s.label} className="bg-[#080810] px-4 py-5 text-center">
+                                        <div key={s.label} className="bg-[#131923] px-4 py-5 text-center">
                                             <p
                                                 className="text-2xl font-light text-rose-400/80 leading-none mb-1"
                                                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
@@ -350,7 +350,7 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                     <motion.button
                                         whileHover={{ scale: 1.01 }}
                                         whileTap={{ scale: 0.98 }}
-                                        className="flex-1 flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
+                                        className="flex-1 flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                     >
                                         <Rocket className="w-3.5 h-3.5" />
                                         Implementar IA
@@ -391,7 +391,7 @@ function MainCard({ onClick }: { onClick: () => void }) {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             onClick={onClick}
-            className="group relative bg-[#080810] border border-slate-800/70 hover:border-slate-700/80 transition-colors duration-300 overflow-hidden cursor-pointer"
+            className="group relative bg-[#131923] border border-slate-800/70 hover:border-slate-700/80 transition-colors duration-300 overflow-hidden cursor-pointer"
         >
             {/* Top rose accent on hover */}
             <div className="absolute top-0 left-0 right-0 h-px bg-rose-400/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -459,7 +459,7 @@ function MainCard({ onClick }: { onClick: () => void }) {
                         { value: `${SITE_STATS.ownProducts}`, label: 'Productos propios' },
                         { value: `${SITE_STATS.years}`, label: 'Años' },
                     ].map(s => (
-                        <div key={s.label} className="bg-[#080810] px-3 py-4 text-center group-hover:bg-slate-900/40 transition-colors">
+                        <div key={s.label} className="bg-[#131923] px-3 py-4 text-center group-hover:bg-slate-900/40 transition-colors">
                             <p
                                 className="text-2xl font-light text-rose-400/80 leading-none mb-1"
                                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
@@ -483,7 +483,7 @@ export default function AIService() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="min-h-screen bg-[#080810] flex items-center justify-center p-8">
+        <div className="min-h-screen bg-[#0d1117] flex items-center justify-center p-8">
             {/* Ambient */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-rose-900/8 blur-[140px]" />

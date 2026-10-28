@@ -34,16 +34,16 @@ export async function POST(req: Request) {
         to: email,
         subject: "Recupera tu contraseña",
         html: `
-            <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #080810; color: #fff;">
+            <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #131923; color: #fff;">
                 <h2 style="font-weight: 300; margin-bottom: 8px;">Recuperar contraseña</h2>
-                <p style="color: #94a3b8; font-size: 14px; margin-bottom: 32px;">
+                <p style="color: #9aa9bd; font-size: 14px; margin-bottom: 32px;">
                     Recibimos una solicitud para restablecer tu contraseña. El link expira en 1 hora.
                 </p>
                 <a href="${resetUrl}"
-                    style="display: inline-block; padding: 12px 24px; background: #fff; color: #080810; text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;">
+                    style="display: inline-block; padding: 12px 24px; background: #fff; color: #131923; text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;">
                     Restablecer contraseña
                 </a>
-                <p style="color: #475569; font-size: 12px; margin-top: 32px;">
+                <p style="color: #4a5666; font-size: 12px; margin-top: 32px;">
                     Si no solicitaste esto, ignora este correo.
                 </p>
             </div>

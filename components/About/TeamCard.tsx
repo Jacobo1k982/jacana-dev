@@ -59,7 +59,7 @@ export default function TeamCard({ member, index }: TeamCardProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative flex flex-col bg-[#080810] border border-slate-800/70 hover:border-slate-700/80 transition-colors duration-300 overflow-hidden"
+            className="group relative flex flex-col bg-[#131923] border border-slate-800/70 hover:border-slate-700/80 transition-colors duration-300 overflow-hidden"
         >
             {/* Top accent line on hover */}
             <div className={`absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${accent.border.replace('border-', 'bg-').replace('/30', '/60')}`} />

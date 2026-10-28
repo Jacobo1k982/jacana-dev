@@ -14,7 +14,7 @@ import ConsultingService from '@/app/services/ConsultingService/page';
 
 export default function ServicesSection() {
     return (
-        <section id="services" className="relative py-24 md:py-36 overflow-hidden bg-[#080810]">
+        <section id="services" className="relative py-24 md:py-36 overflow-hidden bg-[#0d1117]">
 
             {/* Grain */}
             <div
@@ -86,7 +86,7 @@ export default function ServicesSection() {
                             href="/Contact"
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.98 }}
-                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors shrink-0"
+                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors shrink-0"
                         >
                             Contactar ahora
                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

@@ -54,7 +54,7 @@ export default function TechSection() {
     const active = categories.find(([key]) => key === activeCategory);
 
     return (
-        <section id="tech" className="relative py-24 md:py-36 bg-[#080810] overflow-hidden">
+        <section id="tech" className="relative py-24 md:py-36 bg-[#0d1117] overflow-hidden">
 
             <SectionBackdrop variant="grid" />
             {/* Grain */}
@@ -210,7 +210,7 @@ export default function TechSection() {
                             href="/Contact"
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.98 }}
-                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
+                            className="group flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                         >
                             Consulta técnica
                             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

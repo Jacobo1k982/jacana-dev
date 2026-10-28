@@ -61,7 +61,7 @@ export function UserMenu({ onLogout }: UserMenuProps) {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -6 }}
                             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="absolute right-0 top-full mt-1 w-52 bg-[#080810] border border-slate-800/80 shadow-2xl shadow-black/50 z-50"
+                            className="absolute right-0 top-full mt-1 w-52 bg-[#131923] border border-slate-800/80 shadow-2xl shadow-black/50 z-50"
                         >
                             <div className="h-px bg-gradient-to-r from-transparent via-lime-400/30 to-transparent" />
 

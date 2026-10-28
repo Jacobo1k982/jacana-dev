@@ -18,8 +18,8 @@ const mix = (color: string, pct: number) =>
 
 export default function SectionBackdrop({
     variant = 'grid',
-    accent = '#a3e635',
-    secondary = '#4f46e5',
+    accent = '#b0d000',
+    secondary = '#5f7fa8',
 }: Props) {
     const fadeMask =
         'radial-gradient(ellipse 75% 65% at 50% 28%, #000 25%, transparent 75%)';

@@ -65,18 +65,18 @@ export async function POST(req: Request) {
             replyTo: email,
             subject: `Nuevo contacto: ${name}${service ? ` — ${service}` : ''}`,
             html: `
-                <div style="font-family: sans-serif; max-width: 560px; margin: 0 auto; padding: 32px; background: #080810; color: #fff;">
+                <div style="font-family: sans-serif; max-width: 560px; margin: 0 auto; padding: 32px; background: #131923; color: #fff;">
                     <h2 style="font-weight: 300; margin-bottom: 24px;">Nuevo mensaje desde jacana-dev.com</h2>
                     <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
                         ${rows.map(([label, value]) => `
                             <tr>
-                                <td style="padding: 6px 16px 6px 0; color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; vertical-align: top; white-space: nowrap;">${label}</td>
-                                <td style="padding: 6px 0; color: #e2e8f0; font-size: 14px;">${escapeHtml(value)}</td>
+                                <td style="padding: 6px 16px 6px 0; color: #7d8da3; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; vertical-align: top; white-space: nowrap;">${label}</td>
+                                <td style="padding: 6px 0; color: #d0d9e3; font-size: 14px;">${escapeHtml(value)}</td>
                             </tr>
                         `).join('')}
                     </table>
-                    <p style="color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">Mensaje</p>
-                    <p style="color: #e2e8f0; font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(message)}</p>
+                    <p style="color: #7d8da3; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">Mensaje</p>
+                    <p style="color: #d0d9e3; font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(message)}</p>
                 </div>
             `,
         });

@@ -50,10 +50,10 @@ export default function AdminProjectsClient({ initialProjects }: { initialProjec
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Buscar por nombre o email..."
-                className="w-full px-4 py-3 bg-[#080810] border border-slate-800/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors"
+                className="w-full px-4 py-3 bg-[#131923] border border-slate-800/60 text-white text-sm placeholder-slate-700 focus:border-lime-400/60 focus:outline-none transition-colors"
             />
 
-            <div className="bg-[#080810] border border-slate-800/60 overflow-hidden">
+            <div className="bg-[#131923] border border-slate-800/60 overflow-hidden">
                 <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent" />
                 <div className="overflow-x-auto">
                     <table className="w-full">

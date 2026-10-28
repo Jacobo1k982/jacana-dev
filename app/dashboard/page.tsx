@@ -29,7 +29,7 @@ export default async function DashboardPage() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {stats.map(({ label, value, icon: Icon }) => (
-                    <div key={label} className="bg-[#080810] border border-slate-800/60 p-6">
+                    <div key={label} className="bg-[#131923] border border-slate-800/60 p-6">
                         <div className="flex items-center justify-between mb-4">
                             <span className="text-[9px] uppercase tracking-[0.25em] text-slate-600">{label}</span>
                             <Icon className="w-4 h-4 text-lime-400/40" />
@@ -42,7 +42,7 @@ export default async function DashboardPage() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-[#080810] border border-slate-800/60 p-6">
+                <div className="bg-[#131923] border border-slate-800/60 p-6">
                     <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                     <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Accesos rapidos</p>
                     <div className="space-y-2">
@@ -59,7 +59,7 @@ export default async function DashboardPage() {
                     </div>
                 </div>
 
-                <div className="bg-[#080810] border border-slate-800/60 p-6">
+                <div className="bg-[#131923] border border-slate-800/60 p-6">
                     <div className="h-px bg-gradient-to-r from-lime-400/20 to-transparent mb-6" />
                     <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Informacion de cuenta</p>
                     <div className="space-y-3">

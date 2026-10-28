@@ -83,7 +83,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: P
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <p className="text-xs text-slate-500">{projects.length} proyecto{projects.length !== 1 ? 's' : ''}</p>
-                <motion.button onClick={openCreate} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors">
+                <motion.button onClick={openCreate} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors">
                     <Plus className="w-3.5 h-3.5" />
                     Nuevo proyecto
                 </motion.button>
@@ -98,7 +98,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: P
 
             <AnimatePresence>
                 {showForm && (
-                    <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="bg-[#080810] border border-slate-800/60 p-6 md:p-8">
+                    <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="bg-[#131923] border border-slate-800/60 p-6 md:p-8">
                         <div className="flex items-center justify-between mb-6">
                             <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600">{editingId ? 'Editar proyecto' : 'Nuevo proyecto'}</p>
                             <button onClick={() => setShowForm(false)} className="text-slate-600 hover:text-slate-400 transition-colors">
@@ -123,9 +123,9 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: P
                                 <div className="space-y-2">
                                     <label className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Estado</label>
                                     <select value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value as ProjectStatus }))} className="w-full px-0 py-3 bg-transparent border-b border-slate-700/60 text-white text-sm focus:border-lime-400/60 focus:outline-none transition-colors">
-                                        <option value="ACTIVE" className="bg-[#080810]">Activo</option>
-                                        <option value="PAUSED" className="bg-[#080810]">Pausado</option>
-                                        <option value="COMPLETED" className="bg-[#080810]">Completado</option>
+                                        <option value="ACTIVE" className="bg-[#131923]">Activo</option>
+                                        <option value="PAUSED" className="bg-[#131923]">Pausado</option>
+                                        <option value="COMPLETED" className="bg-[#131923]">Completado</option>
                                     </select>
                                 </div>
 
@@ -152,7 +152,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: P
 
                             <div className="flex justify-end gap-3 pt-2">
                                 <button type="button" onClick={() => setShowForm(false)} className="px-5 py-2.5 text-xs uppercase tracking-[0.12em] text-slate-500 hover:text-slate-300 transition-colors">Cancelar</button>
-                                <motion.button type="submit" disabled={isLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors disabled:opacity-50">
+                                <motion.button type="submit" disabled={isLoading} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-2.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.12em] hover:bg-lime-50 transition-colors disabled:opacity-50">
                                     {isLoading ? <><Loader2 className="w-3.5 h-3.5 animate-spin" />Guardando...</> : 'Guardar'}
                                 </motion.button>
                             </div>
@@ -162,7 +162,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: P
             </AnimatePresence>
 
             {projects.length === 0 ? (
-                <div className="bg-[#080810] border border-slate-800/60 p-12 flex flex-col items-center gap-4 text-center">
+                <div className="bg-[#131923] border border-slate-800/60 p-12 flex flex-col items-center gap-4 text-center">
                     <FolderKanban className="w-10 h-10 text-slate-700" />
                     <p className="text-sm text-slate-500">No tienes proyectos aun.</p>
                     <button onClick={openCreate} className="text-[10px] uppercase tracking-[0.2em] text-lime-400/60 hover:text-lime-400 transition-colors">Crear tu primer proyecto</button>
@@ -172,7 +172,7 @@ export default function ProjectsClient({ initialProjects }: { initialProjects: P
                     {projects.map((project) => {
                         const status = statusConfig[project.status]
                         return (
-                            <motion.div key={project.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="bg-[#080810] border border-slate-800/60 overflow-hidden group">
+                            <motion.div key={project.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="bg-[#131923] border border-slate-800/60 overflow-hidden group">
                                 {project.image && (
                                     <div className="h-36 overflow-hidden border-b border-slate-800/60">
                                         <img src={project.image} alt={project.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />

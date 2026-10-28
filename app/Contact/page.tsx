@@ -128,9 +128,9 @@ const SelectField = ({
                     focus:border-lime-400/60 focus:outline-none transition-colors duration-300
                     hover:border-slate-500/80 appearance-none cursor-pointer"
             >
-                <option value="" className="bg-[#0d0d1a] text-slate-500">{placeholder}</option>
+                <option value="" className="bg-[#161b22] text-slate-500">{placeholder}</option>
                 {options.map((opt) => (
-                    <option key={opt} value={opt} className="bg-[#0d0d1a] text-white">{opt}</option>
+                    <option key={opt} value={opt} className="bg-[#161b22] text-white">{opt}</option>
                 ))}
             </select>
         </div>
@@ -195,9 +195,9 @@ export default function Contact() {
     };
 
     return (
-        <main className="min-h-screen bg-[#06051d]">
+        <main className="min-h-screen bg-[#090d13]">
             <Navbar />
-            <section id="contact" className="relative py-24 md:py-36 overflow-hidden bg-[#080810] scroll-mt-20">
+            <section id="contact" className="relative py-24 md:py-36 overflow-hidden bg-[#0d1117] scroll-mt-20">
                 <SectionBackdrop variant="spotlight" />
                 {/* Grain overlay */}
                 <div
@@ -315,7 +315,7 @@ export default function Contact() {
                                         whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: i * 0.06 + 0.2 }}
-                                        className="bg-[#080810] p-4 sm:p-6 text-center"
+                                        className="bg-[#131923] p-4 sm:p-6 text-center"
                                     >
                                         <p
                                             className="text-2xl sm:text-3xl font-light text-lime-300 mb-1"
@@ -441,9 +441,9 @@ export default function Contact() {
                                         disabled={isSubmitting}
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
-                                        className="group w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-lime-400 text-[#080810]
+                                        className="group w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-lime-400 text-[#131923]
                                             text-sm font-semibold uppercase tracking-[0.15em]
-                                            hover:bg-lime-300 shadow-[0_0_30px_-8px_rgba(163,230,53,0.6)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                            hover:bg-lime-300 shadow-[0_0_30px_-8px_rgba(176, 208, 0,0.6)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {isSubmitting ? (
                                             <><div className="w-4 h-4 border-2 border-slate-800/40 border-t-slate-900 rounded-full animate-spin" />Enviando…</>

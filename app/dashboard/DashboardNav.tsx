@@ -36,7 +36,7 @@ export default function DashboardNav({ user }: DashboardNavProps) {
     const RoleIcon = role.icon
 
     return (
-        <nav className="border-b border-slate-800/60 bg-[#080810]/95 backdrop-blur-xl sticky top-0 z-40">
+        <nav className="border-b border-slate-800/60 bg-[#131923]/95 backdrop-blur-xl sticky top-0 z-40">
             <div className="max-w-7xl mx-auto px-6 md:px-8">
                 <div className="flex items-center justify-between h-16">
 
@@ -72,7 +72,7 @@ export default function DashboardNav({ user }: DashboardNavProps) {
                             {menuOpen && (
                                 <>
                                     <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
-                                    <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }} className="absolute right-0 top-full mt-1 w-56 bg-[#080810] border border-slate-800/80 shadow-2xl shadow-black/50 z-50">
+                                    <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }} className="absolute right-0 top-full mt-1 w-56 bg-[#131923] border border-slate-800/80 shadow-2xl shadow-black/50 z-50">
                                         <div className="h-px bg-gradient-to-r from-transparent via-lime-400/30 to-transparent" />
 
                                         <div className="px-5 py-4 border-b border-slate-800/60">

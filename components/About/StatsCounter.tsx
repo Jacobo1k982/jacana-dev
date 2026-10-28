@@ -68,7 +68,7 @@ export default function StatsCounter({ stats }: StatsCounterProps) {
                     initial={{ opacity: 0, y: 16 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                    className="group bg-[#080810] px-6 py-8 md:px-8 md:py-10 text-center hover:bg-slate-900/40 transition-colors relative overflow-hidden"
+                    className="group bg-[#131923] px-6 py-8 md:px-8 md:py-10 text-center hover:bg-slate-900/40 transition-colors relative overflow-hidden"
                 >
                     {/* Hover top line */}
                     <div className="absolute top-0 left-0 right-0 h-px bg-lime-400/40 scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />

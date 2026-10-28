@@ -52,7 +52,7 @@ export function ServiceDetailDialog({ serviceId, onClose }: ServiceDetailDialogP
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#06051d]/85 backdrop-blur-md"
+                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#090d13]/85 backdrop-blur-md"
                 onClick={onClose}
             >
                 <motion.div
@@ -60,7 +60,7 @@ export function ServiceDetailDialog({ serviceId, onClose }: ServiceDetailDialogP
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 16 }}
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative w-full max-w-4xl max-h-[90vh] bg-[#080810] border border-slate-800/80 shadow-2xl shadow-black/60 overflow-hidden flex flex-col"
+                    className="relative w-full max-w-4xl max-h-[90vh] bg-[#131923] border border-slate-800/80 shadow-2xl shadow-black/60 overflow-hidden flex flex-col"
                     onClick={e => e.stopPropagation()}
                 >
                     {/* Top accent */}
@@ -135,7 +135,7 @@ export function ServiceDetailDialog({ serviceId, onClose }: ServiceDetailDialogP
                                     { label: 'Entrega', value: service.stats.avgDelivery },
                                     { label: 'Equipo', value: service.stats.teamSize },
                                 ].map(stat => (
-                                    <div key={stat.label} className="bg-[#080810] px-3 py-4 text-center">
+                                    <div key={stat.label} className="bg-[#131923] px-3 py-4 text-center">
                                         <p
                                             className={`text-xl font-light ${accent.text} leading-none mb-1`}
                                             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
@@ -189,7 +189,7 @@ export function ServiceDetailDialog({ serviceId, onClose }: ServiceDetailDialogP
                                             initial={{ opacity: 0, x: -12 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: i * 0.04 }}
-                                            className="bg-[#080810] px-5 py-4 flex items-start gap-3"
+                                            className="bg-[#131923] px-5 py-4 flex items-start gap-3"
                                         >
                                             <div className={`w-1 h-4 shrink-0 mt-0.5 ${accent.bar}`} />
                                             <div>
@@ -208,7 +208,7 @@ export function ServiceDetailDialog({ serviceId, onClose }: ServiceDetailDialogP
                                     {service.process.map((step: { step: number; title: string; description: string }, i: number) => (
                                         <div key={i} className="relative flex gap-5 pb-6 last:pb-0 pl-6">
                                             {/* Step dot */}
-                                            <div className={`absolute -left-[9px] top-0 w-[18px] h-[18px] flex items-center justify-center border ${accent.border} bg-[#080810]`}>
+                                            <div className={`absolute -left-[9px] top-0 w-[18px] h-[18px] flex items-center justify-center border ${accent.border} bg-[#131923]`}>
                                                 <span className={`text-[9px] font-medium ${accent.text}`}>{step.step}</span>
                                             </div>
                                             <div>
@@ -225,7 +225,7 @@ export function ServiceDetailDialog({ serviceId, onClose }: ServiceDetailDialogP
                                 <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-4">Planes y precios</p>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-800/30">
                                     {service.pricing.ranges.map((plan: { type: string; price: string; time: string }, i: number) => (
-                                        <div key={i} className="bg-[#080810] px-6 py-5">
+                                        <div key={i} className="bg-[#131923] px-6 py-5">
                                             <p className="text-[10px] uppercase tracking-[0.2em] text-slate-600 mb-2">{plan.type}</p>
                                             <p
                                                 className={`text-2xl font-light ${accent.text} mb-1`}
@@ -267,7 +267,7 @@ export function ServiceDetailDialog({ serviceId, onClose }: ServiceDetailDialogP
                                 <motion.button
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="flex-1 flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
+                                    className="flex-1 flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                 >
                                     Solicitar servicio
                                     <ArrowRight className="w-3.5 h-3.5" />

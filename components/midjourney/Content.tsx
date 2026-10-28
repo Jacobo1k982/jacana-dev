@@ -110,7 +110,7 @@ export default function Content() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                                className="group relative aspect-square bg-[#080810] overflow-hidden cursor-pointer"
+                                className="group relative aspect-square bg-[#131923] overflow-hidden cursor-pointer"
                             >
                                 <img
                                     src={project.src}
@@ -120,7 +120,7 @@ export default function Content() {
                                     decoding="async"
                                 />
                                 {/* Overlay */}
-                                <div className="absolute inset-0 bg-[#080810]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-1 p-3">
+                                <div className="absolute inset-0 bg-[#131923]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-1 p-3">
                                     <span
                                         className="text-white text-center text-base font-light leading-snug"
                                         style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
@@ -166,7 +166,7 @@ export default function Content() {
                     </div>
                     <a
                         href="mailto:jgutierrez@jacana-dev.com?subject=Quiero%20unirme%20al%20equipo%20de%20Jacana%20Dev"
-                        className="group inline-flex items-center gap-2.5 px-6 py-3 bg-white text-[#080810] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
+                        className="group inline-flex items-center gap-2.5 px-6 py-3 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                     >
                         Escríbenos
                         <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
