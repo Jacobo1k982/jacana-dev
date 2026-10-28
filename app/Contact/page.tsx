@@ -4,25 +4,19 @@ import { SITE_STATS } from '@/lib/site-stats';
 import { useId, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    Mail, Phone, MapPin, Clock, Send, Github, Linkedin,
-    Twitter, MessageSquare, CheckCircle, AlertCircle,
+    Mail, Phone, MapPin, Clock, Send,
+    MessageSquare, CheckCircle, AlertCircle,
     User, Building, FileText, ArrowRight, Plus, Minus,
-    Facebook,
 } from 'lucide-react';
 import Navbar from '@/components/Navbar/navbar';
+import SocialIcon from '@/components/SocialIcon';
+import { SOCIALS } from '@/lib/socials';
 
 const contactInfo = [
     { icon: Mail, title: 'Email', value: 'jgutierrez@jacana-dev.com', link: 'mailto:jgutierrez@jacana-dev.com', external: false },
     { icon: Phone, title: 'Teléfono', value: '+506 8790 5876', link: 'tel:+50687905876', external: false },
     { icon: MapPin, title: 'Ubicación', value: 'San Pedro, Montes de Oca, Costa Rica', link: 'https://maps.google.com/?q=San+Pedro,+Montes+de+Oca,+Costa+Rica', external: true },
     { icon: Clock, title: 'Horario', value: 'Lun – Vie · 9:00 – 18:00', link: null, external: false },
-];
-
-const socialLinks = [
-    { icon: Github, href: 'https://github.com/', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com/', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com/', label: 'Twitter' },
-    { icon: Facebook, href: 'https://facebook.com/', label: 'Facebook' },
 ];
 
 const services = [
@@ -331,22 +325,20 @@ export default function Contact() {
                             <div>
                                 <p className="text-[10px] uppercase tracking-[0.25em] text-slate-600 mb-4">Síguenos</p>
                                 <div className="flex gap-3">
-                                    {socialLinks.map((s) => {
-                                        const Icon = s.icon;
-                                        return (
-                                            <motion.a
-                                                key={s.label}
-                                                href={s.href}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                aria-label={s.label}
-                                                whileHover={{ y: -2 }}
-                                                className="w-11 h-11 sm:w-10 sm:h-10 flex items-center justify-center border border-slate-800/80 hover:border-slate-600 text-slate-600 hover:text-slate-300 transition-all"
-                                            >
-                                                <Icon className="w-4 h-4" />
-                                            </motion.a>
-                                        );
-                                    })}
+                                    {SOCIALS.map((s) => (
+                                        <motion.a
+                                            key={s.key}
+                                            href={s.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={`${s.label}: ${s.handle}`}
+                                            title={`${s.label} · ${s.handle}`}
+                                            whileHover={{ y: -2 }}
+                                            className="w-11 h-11 sm:w-10 sm:h-10 flex items-center justify-center border border-slate-800/80 hover:border-slate-600 text-slate-600 hover:text-slate-300 transition-all"
+                                        >
+                                            <SocialIcon name={s.key} className="w-4 h-4" />
+                                        </motion.a>
+                                    ))}
                                 </div>
                             </div>
                         </motion.div>

@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import SocialIcon from '@/components/SocialIcon';
+import { SOCIALS } from '@/lib/socials';
 
 // Rutas privadas / de acceso: sin pie de página público
 const HIDDEN_PREFIXES = ['/dashboard', '/admin', '/login', '/forgot-password', '/reset-password'];
@@ -55,6 +57,23 @@ export default function Footer() {
                         <p className="mt-4 text-sm text-slate-500 leading-relaxed max-w-xs">
                             Construimos software que impulsa negocios, desde Costa Rica.
                         </p>
+
+                        <ul className="mt-6 flex gap-3" aria-label="Redes sociales">
+                            {SOCIALS.map((s) => (
+                                <li key={s.key}>
+                                    <a
+                                        href={s.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={`${s.label}: ${s.handle} (se abre en una pestaña nueva)`}
+                                        title={`${s.label} · ${s.handle}`}
+                                        className="w-10 h-10 flex items-center justify-center border border-slate-800 hover:border-lime-400/40 text-slate-500 hover:text-lime-400 transition-all"
+                                    >
+                                        <SocialIcon name={s.key} className="w-4 h-4" />
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
                     {/* Navegación */}
