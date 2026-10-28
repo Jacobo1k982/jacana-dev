@@ -1,5 +1,6 @@
 'use client';
 
+import SectionBackdrop from '@/components/ui/SectionBackdrop';
 import { SITE_STATS } from '@/lib/site-stats';
 import { useId, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -197,6 +198,7 @@ export default function Contact() {
         <main className="min-h-screen bg-[#06051d]">
             <Navbar />
             <section id="contact" className="relative py-24 md:py-36 overflow-hidden bg-[#080810] scroll-mt-20">
+                <SectionBackdrop variant="spotlight" />
                 {/* Grain overlay */}
                 <div
                     className="pointer-events-none absolute inset-0 opacity-[0.025]"

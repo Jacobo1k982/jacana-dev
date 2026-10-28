@@ -1,5 +1,6 @@
 'use client';
 
+import SectionBackdrop from '@/components/ui/SectionBackdrop';
 import { SITE_STATS } from '@/lib/site-stats';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -30,6 +31,7 @@ export default function ProjectsSection() {
     return (
         <section className="relative py-24 md:py-36 bg-[#080810] overflow-hidden">
 
+            <SectionBackdrop variant="dots" accent="#a3e635" secondary="#6366f1" />
             {/* Grain */}
             <div
                 className="absolute inset-0 opacity-[0.025] pointer-events-none"

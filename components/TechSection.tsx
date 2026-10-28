@@ -1,5 +1,6 @@
 'use client';
 
+import SectionBackdrop from '@/components/ui/SectionBackdrop';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -55,6 +56,7 @@ export default function TechSection() {
     return (
         <section id="tech" className="relative py-24 md:py-36 bg-[#080810] overflow-hidden">
 
+            <SectionBackdrop variant="grid" />
             {/* Grain */}
             <div
                 className="absolute inset-0 opacity-[0.025] pointer-events-none"

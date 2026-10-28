@@ -1,5 +1,6 @@
 'use client';
 
+import SectionBackdrop from '@/components/ui/SectionBackdrop';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
@@ -38,6 +39,7 @@ const fadeUp = {
 export default function DaxCloudShowcase() {
     return (
         <section id="daxcloud" className="relative py-24 md:py-32 bg-[#06051d] overflow-hidden border-t border-slate-800/40">
+            <SectionBackdrop variant="beam" accent="#FF6B5E" secondary="#4f46e5" />
             <div
                 className="absolute top-1/4 right-0 w-[520px] h-[520px] rounded-full blur-[150px] pointer-events-none opacity-[0.07]"
                 style={{ background: CORAL }}

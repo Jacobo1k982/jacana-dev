@@ -1,5 +1,6 @@
 'use client';
 
+import SectionBackdrop from '@/components/ui/SectionBackdrop';
 import { motion } from 'framer-motion';
 import {
     MapPin, Clock, Target, Eye, Rocket, Code, CheckCircle,
@@ -66,6 +67,7 @@ export default function AboutSection() {
     return (
         <section className="relative py-24 md:py-36 bg-[#080810] overflow-hidden">
 
+            <SectionBackdrop variant="spotlight" accent="#a3e635" secondary="#0ea5e9" />
             {/* Grain */}
             <div
                 className="absolute inset-0 opacity-[0.025] pointer-events-none"

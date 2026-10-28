@@ -1,5 +1,6 @@
 'use client';
 
+import SectionBackdrop from '@/components/ui/SectionBackdrop';
 import { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
@@ -306,9 +307,10 @@ export default function ServicesSection() {
     return (
         <section
             id="explore"
-            className="relative bg-[#06051d] py-28 md:py-36"
+            className="relative bg-[#06051d] py-28 md:py-36 overflow-hidden"
             style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif" }}
         >
+            <SectionBackdrop variant="grid" accent="#a3e635" secondary="#6366f1" />
             {/* Noise texture overlay */}
             <div
                 className="absolute inset-0 opacity-[0.025] pointer-events-none"
