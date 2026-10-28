@@ -5,7 +5,24 @@ import { sendPasswordResetEmail } from "@/lib/email"
 import crypto from "crypto"
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const GENERIC_OK = { message: "Si el email existe recibirás un correo" }
+const OK = { message: "Te enviamos un correo con las instrucciones para restablecer tu contraseña." }
+
+// Límite simple por conexión: evita que alguien use este formulario para averiguar
+// qué correos tienen cuenta o para llenar de correos a otra persona.
+const WINDOW_MS = 15 * 60 * 1000
+const MAX_ATTEMPTS = 5
+const attempts = new Map<string, { count: number; resetAt: number }>()
+
+function isRateLimited(key: string): boolean {
+    const now = Date.now()
+    const entry = attempts.get(key)
+    if (!entry || entry.resetAt < now) {
+        attempts.set(key, { count: 1, resetAt: now + WINDOW_MS })
+        return false
+    }
+    entry.count += 1
+    return entry.count > MAX_ATTEMPTS
+}
 
 export async function POST(req: Request) {
     let body: { email?: unknown }
@@ -13,6 +30,14 @@ export async function POST(req: Request) {
         body = await req.json()
     } catch {
         return NextResponse.json({ error: "Solicitud inválida." }, { status: 400 })
+    }
+
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+    if (isRateLimited(ip)) {
+        return NextResponse.json(
+            { error: "Demasiados intentos. Espera unos minutos e inténtalo de nuevo." },
+            { status: 429 }
+        )
     }
 
     const email = String(body.email ?? "").trim()
@@ -25,8 +50,13 @@ export async function POST(req: Request) {
         where: { email: { equals: email, mode: "insensitive" } },
     })
 
-    // Siempre responde OK aunque el email no exista (seguridad)
-    if (!user) return NextResponse.json(GENERIC_OK)
+    // Si no hay cuenta con ese correo, se avisa y NO se envía nada
+    if (!user) {
+        return NextResponse.json(
+            { error: "No encontramos una cuenta con ese correo. Revisa que esté bien escrito o crea una cuenta." },
+            { status: 404 }
+        )
+    }
 
     // El token se guarda con el email tal como está en la cuenta
     await prisma.passwordResetToken.deleteMany({ where: { email: user.email } })
@@ -50,5 +80,5 @@ export async function POST(req: Request) {
         )
     }
 
-    return NextResponse.json(GENERIC_OK)
+    return NextResponse.json(OK)
 }

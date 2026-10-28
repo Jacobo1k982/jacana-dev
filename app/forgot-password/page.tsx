@@ -57,7 +57,7 @@ export default function ForgotPasswordPage() {
                             className="flex flex-col items-center gap-4 text-center py-4"
                         >
                             <CheckCircle className="w-10 h-10 text-emerald-400/80" />
-                            <p className="text-sm text-slate-300">Revisa tu correo — si el email existe recibirás las instrucciones.</p>
+                            <p className="text-sm text-slate-300">Te enviamos un correo con las instrucciones. Revisa también la carpeta de spam.</p>
                             <a href="/login" className="text-[10px] uppercase tracking-[0.2em] text-lime-400/60 hover:text-lime-400 transition-colors">
                                 Volver al login
                             </a>
