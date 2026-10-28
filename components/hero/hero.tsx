@@ -5,7 +5,7 @@ import { SITE_STATS } from '@/lib/site-stats';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { UserPlus, LogIn, Code2, Zap, Globe, Shield, ArrowRight, MoveDown } from 'lucide-react';
 import { UserMenu } from '@/components/auth';
 import { HeroDialogs } from './HeroDialogs';
@@ -182,6 +182,7 @@ export default function Hero() {
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
+    const reduceMotion = useReducedMotion();
 
     const { data: session, status } = useSession();
     const isAuthenticated = status === 'authenticated';
@@ -216,26 +217,45 @@ export default function Hero() {
                 }}
             />
 
-            {/* Emblema del logo como marca de agua: presencia sin competir con el texto */}
+            {/* Emblema del logo como marca de agua.
+                Móvil/tablet: asoma por el borde derecho, cortado a la mitad en vertical y
+                desvaneciéndose hacia el texto. Escritorio: completo a la derecha. */}
             <motion.div
                 aria-hidden="true"
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.96 }}
                 transition={{ delay: 0.6, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-                className="hidden lg:block absolute z-[4] pointer-events-none right-[3%] top-1/2 -translate-y-1/2 w-[min(38vw,560px)] aspect-square"
-                style={{
-                    WebkitMaskImage: 'radial-gradient(circle at 50% 50%, #000 52%, transparent 78%)',
-                    maskImage: 'radial-gradient(circle at 50% 50%, #000 52%, transparent 78%)',
-                }}
+                className="absolute z-[4] pointer-events-none aspect-square
+                    right-0 top-[20%] translate-x-1/2 w-[84vw] max-w-[540px]
+                    lg:right-[3%] lg:top-1/2 lg:translate-x-0 lg:-translate-y-1/2 lg:w-[min(38vw,560px)] lg:max-w-none
+                    [-webkit-mask-image:linear-gradient(to_left,#000_28%,transparent_92%)]
+                    [mask-image:linear-gradient(to_left,#000_28%,transparent_92%)]
+                    lg:[-webkit-mask-image:radial-gradient(circle_at_50%_50%,#000_52%,transparent_78%)]
+                    lg:[mask-image:radial-gradient(circle_at_50%_50%,#000_52%,transparent_78%)]"
             >
                 <div className="absolute inset-[12%] rounded-full bg-lime-400/10 blur-[90px]" />
-                <NextImage
-                    src="/logo-mark.png"
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 38vw, 0px"
-                    className="object-contain opacity-[0.22]"
+
+                {/* Anillo punteado que gira muy despacio */}
+                <motion.div
+                    className="absolute inset-[-4%] rounded-full border border-dashed border-lime-400/20"
+                    animate={reduceMotion ? undefined : { rotate: 360 }}
+                    transition={{ duration: 90, ease: 'linear', repeat: Infinity }}
                 />
+
+                {/* Flotación leve del emblema */}
+                <motion.div
+                    className="absolute inset-0"
+                    animate={reduceMotion ? undefined : { y: [0, -12, 0] }}
+                    transition={{ duration: 9, ease: 'easeInOut', repeat: Infinity }}
+                >
+                    <NextImage
+                        src="/logo-mark.png"
+                        alt=""
+                        fill
+                        sizes="(min-width: 1024px) 38vw, 84vw"
+                        className="object-contain opacity-[0.24]"
+                    />
+                </motion.div>
             </motion.div>
 
             <motion.div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 pt-36 sm:pt-32 md:pt-28" style={{ y: contentY }}>
