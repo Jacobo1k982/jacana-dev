@@ -4,7 +4,21 @@ import { prisma } from "@/lib/prisma"
 import bcrypt from "bcryptjs"
 
 export async function POST(req: Request) {
-    const { token, password } = await req.json()
+    let body: { token?: unknown; password?: unknown }
+    try {
+        body = await req.json()
+    } catch {
+        return NextResponse.json({ error: "Solicitud inválida" }, { status: 400 })
+    }
+    const token = typeof body.token === "string" ? body.token : ""
+    const password = typeof body.password === "string" ? body.password : ""
+
+    if (!token) {
+        return NextResponse.json({ error: "Token inválido" }, { status: 400 })
+    }
+    if (password.length < 8) {
+        return NextResponse.json({ error: "La contraseña debe tener al menos 8 caracteres" }, { status: 400 })
+    }
 
     const resetToken = await prisma.passwordResetToken.findUnique({
         where: { token }

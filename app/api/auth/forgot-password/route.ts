@@ -1,54 +1,54 @@
 // app/api/auth/forgot-password/route.ts
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
-import { Resend } from "resend"
+import { sendPasswordResetEmail } from "@/lib/email"
 import crypto from "crypto"
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const GENERIC_OK = { message: "Si el email existe recibirás un correo" }
+
 export async function POST(req: Request) {
-    const resend = new Resend(process.env.RESEND_API_KEY)
-
-    const { email } = await req.json()
-
-    const user = await prisma.user.findUnique({ where: { email } })
-
-    // Siempre responde OK aunque el email no exista (seguridad)
-    if (!user) {
-        return NextResponse.json({ message: "Si el email existe recibirás un correo" })
+    let body: { email?: unknown }
+    try {
+        body = await req.json()
+    } catch {
+        return NextResponse.json({ error: "Solicitud inválida." }, { status: 400 })
     }
 
-    // Elimina tokens anteriores del mismo email
-    await prisma.passwordResetToken.deleteMany({ where: { email } })
+    const email = String(body.email ?? "").trim()
+    if (!EMAIL_RE.test(email)) {
+        return NextResponse.json({ error: "Ingresa un email válido." }, { status: 400 })
+    }
 
-    // Genera token seguro
+    // Sin distinguir mayúsculas/minúsculas ("Ana@x.com" == "ana@x.com")
+    const user = await prisma.user.findFirst({
+        where: { email: { equals: email, mode: "insensitive" } },
+    })
+
+    // Siempre responde OK aunque el email no exista (seguridad)
+    if (!user) return NextResponse.json(GENERIC_OK)
+
+    // El token se guarda con el email tal como está en la cuenta
+    await prisma.passwordResetToken.deleteMany({ where: { email: user.email } })
+
     const token = crypto.randomBytes(32).toString("hex")
     const expiresAt = new Date(Date.now() + 1000 * 60 * 60) // 1 hora
 
     await prisma.passwordResetToken.create({
-        data: { email, token, expiresAt }
+        data: { email: user.email, token, expiresAt },
     })
 
-    const resetUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password?token=${token}`
+    const result = await sendPasswordResetEmail(user.email, token)
 
-    await resend.emails.send({
-        from: "Jacana Dev <onboarding@resend.dev>",
-        to: email,
-        subject: "Recupera tu contraseña",
-        html: `
-            <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #131923; color: #fff;">
-                <h2 style="font-weight: 300; margin-bottom: 8px;">Recuperar contraseña</h2>
-                <p style="color: #9aa9bd; font-size: 14px; margin-bottom: 32px;">
-                    Recibimos una solicitud para restablecer tu contraseña. El link expira en 1 hora.
-                </p>
-                <a href="${resetUrl}"
-                    style="display: inline-block; padding: 12px 24px; background: #fff; color: #131923; text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;">
-                    Restablecer contraseña
-                </a>
-                <p style="color: #4a5666; font-size: 12px; margin-top: 32px;">
-                    Si no solicitaste esto, ignora este correo.
-                </p>
-            </div>
-        `,
-    })
+    if (!result.ok) {
+        // Queda en los logs del servidor (docker logs) para diagnosticar
+        console.error("[api/auth/forgot-password] No se pudo enviar el correo:", result.error)
+        await prisma.passwordResetToken.deleteMany({ where: { token } })
+        return NextResponse.json(
+            { error: "No pudimos enviar el correo en este momento. Intenta de nuevo más tarde." },
+            { status: 502 }
+        )
+    }
 
-    return NextResponse.json({ message: "Si el email existe recibirás un correo" })
+    return NextResponse.json(GENERIC_OK)
 }

@@ -21,10 +21,11 @@ export default function ForgotPasswordPage() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
             })
-            if (!res.ok) throw new Error('Error al enviar el correo')
+            const data = await res.json().catch(() => ({}))
+            if (!res.ok) throw new Error(data?.error || 'Error al enviar el correo')
             setSuccess(true)
-        } catch {
-            setError('Error al enviar el correo. Intenta de nuevo.')
+        } catch (err) {
+            setError(err instanceof Error && err.message ? err.message : 'Error al enviar el correo. Intenta de nuevo.')
         } finally {
             setIsLoading(false)
         }
