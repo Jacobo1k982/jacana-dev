@@ -251,6 +251,7 @@ export default function Contact() {
                             <div className="space-y-0">
                                 {contactInfo.map((item, i) => {
                                     const Icon = item.icon;
+                                    const primary = i === 0;
                                     const content = (
                                         <>
                                             <div className="flex items-center gap-4 min-w-0">
@@ -267,7 +268,6 @@ export default function Contact() {
                                             )}
                                         </>
                                     );
-                                    const primary = i === 0;
                                     const rowClass = primary
                                         ? 'group flex items-center justify-between gap-4 p-5 mb-3 border border-lime-400/25 bg-lime-400/[0.04] hover:bg-lime-400/[0.08] hover:border-lime-400/50 transition-colors'
                                         : 'group flex items-center justify-between gap-4 py-5 border-b border-slate-800/60 transition-colors';
