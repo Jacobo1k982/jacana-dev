@@ -58,7 +58,7 @@ const stats = [
     { value: String(SITE_STATS.projects), label: 'Proyectos' },
     { value: String(SITE_STATS.ownProducts), label: 'Productos propios' },
     { value: SITE_STATS.years, label: 'Años' },
-    { value: '24/7', label: 'Soporte' },
+    { value: '30 días', label: 'Soporte post-entrega' },
 ];
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

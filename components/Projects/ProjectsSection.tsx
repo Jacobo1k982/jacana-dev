@@ -255,7 +255,7 @@ export default function ProjectsSection() {
                             {[
                                 { label: 'Tiempo de entrega', value: '1–6 meses' },
                                 { label: 'Productos propios', value: String(SITE_STATS.ownProducts) },
-                                { label: 'Soporte post-lanzamiento', value: '24/7' },
+                                { label: 'Soporte post-lanzamiento', value: '30 días' },
                                 { label: 'Metodología', value: 'Ágil' },
                             ].map((item, i) => (
                                 <motion.div
