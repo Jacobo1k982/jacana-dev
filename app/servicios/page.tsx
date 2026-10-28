@@ -13,6 +13,7 @@ import {
 
 interface Service {
     id: string;
+    href: string;
     index: string;
     icon: React.ElementType;
     title: string;
@@ -31,6 +32,7 @@ interface Service {
 const SERVICES: Service[] = [
     {
         id: 'web',
+        href: '/services/FrontendService',
         index: '01',
         icon: Globe,
         title: 'Desarrollo Web',
@@ -53,6 +55,7 @@ const SERVICES: Service[] = [
     },
     {
         id: 'mobile',
+        href: '/services/MobileService',
         index: '02',
         icon: Smartphone,
         title: 'Apps Móviles',
@@ -75,6 +78,7 @@ const SERVICES: Service[] = [
     },
     {
         id: 'cloud',
+        href: '/services/CloudService',
         index: '03',
         icon: Cloud,
         title: 'Cloud & DevOps',
@@ -97,6 +101,7 @@ const SERVICES: Service[] = [
     },
     {
         id: 'ai',
+        href: '/services/AIService',
         index: '04',
         icon: Brain,
         title: 'Inteligencia Artificial',
@@ -119,6 +124,7 @@ const SERVICES: Service[] = [
     },
     {
         id: 'api',
+        href: '/services/APIService',
         index: '05',
         icon: Terminal,
         title: 'APIs & Backend',
@@ -141,6 +147,7 @@ const SERVICES: Service[] = [
     },
     {
         id: 'database',
+        href: '/services/DatabaseService',
         index: '06',
         icon: Database,
         title: 'Bases de Datos',
@@ -163,6 +170,7 @@ const SERVICES: Service[] = [
     },
     {
         id: 'consulting',
+        href: '/services/ConsultingService',
         index: '07',
         icon: Shield,
         title: 'Consultoría Técnica',
@@ -262,14 +270,22 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
                                     fontSize: 'clamp(1.25rem, 2.5vw, 1.6rem)',
                                 }}
                             >
-                                {service.title}
+                                <Link href={service.href} className="hover:text-white/80 transition-colors">
+                                    {service.title}
+                                </Link>
                             </h3>
                             <p className="text-[10px] uppercase tracking-[0.18em] text-slate-600 mt-0.5 leading-none">
                                 {service.subtitle}
                             </p>
                         </div>
                     </div>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-slate-700 group-hover:text-slate-400 transition-colors mt-1 flex-shrink-0" />
+                    <Link
+                        href={service.href}
+                        aria-label={`Ver detalle de ${service.title}`}
+                        className="flex-shrink-0 -m-2 p-2 text-slate-700 group-hover:text-slate-400 hover:!text-white transition-colors"
+                    >
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                    </Link>
                 </div>
 
                 {/* ── Description ── */}
@@ -356,6 +372,15 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
                             </motion.div>
                         )}
                     </AnimatePresence>
+
+                    <Link
+                        href={service.href}
+                        className="mt-5 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] transition-opacity hover:opacity-80"
+                        style={{ color: service.accent }}
+                    >
+                        Ver servicio completo
+                        <ArrowUpRight className="w-3 h-3" />
+                    </Link>
                 </div>
 
             </div>
