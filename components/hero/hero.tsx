@@ -236,34 +236,44 @@ export default function Hero() {
                         </div>
                     </motion.div>
 
+                    {/* ── WORDMARK: misma tipografía del logo (Zen Dots) ── */}
                     {isVisible && (
-                        <div className="pt-6 pb-4" style={{ clipPath: 'inset(-40% -10% -10% -10%)' }}>
-                            <h1
-                                className="font-light text-white tracking-[-0.02em]"
-                                style={{ fontFamily: "'Cormorant Garamond', 'Garamond', Georgia, serif", fontSize: 'clamp(5rem, 14vw, 13rem)', lineHeight: 1 }}
+                        <h1
+                            className="pt-6 pb-2 flex flex-col w-fit max-w-full"
+                            style={{ fontFamily: 'var(--font-logo), system-ui, sans-serif' }}
+                            aria-label="Jacana Developers"
+                        >
+                            <span
+                                aria-hidden="true"
+                                className="text-white leading-none tracking-[0.02em]"
+                                style={{ fontSize: 'clamp(3rem, 9.5vw, 8.5rem)' }}
                             >
                                 <SplitText text="JACANA" delay={0.3} />
-                            </h1>
-                        </div>
-                    )}
+                            </span>
 
-                    {isVisible && (
-                        <div className="self-end -mt-4 md:-mt-6 lg:-mt-10 pr-4" style={{ clipPath: 'inset(-20% -10% -20% -10%)' }}>
-                            <motion.div
-                                initial={{ opacity: 0, x: 40 }}
-                                animate={{ opacity: 1, x: 0 }}
+                            <motion.span
+                                aria-hidden="true"
+                                initial={{ opacity: 0, y: 12 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.95, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                                className="flex items-end gap-4"
+                                className="mt-3 md:mt-4 flex items-center gap-3 md:gap-5"
                             >
-                                <div className="w-20 md:w-32 h-px bg-gradient-to-l from-lime-400/60 to-transparent mb-3 hidden sm:block" />
+                                <span className="flex-1 h-px bg-gradient-to-r from-transparent to-lime-400/70" />
                                 <span
-                                    className="text-lime-400/90 italic"
-                                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', fontWeight: 300 }}
+                                    className="text-lime-400 uppercase"
+                                    style={{
+                                        fontFamily: 'var(--font-logo-sub), var(--font-logo), system-ui, sans-serif',
+                                        fontWeight: 700,
+                                        fontSize: 'clamp(0.65rem, 1.7vw, 1.5rem)',
+                                        letterSpacing: '0.4em',
+                                        marginRight: '-0.4em',
+                                    }}
                                 >
                                     Developers
                                 </span>
-                            </motion.div>
-                        </div>
+                                <span className="flex-1 h-px bg-gradient-to-l from-transparent to-lime-400/70" />
+                            </motion.span>
+                        </h1>
                     )}
 
                     <motion.p

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, DM_Mono } from 'next/font/google';
+import { Cormorant_Garamond, DM_Mono, Zen_Dots, Syncopate } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { SessionProvider } from 'next-auth/react';
@@ -11,6 +11,24 @@ const cormorant = Cormorant_Garamond({
   weight: ['300', '400', '500', '600'],
   display: 'swap',
   preload: true,
+});
+
+// Tipografía del wordmark del logo (JACANA / DEVELOPERS)
+const zenDots = Zen_Dots({
+  variable: '--font-logo',
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+  preload: true,
+});
+
+// "DEVELOPERS" del logo: ancha y de O lisa (la O de Zen Dots lleva un punto)
+const syncopate = Syncopate({
+  variable: '--font-logo-sub',
+  subsets: ['latin'],
+  weight: '700',
+  display: 'swap',
+  preload: false,
 });
 
 const dmMono = DM_Mono({
@@ -92,7 +110,7 @@ export default async function RootLayout({
 
   return (
     <html lang="es" suppressHydrationWarning className="dark">
-      <body className={`${cormorant.variable} ${dmMono.variable} antialiased bg-background text-foreground min-h-screen`}>
+      <body className={`${cormorant.variable} ${dmMono.variable} ${zenDots.variable} ${syncopate.variable} antialiased bg-background text-foreground min-h-screen`}>
         <SessionProvider session={session}>
           {children}
           <Toaster />
