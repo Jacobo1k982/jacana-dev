@@ -49,9 +49,9 @@ export default function Footer() {
                             <Image
                                 src="/Logo-dev.png"
                                 alt="Jacana Developers"
-                                width={120}
-                                height={120}
-                                className="w-28 h-28 object-contain"
+                                width={160}
+                                height={160}
+                                className="w-36 h-36 object-contain"
                             />
                         </Link>
                         <p className="mt-4 text-sm text-slate-500 leading-relaxed max-w-xs">

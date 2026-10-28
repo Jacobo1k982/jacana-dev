@@ -119,18 +119,33 @@ export default function Navbar() {
                         {/* Logo */}
                         <motion.a
                             href="/"
-                            className="shrink-0 flex items-center"
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
+                            aria-label="Jacana Developers — inicio"
+                            className="shrink-0 flex items-center gap-3"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                         >
                             <NextImage
-                                src="/Logo-dev.png"
-                                alt="Jacana Dev"
-                                width={40}
-                                height={40}
+                                src="/logo-mark.png"
+                                alt=""
+                                width={48}
+                                height={48}
                                 priority
-                                className="w-10 h-10 md:w-9 md:h-9 object-contain"
+                                className="w-11 h-11 md:w-12 md:h-12 object-contain drop-shadow-[0_0_14px_rgba(176,208,0,0.25)]"
                             />
+                            <span className="hidden sm:flex flex-col leading-none" aria-hidden="true">
+                                <span
+                                    className="text-[17px] text-white tracking-[0.04em]"
+                                    style={{ fontFamily: 'var(--font-logo), system-ui, sans-serif' }}
+                                >
+                                    JACANA
+                                </span>
+                                <span
+                                    className="mt-1 text-[8px] font-bold uppercase text-lime-400"
+                                    style={{ fontFamily: 'var(--font-logo-sub), var(--font-logo), system-ui, sans-serif', letterSpacing: '0.42em' }}
+                                >
+                                    Developers
+                                </span>
+                            </span>
                         </motion.a>
 
                         {/* Center nav links */}
@@ -334,7 +349,7 @@ export default function Navbar() {
 
                             {/* ── Header ── */}
                             <div className="flex-shrink-0 flex items-center justify-between px-5 h-16 border-b border-white/[0.06]">
-                                <NextImage src="/Logo-dev.png" alt="Jacana Dev" width={36} height={36} className="w-9 h-9 object-contain" />
+                                <NextImage src="/logo-mark.png" alt="Jacana Dev" width={44} height={44} className="w-11 h-11 object-contain" />
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
                                     className="w-9 h-9 flex items-center justify-center border border-white/10 hover:border-lime-400/30 text-slate-500 hover:text-white transition-all"

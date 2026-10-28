@@ -1,5 +1,6 @@
 'use client';
 
+import NextImage from 'next/image';
 import { SITE_STATS } from '@/lib/site-stats';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -214,6 +215,28 @@ export default function Hero() {
                     backgroundSize: '128px 128px',
                 }}
             />
+
+            {/* Emblema del logo como marca de agua: presencia sin competir con el texto */}
+            <motion.div
+                aria-hidden="true"
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.96 }}
+                transition={{ delay: 0.6, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+                className="hidden lg:block absolute z-[4] pointer-events-none right-[3%] top-1/2 -translate-y-1/2 w-[min(38vw,560px)] aspect-square"
+                style={{
+                    WebkitMaskImage: 'radial-gradient(circle at 50% 50%, #000 52%, transparent 78%)',
+                    maskImage: 'radial-gradient(circle at 50% 50%, #000 52%, transparent 78%)',
+                }}
+            >
+                <div className="absolute inset-[12%] rounded-full bg-lime-400/10 blur-[90px]" />
+                <NextImage
+                    src="/logo-mark.png"
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 38vw, 0px"
+                    className="object-contain opacity-[0.22]"
+                />
+            </motion.div>
 
             <motion.div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-8 pt-36 sm:pt-32 md:pt-28" style={{ y: contentY }}>
                 <div className="flex flex-col items-start max-w-4xl">
