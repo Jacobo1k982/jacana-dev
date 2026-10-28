@@ -13,7 +13,7 @@ import SocialIcon from '@/components/SocialIcon';
 import { SOCIALS } from '@/lib/socials';
 
 const contactInfo = [
-    { icon: Mail, title: 'Email', value: 'jgutierrez@jacana-dev.com', link: 'mailto:jgutierrez@jacana-dev.com', external: false },
+    { icon: Mail, title: 'Email', value: 'soporte@jacana-dev.com', link: 'mailto:soporte@jacana-dev.com', external: false },
     { icon: Phone, title: 'Teléfono', value: '+506 8790 5876', link: 'tel:+50687905876', external: false },
     { icon: MapPin, title: 'Ubicación', value: 'San Pedro, Montes de Oca, Costa Rica', link: 'https://maps.google.com/?q=San+Pedro,+Montes+de+Oca,+Costa+Rica', external: true },
     { icon: Clock, title: 'Horario', value: 'Lun – Vie · 9:00 – 18:00', link: null, external: false },
@@ -228,7 +228,7 @@ export default function Contact() {
                                 style={{ fontFamily: "'Cormorant Garamond', 'Garamond', Georgia, serif" }}
                             >
                                 ¿Tienes un proyecto<br />
-                                <em className="text-slate-400 not-italic">en mente?</em>
+                                <span className="bg-gradient-to-r from-lime-300 via-lime-400 to-emerald-400 bg-clip-text text-transparent">en mente?</span>
                             </h2>
                             <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
                                 Cuéntanos sobre tu idea y construyamos algo memorable juntos.
@@ -254,12 +254,12 @@ export default function Contact() {
                                     const content = (
                                         <>
                                             <div className="flex items-center gap-4 min-w-0">
-                                                <span className="shrink-0 w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-lime-400/40 transition-colors">
-                                                    <Icon className="w-3.5 h-3.5 text-slate-500 group-hover:text-lime-400/80 transition-colors" />
+                                                <span className={`shrink-0 w-9 h-9 flex items-center justify-center border transition-colors ${primary ? 'border-lime-400/40 bg-lime-400/10' : 'border-slate-700/60 group-hover:border-lime-400/40'}`}>
+                                                    <Icon className={`w-4 h-4 transition-colors ${primary ? 'text-lime-400' : 'text-slate-500 group-hover:text-lime-400/80'}`} />
                                                 </span>
                                                 <div className="min-w-0">
-                                                    <p className="text-[10px] uppercase tracking-[0.2em] text-slate-600 mb-0.5">{item.title}</p>
-                                                    <p className="text-sm text-slate-300 group-hover:text-white transition-colors break-words">{item.value}</p>
+                                                    <p className={`text-[10px] uppercase tracking-[0.2em] mb-0.5 ${primary ? 'text-lime-400/70' : 'text-slate-600'}`}>{primary ? 'Escríbenos · Soporte y proyectos' : item.title}</p>
+                                                    <p className={`${primary ? 'text-base text-white' : 'text-sm text-slate-300 group-hover:text-white'} transition-colors break-words`}>{item.value}</p>
                                                 </div>
                                             </div>
                                             {item.link && (
@@ -267,7 +267,10 @@ export default function Contact() {
                                             )}
                                         </>
                                     );
-                                    const rowClass = 'group flex items-center justify-between gap-4 py-5 border-b border-slate-800/60 transition-colors';
+                                    const primary = i === 0;
+                                    const rowClass = primary
+                                        ? 'group flex items-center justify-between gap-4 p-5 mb-3 border border-lime-400/25 bg-lime-400/[0.04] hover:bg-lime-400/[0.08] hover:border-lime-400/50 transition-colors'
+                                        : 'group flex items-center justify-between gap-4 py-5 border-b border-slate-800/60 transition-colors';
 
                                     if (!item.link) {
                                         return (
@@ -302,7 +305,7 @@ export default function Contact() {
                             </div>
 
                             {/* Stats */}
-                            <div className="grid grid-cols-2 gap-px bg-slate-800/30">
+                            <div className="grid grid-cols-2 gap-px bg-slate-800/40 border border-slate-800/60">
                                 {stats.map((s, i) => (
                                     <motion.div
                                         key={s.label}
@@ -313,7 +316,7 @@ export default function Contact() {
                                         className="bg-[#080810] p-4 sm:p-6 text-center"
                                     >
                                         <p
-                                            className="text-2xl sm:text-3xl font-light text-white mb-1"
+                                            className="text-2xl sm:text-3xl font-light text-lime-300 mb-1"
                                             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                                         >{s.value}</p>
                                         <p className="text-[10px] uppercase tracking-[0.2em] text-slate-600">{s.label}</p>
@@ -334,7 +337,7 @@ export default function Contact() {
                                             aria-label={`${s.label}: ${s.handle}`}
                                             title={`${s.label} · ${s.handle}`}
                                             whileHover={{ y: -2 }}
-                                            className="w-11 h-11 sm:w-10 sm:h-10 flex items-center justify-center border border-slate-800/80 hover:border-slate-600 text-slate-600 hover:text-slate-300 transition-all"
+                                            className="w-11 h-11 sm:w-10 sm:h-10 flex items-center justify-center border border-slate-800/80 hover:border-lime-400/50 text-slate-500 hover:text-lime-300 hover:bg-lime-400/5 transition-all"
                                         >
                                             <SocialIcon name={s.key} className="w-4 h-4" />
                                         </motion.a>
@@ -351,6 +354,14 @@ export default function Contact() {
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                             className="md:col-span-2 lg:col-span-3"
                         >
+                            <div className="relative border border-slate-800/80 bg-white/[0.02] p-6 sm:p-8 lg:p-10">
+                            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-lime-400/60 to-transparent" />
+                            <div className="mb-8">
+                                <p className="text-[10px] uppercase tracking-[0.3em] text-lime-400/70 mb-2">— Nuevo mensaje</p>
+                                <h3 className="text-2xl sm:text-3xl font-light text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                                    Cuéntanos sobre tu proyecto
+                                </h3>
+                            </div>
                             <form onSubmit={handleSubmit} noValidate className="space-y-8">
                                 {/* Honeypot anti-spam — oculto para personas, visible para bots */}
                                 <input
@@ -428,14 +439,14 @@ export default function Contact() {
                                         disabled={isSubmitting}
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
-                                        className="group w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#080810]
-                                            text-sm font-medium uppercase tracking-[0.15em]
-                                            hover:bg-lime-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="group w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-lime-400 text-[#080810]
+                                            text-sm font-semibold uppercase tracking-[0.15em]
+                                            hover:bg-lime-300 shadow-[0_0_30px_-8px_rgba(163,230,53,0.6)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {isSubmitting ? (
-                                            <><div className="w-4 h-4 border-2 border-slate-400 border-t-slate-800 rounded-full animate-spin" />Enviando…</>
+                                            <><div className="w-4 h-4 border-2 border-slate-800/40 border-t-slate-900 rounded-full animate-spin" />Enviando…</>
                                         ) : submitStatus === 'success' ? (
-                                            <><CheckCircle className="w-4 h-4 text-emerald-600" />Enviado</>
+                                            <><CheckCircle className="w-4 h-4 text-emerald-700" />Enviado</>
                                         ) : (
                                             <><Send className="w-4 h-4" />Enviar mensaje</>
                                         )}
@@ -470,6 +481,7 @@ export default function Contact() {
                                     )}
                                 </AnimatePresence>
                             </form>
+                            </div>
                         </motion.div>
                     </div>
 
@@ -504,7 +516,7 @@ export default function Contact() {
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ delay: i * 0.07 }}
-                                            className="border-b border-slate-800/60 last:border-b-0"
+                                            className={`border-b border-slate-800/60 last:border-b-0 transition-colors ${openFaq === i ? 'bg-lime-400/[0.03]' : ''}`}
                                         >
                                             <button
                                                 type="button"

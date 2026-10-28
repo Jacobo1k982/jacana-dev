@@ -101,9 +101,9 @@ export default function Footer() {
                         <h2 className={headingClass}>— Contacto</h2>
                         <ul className="space-y-3">
                             <li>
-                                <a href="mailto:jgutierrez@jacana-dev.com" className={`${linkClass} inline-flex items-center gap-2.5 break-all`}>
+                                <a href="mailto:soporte@jacana-dev.com" className={`${linkClass} inline-flex items-center gap-2.5 break-all`}>
                                     <Mail className="w-3.5 h-3.5 shrink-0 text-lime-400/60" aria-hidden="true" />
-                                    jgutierrez@jacana-dev.com
+                                    soporte@jacana-dev.com
                                 </a>
                             </li>
                             <li>
