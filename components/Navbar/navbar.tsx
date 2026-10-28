@@ -335,7 +335,7 @@ export default function Navbar() {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.2 }}
                             onClick={() => setIsMenuOpen(false)}
-                            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] lg:hidden"
+                            className="fixed inset-0 bg-[#010409]/75 backdrop-blur-md z-[60] lg:hidden"
                         />
 
                         {/* Drawer panel */}
@@ -344,11 +344,14 @@ export default function Navbar() {
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-                            className="fixed top-0 right-0 h-[100dvh] w-full max-w-[340px] z-[70] lg:hidden flex flex-col bg-[#090d13] border-l border-white/[0.07]"
+                            className="fixed top-0 right-0 h-[100dvh] w-full max-w-[340px] z-[70] lg:hidden flex flex-col bg-[#161b22] border-l border-lime-400/25 shadow-[-24px_0_60px_-12px_rgba(0,0,0,0.8)]"
                         >
 
+                            {/* Línea de acento superior */}
+                            <div className="h-0.5 shrink-0 bg-gradient-to-r from-transparent via-lime-400/70 to-transparent" />
+
                             {/* ── Header ── */}
-                            <div className="flex-shrink-0 flex items-center justify-between px-5 h-16 border-b border-white/[0.06]">
+                            <div className="flex-shrink-0 flex items-center justify-between px-5 h-16 border-b border-lime-400/15 bg-[#10151c]">
                                 <NextImage src="/logo-mark.png" alt="Jacana Dev" width={44} height={44} className="w-11 h-11 object-contain" />
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
@@ -377,10 +380,10 @@ export default function Navbar() {
                                                     <>
                                                         <button
                                                             onClick={() => setOpenMobileSubmenu(isOpen ? null : link.label)}
-                                                            className={`w-full flex items-center justify-between px-3 py-3.5 rounded-sm transition-colors duration-150 ${isOpen ? 'bg-white/[0.04] text-white' : 'text-slate-400 hover:text-white hover:bg-white/[0.03]'}`}
+                                                            className={`w-full flex items-center justify-between px-3 py-3.5 rounded-sm transition-colors duration-150 ${isOpen ? 'bg-lime-400/10 text-white' : 'text-slate-300 hover:text-white hover:bg-lime-400/[0.07]'}`}
                                                         >
                                                             <div className="flex items-center gap-3">
-                                                                <Icon className={`w-4 h-4 transition-colors ${isOpen ? 'text-lime-400' : 'text-slate-600'}`} />
+                                                                <Icon className={`w-4 h-4 transition-colors ${isOpen ? 'text-lime-400' : 'text-slate-400'}`} />
                                                                 <span className="text-[11px] font-medium uppercase tracking-[0.12em]">
                                                                     {link.label}
                                                                 </span>
@@ -389,7 +392,7 @@ export default function Navbar() {
                                                                 animate={{ rotate: isOpen ? 45 : 0 }}
                                                                 transition={{ duration: 0.2 }}
                                                             >
-                                                                <Plus className={`w-3.5 h-3.5 transition-colors ${isOpen ? 'text-lime-400' : 'text-slate-600'}`} />
+                                                                <Plus className={`w-3.5 h-3.5 transition-colors ${isOpen ? 'text-lime-400' : 'text-slate-400'}`} />
                                                             </motion.span>
                                                         </button>
 
@@ -415,15 +418,15 @@ export default function Navbar() {
                                                                                     animate={{ opacity: 1, x: 0 }}
                                                                                     transition={{ delay: idx * 0.035 }}
                                                                                     onClick={() => setIsMenuOpen(false)}
-                                                                                    className="group flex items-start gap-3 py-2.5 px-2 rounded-sm hover:bg-white/[0.03] transition-colors"
+                                                                                    className="group flex items-start gap-3 py-2.5 px-2 rounded-sm hover:bg-lime-400/[0.07] transition-colors"
                                                                                 >
                                                                                     <SubIcon className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${iconColor} opacity-50 group-hover:opacity-100 transition-opacity`} />
                                                                                     <div className="min-w-0">
-                                                                                        <p className="text-[11px] font-medium text-slate-400 group-hover:text-slate-200 transition-colors leading-snug">
+                                                                                        <p className="text-[11px] font-medium text-slate-300 group-hover:text-slate-200 transition-colors leading-snug">
                                                                                             {item.label}
                                                                                         </p>
                                                                                         {item.description && (
-                                                                                            <p className="text-[10px] text-slate-600 group-hover:text-slate-500 mt-0.5 leading-relaxed line-clamp-1 transition-colors">
+                                                                                            <p className="text-[10px] text-slate-400 group-hover:text-slate-500 mt-0.5 leading-relaxed line-clamp-1 transition-colors">
                                                                                                 {item.description}
                                                                                             </p>
                                                                                         )}
@@ -440,15 +443,15 @@ export default function Navbar() {
                                                     <a
                                                         href={link.href}
                                                         onClick={() => setIsMenuOpen(false)}
-                                                        className="flex items-center justify-between px-3 py-3.5 rounded-sm text-slate-400 hover:text-white hover:bg-white/[0.03] transition-colors duration-150 group"
+                                                        className="flex items-center justify-between px-3 py-3.5 rounded-sm text-slate-300 hover:text-white hover:bg-lime-400/[0.07] transition-colors duration-150 group"
                                                     >
                                                         <div className="flex items-center gap-3">
-                                                            <Icon className="w-4 h-4 text-slate-600 group-hover:text-lime-400/80 transition-colors" />
+                                                            <Icon className="w-4 h-4 text-slate-400 group-hover:text-lime-400/80 transition-colors" />
                                                             <span className="text-[11px] font-medium uppercase tracking-[0.12em]">
                                                                 {link.label}
                                                             </span>
                                                         </div>
-                                                        <ChevronRight className="w-3.5 h-3.5 text-slate-700 group-hover:text-lime-400/60 transition-colors" />
+                                                        <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-lime-400/60 transition-colors" />
                                                     </a>
                                                 )}
                                             </motion.div>
@@ -464,11 +467,11 @@ export default function Navbar() {
 
                                 {!isAuthenticated ? (
                                     <div
-                                        className="p-5 flex flex-col gap-3 bg-[#090d13]"
+                                        className="p-5 flex flex-col gap-3 bg-[#10151c] border-t border-lime-400/10"
                                         style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom, 1.25rem))' }}
                                     >
                                         {/* Section label — enfocado en negocio, no en la cuenta */}
-                                        <p className="text-[9px] uppercase tracking-[0.3em] text-slate-600 text-center">
+                                        <p className="text-[9px] uppercase tracking-[0.3em] text-slate-400 text-center">
                                             ¿Tienes un proyecto en mente?
                                         </p>
 
@@ -495,7 +498,7 @@ export default function Navbar() {
                                     </div>
                                 ) : (
                                     <div
-                                        className="p-5 bg-[#090d13]"
+                                        className="p-5 bg-[#10151c] border-t border-lime-400/10"
                                         style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom, 1.25rem))' }}
                                     >
                                         <UserMenu onLogout={handleLogout} />
