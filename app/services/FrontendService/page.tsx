@@ -1,6 +1,7 @@
 'use client';
 
 import { SITE_STATS } from '@/lib/site-stats';
+import { getTechEvidence } from '@/lib/tech-evidence';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -28,12 +29,12 @@ const serviceData = {
         { icon: Eye, title: 'Accesibilidad', desc: 'Cumplimiento WCAG 2.1 AA', detail: 'Interfaces inclusivas que funcionan para todos, incluyendo tecnologías asistivas.' },
     ],
     technologies: [
-        { name: 'React', level: 95, description: 'Biblioteca líder para interfaces interactivas' },
-        { name: 'Next.js', level: 92, description: 'Framework React con SSR y optimizaciones' },
-        { name: 'Vue.js', level: 88, description: 'Framework progresivo y versátil' },
-        { name: 'Angular', level: 85, description: 'Platform completo para apps empresariales' },
-        { name: 'TypeScript', level: 95, description: 'JavaScript con tipado estático' },
-        { name: 'Tailwind CSS', level: 93, description: 'Utility-first CSS framework' },
+        { name: 'React', description: 'Biblioteca líder para interfaces interactivas' },
+        { name: 'Next.js', description: 'Framework React con SSR y optimizaciones' },
+        { name: 'Vue.js', description: 'Framework progresivo y versátil' },
+        { name: 'Angular', description: 'Platform completo para apps empresariales' },
+        { name: 'TypeScript', description: 'JavaScript con tipado estático' },
+        { name: 'Tailwind CSS', description: 'Utility-first CSS framework' },
     ],
     benefits: [
         { title: 'Experiencia de usuario excepcional', icon: Heart },
@@ -48,6 +49,11 @@ const serviceData = {
         { step: '04', title: 'QA & Deploy', desc: 'Testing exhaustivo y despliegue continuo' },
     ],
 };
+
+// Tecnologías respaldadas por proyectos reales primero (evidencia calculada desde el portafolio)
+const technologiesByEvidence = serviceData.technologies
+    .map((tech) => ({ ...tech, evidence: getTechEvidence(tech.name) }))
+    .sort((a, b) => b.evidence.count - a.evidence.count);
 
 const tabs = [
     { id: 'features', label: 'Características', icon: Sparkles },
@@ -106,22 +112,22 @@ function TabContent({ activeTab }: { activeTab: string }) {
         ),
         technologies: (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-800/30">
-                {serviceData.technologies.map((tech, i) => (
+                {technologiesByEvidence.map((tech, i) => (
                     <motion.div key={tech.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                         className="bg-[#080810] px-5 py-4"
                     >
                         <div className="flex items-center justify-between mb-2">
                             <span className="text-xs text-slate-400">{tech.name}</span>
-                            <span className="text-[10px] text-cyan-400/80">{tech.level}</span>
-                        </div>
-                        <div className="flex gap-0.5 mb-1.5">
-                            {[...Array(10)].map((_, j) => (
-                                <motion.div key={j} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.05 + j * 0.02 }}
-                                    className={`h-0.5 flex-1 ${j < Math.round(tech.level / 10) ? 'bg-cyan-400/70' : 'bg-slate-800'}`}
-                                />
-                            ))}
+                            {tech.evidence.count > 0 && (
+                                <span className="text-[10px] text-cyan-400/80">
+                                    Usada en {tech.evidence.count} {tech.evidence.count === 1 ? 'proyecto' : 'proyectos'}
+                                </span>
+                            )}
                         </div>
                         <p className="text-[10px] text-slate-700">{tech.description}</p>
+                        {tech.evidence.count > 0 && (
+                            <p className="mt-1 text-[10px] text-slate-600">{tech.evidence.titles.join(', ')}</p>
+                        )}
                     </motion.div>
                 ))}
             </div>

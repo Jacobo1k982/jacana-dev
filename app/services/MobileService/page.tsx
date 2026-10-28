@@ -1,6 +1,7 @@
 'use client';
 
 import { SITE_STATS } from '@/lib/site-stats';
+import { getTechEvidence } from '@/lib/tech-evidence';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -27,12 +28,12 @@ const serviceData = {
         { icon: QrCode, title: 'Deep Linking', desc: 'Navegación y sharing inteligente', detail: 'Universal links y deep links para navegación directa a contenido específico, mejorando la retención y el sharing viral.' },
     ],
     technologies: [
-        { name: 'React Native', level: 95, description: 'Framework líder para apps híbridas' },
-        { name: 'Flutter', level: 90, description: 'UI toolkit de Google multiplataforma' },
-        { name: 'Swift', level: 88, description: 'Lenguaje nativo para iOS/macOS' },
-        { name: 'Kotlin', level: 87, description: 'Lenguaje moderno para Android' },
-        { name: 'Expo', level: 92, description: 'Plataforma para React Native' },
-        { name: 'Firebase', level: 90, description: 'Backend serverless de Google' },
+        { name: 'React Native', description: 'Framework líder para apps híbridas' },
+        { name: 'Flutter', description: 'UI toolkit de Google multiplataforma' },
+        { name: 'Swift', description: 'Lenguaje nativo para iOS/macOS' },
+        { name: 'Kotlin', description: 'Lenguaje moderno para Android' },
+        { name: 'Expo', description: 'Plataforma para React Native' },
+        { name: 'Firebase', description: 'Backend serverless de Google' },
     ],
     benefits: [
         { title: 'Una base de código, dos plataformas', icon: Layers },
@@ -47,6 +48,11 @@ const serviceData = {
         { step: '04', title: 'Launch', desc: 'Publicación en App Store y Google Play' },
     ],
 };
+
+// Tecnologías respaldadas por proyectos reales primero (evidencia calculada desde el portafolio)
+const technologiesByEvidence = serviceData.technologies
+    .map((tech) => ({ ...tech, evidence: getTechEvidence(tech.name) }))
+    .sort((a, b) => b.evidence.count - a.evidence.count);
 
 const tabs = [
     { id: 'features', label: 'Características', icon: Sparkles },
@@ -105,22 +111,22 @@ function TabContent({ activeTab }: { activeTab: string }) {
         ),
         technologies: (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-800/30">
-                {serviceData.technologies.map((tech, i) => (
+                {technologiesByEvidence.map((tech, i) => (
                     <motion.div key={tech.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                         className="bg-[#080810] px-5 py-4"
                     >
                         <div className="flex items-center justify-between mb-2">
                             <span className="text-xs text-slate-400">{tech.name}</span>
-                            <span className="text-[10px] text-fuchsia-400/80">{tech.level}</span>
-                        </div>
-                        <div className="flex gap-0.5 mb-1.5">
-                            {[...Array(10)].map((_, j) => (
-                                <motion.div key={j} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.05 + j * 0.02 }}
-                                    className={`h-0.5 flex-1 ${j < Math.round(tech.level / 10) ? 'bg-fuchsia-400/70' : 'bg-slate-800'}`}
-                                />
-                            ))}
+                            {tech.evidence.count > 0 && (
+                                <span className="text-[10px] text-fuchsia-400/80">
+                                    Usada en {tech.evidence.count} {tech.evidence.count === 1 ? 'proyecto' : 'proyectos'}
+                                </span>
+                            )}
                         </div>
                         <p className="text-[10px] text-slate-700">{tech.description}</p>
+                        {tech.evidence.count > 0 && (
+                            <p className="mt-1 text-[10px] text-slate-600">{tech.evidence.titles.join(', ')}</p>
+                        )}
                     </motion.div>
                 ))}
             </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { SITE_STATS } from '@/lib/site-stats';
+import { getTechEvidence } from '@/lib/tech-evidence';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -28,12 +29,12 @@ const serviceData = {
         { icon: BarChart3, title: 'Data Warehouse', desc: 'ETL, analytics y Business Intelligence integration', detail: 'Construimos pipelines de datos que transforman información cruda en insights. Diseñamos modelos dimensional (star/snowflake schema) para analytics eficientes.' },
     ],
     technologies: [
-        { name: 'PostgreSQL', level: 95, description: 'Base de datos relacional más avanzada' },
-        { name: 'MongoDB', level: 92, description: 'NoSQL para documentos flexibles' },
-        { name: 'Redis', level: 90, description: 'Cache y mensajes en memoria' },
-        { name: 'MySQL', level: 88, description: 'Relacional para aplicaciones web' },
-        { name: 'Elasticsearch', level: 85, description: 'Búsqueda y analytics en tiempo real' },
-        { name: 'Prisma ORM', level: 92, description: 'ORM moderno para TypeScript' },
+        { name: 'PostgreSQL', description: 'Base de datos relacional más avanzada' },
+        { name: 'MongoDB', description: 'NoSQL para documentos flexibles' },
+        { name: 'Redis', description: 'Cache y mensajes en memoria' },
+        { name: 'MySQL', description: 'Relacional para aplicaciones web' },
+        { name: 'Elasticsearch', description: 'Búsqueda y analytics en tiempo real' },
+        { name: 'Prisma ORM', description: 'ORM moderno para TypeScript' },
     ],
     benefits: [
         { title: 'Consultas ultra-rápidas', icon: Zap },
@@ -49,6 +50,11 @@ const serviceData = {
         { step: '05', title: 'Monitoreo', desc: 'Dashboards, alertas y mantenimiento continuo' },
     ],
 };
+
+// Tecnologías respaldadas por proyectos reales primero (evidencia calculada desde el portafolio)
+const technologiesByEvidence = serviceData.technologies
+    .map((tech) => ({ ...tech, evidence: getTechEvidence(tech.name) }))
+    .sort((a, b) => b.evidence.count - a.evidence.count);
 
 const tabs = [
     { id: 'features', label: 'Características', icon: Layers },
@@ -107,22 +113,22 @@ function TabContent({ activeTab }: { activeTab: string }) {
         ),
         technologies: (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-800/30">
-                {serviceData.technologies.map((tech, i) => (
+                {technologiesByEvidence.map((tech, i) => (
                     <motion.div key={tech.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                         className="bg-[#080810] px-5 py-4"
                     >
                         <div className="flex items-center justify-between mb-2">
                             <span className="text-xs text-slate-400">{tech.name}</span>
-                            <span className="text-[10px] text-lime-400/80">{tech.level}</span>
-                        </div>
-                        <div className="flex gap-0.5 mb-1.5">
-                            {[...Array(10)].map((_, j) => (
-                                <motion.div key={j} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.05 + j * 0.02 }}
-                                    className={`h-0.5 flex-1 ${j < Math.round(tech.level / 10) ? 'bg-lime-400/70' : 'bg-slate-800'}`}
-                                />
-                            ))}
+                            {tech.evidence.count > 0 && (
+                                <span className="text-[10px] text-lime-400/80">
+                                    Usada en {tech.evidence.count} {tech.evidence.count === 1 ? 'proyecto' : 'proyectos'}
+                                </span>
+                            )}
                         </div>
                         <p className="text-[10px] text-slate-700">{tech.description}</p>
+                        {tech.evidence.count > 0 && (
+                            <p className="mt-1 text-[10px] text-slate-600">{tech.evidence.titles.join(', ')}</p>
+                        )}
                     </motion.div>
                 ))}
             </div>

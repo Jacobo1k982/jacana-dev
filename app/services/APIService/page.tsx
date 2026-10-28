@@ -1,6 +1,7 @@
 'use client';
 
 import { SITE_STATS } from '@/lib/site-stats';
+import { getTechEvidence } from '@/lib/tech-evidence';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -27,12 +28,12 @@ const serviceData = {
         { icon: Globe, title: 'Integraciones Third-Party', desc: 'Pagos, CRM, ERPs, APIs externas', detail: 'Integramos con Stripe, PayPal, Salesforce, HubSpot, SAP y cientos de servicios más. Creamos adaptadores que aíslan la lógica de integración.' },
     ],
     technologies: [
-        { name: 'REST API', level: 95, description: 'Arquitectura RESTful estándar' },
-        { name: 'GraphQL', level: 90, description: 'Query language flexible' },
-        { name: 'WebSockets', level: 90, description: 'Comunicación en tiempo real' },
-        { name: 'gRPC', level: 78, description: 'RPC de alto rendimiento' },
-        { name: 'OpenAPI/Swagger', level: 92, description: 'Documentación automática' },
-        { name: 'Webhooks', level: 95, description: 'Eventos y notificaciones' },
+        { name: 'REST API', description: 'Arquitectura RESTful estándar' },
+        { name: 'GraphQL', description: 'Query language flexible' },
+        { name: 'WebSockets', description: 'Comunicación en tiempo real' },
+        { name: 'gRPC', description: 'RPC de alto rendimiento' },
+        { name: 'OpenAPI/Swagger', description: 'Documentación automática' },
+        { name: 'Webhooks', description: 'Eventos y notificaciones' },
     ],
     benefits: [
         { title: 'Integración sin fricción', icon: Plug },
@@ -102,6 +103,11 @@ function FeatureCard({ feature, index }: { feature: typeof serviceData.features[
 // TABS
 // ─────────────────────────────────────────────
 
+// Tecnologías respaldadas por proyectos reales primero (evidencia calculada desde el portafolio)
+const technologiesByEvidence = serviceData.technologies
+    .map((tech) => ({ ...tech, evidence: getTechEvidence(tech.name) }))
+    .sort((a, b) => b.evidence.count - a.evidence.count);
+
 const tabs = [
     { id: 'features', label: 'Características', icon: Sparkles },
     { id: 'technologies', label: 'Protocolos', icon: Code2 },
@@ -118,22 +124,22 @@ function TabContent({ activeTab }: { activeTab: string }) {
 
         technologies: (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-slate-800/30">
-                {serviceData.technologies.map((tech, i) => (
+                {technologiesByEvidence.map((tech, i) => (
                     <motion.div key={tech.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                         className="bg-[#080810] px-5 py-4"
                     >
                         <div className="flex items-center justify-between mb-2">
                             <span className="text-xs text-slate-400">{tech.name}</span>
-                            <span className="text-[10px] text-teal-400/80">{tech.level}</span>
-                        </div>
-                        <div className="flex gap-0.5 mb-1.5">
-                            {[...Array(10)].map((_, j) => (
-                                <motion.div key={j} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.05 + j * 0.02 }}
-                                    className={`h-0.5 flex-1 ${j < Math.round(tech.level / 10) ? 'bg-teal-400/70' : 'bg-slate-800'}`}
-                                />
-                            ))}
+                            {tech.evidence.count > 0 && (
+                                <span className="text-[10px] text-teal-400/80">
+                                    Usada en {tech.evidence.count} {tech.evidence.count === 1 ? 'proyecto' : 'proyectos'}
+                                </span>
+                            )}
                         </div>
                         <p className="text-[10px] text-slate-700">{tech.description}</p>
+                        {tech.evidence.count > 0 && (
+                            <p className="mt-1 text-[10px] text-slate-600">{tech.evidence.titles.join(', ')}</p>
+                        )}
                     </motion.div>
                 ))}
             </div>
