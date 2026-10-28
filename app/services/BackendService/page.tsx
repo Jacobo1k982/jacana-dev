@@ -28,7 +28,9 @@ const serviceData = {
         { icon: Shield, title: 'Seguridad', desc: 'Protección contra vulnerabilidades OWASP', detail: 'Auditorías de seguridad, encryption at-rest y in-transit, WAF y protección contra SQL injection, XSS y CSRF.' },
     ],
     technologies: [
+        { name: 'NestJS', description: 'Framework Node.js modular para APIs escalables' },
         { name: 'Node.js', description: 'Runtime JavaScript escalable' },
+        { name: 'Prisma', description: 'ORM tipado para PostgreSQL y migraciones' },
         { name: 'Python', description: 'Lenguaje versátil y productivo' },
         { name: 'Go', description: 'Alto rendimiento y concurrencia' },
         { name: 'Java/Spring', description: 'Framework enterprise robusto' },
