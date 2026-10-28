@@ -88,15 +88,19 @@
             "slug": "daxcloud",
             "category": "pos",
             "type": "Producto propio",
-            "shortDescription": "Plataforma cloud multi-negocio con POS, onboarding guiado y dashboard, pensada para escalar a distintos rubros.",
-            "fullDescription": "DaxCloud es una plataforma de punto de venta y gestión de negocio en la nube, con onboarding guiado (registro del negocio, primer producto, invitación de equipo) y un dashboard central, diseñada para adaptarse a distintos tipos de comercio.",
-            "technologies": ["Next.js", "Turborepo", "Prisma"],
+            "shortDescription": "SaaS multi-negocio en la nube: POS, inventario, facturación electrónica y tienda online. En producción en daxcloud.shop.",
+            "fullDescription": "DaxCloud es nuestra plataforma SaaS de punto de venta y gestión de negocio, en producción en daxcloud.shop. Es multi-tenant, con onboarding guiado, dashboard central, venta a crédito, cobros en línea con Pagadito y automatizaciones con n8n. Corre como monorepo (Turborepo) con API en NestJS y frontend en Next.js, desplegada con Docker y CI/CD en GitHub Actions.",
+            "technologies": ["NestJS", "Next.js", "Turborepo", "PostgreSQL", "Prisma", "Docker", "GitHub Actions"],
             "features": [
-                "Onboarding guiado paso a paso",
-                "POS en la nube",
-                "Dashboard de negocio",
-                "Arquitectura multi-negocio"
+                "Arquitectura multi-tenant (multi-negocio)",
+                "POS con efectivo, tarjeta, pago mixto y venta a crédito",
+                "Facturación electrónica con Hacienda",
+                "Inventario, contabilidad y catálogo online",
+                "Cobros en línea con Pagadito, certificado en producción",
+                "Automatizaciones con n8n (pedidos online → notificaciones)",
+                "Despliegue con Docker, Nginx y CI/CD"
             ],
+            "link": "https://daxcloud.shop",
             "featured": true,
             "color": "purple"
         },
@@ -221,9 +225,8 @@
         }
     ],
     "stats": {
-        "totalProjects": "11+",
+        "totalProjects": "11",
         "yearsExperience": "2+",
-        "teamSize": "1",
-        "satisfactionRate": "98%"
+        "teamSize": "1"
     }
 }

@@ -1,5 +1,6 @@
 import Hero from '@/components/hero/hero';
 import Navbar from '@/components/Navbar/navbar';
+import DaxCloudShowcase from '@/components/FeaturedProduct/DaxCloudShowcase';
 import TechSection from '@/components/TechSection';
 import type { Metadata } from 'next';
 
@@ -23,6 +24,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <DaxCloudShowcase />
         <TechSection />
       </main>
     </div>
