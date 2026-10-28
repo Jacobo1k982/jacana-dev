@@ -2,7 +2,7 @@
 
 import SectionBackdrop from '@/components/ui/SectionBackdrop';
 import { SITE_STATS } from '@/lib/site-stats';
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Mail, Phone, MapPin, Clock, Send,
@@ -146,6 +146,14 @@ export default function Contact() {
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+    // Prefill del servicio cuando se llega desde una página de servicio (?servicio=...)
+    useEffect(() => {
+        try {
+            const sv = new URLSearchParams(window.location.search).get('servicio');
+            if (sv && services.includes(sv)) setFormData((f) => ({ ...f, service: sv }));
+        } catch { /* sin acceso a la URL: se deja el formulario vacío */ }
+    }, []);
 
     const errors = validate(formData);
 

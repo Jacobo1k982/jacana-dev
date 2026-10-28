@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { SITE_STATS } from '@/lib/site-stats';
 import { getTechEvidence } from '@/lib/tech-evidence';
@@ -277,16 +278,16 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
 
                                 {/* CTAs */}
                                 <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-800/60">
-                                    <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
+                                    <Link href="/Contact?servicio=Desarrollo%20Web"
                                         className="flex-1 flex items-center justify-center gap-2.5 py-3.5 bg-white text-[#131923] text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-50 transition-colors"
                                     >
                                         <Rocket className="w-3.5 h-3.5" /> Construir API <ArrowRight className="w-3.5 h-3.5" />
-                                    </motion.button>
-                                    <motion.button whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
+                                    </Link>
+                                    <Link href="/projects"
                                         className="flex items-center justify-center gap-2.5 px-6 py-3.5 border border-slate-700/60 hover:border-lime-400/40 text-slate-400 hover:text-white text-xs font-medium uppercase tracking-[0.15em] transition-all"
                                     >
-                                        <ExternalLink className="w-3.5 h-3.5" /> Ver arquitectura
-                                    </motion.button>
+                                        <ExternalLink className="w-3.5 h-3.5" /> Ver proyectos
+                                    </Link>
                                 </div>
                             </div>
                         </div>
