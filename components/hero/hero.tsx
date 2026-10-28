@@ -413,25 +413,6 @@ export default function Hero() {
 
             <ScrollCue />
 
-            <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : 40 }}
-                transition={{ delay: 2.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute right-8 top-1/2 -translate-y-1/2 z-10 hidden xl:block"
-            >
-                <div className="border border-slate-800/60 bg-[#090d13]/80 backdrop-blur-sm p-6 max-w-[220px]">
-                    <div className="h-px w-full bg-gradient-to-r from-lime-400/30 to-transparent mb-4" />
-                    <p className="text-[9px] uppercase tracking-[0.3em] text-lime-400/60 mb-3">— Lo que construimos para ti</p>
-                    {['Desarrollo Web a medida', 'Apps Móviles nativas', 'Cloud & DevOps', 'IA aplicada al negocio', 'Consultoría Técnica'].map((s, i) => (
-                        <motion.div key={s} initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.1 + i * 0.1 }} className="flex items-center gap-2 py-2 border-b border-slate-800/40 last:border-b-0 group cursor-default">
-                            <span className="w-1 h-1 rounded-full bg-lime-400/40 group-hover:bg-lime-400/80 transition-colors" />
-                            <span className="text-xs text-slate-500 group-hover:text-slate-300 transition-colors">{s}</span>
-                        </motion.div>
-                    ))}
-                    <div className="h-px w-full bg-gradient-to-r from-transparent to-lime-400/20 mt-4" />
-                </div>
-            </motion.div>
-
             <HeroDialogs
                 showLogin={showLogin}
                 showRegister={showRegister}
