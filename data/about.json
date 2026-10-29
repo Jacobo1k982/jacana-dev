@@ -14,21 +14,21 @@
         {
             "id": "innovation",
             "title": "Innovación",
-            "description": "Exploramos constantemente nuevas tecnologías y metodologías para ofrecer soluciones vanguardistas.",
+            "description": "Probamos tecnologías nuevas y adoptamos las que de verdad mejoran el resultado para el cliente.",
             "icon": "Sparkles",
             "color": "cyan"
         },
         {
             "id": "quality",
             "title": "Calidad",
-            "description": "Cada línea de código escribimos con estándares de excelencia y mejores prácticas de la industria.",
+            "description": "Escribimos cada línea de código con buenas prácticas y la revisamos antes de entregarla.",
             "icon": "Award",
             "color": "blue"
         },
         {
             "id": "collaboration",
             "title": "Colaboración",
-            "description": "Trabajamos como un verdadero equipo con nuestros clientes, integrando sus conocimientos con nuestra expertise.",
+            "description": "Trabajamos como un verdadero equipo con nuestros clientes, sumando lo que ustedes saben de su negocio a nuestra experiencia técnica.",
             "icon": "Users",
             "color": "purple"
         },
@@ -42,14 +42,14 @@
         {
             "id": "commitment",
             "title": "Compromiso",
-            "description": "Nos dedicamos completamente a cada proyecto como si fuera nuestro propio negocio.",
+            "description": "Tratamos cada proyecto como si fuera nuestro propio negocio; de hecho, operamos varios productos propios.",
             "icon": "Heart",
             "color": "pink"
         },
         {
             "id": "growth",
             "title": "Crecimiento",
-            "description": "Fomentamos el aprendizaje continuo y la evolución profesional de nuestro equipo y clientes.",
+            "description": "Aprendemos de forma continua y acompañamos a nuestros clientes mientras su producto crece.",
             "icon": "TrendingUp",
             "color": "orange"
         }

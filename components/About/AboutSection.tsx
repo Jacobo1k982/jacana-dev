@@ -105,11 +105,11 @@ export default function AboutSection() {
                                 {company.description}
                             </p>
                             <div className="flex items-center md:justify-end gap-5">
-                                <div className="flex items-center gap-1.5 text-xs text-slate-600">
+                                <div className="flex items-center gap-1.5 text-xs text-slate-500">
                                     <MapPin className="w-3 h-3 text-lime-400/50" />
                                     {company.location}
                                 </div>
-                                <div className="flex items-center gap-1.5 text-xs text-slate-600">
+                                <div className="flex items-center gap-1.5 text-xs text-slate-500">
                                     <Clock className="w-3 h-3 text-lime-400/50" />
                                     {company.timezone}
                                 </div>
@@ -150,9 +150,9 @@ export default function AboutSection() {
                         >
                             <div className="flex items-center gap-3 mb-5">
                                 <div className="w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-lime-400/40 transition-colors">
-                                    <Target className="w-3.5 h-3.5 text-slate-600 group-hover:text-lime-400/70 transition-colors" />
+                                    <Target className="w-3.5 h-3.5 text-slate-500 group-hover:text-lime-400/70 transition-colors" />
                                 </div>
-                                <p className="text-[10px] uppercase tracking-[0.25em] text-slate-600">Misión</p>
+                                <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">Misión</p>
                             </div>
                             <p
                                 className="text-xl font-light text-white leading-snug mb-4"
@@ -172,9 +172,9 @@ export default function AboutSection() {
                         >
                             <div className="flex items-center gap-3 mb-5">
                                 <div className="w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-lime-400/40 transition-colors">
-                                    <Eye className="w-3.5 h-3.5 text-slate-600 group-hover:text-lime-400/70 transition-colors" />
+                                    <Eye className="w-3.5 h-3.5 text-slate-500 group-hover:text-lime-400/70 transition-colors" />
                                 </div>
-                                <p className="text-[10px] uppercase tracking-[0.25em] text-slate-600">Visión</p>
+                                <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">Visión</p>
                             </div>
                             <p
                                 className="text-xl font-light text-white leading-snug mb-4"
@@ -261,16 +261,16 @@ export default function AboutSection() {
                                     </span>
 
                                     <div className="w-8 h-8 flex items-center justify-center border border-slate-700/60 group-hover:border-lime-400/40 transition-colors mb-3">
-                                        <Icon className="w-3.5 h-3.5 text-slate-600 group-hover:text-lime-400/70 transition-colors" />
+                                        <Icon className="w-3.5 h-3.5 text-slate-500 group-hover:text-lime-400/70 transition-colors" />
                                     </div>
 
                                     <h4 className="text-xs font-medium uppercase tracking-[0.1em] text-white mb-2">
                                         {step.title}
                                     </h4>
-                                    <p className="text-[11px] text-slate-600 leading-relaxed mb-2">
+                                    <p className="text-[11px] text-slate-500 leading-relaxed mb-2">
                                         {step.description}
                                     </p>
-                                    <span className="text-[9px] uppercase tracking-[0.2em] text-lime-400/50">
+                                    <span className="text-[10px] uppercase tracking-[0.2em] text-lime-400/50">
                                         {step.duration}
                                     </span>
                                 </motion.div>
@@ -296,7 +296,7 @@ export default function AboutSection() {
                     <div className="max-w-3xl space-y-0 border-l border-slate-800/60 ml-3">
                         {timeline.map((item, index) => (
                             <motion.div
-                                key={item.year}
+                                key={`${item.year}-${item.title}`}
                                 initial={{ opacity: 0, x: -16 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
@@ -309,14 +309,17 @@ export default function AboutSection() {
                                 </div>
 
                                 <div className="flex-1">
-                                    <p
-                                        className="text-2xl font-light text-lime-400/70 leading-none mb-2"
-                                        style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                                    >
-                                        {item.year}
-                                    </p>
+                                    {/* El año se muestra solo cuando cambia: evita repetir "2024" en cada hito */}
+                                    {item.year !== timeline[index - 1]?.year && (
+                                        <p
+                                            className="text-2xl font-light text-lime-400/70 leading-none mb-2"
+                                            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                                        >
+                                            {item.year}
+                                        </p>
+                                    )}
                                     <h4 className="text-sm font-medium text-white mb-1">{item.title}</h4>
-                                    <p className="text-xs text-slate-500 leading-relaxed">{item.description}</p>
+                                    <p className="text-xs text-slate-400 leading-relaxed">{item.description}</p>
                                 </div>
                             </motion.div>
                         ))}

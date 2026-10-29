@@ -84,7 +84,7 @@ export default function ValueCard({ value, index }: ValueCardProps) {
                 </h3>
 
                 {/* Description */}
-                <p className="text-[11px] text-slate-600 leading-relaxed group-hover:text-slate-500 transition-colors">
+                <p className="text-[11px] text-slate-500 leading-relaxed group-hover:text-slate-500 transition-colors">
                     {value.description}
                 </p>
             </div>

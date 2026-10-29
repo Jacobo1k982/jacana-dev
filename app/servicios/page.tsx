@@ -246,7 +246,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
                         <div>
                             <div className="flex items-center gap-2 mb-1">
                                 <span
-                                    className="text-[9px] uppercase tracking-[0.32em] font-light"
+                                    className="text-[10px] uppercase tracking-[0.32em] font-light"
                                     style={{ color: `${service.accent}70` }}
                                 >
                                     {service.index}
@@ -275,7 +275,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
                                     {service.title}
                                 </Link>
                             </h3>
-                            <p className="text-[10px] uppercase tracking-[0.18em] text-slate-600 mt-0.5 leading-none">
+                            <p className="text-[10px] uppercase tracking-[0.18em] text-slate-500 mt-0.5 leading-none">
                                 {service.subtitle}
                             </p>
                         </div>
@@ -299,7 +299,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
                     {service.stack.map((tech) => (
                         <span
                             key={tech}
-                            className="text-[9px] uppercase tracking-[0.14em] px-2.5 py-1 border border-slate-800 text-slate-600 hover:border-slate-700 hover:text-slate-500 transition-colors"
+                            className="text-[10px] uppercase tracking-[0.14em] px-2.5 py-1 border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-500 transition-colors"
                         >
                             {tech}
                         </span>
@@ -458,7 +458,7 @@ export default function ServiciosPage() {
                         >
                             <Link
                                 href="/"
-                                className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-slate-600 hover:text-lime-400/70 transition-colors"
+                                className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-slate-500 hover:text-lime-400/70 transition-colors"
                             >
                                 <ArrowLeft className="w-3 h-3" />
                                 Volver al inicio
@@ -475,7 +475,7 @@ export default function ServiciosPage() {
                                     className="flex items-center gap-3 mb-6"
                                 >
                                     <div className="w-6 h-px bg-lime-400/60" />
-                                    <span className="text-[9px] uppercase tracking-[0.38em] text-lime-400/60">
+                                    <span className="text-[10px] uppercase tracking-[0.38em] text-lime-400/60">
                                         Nuestros servicios
                                     </span>
                                 </motion.div>
@@ -540,7 +540,7 @@ export default function ServiciosPage() {
                                             <Icon className="w-3.5 h-3.5 text-lime-400/50 mt-0.5 flex-shrink-0" />
                                             <div>
                                                 <p className="text-xs text-slate-300 font-medium leading-none mb-0.5">{label}</p>
-                                                <p className="text-[10px] text-slate-600">{sub}</p>
+                                                <p className="text-[10px] text-slate-500">{sub}</p>
                                             </div>
                                         </motion.div>
                                     ))}
@@ -568,7 +568,7 @@ export default function ServiciosPage() {
                                     >
                                         {value}
                                     </p>
-                                    <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600">{label}</p>
+                                    <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">{label}</p>
                                 </div>
                             ))}
                         </motion.div>
@@ -590,7 +590,7 @@ export default function ServiciosPage() {
                             className="flex items-center gap-4 mb-12"
                         >
                             <div className="w-6 h-px bg-slate-700" />
-                            <span className="text-[9px] uppercase tracking-[0.35em] text-slate-700">
+                            <span className="text-[10px] uppercase tracking-[0.35em] text-slate-700">
                                 — 7 servicios disponibles
                             </span>
                         </motion.div>
@@ -674,7 +674,7 @@ export default function ServiciosPage() {
                             />
                             <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
                                 <div>
-                                    <p className="text-[9px] uppercase tracking-[0.35em] text-lime-400/60 mb-3">
+                                    <p className="text-[10px] uppercase tracking-[0.35em] text-lime-400/60 mb-3">
                                         — Hablemos de tu proyecto
                                     </p>
                                     <h2

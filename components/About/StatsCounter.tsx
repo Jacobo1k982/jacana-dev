@@ -87,7 +87,7 @@ export default function StatsCounter({ stats }: StatsCounterProps) {
                     </p>
 
                     {/* Description */}
-                    <p className="text-[11px] text-slate-600 leading-relaxed">
+                    <p className="text-[11px] text-slate-500 leading-relaxed">
                         {stat.description}
                     </p>
                 </motion.div>

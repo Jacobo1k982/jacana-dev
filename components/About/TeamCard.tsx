@@ -88,14 +88,14 @@ export default function TeamCard({ member, index }: TeamCardProps) {
                         <p className={`text-[10px] uppercase tracking-[0.2em] ${accent.text} mt-0.5 truncate`}>
                             {member.role}
                         </p>
-                        <p className="text-[10px] text-slate-600 mt-0.5 truncate">
+                        <p className="text-[10px] text-slate-500 mt-0.5 truncate">
                             {member.specialty}
                         </p>
                     </div>
                 </div>
 
                 {/* Bio */}
-                <p className="text-xs text-slate-500 leading-relaxed mt-4 line-clamp-3">
+                <p className="text-xs text-slate-400 leading-relaxed mt-4 line-clamp-3">
                     {member.bio}
                 </p>
             </div>
@@ -124,7 +124,7 @@ export default function TeamCard({ member, index }: TeamCardProps) {
                             aria-label={`${s.label}: ${s.handle}`}
                             title={`${s.label} · ${s.handle}`}
                             whileHover={{ y: -2 }}
-                            className="w-8 h-8 flex items-center justify-center border border-slate-800/60 hover:border-lime-400/40 text-slate-600 hover:text-slate-300 transition-all"
+                            className="w-8 h-8 flex items-center justify-center border border-slate-800/60 hover:border-lime-400/40 text-slate-500 hover:text-slate-300 transition-all"
                         >
                             <SocialIcon name={s.key} className="w-3.5 h-3.5" />
                         </motion.a>
