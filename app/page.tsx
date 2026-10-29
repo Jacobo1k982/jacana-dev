@@ -2,6 +2,10 @@ import Hero from '@/components/hero/hero';
 import Navbar from '@/components/Navbar/navbar';
 import DaxCloudShowcase from '@/components/FeaturedProduct/DaxCloudShowcase';
 import TechSection from '@/components/TechSection';
+import WorkIndex from '@/components/home/WorkIndex';
+import ServicesStrip from '@/components/home/ServicesStrip';
+import BlogTeaser from '@/components/home/BlogTeaser';
+import FinalCta from '@/components/home/FinalCta';
 import type { Metadata } from 'next';
 
 // ─────────────────────────────────────────────
@@ -26,7 +30,11 @@ export default function Home() {
       <main>
         <Hero />
         <DaxCloudShowcase />
+        <WorkIndex />
+        <ServicesStrip />
         <TechSection />
+        <BlogTeaser />
+        <FinalCta />
       </main>
     </div>
   );
