@@ -17,7 +17,8 @@ export function getBaseUrl(): string {
     return raw.replace(/\/+$/, '')
 }
 
-export type SendResult = { ok: true } | { ok: false; error: string }
+// `error?: undefined` en el caso ok permite leer `.error` sin estrechar el tipo (tsconfig sin strict)
+export type SendResult = { ok: true; error?: undefined } | { ok: false; error: string }
 
 export async function sendPasswordResetEmail(email: string, token: string): Promise<SendResult> {
     const apiKey = process.env.RESEND_API_KEY
@@ -97,3 +98,43 @@ export async function sendNewSignupNotification(user: { email: string; name?: st
         return { ok: false, error: err instanceof Error ? err.message : String(err) }
     }
 }
+
+/** Correo genérico del portal (avances, comentarios, aprobaciones, solicitudes). */
+export async function sendPortalEmail(opts: {
+    to: string
+    subject: string
+    title: string
+    message: string
+    ctaLabel?: string
+    ctaPath?: string
+}): Promise<SendResult> {
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) return { ok: false, error: 'RESEND_API_KEY no está configurada' }
+
+    const resend = new Resend(apiKey)
+    const url = opts.ctaPath ? `${getBaseUrl()}${opts.ctaPath}` : null
+    try {
+        const { error } = await resend.emails.send({
+            from: MAIL_FROM,
+            to: opts.to,
+            subject: opts.subject,
+            html: `
+            <div style="font-family:Georgia,serif;background:#0d1117;padding:32px 16px;">
+                <div style="max-width:520px;margin:0 auto;background:#161b22;border:1px solid #2b3543;padding:36px;">
+                    <p style="font-size:10px;letter-spacing:0.3em;color:#b0d000;margin:0 0 14px;">JACANA DEVELOPERS</p>
+                    <h1 style="font-size:24px;font-weight:300;color:#ffffff;margin:0 0 16px;line-height:1.25;">${escapeHtml(opts.title)}</h1>
+                    <p style="font-size:14px;color:#b4c0cf;margin:0 0 24px;line-height:1.7;white-space:pre-line;">${escapeHtml(opts.message)}</p>
+                    ${url ? `<a href="${url}" style="display:inline-block;padding:12px 26px;background:#b0d000;color:#0d1117;font-size:13px;font-weight:700;text-decoration:none;">${escapeHtml(opts.ctaLabel ?? 'Abrir en el portal')}</a>` : ''}
+                    <p style="font-size:11px;color:#7d8da3;margin:28px 0 0;">Recibes este correo porque tienes una cuenta en jacana-dev.com.</p>
+                </div>
+            </div>`,
+        })
+        if (error) return { ok: false, error: `${error.name ?? 'resend'}: ${error.message}` }
+        return { ok: true }
+    } catch (err) {
+        return { ok: false, error: err instanceof Error ? err.message : String(err) }
+    }
+}
+
+/** Dirección del equipo que recibe los avisos internos. */
+export const TEAM_EMAIL = process.env.CONTACT_TO_EMAIL || 'jgutierrez@jacana-dev.com'

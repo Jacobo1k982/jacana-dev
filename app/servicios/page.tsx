@@ -198,7 +198,7 @@ const SERVICES: Service[] = [
 
 function useReveal(margin = '-80px') {
     const ref = useRef<HTMLDivElement>(null);
-    const inView = useInView(ref, { once: true, margin });
+    const inView = useInView(ref, { once: true, margin: margin as `${number}px` });
     return { ref, inView };
 }
 
