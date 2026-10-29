@@ -370,7 +370,7 @@ export default function Hero() {
                                     {/* 3. Acción terciaria: crear cuenta nueva */}
                                     <motion.button onClick={() => setShowRegister(true)} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }} className="flex items-center gap-2 px-6 py-3.5 text-slate-500 hover:text-lime-400/80 text-xs font-medium uppercase tracking-[0.15em] transition-colors">
                                         <UserPlus className="w-3.5 h-3.5" />
-                                        Crear cuenta gratis
+                                        Crear cuenta
                                     </motion.button>
                                 </motion.div>
                             )}
