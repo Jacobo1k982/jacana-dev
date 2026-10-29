@@ -43,7 +43,7 @@ const orgJsonLd = JSON.stringify({
         addressLocality: 'San Pedro, Montes de Oca',
         addressCountry: 'CR',
       },
-      sameAs: ['https://www.tiktok.com/@jacanadev'],
+      sameAs: ['https://www.facebook.com/profile.php?id=61594578440714', 'https://www.tiktok.com/@jacanadev'],
     },
     {
       '@type': 'WebSite',

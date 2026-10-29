@@ -13,8 +13,7 @@ export const SOCIALS: Social[] = [
         key: 'facebook',
         label: 'Facebook',
         handle: 'Jacana Developers',
-        // TODO: reemplazar por la URL directa de la página (facebook.com/<usuario>) cuando se tenga.
-        href: 'https://www.facebook.com/search/pages?q=Jacana%20Developers',
+        href: 'https://www.facebook.com/profile.php?id=61594578440714',
     },
     {
         key: 'instagram',
