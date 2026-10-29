@@ -107,7 +107,7 @@
     },
     {
         "label": "Blog",
-        "href": "#blog",
+        "href": "/blog",
         "icon": "FileText",
         "description": "Artículos y tutoriales"
     },
