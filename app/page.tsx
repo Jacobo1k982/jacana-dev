@@ -23,9 +23,43 @@ export const metadata: Metadata = {
 // PAGE
 // ─────────────────────────────────────────────
 
+// Datos estructurados de la organización: solo información pública y verificable del sitio.
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://jacana-dev.com';
+const orgJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${BASE_URL}/#organization`,
+      name: 'Jacana Developers',
+      alternateName: 'Jacana Dev',
+      url: BASE_URL,
+      logo: `${BASE_URL}/logo-mark.png`,
+      foundingDate: '2024',
+      email: 'soporte@jacana-dev.com',
+      telephone: '+506 8790 5876',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'San Pedro, Montes de Oca',
+        addressCountry: 'CR',
+      },
+      sameAs: ['https://www.tiktok.com/@jacanadev'],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${BASE_URL}/#website`,
+      url: BASE_URL,
+      name: 'Jacana Developers',
+      inLanguage: 'es-CR',
+      publisher: { '@id': `${BASE_URL}/#organization` },
+    },
+  ],
+}).replace(/</g, '\\u003c');
+
 export default function Home() {
   return (
     <div className="bg-[#090d13] min-h-screen">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: orgJsonLd }} />
       <Navbar />
       <main>
         <Hero />

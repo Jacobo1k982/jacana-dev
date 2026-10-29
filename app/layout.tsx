@@ -72,12 +72,10 @@ export const metadata: Metadata = {
     siteName: 'Jacana Developers',
     title: 'Jacana Developers — Fullstack Studio',
     description: 'Estudio de desarrollo fullstack. Web, móvil, cloud e IA.',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Jacana Developers' }],
+    images: [{ url: '/og-image.png', width: 1731, height: 909, alt: 'Jacana Developers: desarrollo de software a la medida' }],
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@jacanadev',
-    creator: '@jacanadev',
     title: 'Jacana Developers — Fullstack Studio',
     description: 'Estudio de desarrollo fullstack. Web, móvil, cloud e IA.',
     images: ['/og-image.png'],
