@@ -5,24 +5,8 @@ import { NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 
-export const PHASES = ['DISCOVERY', 'PLANNING', 'DEVELOPMENT', 'QA', 'DEPLOYMENT', 'SUPPORT'] as const
-export type Phase = (typeof PHASES)[number]
-
-export const PHASE_LABELS: Record<Phase, string> = {
-    DISCOVERY: 'Descubrimiento',
-    PLANNING: 'Planificación',
-    DEVELOPMENT: 'Desarrollo',
-    QA: 'Pruebas y revisión',
-    DEPLOYMENT: 'Publicación',
-    SUPPORT: 'Soporte',
-}
-
-export const LINK_KINDS = ['STAGING', 'PRODUCTION', 'DOCUMENT', 'DESIGN', 'OTHER'] as const
-export type LinkKindValue = (typeof LINK_KINDS)[number]
-
-export const PROJECT_STATUSES = ['ACTIVE', 'PAUSED', 'COMPLETED'] as const
-export const REQUEST_STATUSES = ['NEW', 'CONTACTED', 'CONVERTED', 'CLOSED'] as const
-export const REQUEST_KINDS = ['Sitio web', 'Tienda en línea', 'Sistema de gestión', 'Aplicación móvil', 'Automatización o IA', 'Otro'] as const
+export * from './portal-shared'
+import type { Phase } from './portal-shared'
 
 export type PortalUser = {
     id: string
