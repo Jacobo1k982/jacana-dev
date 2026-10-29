@@ -198,9 +198,9 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                 </div>
                                 <div>
                                     <p className="text-[9px] uppercase tracking-[0.3em] text-lime-400/60 mb-1">— Servicio</p>
-                                    <h2 className="text-2xl md:text-3xl font-light text-white leading-tight"
+                                    <h1 className="text-2xl md:text-3xl font-light text-white leading-tight"
                                         style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                                    >{serviceData.title}</h2>
+                                    >{serviceData.title}</h1>
                                     <p className="text-sm text-slate-500 mt-1">{serviceData.subtitle}</p>
                                 </div>
                             </div>

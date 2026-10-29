@@ -233,13 +233,13 @@ export default function Contact() {
                             — Contacto
                         </p>
                         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-                            <h2
+                            <h1
                                 className="text-4xl md:text-6xl font-light text-white leading-[1.1] tracking-tight"
                                 style={{ fontFamily: "'Cormorant Garamond', 'Garamond', Georgia, serif" }}
                             >
                                 ¿Tienes un proyecto<br />
                                 <span className="bg-gradient-to-r from-lime-300 via-lime-400 to-emerald-400 bg-clip-text text-transparent">en mente?</span>
-                            </h2>
+                            </h1>
                             <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
                                 Cuéntanos sobre tu idea y construyamos algo memorable juntos.
                             </p>

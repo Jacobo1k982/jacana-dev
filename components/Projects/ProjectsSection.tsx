@@ -29,7 +29,7 @@ export default function ProjectsSection() {
     ];
 
     return (
-        <section className="relative py-24 md:py-36 bg-[#0d1117] overflow-hidden">
+        <section className="relative pt-32 pb-20 md:pt-44 md:pb-36 bg-[#0d1117] overflow-hidden">
 
             <SectionBackdrop variant="dots" accent="#b0d000" secondary="#5f7fa8" />
             {/* Grain */}
@@ -45,7 +45,7 @@ export default function ProjectsSection() {
             {/* Ambient right */}
             <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full bg-lime-900/8 blur-[140px] pointer-events-none" />
 
-            <div className="relative max-w-7xl mx-auto px-6 md:px-8">
+            <div className="relative max-w-7xl mx-auto px-5 sm:px-6 md:px-8">
 
                 {/* ── HEADER ── */}
                 <motion.div
@@ -59,15 +59,14 @@ export default function ProjectsSection() {
                         — Portafolio
                     </p>
                     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-                        <h2
-                            className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.05] tracking-tight"
+                        <h1
+                            className="text-[2.4rem] sm:text-5xl lg:text-6xl font-light text-white leading-[1.05] tracking-tight text-balance"
                             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                         >
-                            Proyectos que<br />
-                            <em className="text-slate-400 not-italic">transforman negocios</em>
-                        </h2>
-                        <p className="text-slate-500 text-sm max-w-xs leading-relaxed md:text-right">
-                            Cada proyecto es una historia de éxito construida con precisión técnica y visión estratégica.
+                            Lo que hemos construido
+                        </h1>
+                        <p className="text-slate-400 text-sm sm:text-base max-w-sm leading-relaxed md:text-right">
+                            Web, móvil y sistemas de punto de venta. Algunos son de clientes; otros son productos propios que operamos nosotros.
                         </p>
                     </div>
                     <div className="mt-10 h-px bg-gradient-to-r from-slate-700/60 via-lime-400/20 to-transparent" />
@@ -96,7 +95,7 @@ export default function ProjectsSection() {
                             >
                                 {stat.value}
                             </p>
-                            <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600">
+                            <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">
                                 {stat.label}
                             </p>
                         </motion.div>
@@ -124,7 +123,7 @@ export default function ProjectsSection() {
                                 <div className="flex-1 h-px bg-slate-800/60" />
                             </div>
                             <div className="grid md:grid-cols-2 gap-px bg-slate-800/30">
-                                {featuredProjects.slice(0, 4).map((project, index) => (
+                                {featuredProjects.map((project, index) => (
                                     <ProjectCard key={project.id} project={project} index={index} />
                                 ))}
                             </div>
@@ -149,6 +148,7 @@ export default function ProjectsSection() {
                             <button
                                 key={cat.id}
                                 onClick={() => setActiveCategory(cat.id)}
+                                aria-pressed={isActive}
                                 className={`relative flex items-center gap-2.5 px-5 py-3 text-xs font-medium uppercase tracking-[0.12em] transition-all border-r border-slate-800/60 last:border-r-0 ${isActive
                                         ? 'text-white bg-slate-900/60'
                                         : 'text-slate-500 hover:text-slate-300 hover:bg-slate-900/30'
@@ -162,9 +162,9 @@ export default function ProjectsSection() {
                                     />
                                 )}
                                 {cat.label}
-                                <span className={`text-[9px] px-1.5 py-0.5 border ${isActive
+                                <span className={`text-[10px] px-1.5 py-0.5 border ${isActive
                                         ? 'border-lime-400/30 text-lime-400/70'
-                                        : 'border-slate-700/60 text-slate-600'
+                                        : 'border-slate-700/60 text-slate-500'
                                     }`}>
                                     {cat.count}
                                 </span>
@@ -181,7 +181,7 @@ export default function ProjectsSection() {
                     transition={{ duration: 0.3 }}
                     className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-800/30"
                 >
-                    {(activeCategory === 'all' ? projects.slice(4) : filteredProjects).map((project, index) => (
+                    {(activeCategory === 'all' ? projects.filter(p => !p.featured) : filteredProjects).map((project, index) => (
                         <ProjectCard key={project.id} project={project} index={index} />
                     ))}
                 </motion.div>
@@ -220,16 +220,14 @@ export default function ProjectsSection() {
                             <p className="text-[10px] uppercase tracking-[0.3em] text-lime-400/70 mb-5">
                                 — Siguiente paso
                             </p>
-                            <h3
-                                className="text-3xl md:text-4xl font-light text-white leading-snug mb-5"
+                            <h2
+                                className="text-3xl md:text-4xl font-light text-white leading-snug mb-5 text-balance"
                                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                             >
-                                ¿Tienes un proyecto<br />
-                                <em className="text-slate-400 not-italic">en mente?</em>
-                            </h3>
-                            <p className="text-slate-500 text-sm leading-relaxed mb-8 max-w-sm">
-                                Convierte tu visión en realidad. Estoy listo para construir
-                                la solución digital perfecta para tu negocio.
+                                ¿Tienes un proyecto en mente?
+                            </h2>
+                            <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-8 max-w-sm">
+                                Cuéntanos qué necesitas y te respondemos con una propuesta clara.
                             </p>
                             <div className="flex flex-wrap gap-3">
                                 <motion.a
@@ -274,7 +272,7 @@ export default function ProjectsSection() {
                                     >
                                         {item.value}
                                     </p>
-                                    <p className="text-[10px] uppercase tracking-[0.18em] text-slate-600">
+                                    <p className="text-[10px] uppercase tracking-[0.18em] text-slate-500">
                                         {item.label}
                                     </p>
                                 </motion.div>

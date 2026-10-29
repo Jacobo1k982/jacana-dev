@@ -74,13 +74,13 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 {/* Row: category + type + featured */}
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
-                        <span className={`text-[9px] uppercase tracking-[0.25em] font-medium ${accent.text}`}>
+                        <span className={`text-[10px] uppercase tracking-[0.2em] font-medium ${accent.text}`}>
                             {categoryLabels[project.category] ?? project.category}
                         </span>
                         {project.featured && (
                             <>
                                 <span className="text-slate-700">·</span>
-                                <span className="flex items-center gap-1 text-[9px] uppercase tracking-[0.2em] text-lime-400/70">
+                                <span className="flex items-center gap-1 text-[10px] uppercase tracking-[0.2em] text-lime-400/80">
                                     <Star className="w-2.5 h-2.5 fill-current" />
                                     Destacado
                                 </span>
@@ -104,7 +104,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 </div>
 
                 {/* Description */}
-                <p className="text-sm text-slate-500 leading-relaxed line-clamp-2">
+                <p className="text-sm text-slate-400 leading-relaxed line-clamp-2">
                     {project.shortDescription}
                 </p>
             </div>
@@ -120,7 +120,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                     </span>
                 ))}
                 {project.technologies.length > 5 && (
-                    <span className="px-2.5 py-1 text-[10px] uppercase tracking-[0.1em] border border-slate-800/60 text-slate-600">
+                    <span className="px-2.5 py-1 text-[10px] uppercase tracking-[0.1em] border border-slate-800/60 text-slate-500">
                         +{project.technologies.length - 5}
                     </span>
                 )}
@@ -132,6 +132,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setShowDetails(!showDetails)}
+                    aria-expanded={showDetails}
                     className={`flex-1 flex items-center justify-between px-4 py-2.5 border ${showDetails
                             ? `${accent.border} ${accent.text}`
                             : 'border-slate-700/60 text-slate-400 hover:text-white hover:border-slate-600'
@@ -153,8 +154,9 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.98 }}
-                        className="w-10 h-10 flex items-center justify-center border border-slate-700/60 hover:border-lime-400/40 text-slate-600 hover:text-slate-300 transition-all"
+                        className="w-10 h-10 flex items-center justify-center border border-slate-700/60 hover:border-lime-400/40 text-slate-500 hover:text-slate-300 transition-all"
                         title="Ver proyecto en vivo"
+                        aria-label={`Ver ${project.title} en vivo (se abre en una pestaña nueva)`}
                     >
                         <ExternalLink className="w-3.5 h-3.5" />
                     </motion.a>
@@ -178,7 +180,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                             <div className="px-6 py-6 space-y-6">
                                 {/* Full description */}
                                 <div>
-                                    <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-2">Descripción</p>
+                                    <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500 mb-2">Descripción</p>
                                     <p className="text-sm text-slate-400 leading-relaxed">
                                         {project.fullDescription}
                                     </p>
@@ -186,10 +188,10 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
                                 {/* Features */}
                                 <div>
-                                    <p className="text-[9px] uppercase tracking-[0.25em] text-slate-600 mb-3">Características</p>
-                                    <ul className="grid grid-cols-2 gap-y-2 gap-x-4">
+                                    <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500 mb-3">Características</p>
+                                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
                                         {project.features.map((feature, i) => (
-                                            <li key={i} className="flex items-start gap-2 text-xs text-slate-500">
+                                            <li key={i} className="flex items-start gap-2 text-xs text-slate-400">
                                                 <span className={`w-px h-3 mt-0.5 shrink-0 ${accent.border.replace('border-', 'bg-').replace('/30', '/60')}`} />
                                                 {feature}
                                             </li>

@@ -93,13 +93,13 @@ export default function AboutSection() {
                         — Sobre nosotros
                     </p>
                     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-                        <h2
+                        <h1
                             className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.05] tracking-tight"
                             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                         >
                             La persona detrás de<br />
                             <em className="text-slate-400 not-italic">{company.name}</em>
-                        </h2>
+                        </h1>
                         <div className="space-y-3 md:text-right">
                             <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
                                 {company.description}
