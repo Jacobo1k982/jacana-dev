@@ -34,6 +34,10 @@ model User {
   accounts Account[]
   projects Project[]
 
+  projectUpdates  ProjectUpdate[]
+  projectComments ProjectComment[]
+  projectRequests ProjectRequest[]
+
   @@index([email])
   @@index([username])
   @@map("users")
@@ -51,6 +55,15 @@ model Project {
   image       String?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
+
+  // Portal de clientes: solo los proyectos creados por el equipo (true) se muestran al cliente
+  phase           ProjectPhase @default(DISCOVERY)
+  isClientProject Boolean      @default(false)
+
+  updates   ProjectUpdate[]
+  comments  ProjectComment[]
+  links     ProjectLink[]
+  approvals ProjectApproval[]
 
   @@index([userId])
   @@map("projects")
@@ -129,4 +142,115 @@ enum ProjectStatus {
   ACTIVE
   PAUSED
   COMPLETED
+}
+
+// ─────────────────────────────────────────────
+// PORTAL DE CLIENTES
+// ─────────────────────────────────────────────
+
+enum ProjectPhase {
+  DISCOVERY
+  PLANNING
+  DEVELOPMENT
+  QA
+  DEPLOYMENT
+  SUPPORT
+}
+
+enum LinkKind {
+  STAGING
+  PRODUCTION
+  DOCUMENT
+  DESIGN
+  OTHER
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  CHANGES_REQUESTED
+}
+
+enum RequestStatus {
+  NEW
+  CONTACTED
+  CONVERTED
+  CLOSED
+}
+
+// Avances publicados por el equipo
+model ProjectUpdate {
+  id        String        @id @default(cuid())
+  projectId String
+  project   Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  authorId  String?
+  author    User?         @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  title     String
+  body      String
+  phase     ProjectPhase?
+  createdAt DateTime      @default(now())
+
+  @@index([projectId])
+  @@map("project_updates")
+}
+
+// Conversación entre cliente y equipo dentro de un proyecto
+model ProjectComment {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  authorId  String?
+  author    User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  body      String
+  createdAt DateTime @default(now())
+
+  @@index([projectId])
+  @@map("project_comments")
+}
+
+// Enlaces compartidos (sitio de pruebas, diseños, documentos). No almacenamos archivos.
+model ProjectLink {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  label     String
+  url       String
+  kind      LinkKind @default(OTHER)
+  createdAt DateTime @default(now())
+
+  @@index([projectId])
+  @@map("project_links")
+}
+
+// Entregas que el cliente debe aprobar o pedir cambios
+model ProjectApproval {
+  id          String         @id @default(cuid())
+  projectId   String
+  project     Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  status      ApprovalStatus @default(PENDING)
+  response    String?
+  decidedAt   DateTime?
+  createdAt   DateTime       @default(now())
+
+  @@index([projectId])
+  @@map("project_approvals")
+}
+
+// Solicitud inicial de un cliente nuevo ("cuéntanos qué necesitas")
+model ProjectRequest {
+  id          String        @id @default(cuid())
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind        String
+  description String
+  timeline    String?
+  links       String?
+  status      RequestStatus @default(NEW)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([userId])
+  @@map("project_requests")
 }
