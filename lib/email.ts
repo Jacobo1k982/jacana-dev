@@ -66,3 +66,34 @@ export async function sendPasswordResetEmail(email: string, token: string): Prom
         return { ok: false, error: err instanceof Error ? err.message : String(err) }
     }
 }
+
+const escapeHtml = (v: string) =>
+    v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
+/** Aviso interno: alguien creó una cuenta. Nunca debe romper el registro, por eso devuelve el resultado en vez de lanzar. */
+export async function sendNewSignupNotification(user: { email: string; name?: string | null; username?: string | null }): Promise<SendResult> {
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) return { ok: false, error: 'RESEND_API_KEY no está configurada' }
+
+    const to = process.env.CONTACT_TO_EMAIL || 'jgutierrez@jacana-dev.com'
+    const resend = new Resend(apiKey)
+    try {
+        const { error } = await resend.emails.send({
+            from: MAIL_FROM,
+            to,
+            subject: `Nueva cuenta: ${user.name || user.email}`,
+            html: `
+            <div style="font-family:Georgia,serif;background:#0d1117;padding:32px;color:#e6edf3;">
+                <p style="color:#b0d000;font-size:11px;letter-spacing:0.3em;margin:0 0 12px;">NUEVO REGISTRO</p>
+                <p style="margin:0 0 6px;font-size:18px;">${escapeHtml(user.name || 'Sin nombre')}</p>
+                <p style="margin:0 0 6px;color:#9aa9bd;">${escapeHtml(user.email)}</p>
+                ${user.username ? `<p style="margin:0 0 6px;color:#9aa9bd;">@${escapeHtml(user.username)}</p>` : ''}
+                <p style="margin:20px 0 0;"><a href="${getBaseUrl()}/admin/users" style="color:#b0d000;">Ver usuarios en el panel</a></p>
+            </div>`,
+        })
+        if (error) return { ok: false, error: `${error.name ?? 'resend'}: ${error.message}` }
+        return { ok: true }
+    } catch (err) {
+        return { ok: false, error: err instanceof Error ? err.message : String(err) }
+    }
+}
