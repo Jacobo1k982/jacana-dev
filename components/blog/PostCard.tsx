@@ -19,7 +19,7 @@ export default function PostCard({ post, featured = false }: { post: Post; featu
                 </span>
             </div>
 
-            <h3 className={`mt-4 font-light text-white leading-tight ${featured ? 'text-3xl md:text-5xl' : 'text-2xl'}`} style={DISPLAY}>
+            <h3 className={`mt-4 font-light text-white leading-tight text-balance break-words ${featured ? 'text-2xl sm:text-3xl md:text-5xl' : 'text-xl sm:text-2xl'}`} style={DISPLAY}>
                 <Link href={`/blog/${post.slug}`} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
                     {post.title}
                 </Link>

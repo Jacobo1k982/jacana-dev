@@ -681,7 +681,7 @@ function LandingScreen({ onEnter }: { onEnter: () => void }) {
                             <p className="text-xl font-light text-white leading-none mb-1"
                                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                             >{s.value}</p>
-                            <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600">{s.label}</p>
+                            <p className="text-[10px] uppercase tracking-[0.12em] sm:tracking-[0.2em] text-slate-500">{s.label}</p>
                         </div>
                     ))}
                 </div>

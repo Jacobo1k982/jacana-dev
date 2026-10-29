@@ -201,6 +201,18 @@
 
   body {
     @apply bg-background text-foreground;
+    /* Red de seguridad responsiva: decoraciones (blur, glows) nunca generan scroll horizontal */
+    overflow-x: clip;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  img, svg, video {
+    max-width: 100%;
   }
 }
 

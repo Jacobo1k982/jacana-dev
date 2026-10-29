@@ -79,10 +79,10 @@ export default async function BlogPostPage({ params }: Props) {
             <Navbar />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
 
-            <article className="relative overflow-hidden pt-36 pb-20 md:pt-44">
+            <article className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-20 md:pt-44">
                 <SectionBackdrop variant="beam" />
 
-                <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-8">
+                <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 md:px-8">
                     <Link href="/blog" className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-slate-400 transition-colors hover:text-lime-300">
                         <ArrowLeft className="h-3.5 w-3.5" />
                         Todos los artículos
@@ -97,12 +97,12 @@ export default async function BlogPostPage({ params }: Props) {
                                 {getReadingTime(post)} min de lectura
                             </span>
                         </div>
-                        <h1 className="mt-5 text-4xl md:text-6xl font-light leading-[1.08] tracking-tight text-white" style={DISPLAY}>
+                        <h1 className="mt-5 text-[2rem] sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-white text-balance break-words" style={DISPLAY}>
                             {post.title}
                         </h1>
-                        <p className="mt-6 text-lg md:text-xl leading-relaxed text-slate-400">{post.excerpt}</p>
+                        <p className="mt-5 sm:mt-6 text-base sm:text-lg md:text-xl leading-relaxed text-slate-400">{post.excerpt}</p>
 
-                        <div className="mt-8 flex items-center gap-4 border-t border-slate-800/70 pt-6">
+                        <div className="mt-7 sm:mt-8 flex items-center gap-4 border-t border-slate-800/70 pt-6">
                             <span className="flex h-11 w-11 items-center justify-center border border-lime-400/40 bg-lime-400/10 text-sm font-semibold text-lime-300">
                                 {post.author.name.charAt(0)}
                             </span>
@@ -113,18 +113,18 @@ export default async function BlogPostPage({ params }: Props) {
                         </div>
                     </header>
 
-                    <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-16">
+                    <div className="mt-10 sm:mt-14 grid gap-12 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-16">
                         <div className="max-w-3xl">
                             <PostBody blocks={post.blocks} />
 
-                            <div className="mt-16 border border-lime-400/25 bg-lime-400/[0.05] p-8 md:p-10">
+                            <div className="mt-12 sm:mt-16 border border-lime-400/25 bg-lime-400/[0.05] p-6 sm:p-8 md:p-10">
                                 <p className="text-[10px] uppercase tracking-[0.3em] text-lime-300">— ¿Quieres algo así?</p>
-                                <p className="mt-3 text-2xl md:text-3xl font-light text-white" style={DISPLAY}>
+                                <p className="mt-3 text-xl sm:text-2xl md:text-3xl font-light text-white text-balance" style={DISPLAY}>
                                     Cuéntanos tu idea y la convertimos en un producto que funcione.
                                 </p>
                                 <Link
                                     href={contactHref}
-                                    className="mt-6 inline-flex items-center gap-3 bg-lime-400 px-8 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-[#0d1117] transition-colors hover:bg-lime-300"
+                                    className="mt-6 flex w-full sm:w-auto sm:inline-flex items-center justify-center gap-3 bg-lime-400 px-6 sm:px-8 py-4 text-xs sm:text-sm font-semibold uppercase tracking-[0.15em] text-[#0d1117] transition-colors hover:bg-lime-300"
                                 >
                                     Hablemos de tu proyecto
                                     <ArrowRight className="h-4 w-4" />
@@ -151,7 +151,7 @@ export default async function BlogPostPage({ params }: Props) {
                     </div>
 
                     {related.length > 0 && (
-                        <section className="mt-24 border-t border-slate-800/70 pt-14">
+                        <section className="mt-16 sm:mt-24 border-t border-slate-800/70 pt-14">
                             <p className="mb-8 text-[10px] uppercase tracking-[0.3em] text-lime-400/80">— Sigue leyendo</p>
                             <div className="grid gap-8 md:grid-cols-2">
                                 {related.map((p) => (

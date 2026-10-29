@@ -284,14 +284,14 @@ function ServiceModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                                         { label: 'Productos propios', value: `${SITE_STATS.ownProducts}`, icon: TrendingUp },
                                         { label: 'Años', value: `${SITE_STATS.years}`, icon: Cpu },
                                     ].map(s => (
-                                        <div key={s.label} className="bg-[#131923] px-4 py-5 text-center">
+                                        <div key={s.label} className="bg-[#131923] px-2 py-4 sm:px-4 sm:py-5 text-center">
                                             <p
                                                 className="text-2xl font-light text-rose-400/80 leading-none mb-1"
                                                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                                             >
                                                 {s.value}
                                             </p>
-                                            <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600">{s.label}</p>
+                                            <p className="text-[10px] uppercase tracking-[0.12em] sm:tracking-[0.2em] text-slate-500">{s.label}</p>
                                         </div>
                                     ))}
                                 </div>

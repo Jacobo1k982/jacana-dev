@@ -8,12 +8,12 @@ const DISPLAY = { fontFamily: "'Cormorant Garamond', Georgia, serif" } as const;
 
 export default function PostBody({ blocks }: { blocks: Block[] }) {
     return (
-        <div className="space-y-6 text-[17px] leading-[1.8] text-slate-300">
+        <div className="space-y-5 sm:space-y-6 text-base sm:text-[17px] leading-[1.75] sm:leading-[1.8] text-slate-300 break-words [overflow-wrap:anywhere]">
             {blocks.map((b, i) => {
                 switch (b.type) {
                     case 'h2':
                         return (
-                            <h2 key={i} id={slugify(b.text)} className="scroll-mt-28 pt-8 text-3xl md:text-4xl font-light text-white leading-tight" style={DISPLAY}>
+                            <h2 key={i} id={slugify(b.text)} className="scroll-mt-28 pt-6 sm:pt-8 text-2xl sm:text-3xl md:text-4xl font-light text-balance text-white leading-tight" style={DISPLAY}>
                                 {b.text}
                             </h2>
                         );
@@ -27,7 +27,7 @@ export default function PostBody({ blocks }: { blocks: Block[] }) {
                                 {b.items.map((it, j) => (
                                     <li key={j} className="flex gap-3">
                                         <span className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-lime-400/80" />
-                                        <span><Inline text={it} /></span>
+                                        <span className="min-w-0"><Inline text={it} /></span>
                                     </li>
                                 ))}
                             </ul>
@@ -40,7 +40,7 @@ export default function PostBody({ blocks }: { blocks: Block[] }) {
                                         <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center border border-lime-400/30 text-xs text-lime-300" style={{ fontFamily: 'var(--font-mono), monospace' }}>
                                             {j + 1}
                                         </span>
-                                        <span><Inline text={it} /></span>
+                                        <span className="min-w-0"><Inline text={it} /></span>
                                     </li>
                                 ))}
                             </ol>
@@ -58,7 +58,7 @@ export default function PostBody({ blocks }: { blocks: Block[] }) {
                         );
                     case 'callout':
                         return (
-                            <aside key={i} className="relative border border-lime-400/25 bg-lime-400/[0.05] p-5 md:p-6">
+                            <aside key={i} className="relative border border-lime-400/25 bg-lime-400/[0.05] p-4 sm:p-5 md:p-6">
                                 <div className="flex items-center gap-2 mb-2 text-[11px] uppercase tracking-[0.2em] text-lime-300">
                                     <Lightbulb className="h-3.5 w-3.5" />
                                     {b.title}
@@ -68,7 +68,7 @@ export default function PostBody({ blocks }: { blocks: Block[] }) {
                         );
                     case 'quote':
                         return (
-                            <blockquote key={i} className="border-l-2 border-lime-400/60 pl-5 text-2xl font-light italic text-slate-100 leading-snug" style={DISPLAY}>
+                            <blockquote key={i} className="border-l-2 border-lime-400/60 pl-4 sm:pl-5 text-xl sm:text-2xl font-light italic text-slate-100 leading-snug" style={DISPLAY}>
                                 <Inline text={b.text} />
                             </blockquote>
                         );
