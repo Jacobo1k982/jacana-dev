@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Settings, LogOut, ChevronDown, Crown, Shield } from 'lucide-react';
+import Link from 'next/link';
+import { User, Settings, LogOut, ChevronDown, Crown, Shield, LayoutDashboard, FolderKanban, ShieldCheck } from 'lucide-react';
 
 interface UserMenuProps {
     onLogout: () => void;
@@ -92,19 +93,25 @@ export function UserMenu({ onLogout }: UserMenuProps) {
 
                             <div className="py-1">
                                 {[
-                                    { icon: User, label: 'Mi perfil' },
-                                    { icon: Settings, label: 'Configuración' },
-                                ].map(({ icon: Icon, label }) => (
-                                    <button
+                                    { icon: LayoutDashboard, label: 'Mi cuenta', href: '/dashboard' },
+                                    { icon: FolderKanban, label: 'Mis proyectos', href: '/dashboard/projects' },
+                                    { icon: User, label: 'Mi perfil', href: '/dashboard/profile' },
+                                    { icon: Settings, label: 'Configuración', href: '/dashboard/settings' },
+                                    ...((user as { role?: string }).role === 'ADMIN'
+                                        ? [{ icon: ShieldCheck, label: 'Portal de clientes', href: '/admin/portal' }]
+                                        : []),
+                                ].map(({ icon: Icon, label, href }) => (
+                                    <Link
                                         key={label}
+                                        href={href}
                                         onClick={() => setIsOpen(false)}
-                                        className="group w-full flex items-center gap-3 px-5 py-2.5 border-b border-slate-800/40 last:border-b-0 hover:bg-slate-900/40 transition-colors"
+                                        className="group w-full flex items-center gap-3 px-5 py-2.5 border-b border-slate-800/40 last:border-b-0 hover:bg-slate-900/40 transition-colors focus-visible:outline-none focus-visible:bg-slate-900/60"
                                     >
-                                        <Icon className="w-3.5 h-3.5 text-slate-600 group-hover:text-slate-400 transition-colors" />
-                                        <span className="text-xs uppercase tracking-[0.1em] text-slate-500 group-hover:text-slate-300 transition-colors">
+                                        <Icon className="w-3.5 h-3.5 text-slate-500 group-hover:text-lime-300 transition-colors" />
+                                        <span className="text-xs uppercase tracking-[0.1em] text-slate-400 group-hover:text-slate-200 transition-colors">
                                             {label}
                                         </span>
-                                    </button>
+                                    </Link>
                                 ))}
                             </div>
 

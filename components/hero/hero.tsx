@@ -341,6 +341,12 @@ export default function Hero() {
                                         </div>
                                     </div>
                                     <UserMenu onLogout={handleLogout} />
+                                    <Link
+                                        href="/dashboard"
+                                        className="flex items-center gap-2 px-5 py-3 border border-lime-400/40 text-lime-300 text-xs font-medium uppercase tracking-[0.15em] hover:bg-lime-400/10 transition-colors"
+                                    >
+                                        Mi cuenta
+                                    </Link>
                                     {/* 1. Acción principal de negocio */}
                                     <Link
                                         href="/Contact"
