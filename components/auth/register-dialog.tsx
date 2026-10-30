@@ -28,11 +28,11 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
     const passwordStrength = useMemo(() => {
         const requirements = [
             { met: password.length >= 8, text: '8+ caracteres' },
-            { met: password.length >= 12, text: '12+ caracteres' },
             { met: /[A-Z]/.test(password), text: 'Una mayúscula' },
             { met: /[a-z]/.test(password), text: 'Una minúscula' },
             { met: /[0-9]/.test(password), text: 'Un número' },
-            { met: /[!@#$%^&*(),.?":{}|<>]/.test(password), text: 'Carácter especial' },
+            { met: password.length >= 12, text: '12+ caracteres (opcional)' },
+            { met: /[!@#$%^&*(),.?":{}|<>]/.test(password), text: 'Carácter especial (opcional)' },
         ];
         const metCount = requirements.filter(r => r.met).length;
         const percentage = (metCount / requirements.length) * 100;
@@ -53,7 +53,11 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
         setError(null);
         setFieldErrors({});
         if (password !== confirmPassword) { setError('Las contraseñas no coinciden'); return; }
-        if (passwordStrength.metCount < 4) { setError('La contraseña es muy débil. Completa más requisitos.'); return; }
+        // Mismos requisitos obligatorios que valida el servidor (los 4 primeros de la lista)
+        if (!passwordStrength.requirements.slice(0, 4).every(r => r.met)) {
+            setError('Tu contraseña debe tener 8+ caracteres, una mayúscula, una minúscula y un número.');
+            return;
+        }
         setIsLoading(true);
         try {
             // 1 — Crear el usuario
@@ -70,7 +74,9 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
             const data = await res.json();
             if (!res.ok) {
                 if (data.details) setFieldErrors(data.details);
-                throw new Error(data.error || 'Error al crear cuenta');
+                // Mostrar el primer motivo concreto en lugar de un genérico "Datos inválidos"
+                const firstDetail = data.details ? (Object.values(data.details).flat() as string[])[0] : undefined;
+                throw new Error(firstDetail || data.error || 'Error al crear cuenta');
             }
 
             // 2 — Login automático tras registro exitoso
@@ -249,7 +255,7 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                                                 </span>
                                             </div>
                                             <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
-                                                {passwordStrength.requirements.slice(0, 4).map((req, i) => (
+                                                {passwordStrength.requirements.map((req, i) => (
                                                     <div key={i} className="flex items-center gap-2">
                                                         <span className={`w-3 h-3 flex items-center justify-center border transition-all ${req.met ? 'border-lime-400/60 bg-lime-400/10' : 'border-slate-700/60'}`}>
                                                             {req.met && <Check className="w-2 h-2 text-lime-400/80" />}
@@ -263,6 +269,9 @@ export function RegisterDialog({ isOpen, onClose, onSwitchToLogin }: RegisterDia
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
+                                {fieldErrors.password && (
+                                    <p role="alert" className="text-[11px] text-red-400/80">{fieldErrors.password[0]}</p>
+                                )}
                             </div>
                             <div className="space-y-2">
                                 <label className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-slate-500">
