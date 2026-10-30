@@ -28,6 +28,8 @@ jobs:
             git pull origin main
             echo "=== docker compose build + up (nextjs) ==="
             docker compose up -d --build nextjs
+            echo "=== recargar nginx (re-resolver la IP de nextjs_app) ==="
+            docker exec daxcloud_nginx nginx -t && docker exec daxcloud_nginx nginx -s reload
             echo "=== estado de los contenedores ==="
             docker compose ps
             echo "=== últimas líneas del log de nextjs ==="
