@@ -63,7 +63,13 @@
                 "Multi-moneda"
             ],
             "featured": true,
-            "color": "cyan"
+            "color": "cyan",
+            "download": {
+                "slug": "finflow",
+                "label": "Descargar app",
+                "platform": "Android (APK)",
+                "note": "Instalación manual: al abrir el archivo, Android te pedirá permitir instalar apps de esta fuente."
+            }
         },
         {
             "id": "marketpos",

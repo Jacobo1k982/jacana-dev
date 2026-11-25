@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import DownloadButton from './DownloadButton';
 import {
     ExternalLink, ChevronRight, Star, Tag, Plus, Minus
 } from 'lucide-react';
@@ -21,6 +22,7 @@ interface Project {
     technologies: string[];
     features: string[];
     link?: string;
+    download?: { slug: string; label: string; platform: string; note?: string };
     featured: boolean;
     color: string;
 }
@@ -127,7 +129,15 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             </div>
 
             {/* ── ACTIONS ── */}
-            <div className="px-6 py-4 flex items-center gap-3 mt-auto">
+            <div className="px-6 py-4 flex flex-wrap items-center gap-3 mt-auto">
+                {project.download && (
+                    <DownloadButton
+                        slug={project.download.slug}
+                        label={project.download.label}
+                        platform={project.download.platform}
+                        appName={project.title.split(' — ')[0]}
+                    />
+                )}
                 <motion.button
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
@@ -198,6 +208,10 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                                         ))}
                                     </ul>
                                 </div>
+
+                                {project.download?.note && (
+                                    <p className="text-xs leading-relaxed text-slate-500">{project.download.note}</p>
+                                )}
 
                                 {project.link && (
                                     <a

@@ -27,3 +27,15 @@ docker compose exec -T postgres psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "\
 ```
 
 Para deshacer: `001_portal_clientes_rollback.sql` (borra solo lo del portal).
+
+
+## 002 — Contador de descargas (Finflow)
+
+Mismo procedimiento (respaldo → aplicar → verificar → push):
+
+```bash
+docker compose exec -T postgres psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1 < prisma/manual/002_descargas.sql
+docker compose exec -T postgres psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "\dt app_downloads download_events"
+```
+
+Además, agregar `FINFLOW_APK_URL=https://...` a `.env.production` en el VPS. Deshacer: `002_descargas_rollback.sql`.

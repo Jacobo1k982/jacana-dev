@@ -254,3 +254,25 @@ model ProjectRequest {
   @@index([userId])
   @@map("project_requests")
 }
+
+// Descargas de apps propias (APK de Finflow, etc.): total acumulado
+model AppDownload {
+  slug      String   @id
+  count     Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@map("app_downloads")
+}
+
+// Cada descarga contada (una por visitante cada 24 h). La IP se guarda solo como hash.
+model DownloadEvent {
+  id        String   @id @default(cuid())
+  slug      String
+  ipHash    String
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([slug, createdAt])
+  @@index([slug, ipHash, createdAt])
+  @@map("download_events")
+}
