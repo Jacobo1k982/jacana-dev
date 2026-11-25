@@ -38,4 +38,4 @@ docker compose exec -T postgres psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON
 docker compose exec -T postgres psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "\dt app_downloads download_events"
 ```
 
-Además, agregar `FINFLOW_APK_URL=https://...` a `.env.production` en el VPS. Deshacer: `002_descargas_rollback.sql`.
+El APK se sirve desde `/var/www/finflow-downloads/finflow.apk` (montado en el contenedor como `/downloads`); no requiere variables. `FINFLOW_APK_URL` es solo un respaldo opcional. Deshacer: `002_descargas_rollback.sql`.

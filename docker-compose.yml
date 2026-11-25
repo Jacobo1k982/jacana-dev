@@ -22,6 +22,9 @@ services:
       - "127.0.0.1:3000:3000"
     env_file:
       - .env.production
+    volumes:
+      # APK de Finflow: se reemplaza el archivo en el VPS y el botón sirve la versión nueva
+      - /var/www/finflow-downloads:/downloads:ro
     depends_on:
       - postgres
 

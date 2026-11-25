@@ -1,9 +1,15 @@
 // lib/downloads.ts — apps descargables y conteo
-// El archivo vive donde tú quieras (GitHub Release, EAS, tu servidor): su URL va en una variable de entorno.
+// El archivo vive en el VPS (/var/www/finflow-downloads, montado en /downloads) o, de respaldo, en una URL externa.
 // Los visitantes siempre pasan por /api/download/<slug>, que cuenta y luego redirige.
 
 export const DOWNLOADS = {
-    finflow: { name: 'Finflow', envVar: 'FINFLOW_APK_URL' },
+    finflow: {
+        name: 'Finflow',
+        envVar: 'FINFLOW_APK_URL', // opcional: URL externa de respaldo si no hay archivo local
+        file: process.env.FINFLOW_APK_PATH || '/downloads/finflow.apk', // carpeta del VPS montada en el contenedor
+        versionFile: process.env.FINFLOW_VERSION_PATH || '/downloads/version.json',
+        downloadName: 'finflow.apk',
+    },
 } as const
 
 export type DownloadSlug = keyof typeof DOWNLOADS
